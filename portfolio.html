@@ -3,7 +3,7 @@
 <html class="dark" lang="tr"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>DevPortfolio | Apps &amp; Categories</title>
+<title>MgaCreative | Uygulamalarımız</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;family=Inter:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -122,42 +122,39 @@
 <!-- TopNavBar -->
 <header class="fixed top-0 left-0 w-full z-50 bg-surface/80 backdrop-blur-xl dark:bg-surface-container/80 border-b border-outline-variant/20 dark:border-outline/10 shadow-sm dark:shadow-none">
 <div class="flex justify-between items-center w-full h-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
-<div class="font-headline-lg text-headline-lg font-bold tracking-tight text-on-surface dark:text-on-background">
-                DevPortfolio
-            </div>
+<a class="font-headline-lg text-headline-lg font-bold tracking-tight text-on-surface dark:text-on-background" href="index.html">MgaCreative</a>
 <nav class="hidden md:flex items-center gap-8">
-<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-tertiary transition-all duration-300" href="index.html">Home</a>
-<a class="text-primary dark:text-tertiary-fixed-dim font-bold border-b-2 border-primary dark:border-tertiary pb-1" href="portfolio.html">Portfolio</a>
-<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-tertiary transition-all duration-300" href="about.html">About</a>
-<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-tertiary transition-all duration-300" href="contact.html">Contact</a>
-<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-tertiary transition-all duration-300" href="admin.html">Admin</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-tertiary transition-all duration-300" href="index.html">Ana Sayfa</a>
+<a class="text-primary dark:text-tertiary-fixed-dim font-bold border-b-2 border-primary dark:border-tertiary pb-1" href="portfolio.html">Uygulamalarımız</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-tertiary transition-all duration-300" href="about.html">Hakkımızda</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-tertiary transition-all duration-300" href="contact.html">İletişim</a>
 </nav>
-<button class="bg-secondary-container text-on-secondary-container px-6 py-2.5 rounded-lg font-label-md hover:backdrop-brightness-110 transition-all duration-300 active:scale-95">
-                Hire Me
+<button onclick="window.location.href='contact.html'" class="bg-secondary-container text-on-secondary-container px-6 py-2.5 rounded-lg font-label-md hover:backdrop-brightness-110 transition-all duration-300 active:scale-95">
+                İletişime Geç
             </button>
 </div>
 </header>
 <main class="pt-32 pb-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
 <!-- Hero Section -->
 <div class="mb-16">
-<h1 class="font-headline-xl text-headline-xl mb-4 text-primary-fixed-dim">Apps &amp; <span class="text-tertiary">Categories</span></h1>
+<h1 class="font-headline-xl text-headline-xl mb-4 text-primary-fixed-dim">Uygulamalar &amp; <span class="text-tertiary">Kategoriler</span></h1>
 <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
-                Explore a curated collection of digital products, ranging from immersive mobile experiences to high-performance web architectures and interactive gaming environments.
+                Kapsamlı mobil deneyimlerden yüksek performanslı web mimarilerine ve etkileşimli oyun ortamlarına kadar özenle seçilmiş dijital ürün koleksiyonumuzu keşfedin.
             </p>
 </div>
 <!-- Filter Controls -->
 <div class="flex flex-wrap items-center gap-4 mb-12">
 <button class="filter-btn active-filter px-6 py-2 rounded-full font-label-md border border-outline-variant/30 transition-all duration-200" id="filter-all" onclick="filterApps('all')">
-                All Projects
+                Tüm Projeler
             </button>
 <button class="filter-btn px-6 py-2 rounded-full font-label-md border border-outline-variant/30 text-on-surface-variant hover:border-tertiary transition-all duration-200" id="filter-mobile" onclick="filterApps('mobile')">
-                Mobile
+                Mobil
             </button>
 <button class="filter-btn px-6 py-2 rounded-full font-label-md border border-outline-variant/30 text-on-surface-variant hover:border-tertiary transition-all duration-200" id="filter-web" onclick="filterApps('web')">
                 Web
             </button>
 <button class="filter-btn px-6 py-2 rounded-full font-label-md border border-outline-variant/30 text-on-surface-variant hover:border-tertiary transition-all duration-200" id="filter-game" onclick="filterApps('game')">
-                Game
+                Oyun
             </button>
 </div>
 <!-- Portfolio Grid -->
@@ -167,19 +164,19 @@
 <div class="relative h-64 overflow-hidden group">
 <img alt="Mobile App Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A sleek mobile application interface displayed on a high-resolution smartphone screen, showcasing a minimalist fitness tracking dashboard. The lighting is crisp and modern with a focus on dark mode aesthetics using deep slate and electric purple accents. The background is a blurred architect's studio, suggesting a professional design environment. The mood is energetic and highly technical." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDb6aaW8yvVVc9yxbzvTxW4HlvlfTvHruwV0Jc0VMp2qbCttNjwlaOglI6_6r5M_wR1FcouFyzNTj9qBEJuBWD-aknNnLPETekOZetTrOT-ChEf6a9EruwCCIPkveyQU29BiYUobSwcFII4K8sQDDPMDk06W2rY9MdILM6wV1HkAqAvdt_NSSzaLgO7PVT2toZoPu9apl5ulbKgXPKO41nif4BwRkTcbyYkV4MWgwgmG6RDQBGAEIkwDY2Jyba_kGVnREtg4VMLQYL6"/>
 <div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobile</span>
+<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
 </div>
 </div>
 <div class="p-6 flex flex-col flex-grow">
 <h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">FitTrack Pro</h3>
 <p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        A comprehensive health monitoring system built with React Native, featuring real-time biometric data sync and AI-driven workout recommendations.
+                        React Native ile oluşturulmuş, gerçek zamanlı biyometrik veri senkronizasyonu ve yapay zeka destekli egzersiz önerileri sunan kapsamlı bir sağlık izleme sistemi.
                     </p>
 <div class="mt-auto flex gap-3">
-<button class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            View Details
+<button onclick="window.location.href='contact.html'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
+                            Detayları İncele
                         </button>
-<button class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
+<button onclick="window.location.href='contact.html'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
 <span class="material-symbols-outlined">play_circle</span>
 </button>
 </div>
@@ -196,13 +193,13 @@
 <div class="p-6 flex flex-col flex-grow">
 <h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">Nexus Analytics</h3>
 <p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        High-performance SaaS dashboard for enterprise data visualization, utilizing Next.js and Tailwind for optimized delivery and responsiveness.
+                        Next.js ve Tailwind CSS kullanılarak optimize edilmiş, kurumsal veri görselleştirme ve yüksek performanslı SaaS yönetim paneli.
                     </p>
 <div class="mt-auto flex gap-3">
-<button class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            View Details
+<button onclick="window.location.href='contact.html'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
+                            Detayları İncele
                         </button>
-<button class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
+<button onclick="window.location.href='contact.html'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
 <span class="material-symbols-outlined">play_circle</span>
 </button>
 </div>
@@ -213,19 +210,19 @@
 <div class="relative h-64 overflow-hidden group">
 <img alt="Game Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A visually stunning first-person gaming environment showcasing a futuristic sci-fi city with neon lights and rainy streets. The scene is rendered with high-fidelity textures and cinematic lighting effects, featuring heavy blues and vibrant pinks. Reflections on wet surfaces demonstrate advanced graphic capabilities. The mood is atmospheric and immersive, capturing a cyberpunk aesthetic in a modern game engine." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBn_xJ09K0WJxLGNKQ8L8bdu5ljZ6OKKSHCTtaGvL_zH0B5S6HVLG-pQPoWTSL-lJFC2A4NGFAdC09HNw4sduAF5EXW3xHzCXSqnszGbTB1JK5YV1GnHxRmFQidCVeCGDvKsWiC3D2qLeas1miFLiiYx8Sk4RCJ8yIhNfwvTeu0gp8TGJAOeC30AlQCDh1FVSBJpeoWprI7tk0BqVGENqATR59wdCe5zQ2y6jO0YYt2fa7KuVVGur4rglNH29XprgHkVnyw5QcHpGJ"/>
 <div class="absolute top-4 left-4">
-<span class="bg-primary-container text-primary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Game</span>
+<span class="bg-primary-container text-primary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Oyun</span>
 </div>
 </div>
 <div class="p-6 flex flex-col flex-grow">
 <h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">Neon Horizon</h3>
 <p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        An immersive cyberpunk action RPG developed in Unity, featuring procedurally generated environments and advanced ray-tracing technology.
+                        Unity ile geliştirilmiş, prosedürel olarak oluşturulan dünyalar ve gelişmiş ışın izleme (ray-tracing) teknolojisine sahip cyberpunk aksiyon RPG oyunu.
                     </p>
 <div class="mt-auto flex gap-3">
-<button class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            View Details
+<button onclick="window.location.href='contact.html'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
+                            Detayları İncele
                         </button>
-<button class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
+<button onclick="window.location.href='contact.html'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
 <span class="material-symbols-outlined">play_circle</span>
 </button>
 </div>
@@ -236,19 +233,19 @@
 <div class="relative h-64 overflow-hidden group">
 <img alt="Mobile App Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A mobile e-commerce application displaying a high-end fashion catalog with elegant typography and large, high-quality product imagery. The interface is clean and minimalist, using a soft gray and white color palette with sharp black accents. The lighting is bright and airy, typical of a professional studio photoshoot. The overall design suggests luxury, ease of use, and a premium shopping experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYVLM1vez38SOgGhMe2hABYLly4-PzZPVc_eFFCmegyIvLJ49YwUM_JTqvSql-kP-tIsVUlzs0aBtcW7AhpEfuBGzHz47fJqntnOuIjH01vw-vcfNSn4cc2j5VLubCDdj1M_5RwDAJC1aDzDtSz0HZiyO9FuvyVjs-tthKaWjLX5YZdjUnpdtD4G2_HJ3OAgKYqY5YzgX2VmCj39vZi0qa_Tifi0qN3GnMjV_qUciOOHC4k-sCwX4sqaA2oEL9yg3D8WYNMGpR2WsW"/>
 <div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobile</span>
+<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
 </div>
 </div>
 <div class="p-6 flex flex-col flex-grow">
 <h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">Elegance Shop</h3>
 <p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        A premium fashion e-commerce platform with AR try-on features and seamless Stripe integration for a frictionless checkout experience.
+                        Artırılmış gerçeklik (AR) deneme özellikleri ve sorunsuz Stripe ödeme entegrasyonu sunan birinci sınıf e-ticaret platformu.
                     </p>
 <div class="mt-auto flex gap-3">
-<button class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            View Details
+<button onclick="window.location.href='contact.html'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
+                            Detayları İncele
                         </button>
-<button class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
+<button onclick="window.location.href='contact.html'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
 <span class="material-symbols-outlined">play_circle</span>
 </button>
 </div>
@@ -265,13 +262,13 @@
 <div class="p-6 flex flex-col flex-grow">
 <h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">CollabFlow</h3>
 <p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        Real-time collaborative workspace for distributed teams, featuring shared whiteboards and instant messaging powered by WebSockets.
+                        WebSockets destekli anlık mesajlaşma ve ortak beyaz tahta özellikleri sunan, dağıtık ekipler için gerçek zamanlı iş birliği platformu.
                     </p>
 <div class="mt-auto flex gap-3">
-<button class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            View Details
+<button onclick="window.location.href='contact.html'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
+                            Detayları İncele
                         </button>
-<button class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
+<button onclick="window.location.href='contact.html'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
 <span class="material-symbols-outlined">play_circle</span>
 </button>
 </div>
@@ -282,19 +279,19 @@
 <div class="relative h-64 overflow-hidden group">
 <img alt="Game Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A stylized, low-poly 3D adventure game environment featuring a floating island with glowing crystals and magical flora. The lighting is whimsical and vibrant, with a soft morning glow and purple-tinted shadows. The visual style is artistic and clean, using a simplified geometry that emphasizes color and mood. The overall aesthetic is enchanting, peaceful, and creatively imaginative." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeDoNignOI1-pbv312aMteC41UciNxS5_V55hcQr0Fz-Zi5BsdmYph0oKveNf26ungY6f5gPDhCLM5GyLxB8Fo1WEfrUKo5V0ZK78dMnwqaBOH97LoisZGq_QK5TgCI78NboyzhxLLNclpoURYufw-KfjGXbV6NvnaK7N-u4wt0nBBtF4jx61cV8ur_nyVqffszzYD6xFAZhier4eN4Dm89kSHUZxVm_V314U7o_uGaeQLhK8Lj8vyQZKq69-AkPA4m_ZhP47usJ4y"/>
 <div class="absolute top-4 left-4">
-<span class="bg-primary-container text-primary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Game</span>
+<span class="bg-primary-container text-primary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Oyun</span>
 </div>
 </div>
 <div class="p-6 flex flex-col flex-grow">
 <h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">Crystal Quest</h3>
 <p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        A low-poly puzzle adventure designed for cross-platform play, focusing on environmental storytelling and innovative physics-based mechanics.
+                        Platformlar arası oynanış için tasarlanmış, çevresel hikaye anlatımı ve yenilikçi fizik tabanlı mekaniklere odaklanan low-poly bulmaca macera oyunu.
                     </p>
 <div class="mt-auto flex gap-3">
-<button class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            View Details
+<button onclick="window.location.href='contact.html'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
+                            Detayları İncele
                         </button>
-<button class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
+<button onclick="window.location.href='contact.html'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
 <span class="material-symbols-outlined">play_circle</span>
 </button>
 </div>
@@ -305,7 +302,7 @@
 <!-- Footer -->
 <footer class="w-full py-12 bg-surface-container-lowest dark:bg-surface-dim border-t border-outline-variant/10">
 <div class="flex flex-col md:flex-row justify-between items-center gap-8 max-w-container-max mx-auto px-margin-desktop">
-<div class="text-on-surface font-headline-lg text-headline-lg">DevPortfolio</div>
+<div class="text-on-surface font-headline-lg text-headline-lg">MgaCreative</div>
 <div class="flex gap-6">
 <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-tertiary transition-colors duration-200 hover:translate-y-[-2px] transition-transform" href="#">LinkedIn</a>
 <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-tertiary transition-colors duration-200 hover:translate-y-[-2px] transition-transform" href="#">GitHub</a>
@@ -313,7 +310,7 @@
 <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-tertiary transition-colors duration-200 hover:translate-y-[-2px] transition-transform" href="#">Dribbble</a>
 </div>
 <p class="font-body-md text-body-md text-on-surface-variant">
-                © 2024 Developer Portfolio. Built with precision.
+                 © 2026 MgaCreative. Tüm hakları saklıdır. Özenle tasarlanıp kodlanmıştır.
             </p>
 </div>
 </footer>

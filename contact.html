@@ -3,7 +3,7 @@
 <html class="dark" lang="tr"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Contact | DevPortfolio</title>
+<title>MgaCreative | İletişim</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@600;700;800&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -125,53 +125,51 @@
 <!-- TopNavBar -->
 <nav class="fixed top-0 left-0 w-full z-50 bg-surface/80 backdrop-blur-xl dark:bg-surface-container/80 border-b border-outline-variant/20 dark:border-outline/10 shadow-sm dark:shadow-none h-20">
 <div class="flex justify-between items-center w-full h-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
-<div class="font-headline-lg text-headline-lg font-bold tracking-tight text-on-surface dark:text-on-background">
-                DevPortfolio
-            </div>
-<!-- Desktop Links -->
+<a class="font-headline-lg text-headline-lg font-bold tracking-tight text-on-surface dark:text-on-background" href="index.html">MgaCreative</a>
 <div class="hidden md:flex items-center gap-8">
-<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-tertiary transition-all duration-300" href="index.html">Home</a>
-<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-tertiary transition-all duration-300" href="portfolio.html">Portfolio</a>
-<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-tertiary transition-all duration-300" href="about.html">About</a>
-<a class="text-primary dark:text-tertiary-fixed-dim font-bold border-b-2 border-primary dark:border-tertiary pb-1" href="contact.html">Contact</a>
-<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-tertiary transition-all duration-300" href="admin.html">Admin</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-tertiary transition-all duration-300" href="index.html">Ana Sayfa</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-tertiary transition-all duration-300" href="portfolio.html">Uygulamalarımız</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-tertiary transition-all duration-300" href="about.html">Hakkımızda</a>
+<a class="text-primary dark:text-tertiary-fixed-dim font-bold border-b-2 border-primary dark:border-tertiary pb-1" href="contact.html">İletişim</a>
 </div>
-<button class="bg-secondary-container text-on-secondary-container px-6 py-2.5 rounded-lg font-label-md text-label-md hover:backdrop-brightness-110 active:scale-95 transition-all duration-300 hover:drop-shadow-[0_0_12px_rgba(76,215,246,0.3)]">
-                Hire Me
+<button onclick="window.location.href='contact.html'" class="bg-secondary-container text-on-secondary-container px-6 py-2.5 rounded-lg font-label-md text-label-md hover:backdrop-brightness-110 active:scale-95 transition-all duration-300 hover:drop-shadow-[0_0_12px_rgba(76,215,246,0.3)]">
+                İletişime Geç
             </button>
 </div>
 </nav>
 <main class="flex-grow pt-32 pb-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full">
 <!-- Header Section -->
 <header class="mb-16 md:mb-24 text-center max-w-3xl mx-auto">
-<h1 class="font-headline-xl text-headline-lg-mobile md:text-headline-xl text-on-surface mb-6">Let's build something <span class="text-tertiary">extraordinary</span> together.</h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant">Whether you have a specific project in mind or just want to chat about system architecture, I'm always open to new connections.</p>
+<h1 class="font-headline-xl text-headline-lg-mobile md:text-headline-xl text-on-surface mb-6">Birlikte <span class="text-tertiary">sıra dışı</span> bir şeyler inşa edelim.</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Aklınızda belirli bir proje olsun ya da sadece yazılım mimarileri hakkında konuşmak isteyin, her zaman yeni fikirlere ve iş birliklerine açığım.</p>
 </header>
 <!-- Main Layout: Form + Info Sidebar -->
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
 <!-- Contact Form Section (Bento Card style) -->
 <section class="lg:col-span-8 glass-card p-8 md:p-12 rounded-xl">
-<form class="space-y-8" id="contactForm">
+<form class="space-y-8" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+<!-- Web3Forms Access Key Option (User can change this token) -->
+<input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY_HERE">
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 <div class="space-y-2">
-<label class="font-label-sm text-label-sm text-on-surface-variant block ml-1" for="name">NAME</label>
-<input class="w-full bg-surface-container-lowest border border-outline-variant/30 rounded-lg px-4 py-3 text-on-surface font-body-md focus:outline-none input-glow transition-all duration-300" id="name" name="name" placeholder="John Doe" required="" type="text"/>
+<label class="font-label-sm text-label-sm text-on-surface-variant block ml-1" for="name">ADINIZ SOYADINIZ</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant/30 rounded-lg px-4 py-3 text-on-surface font-body-md focus:outline-none input-glow transition-all duration-300" id="name" name="name" placeholder="Ahmet Yılmaz" required="" type="text"/>
 </div>
 <div class="space-y-2">
-<label class="font-label-sm text-label-sm text-on-surface-variant block ml-1" for="email">EMAIL ADDRESS</label>
-<input class="w-full bg-surface-container-lowest border border-outline-variant/30 rounded-lg px-4 py-3 text-on-surface font-body-md focus:outline-none input-glow transition-all duration-300" id="email" name="email" placeholder="john@example.com" required="" type="email"/>
+<label class="font-label-sm text-label-sm text-on-surface-variant block ml-1" for="email">E-POSTA ADRESİNİZ</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant/30 rounded-lg px-4 py-3 text-on-surface font-body-md focus:outline-none input-glow transition-all duration-300" id="email" name="email" placeholder="ahmet@ornek.com" required="" type="email"/>
 </div>
 </div>
 <div class="space-y-2">
-<label class="font-label-sm text-label-sm text-on-surface-variant block ml-1" for="subject">SUBJECT</label>
-<input class="w-full bg-surface-container-lowest border border-outline-variant/30 rounded-lg px-4 py-3 text-on-surface font-body-md focus:outline-none input-glow transition-all duration-300" id="subject" name="subject" placeholder="Project Inquiry" required="" type="text"/>
+<label class="font-label-sm text-label-sm text-on-surface-variant block ml-1" for="subject">KONU</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant/30 rounded-lg px-4 py-3 text-on-surface font-body-md focus:outline-none input-glow transition-all duration-300" id="subject" name="subject" placeholder="Proje Talebi" required="" type="text"/>
 </div>
 <div class="space-y-2">
-<label class="font-label-sm text-label-sm text-on-surface-variant block ml-1" for="message">MESSAGE</label>
-<textarea class="w-full bg-surface-container-lowest border border-outline-variant/30 rounded-lg px-4 py-3 text-on-surface font-body-md focus:outline-none input-glow transition-all duration-300 resize-none" id="message" name="message" placeholder="Tell me about your vision..." required="" rows="6"></textarea>
+<label class="font-label-sm text-label-sm text-on-surface-variant block ml-1" for="message">MESAJINIZ</label>
+<textarea class="w-full bg-surface-container-lowest border border-outline-variant/30 rounded-lg px-4 py-3 text-on-surface font-body-md focus:outline-none input-glow transition-all duration-300 resize-none" id="message" name="message" placeholder="Bize hayalinizdeki projeden bahsedin..." required="" rows="6"></textarea>
 </div>
 <button class="w-full md:w-auto bg-secondary-container hover:bg-secondary text-on-secondary-container hover:text-on-secondary px-10 py-4 rounded-lg font-label-md text-label-md flex items-center justify-center gap-3 transition-all duration-300 active:scale-[0.98] group" type="submit">
-                        Send Message
+                        Mesajı Gönder
                         <span class="material-symbols-outlined transition-transform group-hover:translate-x-1">send</span>
 </button>
 </form>
@@ -185,8 +183,8 @@
 <span class="material-symbols-outlined">alternate_email</span>
 </div>
 <div>
-<p class="font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase tracking-widest">Email</p>
-<p class="font-body-md text-body-md text-on-surface">hello@devportfolio.com</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase tracking-widest">E-posta</p>
+<p class="font-body-md text-body-md text-on-surface">iletisim@mgacreative.com</p>
 </div>
 </div>
 <div class="flex items-start gap-4">
@@ -194,12 +192,12 @@
 <span class="material-symbols-outlined">location_on</span>
 </div>
 <div>
-<p class="font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase tracking-widest">Location</p>
-<p class="font-body-md text-body-md text-on-surface">San Francisco, CA</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase tracking-widest">Konum</p>
+<p class="font-body-md text-body-md text-on-surface">İstanbul, Türkiye</p>
 </div>
 </div>
 <div class="pt-4 border-t border-outline-variant/10">
-<p class="font-label-sm text-label-sm text-on-surface-variant mb-4 uppercase tracking-widest">Digital Presence</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-4 uppercase tracking-widest">Dijital Kanallar</p>
 <div class="flex gap-4">
 <a class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant hover:text-tertiary hover:bg-tertiary/10 transition-all duration-300" href="#" title="LinkedIn">
 <span class="material-symbols-outlined">link</span>
@@ -217,8 +215,8 @@
 <div class="relative overflow-hidden rounded-xl h-64 glass-card group">
 <img alt="Digital Map Visualization" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A highly stylized, dark-themed 3D topographical map showing glowing data connections over a simplified representation of San Francisco. The aesthetic is futuristic and high-tech, using a palette of deep slate blacks and electric cyan highlights. Soft ambient light from the glowing nodes illuminates the terrain, creating a sense of global connectivity and architectural depth in a minimalist dark-mode environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwlwxcNYwHaV7U3iX4oGyxP6AmI3eDhV4R3VHfajPG9J-L76ywBVSwprMNqw3SUyf18K1BJg1MV2E4yanHXOdbh_J5DO_j2jw8HOi1aE_kmD4XcTb3ZjPNZUYDiwsfuud-iFdhOG_QxsIJ5IkDM0d207g94LyjXa6c9LdvaduDD-kFUTWqIc5o5ZAYRTqmeFY1cGC8KbvKDj7m6D4LEwW_K7XlfsTZIQz4z1z4cHUKp3WAK2p0v2xOUGe_5frYnkS69J83B5kiSwyT"/>
 <div class="absolute inset-0 bg-gradient-to-t from-surface/80 to-transparent flex flex-col justify-end p-6">
-<span class="font-label-sm text-label-sm text-tertiary mb-1">GLOBAL REACH</span>
-<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Available for Remote Projects</h3>
+<span class="font-label-sm text-label-sm text-tertiary mb-1">KÜRESEL ERİŞİM</span>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Uzaktan Çalışma ve Projeler İçin Müsait</h3>
 </div>
 </div>
 </aside>
@@ -228,10 +226,10 @@
 <footer class="bg-surface-container-lowest dark:bg-surface-dim border-t border-outline-variant/10 w-full py-12">
 <div class="flex flex-col md:flex-row justify-between items-center gap-8 max-w-container-max mx-auto px-margin-desktop">
 <div class="font-headline-lg text-headline-lg text-on-surface">
-                DevPortfolio
+                MgaCreative
             </div>
 <p class="font-body-md text-body-md text-on-surface-variant text-center md:text-left">
-                © 2024 Developer Portfolio. Built with precision.
+                © 2026 MgaCreative. Tüm hakları saklıdır. Özenle tasarlanıp kodlanmıştır.
             </p>
 <div class="flex gap-8">
 <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-tertiary transition-colors duration-200 hover:translate-y-[-2px] transition-transform" href="#">LinkedIn</a>
@@ -248,22 +246,42 @@
             const originalText = btn.innerHTML;
             
             // Interaction: Loading state
-            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">refresh</span> Sending...';
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">refresh</span> Gönderiliyor...';
             btn.disabled = true;
 
-            setTimeout(() => {
-                btn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> Message Sent!';
-                btn.classList.replace('bg-secondary-container', 'bg-tertiary');
-                btn.classList.replace('text-on-secondary-container', 'text-on-tertiary');
-                
+            const formData = new FormData(e.target);
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json'
+                },
+                body: formData
+            })
+            .then(async (response) => {
+                let json = await response.json();
+                if (response.status == 200) {
+                    btn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> Mesaj Gönderildi!';
+                    btn.classList.replace('bg-secondary-container', 'bg-tertiary');
+                    btn.classList.replace('text-on-secondary-container', 'text-on-tertiary');
+                    e.target.reset();
+                } else {
+                    btn.innerHTML = '<span class="material-symbols-outlined">error</span> Hata Oluştu!';
+                }
                 setTimeout(() => {
                     btn.innerHTML = originalText;
                     btn.classList.replace('bg-tertiary', 'bg-secondary-container');
                     btn.classList.replace('text-on-tertiary', 'text-on-secondary-container');
                     btn.disabled = false;
-                    e.target.reset();
                 }, 3000);
-            }, 1500);
+            })
+            .catch(error => {
+                btn.innerHTML = '<span class="material-symbols-outlined">error</span> Bağlantı Hatası!';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                }, 3000);
+            });
         });
 
         // Atmospheric effect: Subtle mouse-following glow on form
