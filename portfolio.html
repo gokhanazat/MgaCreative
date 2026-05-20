@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DevPortfolio | Apps &amp; Categories</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;family=Inter:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#323537",
+                    "primary-fixed": "#dae2fd",
+                    "surface-container-lowest": "#0b0f10",
+                    "inverse-primary": "#565e74",
+                    "secondary": "#d2bbff",
+                    "surface-container-high": "#272a2c",
+                    "surface-container-highest": "#323537",
+                    "surface-bright": "#363a3b",
+                    "tertiary-fixed-dim": "#4cd7f6",
+                    "on-secondary-container": "#c9aeff",
+                    "tertiary": "#4cd7f6",
+                    "surface-container": "#1d2022",
+                    "on-tertiary-fixed-variant": "#004e5c",
+                    "secondary-fixed": "#eaddff",
+                    "error-container": "#93000a",
+                    "on-tertiary-fixed": "#001f26",
+                    "on-error": "#690005",
+                    "on-surface": "#e0e3e5",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "primary-fixed-dim": "#bec6e0",
+                    "on-tertiary-container": "#008da5",
+                    "inverse-on-surface": "#2d3133",
+                    "on-primary": "#283044",
+                    "secondary-container": "#6001d1",
+                    "on-error-container": "#ffdad6",
+                    "surface-dim": "#101415",
+                    "surface": "#101415",
+                    "primary": "#bec6e0",
+                    "outline": "#909097",
+                    "error": "#ffb4ab",
+                    "on-tertiary": "#003640",
+                    "tertiary-fixed": "#acedff",
+                    "on-secondary-fixed": "#25005a",
+                    "outline-variant": "#45464d",
+                    "on-secondary": "#3f008e",
+                    "background": "#101415",
+                    "inverse-surface": "#e0e3e5",
+                    "surface-tint": "#bec6e0",
+                    "on-background": "#e0e3e5",
+                    "tertiary-container": "#001b21",
+                    "surface-container-low": "#191c1e",
+                    "on-primary-fixed": "#131b2e",
+                    "on-secondary-fixed-variant": "#5a00c6",
+                    "primary-container": "#0f172a",
+                    "secondary-fixed-dim": "#d2bbff",
+                    "on-surface-variant": "#c6c6cd",
+                    "on-primary-container": "#798098"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "margin-desktop": "48px",
+                    "base": "8px",
+                    "container-max": "1280px",
+                    "margin-mobile": "16px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Geist"],
+                    "headline-xl": ["Geist"],
+                    "body-lg": ["Inter"],
+                    "label-md": ["JetBrains Mono"],
+                    "headline-lg": ["Geist"],
+                    "body-md": ["Inter"],
+                    "label-sm": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(29, 32, 34, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(144, 144, 151, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            transform: translateY(-4px) scale(1.01);
+            border-color: rgba(76, 215, 246, 0.4);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .active-filter {
+            background-color: #6001d1;
+            color: #eaddff;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-surface/80 backdrop-blur-xl dark:bg-surface-container/80 border-b border-outline-variant/20 dark:border-outline/10 shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center w-full h-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="font-headline-lg text-headline-lg font-bold tracking-tight text-on-surface dark:text-on-background">
+                DevPortfolio
+            </div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-tertiary transition-all duration-300" href="index.html">Home</a>
+<a class="text-primary dark:text-tertiary-fixed-dim font-bold border-b-2 border-primary dark:border-tertiary pb-1" href="portfolio.html">Portfolio</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-tertiary transition-all duration-300" href="about.html">About</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-tertiary transition-all duration-300" href="contact.html">Contact</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-tertiary transition-all duration-300" href="admin.html">Admin</a>
+</nav>
+<button class="bg-secondary-container text-on-secondary-container px-6 py-2.5 rounded-lg font-label-md hover:backdrop-brightness-110 transition-all duration-300 active:scale-95">
+                Hire Me
+            </button>
+</div>
+</header>
+<main class="pt-32 pb-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<!-- Hero Section -->
+<div class="mb-16">
+<h1 class="font-headline-xl text-headline-xl mb-4 text-primary-fixed-dim">Apps &amp; <span class="text-tertiary">Categories</span></h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                Explore a curated collection of digital products, ranging from immersive mobile experiences to high-performance web architectures and interactive gaming environments.
+            </p>
+</div>
+<!-- Filter Controls -->
+<div class="flex flex-wrap items-center gap-4 mb-12">
+<button class="filter-btn active-filter px-6 py-2 rounded-full font-label-md border border-outline-variant/30 transition-all duration-200" id="filter-all" onclick="filterApps('all')">
+                All Projects
+            </button>
+<button class="filter-btn px-6 py-2 rounded-full font-label-md border border-outline-variant/30 text-on-surface-variant hover:border-tertiary transition-all duration-200" id="filter-mobile" onclick="filterApps('mobile')">
+                Mobile
+            </button>
+<button class="filter-btn px-6 py-2 rounded-full font-label-md border border-outline-variant/30 text-on-surface-variant hover:border-tertiary transition-all duration-200" id="filter-web" onclick="filterApps('web')">
+                Web
+            </button>
+<button class="filter-btn px-6 py-2 rounded-full font-label-md border border-outline-variant/30 text-on-surface-variant hover:border-tertiary transition-all duration-200" id="filter-game" onclick="filterApps('game')">
+                Game
+            </button>
+</div>
+<!-- Portfolio Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
+<!-- App Card 1 -->
+<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
+<div class="relative h-64 overflow-hidden group">
+<img alt="Mobile App Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A sleek mobile application interface displayed on a high-resolution smartphone screen, showcasing a minimalist fitness tracking dashboard. The lighting is crisp and modern with a focus on dark mode aesthetics using deep slate and electric purple accents. The background is a blurred architect's studio, suggesting a professional design environment. The mood is energetic and highly technical." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDb6aaW8yvVVc9yxbzvTxW4HlvlfTvHruwV0Jc0VMp2qbCttNjwlaOglI6_6r5M_wR1FcouFyzNTj9qBEJuBWD-aknNnLPETekOZetTrOT-ChEf6a9EruwCCIPkveyQU29BiYUobSwcFII4K8sQDDPMDk06W2rY9MdILM6wV1HkAqAvdt_NSSzaLgO7PVT2toZoPu9apl5ulbKgXPKO41nif4BwRkTcbyYkV4MWgwgmG6RDQBGAEIkwDY2Jyba_kGVnREtg4VMLQYL6"/>
+<div class="absolute top-4 left-4">
+<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobile</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">FitTrack Pro</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
+                        A comprehensive health monitoring system built with React Native, featuring real-time biometric data sync and AI-driven workout recommendations.
+                    </p>
+<div class="mt-auto flex gap-3">
+<button class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
+                            View Details
+                        </button>
+<button class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
+<span class="material-symbols-outlined">play_circle</span>
+</button>
+</div>
+</div>
+</article>
+<!-- App Card 2 -->
+<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="web">
+<div class="relative h-64 overflow-hidden group">
+<img alt="Web App Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A sophisticated web dashboard for a financial analytics platform, featuring complex data visualizations and interactive charts. The color palette consists of deep charcoal backgrounds with cyan and purple neon highlights. High-end glassmorphism effects are visible on the UI elements. The lighting mimics a late-night coding session with subtle glows emanating from the screen. The overall aesthetic is professional, complex, and data-driven." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCju0ZkGeXh9rINz2kuRm1p_-8DE8pHIyqeMvjG5YsXOxCIOScHB4SiWDV885ETa9gssbW8YJQ6ydkEGuinsYBc_DfHHGvOJmduxmPpYtetX14Fx-4b4vdhkjGtlNWOz7xB_7A-33OxLwztVcPDKrqrh2_qIORrUkm4uE_tPWhJbSzlN3m0iYkyZU98fBEIzpnHJo5YBhchUEy4Ef7LoFK1xJVTjm8h2PqfAnZ8TZNeUlMnRBIpekhmHTfwCloIPstavA7lFXstAMdd"/>
+<div class="absolute top-4 left-4">
+<span class="bg-secondary-container text-secondary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Web</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">Nexus Analytics</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
+                        High-performance SaaS dashboard for enterprise data visualization, utilizing Next.js and Tailwind for optimized delivery and responsiveness.
+                    </p>
+<div class="mt-auto flex gap-3">
+<button class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
+                            View Details
+                        </button>
+<button class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
+<span class="material-symbols-outlined">play_circle</span>
+</button>
+</div>
+</div>
+</article>
+<!-- App Card 3 -->
+<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="game">
+<div class="relative h-64 overflow-hidden group">
+<img alt="Game Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A visually stunning first-person gaming environment showcasing a futuristic sci-fi city with neon lights and rainy streets. The scene is rendered with high-fidelity textures and cinematic lighting effects, featuring heavy blues and vibrant pinks. Reflections on wet surfaces demonstrate advanced graphic capabilities. The mood is atmospheric and immersive, capturing a cyberpunk aesthetic in a modern game engine." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBn_xJ09K0WJxLGNKQ8L8bdu5ljZ6OKKSHCTtaGvL_zH0B5S6HVLG-pQPoWTSL-lJFC2A4NGFAdC09HNw4sduAF5EXW3xHzCXSqnszGbTB1JK5YV1GnHxRmFQidCVeCGDvKsWiC3D2qLeas1miFLiiYx8Sk4RCJ8yIhNfwvTeu0gp8TGJAOeC30AlQCDh1FVSBJpeoWprI7tk0BqVGENqATR59wdCe5zQ2y6jO0YYt2fa7KuVVGur4rglNH29XprgHkVnyw5QcHpGJ"/>
+<div class="absolute top-4 left-4">
+<span class="bg-primary-container text-primary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Game</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">Neon Horizon</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
+                        An immersive cyberpunk action RPG developed in Unity, featuring procedurally generated environments and advanced ray-tracing technology.
+                    </p>
+<div class="mt-auto flex gap-3">
+<button class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
+                            View Details
+                        </button>
+<button class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
+<span class="material-symbols-outlined">play_circle</span>
+</button>
+</div>
+</div>
+</article>
+<!-- App Card 4 -->
+<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
+<div class="relative h-64 overflow-hidden group">
+<img alt="Mobile App Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A mobile e-commerce application displaying a high-end fashion catalog with elegant typography and large, high-quality product imagery. The interface is clean and minimalist, using a soft gray and white color palette with sharp black accents. The lighting is bright and airy, typical of a professional studio photoshoot. The overall design suggests luxury, ease of use, and a premium shopping experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYVLM1vez38SOgGhMe2hABYLly4-PzZPVc_eFFCmegyIvLJ49YwUM_JTqvSql-kP-tIsVUlzs0aBtcW7AhpEfuBGzHz47fJqntnOuIjH01vw-vcfNSn4cc2j5VLubCDdj1M_5RwDAJC1aDzDtSz0HZiyO9FuvyVjs-tthKaWjLX5YZdjUnpdtD4G2_HJ3OAgKYqY5YzgX2VmCj39vZi0qa_Tifi0qN3GnMjV_qUciOOHC4k-sCwX4sqaA2oEL9yg3D8WYNMGpR2WsW"/>
+<div class="absolute top-4 left-4">
+<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobile</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">Elegance Shop</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
+                        A premium fashion e-commerce platform with AR try-on features and seamless Stripe integration for a frictionless checkout experience.
+                    </p>
+<div class="mt-auto flex gap-3">
+<button class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
+                            View Details
+                        </button>
+<button class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
+<span class="material-symbols-outlined">play_circle</span>
+</button>
+</div>
+</div>
+</article>
+<!-- App Card 5 -->
+<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="web">
+<div class="relative h-64 overflow-hidden group">
+<img alt="Web App Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A modern, dark-themed collaboration workspace web app featuring a sidebar navigation and a central project management board with colorful task cards. The lighting is soft, utilizing ambient occlusion to create depth between UI layers. The color palette is composed of deep blues, grays, and accented with vibrant primary colors for task status. The mood is productive, organized, and technologically sophisticated." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrYRMGSVT8M72D0gGdxvInZP34p94qRfZP4_7ciGikwZef7O-c3VFFMGDw-KT4Sp0LJxFBEHJcdI90ucLkqKID2tdJkyyDQGR-cGDnjbRKZc_CB-eXcerf5HZK8cAMwiweY6dta9h9x3NdVLWjdnzH4SA14VF_8tDhgi8yoaHeBpfWwV_jDF8q3-grqcct2gsfWkV2W_Hn61rAnlubq5BewEr7FVU2IOSMl_oy3cEA3_iAhNAM0tqIR2kCs41z1a6Gc7i9YdpcwwfS"/>
+<div class="absolute top-4 left-4">
+<span class="bg-secondary-container text-secondary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Web</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">CollabFlow</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
+                        Real-time collaborative workspace for distributed teams, featuring shared whiteboards and instant messaging powered by WebSockets.
+                    </p>
+<div class="mt-auto flex gap-3">
+<button class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
+                            View Details
+                        </button>
+<button class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
+<span class="material-symbols-outlined">play_circle</span>
+</button>
+</div>
+</div>
+</article>
+<!-- App Card 6 -->
+<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="game">
+<div class="relative h-64 overflow-hidden group">
+<img alt="Game Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A stylized, low-poly 3D adventure game environment featuring a floating island with glowing crystals and magical flora. The lighting is whimsical and vibrant, with a soft morning glow and purple-tinted shadows. The visual style is artistic and clean, using a simplified geometry that emphasizes color and mood. The overall aesthetic is enchanting, peaceful, and creatively imaginative." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeDoNignOI1-pbv312aMteC41UciNxS5_V55hcQr0Fz-Zi5BsdmYph0oKveNf26ungY6f5gPDhCLM5GyLxB8Fo1WEfrUKo5V0ZK78dMnwqaBOH97LoisZGq_QK5TgCI78NboyzhxLLNclpoURYufw-KfjGXbV6NvnaK7N-u4wt0nBBtF4jx61cV8ur_nyVqffszzYD6xFAZhier4eN4Dm89kSHUZxVm_V314U7o_uGaeQLhK8Lj8vyQZKq69-AkPA4m_ZhP47usJ4y"/>
+<div class="absolute top-4 left-4">
+<span class="bg-primary-container text-primary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Game</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">Crystal Quest</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
+                        A low-poly puzzle adventure designed for cross-platform play, focusing on environmental storytelling and innovative physics-based mechanics.
+                    </p>
+<div class="mt-auto flex gap-3">
+<button class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
+                            View Details
+                        </button>
+<button class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
+<span class="material-symbols-outlined">play_circle</span>
+</button>
+</div>
+</div>
+</article>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 bg-surface-container-lowest dark:bg-surface-dim border-t border-outline-variant/10">
+<div class="flex flex-col md:flex-row justify-between items-center gap-8 max-w-container-max mx-auto px-margin-desktop">
+<div class="text-on-surface font-headline-lg text-headline-lg">DevPortfolio</div>
+<div class="flex gap-6">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-tertiary transition-colors duration-200 hover:translate-y-[-2px] transition-transform" href="#">LinkedIn</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-tertiary transition-colors duration-200 hover:translate-y-[-2px] transition-transform" href="#">GitHub</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-tertiary transition-colors duration-200 hover:translate-y-[-2px] transition-transform" href="#">Twitter</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-tertiary transition-colors duration-200 hover:translate-y-[-2px] transition-transform" href="#">Dribbble</a>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                © 2024 Developer Portfolio. Built with precision.
+            </p>
+</div>
+</footer>
+<script>
+        function filterApps(category) {
+            const cards = document.querySelectorAll('.app-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            // Update buttons
+            buttons.forEach(btn => {
+                btn.classList.remove('active-filter');
+                btn.classList.add('text-on-surface-variant');
+            });
+            document.getElementById(`filter-${category}`).classList.add('active-filter');
+            document.getElementById(`filter-${category}`).classList.remove('text-on-surface-variant');
+
+            // Animate Grid
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'scale(0.95)';
+                
+                setTimeout(() => {
+                    if (category === 'all' || card.getAttribute('data-category') === category) {
+                        card.style.display = 'flex';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'scale(1)';
+                        }, 50);
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }, 300);
+            });
+        }
+
+        // Initialize with slight delay for entrance animation
+        window.onload = () => {
+            const cards = document.querySelectorAll('.app-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s cubic-bezier(0.22, 1, 0.36, 1)';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        };
+    </script>
+</body></html>
