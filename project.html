@@ -130,7 +130,7 @@
                 <h1 id="proj-title" class="font-headline-xl text-headline-lg-mobile md:text-headline-xl text-on-surface font-bold leading-tight">Proje Başlığı</h1>
             </div>
 
-            <p id="proj-desc" class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+            <p id="proj-desc" class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed whitespace-pre-line">
                 Yükleniyor...
             </p>
 
@@ -150,11 +150,15 @@
                 </ul>
             </div>
 
-            <!-- CTA Button -->
-            <div class="pt-4">
+            <!-- CTA Buttons -->
+            <div class="pt-4 flex flex-wrap gap-4">
                 <a id="proj-contact-btn" href="contact.html" class="inline-flex items-center justify-center bg-secondary-container hover:bg-secondary text-on-secondary-container hover:text-on-secondary px-8 py-3.5 rounded-lg font-label-md text-label-md transition-all duration-300 active:scale-95">
                     Bu Projeyi Konuşalım
                     <span class="material-symbols-outlined ml-2">chat_bubble</span>
+                </a>
+                <a id="proj-playstore-btn" href="#" target="_blank" class="inline-flex items-center justify-center bg-surface-container hover:bg-surface-container-high text-on-surface border border-outline-variant/30 px-8 py-3.5 rounded-lg font-label-md text-label-md transition-all duration-300 active:scale-95 hidden">
+                    Google Play'de Gör
+                    <span class="material-symbols-outlined ml-2 text-tertiary">play_apps</span>
                 </a>
             </div>
         </div>
@@ -204,13 +208,29 @@
 <script>
     // In-memory Database of projects matching portfolio.html
     const projectsData = {
+        'agro-plan': {
+            title: 'Agro Plan',
+            category: 'Mobil',
+            categoryClass: 'bg-tertiary/10 text-tertiary border border-tertiary/20',
+            image: 'images/agro-plan.webp',
+            description: `Modern Çiftçiliğin Dijital Ortağı: AgroPlan\n\nKağıt defterleri bir kenara bırakın! AgroPlan, çiftçiler ve tarım üreticileri için özel olarak geliştirilmiş, kullanımı kolay ve kapsamlı bir tarla yönetim uygulamasıdır. Ekimden hasada kadar tüm süreçlerinizi cebinizden takip edin, veriminizi ve kazancınızı artırın.\n\n🚜 Tarlalarınız Kontrol Altında: Sahip olduğunuz veya kiraladığınız tüm tarlaları kaydedin. Hangi tarlada ne ekili, dönüm bilgisi ve konum detaylarıyla arazilerinizi dijitalleştirin.\n\n💧 Ekim ve Bakım Takibi: Sulama, ilaçlama ve gübreleme işlemlerini kolayca takip edin, periyodik hatırlatıcılar ekleyin.\n\n💰 Finansal Yönetim: Mazot, tohum, gübre ve işçilik maliyetlerini girerek gelir/gider hesabı yapın, hasat sonunda kâr/zarar durumunuzu net görün.`,
+            youtubeId: 'F4ki_kJsFtQ',
+            techStack: ['Android', 'Kotlin', 'Jetpack Compose', 'Offline Database', 'Cloud Sync'],
+            features: [
+                'Tarlalarınız Kontrol Altında: Konum ve dönüm bilgileriyle arazilerinizi dijitalleştirin.',
+                'Ekim ve Bakım Takibi: Sulama, ilaçlama, gübreleme ve periyodik denetimleri planlayın.',
+                'Finansal Yönetim: Gider kalemleri (mazot, tohum, vb.) ve hasat gelirleriyle net kâr/zarar analizi yapın.',
+                'İnternetsiz Çalışma Desteği: Çevrimdışı kayıt alma özelliğiyle internetiniz olmasa bile işlerinizi aksatmayın.'
+            ],
+            playstoreUrl: 'https://play.google.com/store/apps/details?id=com.gkhnazat.agroplan.mobile&pcampaignid=web_share'
+        },
         'fittrack-pro': {
             title: 'FitTrack Pro',
             category: 'Mobil',
             categoryClass: 'bg-tertiary/10 text-tertiary border border-tertiary/20',
             image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDb6aaW8yvVVc9yxbzvTxW4HlvlfTvHruwV0Jc0VMp2qbCttNjwlaOglI6_6r5M_wR1FcouFyzNTj9qBEJuBWD-aknNnLPETekOZetTrOT-ChEf6a9EruwCCIPkveyQU29BiYUobSwcFII4K8sQDDPMDk06W2rY9MdILM6wV1HkAqAvdt_NSSzaLgO7PVT2toZoPu9apl5ulbKgXPKO41nif4BwRkTcbyYkV4MWgwgmG6RDQBGAEIkwDY2Jyba_kGVnREtg4VMLQYL6',
             description: 'FitTrack Pro, React Native ve gelişmiş sensör entegrasyonu kullanılarak tasarlanmış yüksek performanslı bir fitness ve sağlık takip uygulamasıdır. Kullanıcıların biyometrik verilerini (kalp ritmi, adım sayısı, uyku kalitesi) gerçek zamanlı izler ve yapay zeka motoru sayesinde özel antrenman programları çıkarır.',
-            youtubeId: 'dQw4w9WgXcQ', // Standard sample video, user can easily swap this!
+            youtubeId: 'dQw4w9WgXcQ',
             techStack: ['React Native', 'TypeScript', 'Redux', 'Node.js', 'Chart.js', 'TailwindCSS'],
             features: [
                 'Gerçek Zamanlı Kalp Ritim Monitörü Entegrasyonu',
@@ -348,6 +368,15 @@
 
         // Customize CTA button redirection subject
         document.getElementById('proj-contact-btn').href = `contact.html?subject=${encodeURIComponent(proj.title + ' Projesi Hakkında')}`;
+
+        // Play Store button config
+        const playBtn = document.getElementById('proj-playstore-btn');
+        if (proj.playstoreUrl) {
+            playBtn.href = proj.playstoreUrl;
+            playBtn.classList.remove('hidden');
+        } else {
+            playBtn.classList.add('hidden');
+        }
 
     } else {
         // Hide details layout and show error state
