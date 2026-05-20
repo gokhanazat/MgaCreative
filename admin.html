@@ -115,6 +115,67 @@
     </style>
 </head>
 <body class="bg-background text-on-background font-body-md selection:bg-tertiary/30">
+<!-- Password Protection Check (Instant) -->
+<script>
+    if (sessionStorage.getItem('admin_authenticated') === 'true') {
+        // Authenticated
+    } else {
+        document.write(`
+        <div id="auth-overlay" class="fixed inset-0 z-[100] flex items-center justify-center bg-[#101415]/95 backdrop-blur-2xl">
+            <div class="glass-panel p-8 rounded-3xl max-w-md w-full mx-4 text-center space-y-6 active-glow border border-outline-variant/30">
+                <div class="w-16 h-16 bg-[#6001d1] text-white rounded-full flex items-center justify-center mx-auto shadow-[0_0_20px_rgba(96,1,209,0.3)]">
+                    <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">lock</span>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold text-on-surface font-headline-lg mb-2">Yönetim Paneli</h2>
+                    <p class="text-on-surface-variant font-body-md">Bu alana erişmek için lütfen şifrenizi girin.</p>
+                </div>
+                <div class="space-y-4">
+                    <input type="password" id="admin-pass-input" placeholder="Şifrenizi girin..." class="w-full bg-surface-container-lowest border border-outline-variant/30 rounded-xl px-4 py-3 text-center text-on-surface font-body-md focus:outline-none focus:ring-2 focus:ring-tertiary focus:border-tertiary transition-all duration-300 tracking-wider">
+                    <p id="auth-error-msg" class="text-red-400 font-label-sm text-label-sm hidden">Hatalı şifre! Lütfen tekrar deneyin.</p>
+                    <button onclick="checkAdminPassword()" class="w-full bg-[#6001d1] hover:bg-[#6001d1]/90 text-white py-3.5 rounded-xl font-label-md transition-all duration-300 hover:drop-shadow-[0_0_12px_rgba(76,215,246,0.3)] active:scale-95 flex items-center justify-center gap-2">
+                        <span>Giriş Yap</span>
+                        <span class="material-symbols-outlined text-lg">login</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        `);
+    }
+
+    async function hashPassword(pw) {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(pw);
+        const hash = await crypto.subtle.digest('SHA-256', data);
+        return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    async function checkAdminPassword() {
+        const input = document.getElementById('admin-pass-input').value;
+        const hash = await hashPassword(input);
+        const targetHash = 'eb980d8fba4f607db3f235ae51000cdfbd238ca411398c54a63660da3d0ef69d';
+        
+        if (hash === targetHash) {
+            sessionStorage.setItem('admin_authenticated', 'true');
+            const overlay = document.getElementById('auth-overlay');
+            overlay.classList.add('transition-opacity', 'duration-500', 'opacity-0');
+            setTimeout(() => overlay.remove(), 500);
+        } else {
+            const errorMsg = document.getElementById('auth-error-msg');
+            errorMsg.classList.remove('hidden');
+            document.getElementById('admin-pass-input').value = '';
+        }
+    }
+
+    // Support enter key
+    setTimeout(() => {
+        document.getElementById('admin-pass-input')?.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkAdminPassword();
+            }
+        });
+    }, 100);
+</script>
 <!-- TopNavBar -->
 <header class="fixed top-0 left-0 w-full z-50 bg-surface/80 backdrop-blur-xl dark:bg-surface-container/80 border-b border-outline-variant/20 dark:border-outline/10 shadow-sm dark:shadow-none">
 <div class="flex justify-between items-center w-full h-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
