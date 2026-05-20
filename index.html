@@ -184,60 +184,152 @@
                     <span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
 </a>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-<!-- App Card 1 -->
-<div class="group relative glass-card rounded-[24px] overflow-hidden inner-glow transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
-<div class="h-64 overflow-hidden">
-<img alt="Agro Plan Preview" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="images/aproplan_kart.png"/>
-</div>
-<div class="p-8 space-y-4">
-<div class="flex gap-2">
-<span class="bg-tertiary/10 text-tertiary px-3 py-1 rounded-full font-label-sm text-label-sm">Android</span>
-<span class="bg-tertiary/10 text-tertiary px-3 py-1 rounded-full font-label-sm text-label-sm">Mobil</span>
-</div>
-<h3 class="font-headline-lg text-[24px] leading-tight">Agro Plan</h3>
-<p class="font-body-md text-body-md text-on-surface-variant">Tarlalarınızı, ekim süreçlerinizi, sulama ve gelir-giderlerinizi tek yerden yönetin.</p>
-<a class="inline-flex items-center text-primary-fixed-dim font-label-md text-label-md pt-2" href="project.html?id=agro-plan">
-                            Projeyi İncele <span class="material-symbols-outlined ml-2 text-[18px]">open_in_new</span>
-</a>
-</div>
-</div>
-<!-- App Card 2 -->
-<div class="group relative glass-card rounded-[24px] overflow-hidden inner-glow transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
-<div class="h-64 overflow-hidden">
-<img alt="Cardly Preview" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="images/cardly_kart.jpeg"/>
-</div>
-<div class="p-8 space-y-4">
-<div class="flex gap-2">
-<span class="bg-tertiary/10 text-tertiary px-3 py-1 rounded-full font-label-sm text-label-sm">Android</span>
-<span class="bg-tertiary/10 text-tertiary px-3 py-1 rounded-full font-label-sm text-label-sm">Kotlin</span>
-</div>
-<h3 class="font-headline-lg text-[24px] leading-tight">Cardly</h3>
-<p class="font-body-md text-body-md text-on-surface-variant">Premium dijital kartvizitler. QR ve NFC ile prestijli bir şekilde paylaşın.</p>
-<a class="inline-flex items-center text-primary-fixed-dim font-label-md text-label-md pt-2" href="project.html?id=cardly">
-                            Projeyi İncele <span class="material-symbols-outlined ml-2 text-[18px]">open_in_new</span>
-</a>
-</div>
-<!-- App Card 3 -->
-<div class="group relative glass-card rounded-[24px] overflow-hidden inner-glow transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
-<div class="h-64 overflow-hidden">
-<img alt="Başvuru Asistanı Preview" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="images/basvuru_kart.jpeg"/>
-</div>
-<div class="p-8 space-y-4">
-<div class="flex gap-2">
-<span class="bg-tertiary/10 text-tertiary px-3 py-1 rounded-full font-label-sm text-label-sm">Android</span>
-<span class="bg-tertiary/10 text-tertiary px-3 py-1 rounded-full font-label-sm text-label-sm">Kotlin</span>
-</div>
-<h3 class="font-headline-lg text-[24px] leading-tight">Başvuru Asistanı</h3>
-<p class="font-body-md text-body-md text-on-surface-variant">Tüm başvurularınızı tek bir noktadan kolayca yönetin ve takip edin.</p>
-<a class="inline-flex items-center text-primary-fixed-dim font-label-md text-label-md pt-2" href="project.html?id=basvuru-asistani">
-                            Projeyi İncele <span class="material-symbols-outlined ml-2 text-[18px]">open_in_new</span>
-</a>
-</div>
-</div>
-</div>
-</div>
-</section>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <!-- App Card 1 (Agro Plan) -->
+            <div class="group relative glass-card rounded-[24px] overflow-hidden inner-glow transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col h-full">
+                <div class="h-64 overflow-hidden">
+                    <img alt="Agro Plan Preview" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="images/aproplan_kart.png"/>
+                </div>
+                <div class="p-8 space-y-4 flex flex-col flex-grow">
+                    <div class="flex gap-2">
+                        <span class="bg-tertiary/10 text-tertiary px-3 py-1 rounded-full font-label-sm text-label-sm">Android</span>
+                        <span class="bg-tertiary/10 text-tertiary px-3 py-1 rounded-full font-label-sm text-label-sm">Mobil</span>
+                    </div>
+                    <h3 class="font-headline-lg text-[24px] leading-tight">Agro Plan</h3>
+                    <p class="font-body-md text-body-md text-on-surface-variant flex-grow">Tarlalarınızı, ekim süreçlerinizi, sulama ve gelir-giderlerinizi tek yerden yönetin.</p>
+                    <a class="inline-flex items-center text-primary-fixed-dim font-label-md text-label-md pt-2 mt-auto" href="project.html?id=agro-plan">
+                        Projeyi İncele <span class="material-symbols-outlined ml-2 text-[18px]">open_in_new</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- App Card 2 (Cardly) -->
+            <div class="group relative glass-card rounded-[24px] overflow-hidden inner-glow transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col h-full">
+                <div class="h-64 overflow-hidden">
+                    <img alt="Cardly Preview" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="images/cardly_kart.jpeg"/>
+                </div>
+                <div class="p-8 space-y-4 flex flex-col flex-grow">
+                    <div class="flex gap-2">
+                        <span class="bg-tertiary/10 text-tertiary px-3 py-1 rounded-full font-label-sm text-label-sm">Android</span>
+                        <span class="bg-tertiary/10 text-tertiary px-3 py-1 rounded-full font-label-sm text-label-sm">Kotlin</span>
+                    </div>
+                    <h3 class="font-headline-lg text-[24px] leading-tight">Cardly</h3>
+                    <p class="font-body-md text-body-md text-on-surface-variant flex-grow">Premium dijital kartvizitler. QR ve NFC ile prestijli bir şekilde paylaşın.</p>
+                    <a class="inline-flex items-center text-primary-fixed-dim font-label-md text-label-md pt-2 mt-auto" href="project.html?id=cardly">
+                        Projeyi İncele <span class="material-symbols-outlined ml-2 text-[18px]">open_in_new</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- App Card 3 (Başvuru Asistanı) -->
+            <div class="group relative glass-card rounded-[24px] overflow-hidden inner-glow transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col h-full">
+                <div class="h-64 overflow-hidden">
+                    <img alt="Başvuru Asistanı Preview" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="images/basvuru_kart.jpeg"/>
+                </div>
+                <div class="p-8 space-y-4 flex flex-col flex-grow">
+                    <div class="flex gap-2">
+                        <span class="bg-tertiary/10 text-tertiary px-3 py-1 rounded-full font-label-sm text-label-sm">Android</span>
+                        <span class="bg-tertiary/10 text-tertiary px-3 py-1 rounded-full font-label-sm text-label-sm">Kotlin</span>
+                    </div>
+                    <h3 class="font-headline-lg text-[24px] leading-tight">Başvuru Asistanı</h3>
+                    <p class="font-body-md text-body-md text-on-surface-variant flex-grow">Tüm başvurularınızı tek bir noktadan kolayca yönetin ve takip edin.</p>
+                    <a class="inline-flex items-center text-primary-fixed-dim font-label-md text-label-md pt-2 mt-auto" href="project.html?id=basvuru-asistani">
+                        Projeyi İncele <span class="material-symbols-outlined ml-2 text-[18px]">open_in_new</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- App Card 4 (ChronoSnap) -->
+            <div class="group relative glass-card rounded-[24px] overflow-hidden inner-glow transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col h-full">
+                <div class="h-64 overflow-hidden">
+                    <img alt="ChronoSnap Preview" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="images/chronosnap_kart.jpeg"/>
+                </div>
+                <div class="p-8 space-y-4 flex flex-col flex-grow">
+                    <div class="flex gap-2">
+                        <span class="bg-tertiary/10 text-tertiary px-3 py-1 rounded-full font-label-sm text-label-sm">Android</span>
+                        <span class="bg-tertiary/10 text-tertiary px-3 py-1 rounded-full font-label-sm text-label-sm">Kotlin</span>
+                    </div>
+                    <h3 class="font-headline-lg text-[24px] leading-tight">ChronoSnap</h3>
+                    <p class="font-body-md text-body-md text-on-surface-variant flex-grow">Fotoğraflarınızı takvim üzerinde düzenleyin. Anılarınızı tarihe göre arşivleyin.</p>
+                    <a class="inline-flex items-center text-primary-fixed-dim font-label-md text-label-md pt-2 mt-auto" href="project.html?id=chronosnap">
+                        Projeyi İncele <span class="material-symbols-outlined ml-2 text-[18px]">open_in_new</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- App Card 5 (CookMatch) -->
+            <div class="group relative glass-card rounded-[24px] overflow-hidden inner-glow transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col h-full">
+                <div class="h-64 overflow-hidden">
+                    <img alt="CookMatch Preview" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="images/cookmatch_kart.jpeg"/>
+                </div>
+                <div class="p-8 space-y-4 flex flex-col flex-grow">
+                    <div class="flex gap-2">
+                        <span class="bg-tertiary/10 text-tertiary px-3 py-1 rounded-full font-label-sm text-label-sm">Android</span>
+                        <span class="bg-tertiary/10 text-tertiary px-3 py-1 rounded-full font-label-sm text-label-sm">Kotlin</span>
+                    </div>
+                    <h3 class="font-headline-lg text-[24px] leading-tight">Cook Match</h3>
+                    <p class="font-body-md text-body-md text-on-surface-variant flex-grow">Daha akıllı yemek pişirin. Elinizde bulunan malzemelerle tarifleri keşfedin.</p>
+                    <a class="inline-flex items-center text-primary-fixed-dim font-label-md text-label-md pt-2 mt-auto" href="project.html?id=cookmatch">
+                        Projeyi İncele <span class="material-symbols-outlined ml-2 text-[18px]">open_in_new</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- App Card 6 (DailyLeaf) -->
+            <div class="group relative glass-card rounded-[24px] overflow-hidden inner-glow transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col h-full">
+                <div class="h-64 overflow-hidden">
+                    <img alt="DailyLeaf Preview" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="images/dailyleaf_kart.jpeg"/>
+                </div>
+                <div class="p-8 space-y-4 flex flex-col flex-grow">
+                    <div class="flex gap-2">
+                        <span class="bg-tertiary/10 text-tertiary px-3 py-1 rounded-full font-label-sm text-label-sm">Android</span>
+                        <span class="bg-tertiary/10 text-tertiary px-3 py-1 rounded-full font-label-sm text-label-sm">Kotlin</span>
+                    </div>
+                    <h3 class="font-headline-lg text-[24px] leading-tight">DailyLeaf</h3>
+                    <p class="font-body-md text-body-md text-on-surface-variant flex-grow">Hayatınızı vintage bir dokunuşla estetik bir günlük, alışkanlıklar ve anılarla süsleyin.</p>
+                    <a class="inline-flex items-center text-primary-fixed-dim font-label-md text-label-md pt-2 mt-auto" href="project.html?id=dailyleaf">
+                        Projeyi İncele <span class="material-symbols-outlined ml-2 text-[18px]">open_in_new</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- App Card 7 (Greenova) -->
+            <div class="group relative glass-card rounded-[24px] overflow-hidden inner-glow transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col h-full">
+                <div class="h-64 overflow-hidden">
+                    <img alt="Greenova Preview" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="images/greenova_kart.jpeg"/>
+                </div>
+                <div class="p-8 space-y-4 flex flex-col flex-grow">
+                    <div class="flex gap-2">
+                        <span class="bg-tertiary/10 text-tertiary px-3 py-1 rounded-full font-label-sm text-label-sm">Android</span>
+                        <span class="bg-tertiary/10 text-tertiary px-3 py-1 rounded-full font-label-sm text-label-sm">Kotlin</span>
+                    </div>
+                    <h3 class="font-headline-lg text-[24px] leading-tight">Greenova</h3>
+                    <p class="font-body-md text-body-md text-on-surface-variant flex-grow">Bitkileri fotoğrafla tanı, hastalıkları teşhis et ve bakım önerileri al.</p>
+                    <a class="inline-flex items-center text-primary-fixed-dim font-label-md text-label-md pt-2 mt-auto" href="project.html?id=greenova">
+                        Projeyi İncele <span class="material-symbols-outlined ml-2 text-[18px]">open_in_new</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- App Card 8 (Viano) -->
+            <div class="group relative glass-card rounded-[24px] overflow-hidden inner-glow transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col h-full">
+                <div class="h-64 overflow-hidden">
+                    <img alt="Viano Preview" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="images/viano_kart.jpeg"/>
+                </div>
+                <div class="p-8 space-y-4 flex flex-col flex-grow">
+                    <div class="flex gap-2">
+                        <span class="bg-tertiary/10 text-tertiary px-3 py-1 rounded-full font-label-sm text-label-sm">Android</span>
+                        <span class="bg-tertiary/10 text-tertiary px-3 py-1 rounded-full font-label-sm text-label-sm">Kotlin</span>
+                    </div>
+                    <h3 class="font-headline-lg text-[24px] leading-tight">Viano</h3>
+                    <p class="font-body-md text-body-md text-on-surface-variant flex-grow">Seyahatleri kaydet, rotanı çiz, fotoğraf ve notlarla anılarını ölümsüzleştir.</p>
+                    <a class="inline-flex items-center text-primary-fixed-dim font-label-md text-label-md pt-2 mt-auto" href="project.html?id=viano">
+                        Projeyi İncele <span class="material-symbols-outlined ml-2 text-[18px]">open_in_new</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 <!-- Technical Credibility Bar -->
 <section class="bg-surface-container-low py-12 border-y border-outline-variant/10">
 <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
