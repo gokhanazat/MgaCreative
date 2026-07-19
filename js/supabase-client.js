@@ -45,3 +45,24 @@ export async function fetchPortfolioItems() {
     }
     return data
 }
+
+/**
+ * portfolio_items tablosuna yeni uygulama ekler
+ */
+export async function addPortfolioItem(item) {
+    const { error } = await supabase
+        .from('portfolio_items')
+        .insert([item]);
+    return error;
+}
+
+/**
+ * portfolio_items tablosundan uygulama siler
+ */
+export async function deletePortfolioItem(id) {
+    const { error } = await supabase
+        .from('portfolio_items')
+        .delete()
+        .eq('id', id);
+    return error;
+}

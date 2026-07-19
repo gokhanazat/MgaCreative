@@ -66,6 +66,49 @@
                 </div>
             </div>
 
+            <!-- Portföy Yönetimi -->
+            <div class="glass-card rounded-2xl p-6 mb-8">
+                <h2 class="text-xl font-bold mb-4 text-[#4cd7f6]">Uygulamalarımız (Portföy)</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Yeni Uygulama Ekle Formu -->
+                    <div class="space-y-4 bg-[#1d2022] p-4 rounded-lg border border-[#45464d]">
+                        <h3 class="text-lg font-semibold text-white">Yeni Uygulama Ekle</h3>
+                        <form id="addPortfolioForm" class="space-y-3">
+                            <div>
+                                <label class="block text-sm font-medium text-[#c6c6cd]">Proje Adı</label>
+                                <input type="text" id="p_title" required class="w-full bg-[#101415] border border-[#45464d] rounded-lg px-3 py-1.5 text-white outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#c6c6cd]">Açıklama</label>
+                                <textarea id="p_desc" rows="2" required class="w-full bg-[#101415] border border-[#45464d] rounded-lg px-3 py-1.5 text-white outline-none"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#c6c6cd]">Kategoriler (Virgülle ayır, örn: Android,Mobil)</label>
+                                <input type="text" id="p_tags" required class="w-full bg-[#101415] border border-[#45464d] rounded-lg px-3 py-1.5 text-white outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#c6c6cd]">Resim URL veya Dosya Yolu (örn: images/agroplan.png)</label>
+                                <input type="text" id="p_image" required class="w-full bg-[#101415] border border-[#45464d] rounded-lg px-3 py-1.5 text-white outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#c6c6cd]">Proje Linki (örn: project.html?id=agro-plan)</label>
+                                <input type="text" id="p_link" required class="w-full bg-[#101415] border border-[#45464d] rounded-lg px-3 py-1.5 text-white outline-none">
+                            </div>
+                            <button type="submit" id="addPortfolioBtn" class="w-full px-4 py-2 bg-[#4cd7f6] text-[#003640] font-bold rounded-lg hover:brightness-110 transition-all">Uygulamayı Ekle</button>
+                        </form>
+                    </div>
+
+                    <!-- Ekli Uygulamalar Listesi -->
+                    <div class="overflow-y-auto max-h-[450px]">
+                        <h3 class="text-lg font-semibold text-white mb-4">Ekli Projeler</h3>
+                        <div id="portfolioList" class="space-y-3">
+                            <p class="text-sm text-[#c6c6cd]">Yükleniyor...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
