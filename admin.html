@@ -17,15 +17,14 @@
             backdrop-filter: blur(12px);
             border: 1px solid rgba(144, 144, 151, 0.1);
         }
-        [v-cloak] { display: none; }
     </style>
 </head>
 <body class="selection:bg-[#4cd7f6]/30">
 
-    <div id="app" class="min-h-screen p-8 max-w-5xl mx-auto" v-cloak>
+    <div id="app" class="min-h-screen p-8 max-w-5xl mx-auto">
         
         <!-- Login Ekranı -->
-        <div v-if="!session" class="flex items-center justify-center h-[80vh]">
+        <div id="loginSection" class="flex items-center justify-center h-[80vh]">
             <div class="glass-card p-8 rounded-2xl w-full max-w-md">
                 <h2 class="text-2xl font-bold mb-6 text-center text-[#e0e3e5]">Admin Girişi</h2>
                 <form id="loginForm">
@@ -44,7 +43,7 @@
         </div>
 
         <!-- Dashboard Ekranı -->
-        <div v-else>
+        <div id="dashboardSection" style="display: none;">
             <div class="flex justify-between items-center mb-8 pb-4 border-b border-[#45464d]">
                 <h1 class="text-3xl font-bold font-['Geist'] text-white">Yönetim Paneli</h1>
                 <button id="logoutBtn" class="px-4 py-2 bg-[#93000a] text-[#ffdad6] rounded-lg hover:bg-red-800 transition-all">Çıkış Yap</button>

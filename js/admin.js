@@ -14,20 +14,23 @@ const heroDescInput = document.getElementById('hero_desc');
 const saveContentBtn = document.getElementById('saveContentBtn');
 const contentStatus = document.getElementById('contentStatus');
 
+const loginSection = document.getElementById('loginSection');
+const dashboardSection = document.getElementById('dashboardSection');
+
 // Oturum Durumu Kontrolü
 async function checkSession() {
     const { data: { session } } = await supabase.auth.getSession();
     
     if (session) {
         // Oturum varsa login ekranını gizle, paneli göster
-        if(document.querySelector('.h-\\[80vh\\]')) document.querySelector('.h-\\[80vh\\]').style.display = 'none';
-        if(logoutBtn) logoutBtn.closest('div').parentElement.style.display = 'block';
+        if(loginSection) loginSection.style.display = 'none';
+        if(dashboardSection) dashboardSection.style.display = 'block';
         
         loadDashboardData();
     } else {
         // Oturum yoksa paneli gizle, login göster
-        if(logoutBtn) logoutBtn.closest('div').parentElement.style.display = 'none';
-        if(document.querySelector('.h-\\[80vh\\]')) document.querySelector('.h-\\[80vh\\]').style.display = 'flex';
+        if(dashboardSection) dashboardSection.style.display = 'none';
+        if(loginSection) loginSection.style.display = 'flex';
     }
 }
 
