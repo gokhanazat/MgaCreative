@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html class="dark" lang="tr">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>MGA Creative | Yönetim Paneli</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@600;700&amp;display=swap" rel="stylesheet"/>
+    <style>
+        body {
+            background-color: #101415;
+            color: #e0e3e5;
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-card {
+            background: rgba(29, 32, 34, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(144, 144, 151, 0.1);
+        }
+        [v-cloak] { display: none; }
+    </style>
+</head>
+<body class="selection:bg-[#4cd7f6]/30">
+
+    <div id="app" class="min-h-screen p-8 max-w-5xl mx-auto" v-cloak>
+        
+        <!-- Login Ekranı -->
+        <div v-if="!session" class="flex items-center justify-center h-[80vh]">
+            <div class="glass-card p-8 rounded-2xl w-full max-w-md">
+                <h2 class="text-2xl font-bold mb-6 text-center text-[#e0e3e5]">Admin Girişi</h2>
+                <form id="loginForm">
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-[#c6c6cd] mb-1">E-posta</label>
+                        <input type="email" id="email" class="w-full bg-[#1d2022] border border-[#45464d] rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-[#4cd7f6] outline-none" required>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-[#c6c6cd] mb-1">Şifre</label>
+                        <input type="password" id="password" class="w-full bg-[#1d2022] border border-[#45464d] rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-[#4cd7f6] outline-none" required>
+                    </div>
+                    <button type="submit" id="loginBtn" class="w-full bg-[#4cd7f6] text-[#003640] font-bold py-2 px-4 rounded-lg hover:brightness-110 transition-all">Giriş Yap</button>
+                    <p id="loginError" class="text-red-400 text-sm mt-4 hidden text-center"></p>
+                </form>
+            </div>
+        </div>
+
+        <!-- Dashboard Ekranı -->
+        <div v-else>
+            <div class="flex justify-between items-center mb-8 pb-4 border-b border-[#45464d]">
+                <h1 class="text-3xl font-bold font-['Geist'] text-white">Yönetim Paneli</h1>
+                <button id="logoutBtn" class="px-4 py-2 bg-[#93000a] text-[#ffdad6] rounded-lg hover:bg-red-800 transition-all">Çıkış Yap</button>
+            </div>
+
+            <!-- Site İçerik Yönetimi -->
+            <div class="glass-card rounded-2xl p-6 mb-8">
+                <h2 class="text-xl font-bold mb-4 text-[#4cd7f6]">Ana Sayfa Yazıları</h2>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-[#c6c6cd] mb-1">Ana Başlık (hero_title)</label>
+                        <input type="text" id="hero_title" class="w-full bg-[#1d2022] border border-[#45464d] rounded-lg px-4 py-2 text-white outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-[#c6c6cd] mb-1">Alt Açıklama (hero_desc)</label>
+                        <textarea id="hero_desc" rows="3" class="w-full bg-[#1d2022] border border-[#45464d] rounded-lg px-4 py-2 text-white outline-none"></textarea>
+                    </div>
+                    <button id="saveContentBtn" class="px-6 py-2 bg-[#d2bbff] text-[#3f008e] font-bold rounded-lg hover:brightness-110 transition-all">Değişiklikleri Kaydet</button>
+                    <span id="contentStatus" class="ml-4 text-sm text-green-400 hidden">Kaydedildi!</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modüller -->
+    <script type="module" src="js/admin.js"></script>
+
+</body>
+</html>
