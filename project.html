@@ -4,6 +4,7 @@
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>MGA Creative | Proje Detayı</title>
+    <link rel="canonical" href="https://www.mgacreative.com/project" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@600;700;800&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
     <script id="tailwind-config">
@@ -100,14 +101,14 @@
 <!-- TopNavBar -->
 <nav class="fixed top-0 left-0 w-full z-50 bg-surface/80 backdrop-blur-xl dark:bg-surface-container/80 border-b border-outline-variant/20 dark:border-outline/10 shadow-sm dark:shadow-none h-20">
     <div class="flex justify-between items-center w-full h-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
-        <a class="font-headline-lg text-headline-lg font-bold tracking-tight text-on-surface dark:text-on-background" href="index.html">MGA Creative</a>
+        <a class="font-headline-lg text-headline-lg font-bold tracking-tight text-on-surface dark:text-on-background" href="/">MGA Creative</a>
         <div class="hidden md:flex items-center gap-8">
-            <a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-tertiary transition-all duration-300" href="index.html">Ana Sayfa</a>
-            <a class="text-primary dark:text-tertiary-fixed-dim font-bold border-b-2 border-primary dark:border-tertiary pb-1" href="portfolio.html">Uygulamalarımız</a>
-            <a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-tertiary transition-all duration-300" href="about.html">Hakkımızda</a>
-            <a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-tertiary transition-all duration-300" href="contact.html">İletişim</a>
+            <a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-tertiary transition-all duration-300" href="/">Ana Sayfa</a>
+            <a class="text-primary dark:text-tertiary-fixed-dim font-bold border-b-2 border-primary dark:border-tertiary pb-1" href="/portfolio">Uygulamalarımız</a>
+            <a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-tertiary transition-all duration-300" href="/about">Hakkımızda</a>
+            <a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-tertiary transition-all duration-300" href="/contact">İletişim</a>
         </div>
-        <button onclick="window.location.href='contact.html'" class="bg-secondary-container text-on-secondary-container px-6 py-2.5 rounded-lg font-label-md text-label-md hover:backdrop-brightness-110 active:scale-95 transition-all duration-300 hover:drop-shadow-[0_0_12px_rgba(76,215,246,0.3)]">
+        <button onclick="window.location.href='/contact'" class="bg-secondary-container text-on-secondary-container px-6 py-2.5 rounded-lg font-label-md text-label-md hover:backdrop-brightness-110 active:scale-95 transition-all duration-300 hover:drop-shadow-[0_0_12px_rgba(76,215,246,0.3)]">
             İletişime Geç
         </button>
     </div>
@@ -116,7 +117,7 @@
 <!-- Dynamic Detail Container -->
 <main class="flex-grow pt-32 pb-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full">
     <!-- Go Back Link -->
-    <a href="portfolio.html" class="inline-flex items-center text-tertiary hover:underline mb-8 group transition-all">
+    <a href="/portfolio" class="inline-flex items-center text-tertiary hover:underline mb-8 group transition-all">
         <span class="material-symbols-outlined mr-2 transition-transform group-hover:-translate-x-1">arrow_back</span>
         Uygulamalarımıza Geri Dön
     </a>
@@ -152,7 +153,7 @@
 
             <!-- CTA Buttons -->
             <div class="pt-4 flex flex-wrap gap-4">
-                <a id="proj-contact-btn" href="contact.html" class="inline-flex items-center justify-center bg-secondary-container hover:bg-secondary text-on-secondary-container hover:text-on-secondary px-8 py-3.5 rounded-lg font-label-md text-label-md transition-all duration-300 active:scale-95">
+                <a id="proj-contact-btn" href="/contact" class="inline-flex items-center justify-center bg-secondary-container hover:bg-secondary text-on-secondary-container hover:text-on-secondary px-8 py-3.5 rounded-lg font-label-md text-label-md transition-all duration-300 active:scale-95">
                     Bu Projeyi Konuşalım
                     <span class="material-symbols-outlined ml-2">chat_bubble</span>
                 </a>
@@ -184,7 +185,7 @@
         <span class="material-symbols-outlined text-red-500 text-6xl">error</span>
         <h2 class="font-headline-lg text-headline-lg">Proje Bulunamadı</h2>
         <p class="text-on-surface-variant max-w-md mx-auto">Aradığınız proje veritabanımızda bulunmamaktadır veya kaldırılmış olabilir.</p>
-        <a href="portfolio.html" class="inline-block bg-tertiary text-on-tertiary px-6 py-2.5 rounded-lg">Uygulamalarımıza Dön</a>
+        <a href="/portfolio" class="inline-block bg-tertiary text-on-tertiary px-6 py-2.5 rounded-lg">Uygulamalarımıza Dön</a>
     </div>
 </main>
 
@@ -805,7 +806,7 @@
         }
 
         // Customize CTA button redirection subject
-        document.getElementById('proj-contact-btn').href = `contact.html?subject=${encodeURIComponent(proj.title + ' Projesi Hakkında')}`;
+        document.getElementById('proj-contact-btn').href = `/contact?subject=${encodeURIComponent(proj.title + ' Projesi Hakkında')}`;
 
         // Play Store button config
         const playBtn = document.getElementById('proj-playstore-btn');
