@@ -6,7 +6,7 @@
     <title>MGA Creative | Yönetim Paneli</title>
     <link rel="canonical" href="https://www.mgacreative.com/admin" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Geist:wght@600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
     <style>
         body {
             background-color: #101415;
@@ -14,97 +14,219 @@
             font-family: 'Inter', sans-serif;
         }
         .glass-card {
-            background: rgba(29, 32, 34, 0.4);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(144, 144, 151, 0.1);
+            background: rgba(29, 32, 34, 0.5);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(144, 144, 151, 0.15);
+        }
+        .glass-card:hover {
+            border-color: rgba(76, 215, 246, 0.25);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #101415;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #323537;
+            border-radius: 10px;
         }
     </style>
 </head>
-<body class="selection:bg-[#4cd7f6]/30">
+<body class="selection:bg-[#4cd7f6]/30 custom-scrollbar min-h-screen">
 
-    <div id="app" class="min-h-screen p-8 max-w-5xl mx-auto">
+    <div id="app" class="min-h-screen p-4 md:p-8 max-w-7xl mx-auto">
         
         <!-- Login Ekranı -->
-        <div id="loginSection" class="flex items-center justify-center h-[80vh]">
-            <div class="glass-card p-8 rounded-2xl w-full max-w-md">
-                <h2 class="text-2xl font-bold mb-6 text-center text-[#e0e3e5]">Admin Girişi</h2>
+        <div id="loginSection" class="flex items-center justify-center h-[85vh]">
+            <div class="glass-card p-8 rounded-3xl w-full max-w-md shadow-2xl border border-outline-variant/30">
+                <div class="flex flex-col items-center mb-6">
+                    <div class="w-12 h-12 rounded-2xl bg-[#4cd7f6]/10 flex items-center justify-center text-[#4cd7f6] mb-3">
+                        <span class="material-symbols-outlined text-3xl">admin_panel_settings</span>
+                    </div>
+                    <h2 class="text-2xl font-bold text-[#e0e3e5] font-['Geist']">Admin Girişi</h2>
+                    <p class="text-sm text-[#c6c6cd] mt-1">MGA Creative Yönetim Konsolu</p>
+                </div>
+                
                 <form id="loginForm">
                     <div class="mb-4">
-                        <label class="block text-sm font-medium text-[#c6c6cd] mb-1">E-posta</label>
-                        <input type="email" id="email" class="w-full bg-[#1d2022] border border-[#45464d] rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-[#4cd7f6] outline-none" required>
+                        <label class="block text-sm font-medium text-[#c6c6cd] mb-1.5">E-posta</label>
+                        <input type="email" id="email" class="w-full bg-[#1d2022] border border-[#45464d] rounded-xl px-4 py-2.5 text-white focus:ring-2 focus:ring-[#4cd7f6] outline-none transition-all" required placeholder="admin@mgacreative.com">
                     </div>
                     <div class="mb-6">
-                        <label class="block text-sm font-medium text-[#c6c6cd] mb-1">Şifre</label>
-                        <input type="password" id="password" class="w-full bg-[#1d2022] border border-[#45464d] rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-[#4cd7f6] outline-none" required>
+                        <label class="block text-sm font-medium text-[#c6c6cd] mb-1.5">Şifre</label>
+                        <input type="password" id="password" class="w-full bg-[#1d2022] border border-[#45464d] rounded-xl px-4 py-2.5 text-white focus:ring-2 focus:ring-[#4cd7f6] outline-none transition-all" required placeholder="••••••••">
                     </div>
-                    <button type="submit" id="loginBtn" class="w-full bg-[#4cd7f6] text-[#003640] font-bold py-2 px-4 rounded-lg hover:brightness-110 transition-all">Giriş Yap</button>
-                    <p id="loginError" class="text-red-400 text-sm mt-4 hidden text-center"></p>
+                    <button type="submit" id="loginBtn" class="w-full bg-[#4cd7f6] text-[#003640] font-bold py-3 px-4 rounded-xl hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-[#4cd7f6]/10 flex items-center justify-center gap-2">
+                        <span>Giriş Yap</span>
+                        <span class="material-symbols-outlined text-xl">login</span>
+                    </button>
+                    <p id="loginError" class="text-red-400 text-sm mt-4 hidden text-center bg-red-950/40 p-3 rounded-xl border border-red-800/50"></p>
                 </form>
             </div>
         </div>
 
         <!-- Dashboard Ekranı -->
-        <div id="dashboardSection" style="display: none;">
-            <div class="flex justify-between items-center mb-8 pb-4 border-b border-[#45464d]">
-                <h1 class="text-3xl font-bold font-['Geist'] text-white">Yönetim Paneli</h1>
-                <button id="logoutBtn" class="px-4 py-2 bg-[#93000a] text-[#ffdad6] rounded-lg hover:bg-red-800 transition-all">Çıkış Yap</button>
-            </div>
-
-            <!-- Site İçerik Yönetimi -->
-            <div class="glass-card rounded-2xl p-6 mb-8">
-                <h2 class="text-xl font-bold mb-4 text-[#4cd7f6]">Ana Sayfa Yazıları</h2>
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium text-[#c6c6cd] mb-1">Ana Başlık (hero_title)</label>
-                        <input type="text" id="hero_title" class="w-full bg-[#1d2022] border border-[#45464d] rounded-lg px-4 py-2 text-white outline-none">
+        <div id="dashboardSection" class="hidden space-y-8">
+            <!-- Header Bar -->
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-6 border-b border-[#45464d]/50">
+                <div>
+                    <div class="flex items-center gap-3">
+                        <h1 class="text-3xl font-bold font-['Geist'] text-white">Yönetim Konsolu</h1>
+                        <span class="px-3 py-1 bg-[#4cd7f6]/10 text-[#4cd7f6] border border-[#4cd7f6]/20 rounded-full text-xs font-semibold uppercase tracking-wider">Canlı Mod</span>
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium text-[#c6c6cd] mb-1">Alt Açıklama (hero_desc)</label>
-                        <textarea id="hero_desc" rows="3" class="w-full bg-[#1d2022] border border-[#45464d] rounded-lg px-4 py-2 text-white outline-none"></textarea>
-                    </div>
-                    <button id="saveContentBtn" class="px-6 py-2 bg-[#d2bbff] text-[#3f008e] font-bold rounded-lg hover:brightness-110 transition-all">Değişiklikleri Kaydet</button>
-                    <span id="contentStatus" class="ml-4 text-sm text-green-400 hidden">Kaydedildi!</span>
+                    <p class="text-sm text-[#c6c6cd] mt-1">Sistem içeriğini, projeleri ve görselleri tek noktadan yönetin.</p>
+                </div>
+                <div class="flex items-center gap-3 w-full md:w-auto">
+                    <a href="/" target="_blank" class="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#1d2022] hover:bg-[#272a2c] text-[#e0e3e5] border border-[#45464d] rounded-xl text-sm font-medium transition-all">
+                        <span class="material-symbols-outlined text-lg">public</span>
+                        <span>Siteyi Görüntüle</span>
+                    </a>
+                    <button id="logoutBtn" class="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#93000a] text-[#ffdad6] hover:bg-red-800 rounded-xl text-sm font-medium transition-all">
+                        <span class="material-symbols-outlined text-lg">logout</span>
+                        <span>Çıkış Yap</span>
+                    </button>
                 </div>
             </div>
 
-            <!-- Portföy Yönetimi -->
-            <div class="glass-card rounded-2xl p-6 mb-8">
-                <h2 class="text-xl font-bold mb-4 text-[#4cd7f6]">Uygulamalarımız (Portföy)</h2>
+            <!-- İstatistik Kartları -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-card rounded-2xl p-5 flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-[#c6c6cd] font-medium">Toplam Proje</p>
+                        <h3 id="statTotalProjects" class="text-3xl font-bold text-white mt-1">0</h3>
+                    </div>
+                    <div class="w-12 h-12 rounded-xl bg-[#4cd7f6]/10 text-[#4cd7f6] flex items-center justify-center">
+                        <span class="material-symbols-outlined text-2xl">folder</span>
+                    </div>
+                </div>
+                <div class="glass-card rounded-2xl p-5 flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-[#c6c6cd] font-medium">Site İçerik Durumu</p>
+                        <h3 id="statContentStatus" class="text-lg font-bold text-green-400 mt-1">Aktif &amp; Yayında</h3>
+                    </div>
+                    <div class="w-12 h-12 rounded-xl bg-green-500/10 text-green-400 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-2xl">check_circle</span>
+                    </div>
+                </div>
+                <div class="glass-card rounded-2xl p-5 flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-[#c6c6cd] font-medium">Aktif Oturum</p>
+                        <h3 id="statAdminEmail" class="text-sm font-semibold text-[#e0e3e5] mt-1 truncate max-w-[180px]">Admin</h3>
+                    </div>
+                    <div class="w-12 h-12 rounded-xl bg-[#d2bbff]/10 text-[#d2bbff] flex items-center justify-center">
+                        <span class="material-symbols-outlined text-2xl">account_circle</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Site İçerik Yönetimi -->
+            <div class="glass-card rounded-2xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[#4cd7f6]">edit_note</span>
+                        <h2 class="text-xl font-bold text-[#4cd7f6]">Ana Sayfa Metin Yönetimi</h2>
+                    </div>
+                    <span id="contentStatus" class="text-sm text-green-400 font-medium hidden flex items-center gap-1">
+                        <span class="material-symbols-outlined text-base">check</span> Değişiklikler Kaydedildi
+                    </span>
+                </div>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-[#c6c6cd] mb-1.5">Ana Sayfa Başlık (hero_title)</label>
+                        <input type="text" id="hero_title" class="w-full bg-[#101415] border border-[#45464d] rounded-xl px-4 py-2.5 text-white outline-none focus:border-[#4cd7f6] transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-[#c6c6cd] mb-1.5">Ana Sayfa Açıklama (hero_desc)</label>
+                        <textarea id="hero_desc" rows="3" class="w-full bg-[#101415] border border-[#45464d] rounded-xl px-4 py-2.5 text-white outline-none focus:border-[#4cd7f6] transition-all"></textarea>
+                    </div>
+                    <button id="saveContentBtn" class="px-6 py-2.5 bg-[#d2bbff] text-[#3f008e] font-bold rounded-xl hover:brightness-110 active:scale-95 transition-all inline-flex items-center gap-2">
+                        <span class="material-symbols-outlined text-lg">save</span>
+                        <span>Metin Değişikliklerini Kaydet</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Portföy Yönetimi (CRUD) -->
+            <div class="glass-card rounded-2xl p-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[#4cd7f6]">apps</span>
+                        <h2 class="text-xl font-bold text-[#4cd7f6]">Uygulamalarımız (Portföy Yönetimi)</h2>
+                    </div>
+                    <!-- Arama Çubuğu -->
+                    <div class="relative w-full md:w-72">
+                        <span class="material-symbols-outlined absolute left-3 top-2.5 text-[#c6c6cd] text-xl">search</span>
+                        <input type="text" id="searchPortfolio" placeholder="Projelerde ara..." class="w-full bg-[#101415] border border-[#45464d] rounded-xl pl-10 pr-4 py-2 text-sm text-white outline-none focus:border-[#4cd7f6] transition-all">
+                    </div>
+                </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                     <!-- Yeni Uygulama Ekle Formu -->
-                    <div class="space-y-4 bg-[#1d2022] p-4 rounded-lg border border-[#45464d]">
-                        <h3 class="text-lg font-semibold text-white">Yeni Uygulama Ekle</h3>
-                        <form id="addPortfolioForm" class="space-y-3">
+                    <div class="lg:col-span-5 space-y-4 bg-[#1d2022]/80 p-6 rounded-2xl border border-[#45464d]/60 shadow-inner">
+                        <div class="flex items-center gap-2 text-white font-semibold text-lg pb-2 border-b border-[#45464d]">
+                            <span class="material-symbols-outlined text-[#4cd7f6]">add_circle</span>
+                            <h3>Yeni Proje Ekle</h3>
+                        </div>
+                        <form id="addPortfolioForm" class="space-y-4">
                             <div>
-                                <label class="block text-sm font-medium text-[#c6c6cd]">Proje Adı</label>
-                                <input type="text" id="p_title" required class="w-full bg-[#101415] border border-[#45464d] rounded-lg px-3 py-1.5 text-white outline-none">
+                                <label class="block text-sm font-medium text-[#c6c6cd] mb-1">Proje Adı</label>
+                                <input type="text" id="p_title" required class="w-full bg-[#101415] border border-[#45464d] rounded-xl px-3.5 py-2 text-white outline-none focus:border-[#4cd7f6] transition-all text-sm" placeholder="Örn: AgroPlan">
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-[#c6c6cd]">Açıklama</label>
-                                <textarea id="p_desc" rows="2" required class="w-full bg-[#101415] border border-[#45464d] rounded-lg px-3 py-1.5 text-white outline-none"></textarea>
+                                <label class="block text-sm font-medium text-[#c6c6cd] mb-1">Açıklama</label>
+                                <textarea id="p_desc" rows="3" required class="w-full bg-[#101415] border border-[#45464d] rounded-xl px-3.5 py-2 text-white outline-none focus:border-[#4cd7f6] transition-all text-sm" placeholder="Proje hakkında kısa özet..."></textarea>
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-[#c6c6cd]">Kategoriler (Virgülle ayır, örn: Android,Mobil)</label>
-                                <input type="text" id="p_tags" required class="w-full bg-[#101415] border border-[#45464d] rounded-lg px-3 py-1.5 text-white outline-none">
+                                <label class="block text-sm font-medium text-[#c6c6cd] mb-1">Kategoriler (Virgülle ayırın)</label>
+                                <input type="text" id="p_tags" required class="w-full bg-[#101415] border border-[#45464d] rounded-xl px-3.5 py-2 text-white outline-none focus:border-[#4cd7f6] transition-all text-sm" placeholder="Örn: Android, Tarım, Kotlin">
                             </div>
+                            
+                            <!-- Dosyadan Resim Yükleme Ve URL Seçeneği -->
+                            <div class="space-y-2">
+                                <label class="block text-sm font-medium text-[#c6c6cd]">Proje Resmi (Dosyadan Yükle veya URL Gir)</label>
+                                
+                                <div class="flex flex-col gap-2">
+                                    <label class="cursor-pointer border-2 border-dashed border-[#45464d] hover:border-[#4cd7f6] rounded-xl p-3 text-center transition-all bg-[#101415] flex flex-col items-center justify-center gap-1 group">
+                                        <span class="material-symbols-outlined text-2xl text-[#c6c6cd] group-hover:text-[#4cd7f6]">cloud_upload</span>
+                                        <span class="text-xs text-[#c6c6cd] group-hover:text-white font-medium" id="fileSelectLabel">Bilgisayardan Görsel Seç</span>
+                                        <input type="file" id="p_file" accept="image/*" class="hidden">
+                                    </label>
+                                    
+                                    <!-- Anlık Önizleme -->
+                                    <div id="p_preview_container" class="hidden relative w-full h-32 rounded-xl overflow-hidden border border-[#45464d]">
+                                        <img id="p_preview" src="" alt="Önizleme" class="w-full h-full object-cover">
+                                        <button type="button" id="removePreviewBtn" class="absolute top-2 right-2 bg-red-600/80 text-white rounded-full p-1 hover:bg-red-700">
+                                            <span class="material-symbols-outlined text-sm block">close</span>
+                                        </button>
+                                    </div>
+
+                                    <input type="text" id="p_image" class="w-full bg-[#101415] border border-[#45464d] rounded-xl px-3.5 py-2 text-white outline-none focus:border-[#4cd7f6] transition-all text-xs" placeholder="Veya manuel Görsel URL (https://...)">
+                                </div>
+                            </div>
+
                             <div>
-                                <label class="block text-sm font-medium text-[#c6c6cd]">Resim URL veya Dosya Yolu (örn: images/agroplan.png)</label>
-                                <input type="text" id="p_image" required class="w-full bg-[#101415] border border-[#45464d] rounded-lg px-3 py-1.5 text-white outline-none">
+                                <label class="block text-sm font-medium text-[#c6c6cd] mb-1">Proje Detay Linki</label>
+                                <input type="text" id="p_link" required class="w-full bg-[#101415] border border-[#45464d] rounded-xl px-3.5 py-2 text-white outline-none focus:border-[#4cd7f6] transition-all text-sm" placeholder="Örn: /project?id=agro-plan">
                             </div>
-                            <div>
-                                <label class="block text-sm font-medium text-[#c6c6cd]">Proje Linki (örn: /project?id=agro-plan)</label>
-                                <input type="text" id="p_link" required class="w-full bg-[#101415] border border-[#45464d] rounded-lg px-3 py-1.5 text-white outline-none">
-                            </div>
-                            <button type="submit" id="addPortfolioBtn" class="w-full px-4 py-2 bg-[#4cd7f6] text-[#003640] font-bold rounded-lg hover:brightness-110 transition-all">Uygulamayı Ekle</button>
+                            <button type="submit" id="addPortfolioBtn" class="w-full py-3 bg-[#4cd7f6] text-[#003640] font-bold rounded-xl hover:brightness-110 active:scale-95 transition-all shadow-md flex items-center justify-center gap-2">
+                                <span class="material-symbols-outlined text-xl">add</span>
+                                <span>Projeyi Ekle</span>
+                            </button>
                         </form>
                     </div>
 
                     <!-- Ekli Uygulamalar Listesi -->
-                    <div class="overflow-y-auto max-h-[450px]">
-                        <h3 class="text-lg font-semibold text-white mb-4">Ekli Projeler</h3>
-                        <div id="portfolioList" class="space-y-3">
-                            <p class="text-sm text-[#c6c6cd]">Yükleniyor...</p>
+                    <div class="lg:col-span-7 flex flex-col h-full">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-white">Mevcut Projeler</h3>
+                            <span id="projectCountBadge" class="text-xs text-[#c6c6cd] bg-[#1d2022] px-2.5 py-1 rounded-full border border-[#45464d]">0 Kayıt</span>
+                        </div>
+                        <div id="portfolioList" class="space-y-3 overflow-y-auto max-h-[620px] pr-2 custom-scrollbar flex-1">
+                            <div class="text-center py-12 text-[#c6c6cd]">
+                                <span class="material-symbols-outlined text-4xl animate-spin mb-2">sync</span>
+                                <p class="text-sm">Projeler yükleniyor...</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -113,7 +235,64 @@
         </div>
     </div>
 
-    <!-- Modüller -->
+    <!-- Düzenleme Modalı (Edit Modal) -->
+    <div id="editModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md hidden p-4">
+        <div class="glass-card rounded-3xl p-6 md:p-8 w-full max-w-lg shadow-2xl border border-outline-variant/40 max-h-[90vh] overflow-y-auto custom-scrollbar">
+            <div class="flex items-center justify-between pb-4 border-b border-[#45464d] mb-6">
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[#4cd7f6]">edit</span>
+                    <h3 class="text-xl font-bold text-white">Projeyi Düzenle</h3>
+                </div>
+                <button type="button" id="closeEditModalBtn" class="text-[#c6c6cd] hover:text-white transition-colors">
+                    <span class="material-symbols-outlined text-2xl">close</span>
+                </button>
+            </div>
+
+            <form id="editPortfolioForm" class="space-y-4">
+                <input type="hidden" id="edit_p_id">
+                <div>
+                    <label class="block text-sm font-medium text-[#c6c6cd] mb-1">Proje Adı</label>
+                    <input type="text" id="edit_p_title" required class="w-full bg-[#101415] border border-[#45464d] rounded-xl px-3.5 py-2 text-white outline-none focus:border-[#4cd7f6] text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-[#c6c6cd] mb-1">Açıklama</label>
+                    <textarea id="edit_p_desc" rows="3" required class="w-full bg-[#101415] border border-[#45464d] rounded-xl px-3.5 py-2 text-white outline-none focus:border-[#4cd7f6] text-sm"></textarea>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-[#c6c6cd] mb-1">Kategoriler (Virgülle ayırın)</label>
+                    <input type="text" id="edit_p_tags" required class="w-full bg-[#101415] border border-[#45464d] rounded-xl px-3.5 py-2 text-white outline-none focus:border-[#4cd7f6] text-sm">
+                </div>
+                
+                <div class="space-y-2">
+                    <label class="block text-sm font-medium text-[#c6c6cd]">Proje Resmi</label>
+                    <label class="cursor-pointer border-2 border-dashed border-[#45464d] hover:border-[#4cd7f6] rounded-xl p-3 text-center transition-all bg-[#101415] flex flex-col items-center justify-center gap-1 group">
+                        <span class="material-symbols-outlined text-2xl text-[#c6c6cd] group-hover:text-[#4cd7f6]">upload_file</span>
+                        <span class="text-xs text-[#c6c6cd] group-hover:text-white font-medium" id="editFileSelectLabel">Yeni Görsel Seç (İsteğe bağlı)</span>
+                        <input type="file" id="edit_p_file" accept="image/*" class="hidden">
+                    </label>
+                    <div id="edit_p_preview_container" class="relative w-full h-32 rounded-xl overflow-hidden border border-[#45464d]">
+                        <img id="edit_p_preview" src="" alt="Mevcut Görsel" class="w-full h-full object-cover">
+                    </div>
+                    <input type="text" id="edit_p_image" class="w-full bg-[#101415] border border-[#45464d] rounded-xl px-3.5 py-2 text-white outline-none focus:border-[#4cd7f6] text-xs" placeholder="Görsel URL">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-[#c6c6cd] mb-1">Proje Detay Linki</label>
+                    <input type="text" id="edit_p_link" required class="w-full bg-[#101415] border border-[#45464d] rounded-xl px-3.5 py-2 text-white outline-none focus:border-[#4cd7f6] text-sm">
+                </div>
+
+                <div class="flex items-center gap-3 pt-4 border-t border-[#45464d]">
+                    <button type="button" id="cancelEditBtn" class="flex-1 py-2.5 bg-[#1d2022] hover:bg-[#272a2c] text-white rounded-xl text-sm font-medium transition-all">İptal</button>
+                    <button type="submit" id="saveEditBtn" class="flex-1 py-2.5 bg-[#4cd7f6] text-[#003640] font-bold rounded-xl hover:brightness-110 transition-all text-sm flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-lg">save</span>
+                        <span>Güncelle</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Script yükleme -->
     <script type="module" src="js/admin.js"></script>
 
 </body>
