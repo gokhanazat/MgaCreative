@@ -631,20 +631,31 @@ async function renderPortfolioList() {
         console.warn('Portfolio fetch error:', e);
     }
 
-    // Öncelik: 1. Supabase kayıtları, 2. LocalStorage kayıtları, 3. DEFAULT_PROJECTS (34 Adet)
+    let parsedLocal = [];
+    const savedLocal = localStorage.getItem('mga_portfolio_projects');
+    if (savedLocal) {
+        try {
+            const arr = JSON.parse(savedLocal);
+            if (Array.isArray(arr) && arr.length > 0) {
+                parsedLocal = arr;
+            }
+        } catch(e) {}
+    }
+
+    // Öncelik: 1. Supabase kayıtları, 2. LocalStorage dolu kayıtları, 3. DEFAULT_PROJECTS (34 Adet)
     if (rawItems && rawItems.length > 0) {
         cachedProjects = rawItems.map(parseItemMeta);
+    } else if (parsedLocal.length > 0) {
+        cachedProjects = parsedLocal.map(parseItemMeta);
     } else {
-        const savedLocal = localStorage.getItem('mga_portfolio_projects');
-        if (savedLocal) {
-            try {
-                cachedProjects = JSON.parse(savedLocal).map(parseItemMeta);
-            } catch(e) {
-                cachedProjects = DEFAULT_PROJECTS.map(parseItemMeta);
-            }
-        } else {
-            cachedProjects = DEFAULT_PROJECTS.map(parseItemMeta);
-        }
+        cachedProjects = DEFAULT_PROJECTS.map(parseItemMeta);
+        try {
+            localStorage.setItem('mga_portfolio_projects', JSON.stringify(DEFAULT_PROJECTS));
+        } catch(e) {}
+    }
+
+    if (!cachedProjects || cachedProjects.length === 0) {
+        cachedProjects = DEFAULT_PROJECTS.map(parseItemMeta);
     }
 
     if (statTotalProjects) statTotalProjects.textContent = cachedProjects.length;
@@ -744,6 +755,9 @@ function filterAndDisplayProjects() {
                     await deletePortfolioItem(targetProj.id);
                 }
                 cachedProjects = cachedProjects.filter(p => String(p.id) !== String(id) && p.title !== id);
+                if (cachedProjects.length === 0) {
+                    cachedProjects = DEFAULT_PROJECTS.map(parseItemMeta);
+                }
                 localStorage.setItem('mga_portfolio_projects', JSON.stringify(cachedProjects));
                 if (statTotalProjects) statTotalProjects.textContent = cachedProjects.length;
                 filterAndDisplayProjects();
