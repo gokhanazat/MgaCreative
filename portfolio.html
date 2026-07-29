@@ -136,834 +136,134 @@
 </div>
 </header>
 <main class="pt-32 pb-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
-<!-- Hero Section -->
-<div class="mb-16">
-<h1 class="font-headline-xl text-headline-xl mb-4 text-primary-fixed-dim">Uygulamalar &amp; <span class="text-tertiary">Kategoriler</span></h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
-                Kapsamlı mobil deneyimlerden yüksek performanslı web mimarilerine ve etkileşimli oyun ortamlarına kadar özenle seçilmiş dijital ürün koleksiyonumuzu keşfedin.
-            </p>
+<!-- Hero Header -->
+<div class="mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 pb-8 border-b border-outline-variant/20">
+    <div>
+        <h1 class="font-headline-xl text-headline-xl mb-3 text-primary-fixed-dim">Uygulamalar &amp; <span class="text-tertiary">Kategoriler</span></h1>
+        <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+            Mobil, Web ve Dijital ürünlerimiz arasından anında arama yapın, kategorilere göre filtreleyin veya en son eklenen projeleri keşfedin.
+        </p>
+    </div>
+    <!-- Live Count Badge -->
+    <div id="project-count-badge" class="px-5 py-2.5 bg-surface-container/80 backdrop-blur-md rounded-2xl border border-outline-variant/30 text-on-surface text-sm font-semibold flex items-center gap-3 flex-shrink-0 shadow-lg">
+        <span class="relative flex h-3 w-3">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-3 w-3 bg-tertiary"></span>
+        </span>
+        <span id="live-count-text" class="font-mono text-tertiary font-bold">Yükleniyor...</span>
+    </div>
 </div>
-<!-- Filter Controls -->
-<div class="flex flex-wrap items-center gap-4 mb-12">
-<button class="filter-btn active-filter px-6 py-2 rounded-full font-label-md border border-outline-variant/30 transition-all duration-200" id="filter-all" onclick="filterApps('all')">
-                Tüm Projeler
+
+<!-- Mobile Filter Toggle Button (< lg screens) -->
+<div class="lg:hidden mb-6">
+    <button id="mobile-filter-toggle-btn" class="w-full flex items-center justify-between px-5 py-3.5 bg-surface-container/90 rounded-2xl border border-outline-variant/40 text-on-surface font-semibold text-sm shadow-md">
+        <span class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-tertiary">tune</span>
+            Filtrele &amp; Arama Yap
+        </span>
+        <span class="material-symbols-outlined transition-transform duration-300" id="mobile-toggle-icon">expand_more</span>
+    </button>
+</div>
+
+<!-- Sidebar + Grid Container -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    
+    <!-- LEFT SIDEBAR (SOL PANEL) -->
+    <aside id="portfolio-sidebar" class="hidden lg:block lg:col-span-4 xl:col-span-3 lg:sticky lg:top-28 space-y-6 z-20 transition-all duration-300">
+        <div class="glass-card rounded-3xl p-6 space-y-6 border border-outline-variant/30 shadow-2xl backdrop-blur-xl bg-surface-container-lowest/60">
+            
+            <!-- Arama Kutusu -->
+            <div>
+                <label class="block text-xs font-bold text-tertiary uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-base">search</span>
+                    Proje Ara
+                </label>
+                <div class="relative">
+                    <input type="text" id="sidebar-search-input" placeholder="Uygulama adı veya konu..." 
+                        class="w-full bg-surface-dim/80 border border-outline-variant/40 rounded-2xl px-4 py-3 pl-11 pr-9 text-sm text-on-surface placeholder:text-on-surface-variant/60 outline-none focus:border-tertiary focus:ring-2 focus:ring-tertiary/20 transition-all">
+                    <span class="material-symbols-outlined absolute left-3.5 top-3.5 text-on-surface-variant text-lg">search</span>
+                    <button id="clear-search-btn" class="hidden absolute right-3 top-3 text-on-surface-variant hover:text-white p-0.5 rounded-full hover:bg-surface-container transition-all">
+                        <span class="material-symbols-outlined text-base">close</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Kategori Listesi -->
+            <div>
+                <label class="block text-xs font-bold text-tertiary uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-base">category</span>
+                    Kategoriler
+                </label>
+                <div class="space-y-1.5" id="category-filter-list">
+                    <button class="category-btn active-cat-btn w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200" data-cat="all">
+                        <span class="flex items-center gap-2.5">
+                            <span class="material-symbols-outlined text-lg">apps</span> Tüm Projeler
+                        </span>
+                        <span id="cat-count-all" class="text-xs px-2.5 py-0.5 rounded-full bg-tertiary/10 text-tertiary font-mono font-bold">0</span>
+                    </button>
+                    <button class="category-btn w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-on-surface-variant hover:bg-surface-container/50 hover:text-white" data-cat="mobile">
+                        <span class="flex items-center gap-2.5">
+                            <span class="material-symbols-outlined text-lg">smartphone</span> Mobil Uygulamalar
+                        </span>
+                        <span id="cat-count-mobile" class="text-xs px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-mono font-medium">0</span>
+                    </button>
+                    <button class="category-btn w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-on-surface-variant hover:bg-surface-container/50 hover:text-white" data-cat="web">
+                        <span class="flex items-center gap-2.5">
+                            <span class="material-symbols-outlined text-lg">language</span> Web Projeleri
+                        </span>
+                        <span id="cat-count-web" class="text-xs px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-mono font-medium">0</span>
+                    </button>
+                    <button class="category-btn w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-on-surface-variant hover:bg-surface-container/50 hover:text-white" data-cat="game">
+                        <span class="flex items-center gap-2.5">
+                            <span class="material-symbols-outlined text-lg">sports_esports</span> Oyun &amp; İnteraktif
+                        </span>
+                        <span id="cat-count-game" class="text-xs px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-mono font-medium">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Hızlı Görünüm & Sıralama -->
+            <div class="pt-4 border-t border-outline-variant/20 space-y-2.5">
+                <label class="block text-xs font-bold text-tertiary uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-base">tune</span>
+                    Hızlı Görünüm
+                </label>
+                <button id="quick-filter-latest10" class="w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium bg-surface-dim hover:bg-tertiary/10 text-on-surface border border-outline-variant/30 hover:border-tertiary/40 transition-all duration-200 group">
+                    <span class="flex items-center gap-2.5">
+                        <span class="material-symbols-outlined text-lg text-tertiary group-hover:scale-110 transition-transform">new_releases</span> Son 10 Uygulama
+                    </span>
+                    <span id="latest10-badge" class="text-xs px-2 py-0.5 rounded-full bg-tertiary/20 text-tertiary font-bold font-mono">İlk 10</span>
+                </button>
+                <button id="reset-all-filters-btn" class="w-full py-2.5 text-center text-xs text-on-surface-variant hover:text-tertiary transition-colors flex items-center justify-center gap-1.5 font-medium">
+                    <span class="material-symbols-outlined text-base">restart_alt</span> Tüm Filtreleri Sıfırla
+                </button>
+            </div>
+
+        </div>
+    </aside>
+
+    <!-- RIGHT MAIN GRID (SAĞ UYGULAMA LİSTESİ) -->
+    <main class="lg:col-span-8 xl:col-span-9">
+        <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <!-- App cards populated dynamically -->
+        </div>
+        
+        <!-- Boş Arama Sonucu Durumu -->
+        <div id="no-results-state" class="hidden text-center py-20 px-6 glass-card rounded-3xl border border-outline-variant/30 space-y-5 backdrop-blur-xl">
+            <div class="w-20 h-20 rounded-2xl bg-tertiary/10 text-tertiary flex items-center justify-center mx-auto text-4xl shadow-inner">
+                <span class="material-symbols-outlined text-5xl">search_off</span>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold text-on-surface mb-2">Aranan Kriterlere Uygun Proje Bulunamadı</h3>
+                <p class="text-sm text-on-surface-variant max-w-md mx-auto">Farklı bir arama terimi deneyebilir veya aktif filtreleri temizleyebilirsiniz.</p>
+            </div>
+            <button id="empty-reset-btn" class="px-6 py-3 bg-secondary-container text-on-secondary-container rounded-2xl font-label-md hover:brightness-110 active:scale-95 transition-all shadow-md inline-flex items-center gap-2">
+                <span class="material-symbols-outlined text-base">restart_alt</span>
+                Filtreleri Sıfırla
             </button>
-<button class="filter-btn px-6 py-2 rounded-full font-label-md border border-outline-variant/30 text-on-surface-variant hover:border-tertiary transition-all duration-200" id="filter-mobile" onclick="filterApps('mobile')">
-                Mobil
-            </button>
-<button class="filter-btn px-6 py-2 rounded-full font-label-md border border-outline-variant/30 text-on-surface-variant hover:border-tertiary transition-all duration-200" id="filter-web" onclick="filterApps('web')">
-                Web
-            </button>
-<button class="filter-btn px-6 py-2 rounded-full font-label-md border border-outline-variant/30 text-on-surface-variant hover:border-tertiary transition-all duration-200" id="filter-game" onclick="filterApps('game')">
-                Oyun
-            </button>
-</div>
-<!-- Portfolio Grid -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
-<!-- App Card 0 (Agro Plan) -->
-<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
-<div class="relative h-64 overflow-hidden group">
-<img alt="Agro Plan Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/aproplan_kart.png"/>
-<div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
-</div>
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">Agro Plan</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        Tarlalarınızı, ekim süreçlerinizi, sulama ve gelir-giderlerinizi tek yerden yönetin. Modern çiftçiliğin dijital ortağı.
-                    </p>
-<div class="mt-auto flex gap-3">
-<button onclick="window.location.href='/project?id=agro-plan'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            Detayları İncele
-                        </button>
-<button onclick="window.location.href='/project?id=agro-plan'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-<span class="material-symbols-outlined">play_circle</span>
-</button>
-</div>
-</div>
-</article>
-<!-- App Card 2 (Cardly) -->
-<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
-<div class="relative h-64 overflow-hidden group">
-<img alt="Cardly Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/cardly_kart.jpeg"/>
-<div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
-</div>
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">Cardly</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        Premium dijital kartvizitler. QR ve NFC ile prestijli bir şekilde paylaşın. Prestijli ağ oluşturma çözümü.
-                    </p>
-<div class="mt-auto flex gap-3">
-<button onclick="window.location.href='/project?id=cardly'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            Detayları İncele
-                        </button>
-<button onclick="window.location.href='/project?id=cardly'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-<span class="material-symbols-outlined">play_circle</span>
-</button>
-</div>
-</div>
-</article>
-<!-- App Card 3 (Başvuru Asistanı) -->
-<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
-<div class="relative h-64 overflow-hidden group">
-<img alt="Başvuru Asistanı Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/basvuru_kart.jpeg"/>
-<div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
-</div>
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">Başvuru Asistanı</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        Tüm başvurularınızı tek bir noktadan kolayca yönetin ve takip edin. İş, okul ve vize süreçlerinin akıllı asistanı.
-                    </p>
-<div class="mt-auto flex gap-3">
-<button onclick="window.location.href='/project?id=basvuru-asistani'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            Detayları İncele
-                        </button>
-<button onclick="window.location.href='/project?id=basvuru-asistani'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-<span class="material-symbols-outlined">play_circle</span>
-</button>
-</div>
-</div>
-</article>
-<!-- App Card 4 (ChronoSnap) -->
-<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
-<div class="relative h-64 overflow-hidden group">
-<img alt="ChronoSnap Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/chronosnap_kart.jpeg"/>
-<div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
-</div>
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">ChronoSnap</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        Fotoğraflarınızı takvim üzerinde düzenleyin. Anılarınızı tarihe göre arşivleyerek kişisel görsel günlüğünüzü oluşturun.
-                    </p>
-<div class="mt-auto flex gap-3">
-<button onclick="window.location.href='/project?id=chronosnap'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            Detayları İncele
-                        </button>
-<button onclick="window.location.href='/project?id=chronosnap'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-<span class="material-symbols-outlined">play_circle</span>
-</button>
-</div>
-</div>
-</article>
-<!-- App Card 5 (CookMatch) -->
-<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
-<div class="relative h-64 overflow-hidden group">
-<img alt="CookMatch Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/cookmatch_kart.jpeg"/>
-<div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
-</div>
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">CookMatch</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        Daha akıllı yemek pişirin. Elinizde bulunan malzemelerle harika tarifleri keşfederek yemek israfını önleyin.
-                    </p>
-<div class="mt-auto flex gap-3">
-<button onclick="window.location.href='/project?id=cookmatch'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            Detayları İncele
-                        </button>
-<button onclick="window.location.href='/project?id=cookmatch'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-<span class="material-symbols-outlined">play_circle</span>
-</button>
-</div>
-</div>
-</article>
-<!-- App Card 6 (DailyLeaf) -->
-<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
-<div class="relative h-64 overflow-hidden group">
-<img alt="DailyLeaf Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/dailyleaf_kart.jpeg"/>
-<div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
-</div>
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">DailyLeaf</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        Hayatınızı vintage bir dokunuşla yakalayın. Estetik bir günlük, alışkanlıklar ve tarihte bugün köşesi ile nostaljik günlük deneyimi.
-                    </p>
-<div class="mt-auto flex gap-3">
-<button onclick="window.location.href='/project?id=dailyleaf'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            Detayları İncele
-                        </button>
-<button onclick="window.location.href='/project?id=dailyleaf'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-<span class="material-symbols-outlined">play_circle</span>
-</button>
-</div>
-</div>
-</article>
-<!-- App Card 7 (DealDraft) -->
-<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
-<div class="relative h-64 overflow-hidden group">
-<img alt="DealDraft Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/dealdraft_kart.jpeg"/>
-<div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
-</div>
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">DealDraft</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        Profesyonel PDF teklifleri oluşturun, müşterilerinizi ve projelerinizi Supabase altyapısıyla kolayca yönetin.
-                    </p>
-<div class="mt-auto flex gap-3">
-<button onclick="window.location.href='/project?id=dealdraft'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            Detayları İncele
-                        </button>
-<button onclick="window.location.href='/project?id=dealdraft'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-<span class="material-symbols-outlined">description</span>
-</button>
-</div>
-</div>
-</article>
-<!-- App Card 8 (AppBridge) -->
-<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
-<div class="relative h-64 overflow-hidden group">
-<img alt="AppBridge Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/appbridge_kart.jpeg"/>
-<div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
-</div>
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">AppBridge</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        Android uygulamalarını tek dokunuşla açan derin bağlantılar (deep links) üretin ve dilediğiniz platformda paylaşın.
-                    </p>
-<div class="mt-auto flex gap-3">
-<button onclick="window.location.href='/project?id=appbridge'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            Detayları İncele
-                        </button>
-<button onclick="window.location.href='/project?id=appbridge'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-<span class="material-symbols-outlined">play_circle</span>
-</button>
-</div>
-</div>
-</article>
-<!-- App Card 9 (ARGEP) -->
-<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
-<div class="relative h-64 overflow-hidden group">
-<img alt="ARGEP Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/argep_kart.jpeg"/>
-<div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
-</div>
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">ARGEP</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        Ar-Ge projelerini yönetin, görevleri, kilometre taşlarını ve harcamaları Room veritabanı altyapısıyla kolayca takip edin.
-                    </p>
-<div class="mt-auto flex gap-3">
-<button onclick="window.location.href='/project?id=argep'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            Detayları İncele
-                        </button>
-<button onclick="window.location.href='/project?id=argep'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-<span class="material-symbols-outlined">description</span>
-</button>
-</div>
-</div>
-</article>
-<!-- App Card 10 (CRM XL) -->
-<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
-<div class="relative h-64 overflow-hidden group">
-<img alt="CRM XL Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/lemoraxl-kart.jpeg"/>
-<div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
-</div>
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">CRM XL</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        Müşterilerinizi ve iş sözleşmelerinizi Supabase altyapısıyla güvenle yönetin, tüm cihazlarda anlık veri senkronizasyonu sağlayın.
-                    </p>
-<div class="mt-auto flex gap-3">
-<button onclick="window.location.href='/project?id=crm-xl'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            Detayları İncele
-                        </button>
-<button onclick="window.location.href='/project?id=crm-xl'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-<span class="material-symbols-outlined">description</span>
-</button>
-</div>
-</div>
-</article>
-<!-- App Card 11 (Felsefi Bakış) -->
-<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
-<div class="relative h-64 overflow-hidden group">
-<img alt="Felsefi Bakış Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/inkvera_kart.jpeg"/>
-<div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
-</div>
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">Felsefi Bakış</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        Tarihin en büyük filozoflarına sorular sorun, parşömen tasarımlı nostaljik arayüzde hayatın derinliklerini keşfedin.
-                    </p>
-<div class="mt-auto flex gap-3">
-<button onclick="window.location.href='/project?id=felsefi-bakis'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            Detayları İncele
-                        </button>
-<button onclick="window.location.href='/project?id=felsefi-bakis'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-<span class="material-symbols-outlined">play_circle</span>
-</button>
-</div>
-</div>
-</article>
-<!-- App Card 12 (Formex) -->
-<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
-<div class="relative h-64 overflow-hidden group">
-<img alt="Formex Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/formex_kart.jpeg"/>
-<div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
-</div>
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">Formex</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        Görüntüler, PDF'ler ve veriler için gizlilik öncelikli ve tamamen çevrimdışı profesyonel dosya dönüştürme araç seti.
-                    </p>
-<div class="mt-auto flex gap-3">
-<button onclick="window.location.href='/project?id=formex'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            Detayları İncele
-                        </button>
-<button onclick="window.location.href='/project?id=formex'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-<span class="material-symbols-outlined">play_circle</span>
-</button>
-</div>
-</div>
-</article>
-<!-- App Card 13 (Greenova) -->
-<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
-<div class="relative h-64 overflow-hidden group">
-<img alt="Greenova Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/greenova_kart.jpeg"/>
-<div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
-</div>
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">Greenova</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        Bitkilerinizi fotoğrafla tanıyın, yapay zeka desteğiyle hastalıkları teşhis edin ve uzman bakım önerileri alın.
-                    </p>
-<div class="mt-auto flex gap-3">
-<button onclick="window.location.href='/project?id=greenova'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            Detayları İncele
-                        </button>
-<button onclick="window.location.href='/project?id=greenova'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-<span class="material-symbols-outlined">play_circle</span>
-</button>
-</div>
-</div>
-</article>
-<!-- App Card 14 (GLOBAL TRADE) -->
-<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
-<div class="relative h-64 overflow-hidden group">
-<img alt="GLOBAL TRADE Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/globaltrade_kart.jpeg"/>
-<div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
-</div>
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">GLOBAL TRADE</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        Küresel ticaretin dijital merkezi: Doğrulanmış B2B eşleşme, dijital showroom, sertifikalı eğitimler ve çoklu dil desteği.
-                    </p>
-<div class="mt-auto flex gap-3">
-<button onclick="window.location.href='/project?id=global-trade'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            Detayları İncele
-                        </button>
-<button onclick="window.location.href='/project?id=global-trade'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-<span class="material-symbols-outlined">play_circle</span>
-</button>
-</div>
-</div>
-</article>
-<!-- App Card 15 (InkVera) -->
-<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
-<div class="relative h-64 overflow-hidden group">
-<img alt="InkVera Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/inkvera_kart.jpeg"/>
-<div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
-</div>
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">InkVera</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        PDF belgelerinizi profesyonel bir şekilde düzenleyin, güvenle e-imzalayın ve gelişmiş dosya yöneticisiyle paylaşın.
-                    </p>
-<div class="mt-auto flex gap-3">
-<button onclick="window.location.href='/project?id=inkvera'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            Detayları İncele
-                        </button>
-<button onclick="window.location.href='/project?id=inkvera'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-<span class="material-symbols-outlined">play_circle</span>
-</button>
-</div>
-</div>
-</article>
-<!-- App Card 16 (Lemora XL) -->
-<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
-<div class="relative h-64 overflow-hidden group">
-<img alt="Lemora XL Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/lemoraxl-kart.jpeg"/>
-<div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
-</div>
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">Lemora XL</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        Profesyonel sipariş ve bayi yönetimi, cari takipleri ve envanter analizleriyle toptan satış işlerinizi kolaylaştırın.
-                    </p>
-<div class="mt-auto flex gap-3">
-<button onclick="window.location.href='/project?id=lemora-xl'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            Detayları İncele
-                        </button>
-<button onclick="window.location.href='/project?id=lemora-xl'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-<span class="material-symbols-outlined">description</span>
-</button>
-</div>
-</div>
-</article>
-<!-- App Card 17 (Medication Time) -->
-<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
-<div class="relative h-64 overflow-hidden group">
-<img alt="Medication Time Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/medicationtime_kart.jpeg"/>
-<div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
-</div>
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">Medication Time</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        İlaçlarınızı zamanında alın ve sevdiklerinizi anlık olarak bilgilendirin. Yaşlı dostu, basit, hızlı ve güvenli.
-                    </p>
-<div class="mt-auto flex gap-3">
-<button onclick="window.location.href='/project?id=medication-time'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            Detayları İncele
-                        </button>
-<button onclick="window.location.href='/project?id=medication-time'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-<span class="material-symbols-outlined">play_circle</span>
-</button>
-</div>
-</div>
-</article>
-<!-- App Card 18 (MailMind) -->
-<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
-<div class="relative h-64 overflow-hidden group">
-<img alt="MailMind Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/mailmind_kart.jpeg"/>
-<div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
-</div>
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">MailMind</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        SMS ve E-postalarınız için yapay zeka destekli (NLP), güvenli ve onay mekanizmalı akıllı ajanda asistanı.
-                    </p>
-<div class="mt-auto flex gap-3">
-<button onclick="window.location.href='/project?id=mail-mind'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            Detayları İncele
-                        </button>
-<button onclick="window.location.href='/project?id=mail-mind'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-<span class="material-symbols-outlined">play_circle</span>
-</button>
-</div>
-</div>
-</article>
-<!-- App Card 19 (TripMind) -->
-<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
-<div class="relative h-64 overflow-hidden group">
-<img alt="TripMind Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/tripmind_kart.jpeg"/>
-<div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
-</div>
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">TripMind</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        Kişisel seyahat asistanınız: Akıllı seyahat rotaları, bütçe kontrolü ve seyahat planlama araçları.
-                    </p>
-<div class="mt-auto flex gap-3">
-<button onclick="window.location.href='/project?id=trip-mind'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            Detayları İncele
-                        </button>
-<button onclick="window.location.href='/project?id=trip-mind'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-<span class="material-symbols-outlined">play_circle</span>
-</button>
-</div>
-</div>
-</article>
-<!-- App Card 20 (Viano) -->
-<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
-<div class="relative h-64 overflow-hidden group">
-<img alt="Viano Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/viano_kart.jpeg"/>
-<div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
-</div>
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">Viano</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        Seyahatlerinizi kaydedin, rotanızı çizin, konumsal fotoğraflar ve notlarla seyahat anılarınızı ölümsüzleştirin.
-                    </p>
-<div class="mt-auto flex gap-3">
-<button onclick="window.location.href='/project?id=viano'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            Detayları İncele
-                        </button>
-<button onclick="window.location.href='/project?id=viano'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-<span class="material-symbols-outlined">play_circle</span>
-</button>
-</div>
-</div>
-</article>
-<!-- App Card 21 (My Garage) -->
-<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
-<div class="relative h-64 overflow-hidden group">
-<img alt="My Garage Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/mygarage_kart.jpeg"/>
-<div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
-</div>
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">My Garage</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        Araç bakımını yönetin, DTC arızalarını teşhis edin ve en yakın servisleri kolayca bulun.
-                    </p>
-<div class="mt-auto flex gap-3">
-<button onclick="window.location.href='/project?id=my-garage'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            Detayları İncele
-                        </button>
-<button onclick="window.location.href='/project?id=my-garage'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-<span class="material-symbols-outlined">play_circle</span>
-</button>
-</div>
-</div>
-</article>
-<!-- App Card 22 (MyCity) -->
-<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
-<div class="relative h-64 overflow-hidden group">
-<img alt="MyCity Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/mycity_kart.jpeg"/>
-<div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
-</div>
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">MyCity</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        İskenderun'u cebinizde keşfedin! Güncel şehir rehberiniz, etkinlikler ve tarihi yerler.
-                    </p>
-<div class="mt-auto flex gap-3">
-<button onclick="window.location.href='/project?id=my-city'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            Detayları İncele
-                        </button>
-<button onclick="window.location.href='/project?id=my-city'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-<span class="material-symbols-outlined">play_circle</span>
-</button>
-</div>
-</div>
-</article>
-<!-- App Card 23 (Orbitalis) -->
-<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
-<div class="relative h-64 overflow-hidden group">
-<img alt="Orbitalis Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/orbitalis_kart.jpeg"/>
-<div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
-</div>
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">Orbitalis</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        NASA, SpaceX fırlatmalarını, meteor yağmurlarını ve ISS gözlemlerini gerçek zamanlı takip edin.
-                    </p>
-<div class="mt-auto flex gap-3">
-<button onclick="window.location.href='/project?id=orbitalis'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            Detayları İncele
-                        </button>
-<button onclick="window.location.href='/project?id=orbitalis'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-<span class="material-symbols-outlined">play_circle</span>
-</button>
-</div>
-</div>
-</article>
-<!-- App Card 24 (ProEvent) -->
-<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
-<div class="relative h-64 overflow-hidden group">
-<img alt="ProEvent Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/proevent_kart.jpeg"/>
-<div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
-</div>
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">ProEvent</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        Düğün ve etkinlik organizatörü: Bütçe planlaması, konuk listeleri, RSVP takibi ve etkileşimli oturma planı.
-                    </p>
-<div class="mt-auto flex gap-3">
-<button onclick="window.location.href='/project?id=proevent'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            Detayları İncele
-                        </button>
-<button onclick="window.location.href='/project?id=proevent'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-<span class="material-symbols-outlined">description</span>
-</button>
-</div>
-</div>
-</article>
-<!-- App Card 25 (Projexia) -->
-<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
-<div class="relative h-64 overflow-hidden group">
-<img alt="Projexia Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/projexia_kart.jpeg"/>
-<div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
-</div>
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">Projexia</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        Projelerinizi, yapılacaklar listelerinizi (To-Do) ve finansal verilerinizi tek bir yerden yönetin.
-                    </p>
-<div class="mt-auto flex gap-3">
-<button onclick="window.location.href='/project?id=projexia'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            Detayları İncele
-                        </button>
-<button onclick="window.location.href='/project?id=projexia'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-<span class="material-symbols-outlined">play_circle</span>
-</button>
-</div>
-</div>
-</article>
-<!-- App Card 26 (SubTrack) -->
-<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
-<div class="relative h-64 overflow-hidden group">
-<img alt="SubTrack Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/subtrack_kart.jpeg"/>
-<div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
-</div>
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">SubTrack</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        Abonelikleri yönetin, cironuzu grafiklerle izleyin ve ödeme tarihlerinizi asla kaçırmayın.
-                    </p>
-<div class="mt-auto flex gap-3">
-<button onclick="window.location.href='/project?id=subtrack'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            Detayları İncele
-                        </button>
-<button onclick="window.location.href='/project?id=subtrack'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-<span class="material-symbols-outlined">play_circle</span>
-</button>
-</div>
-</div>
-</article>
-<!-- App Card 27 (Lemora) -->
-<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
-<div class="relative h-64 overflow-hidden group">
-<img alt="Lemora Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/lemoraxl-kart.jpeg"/>
-<div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
-</div>
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">Lemora</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        Barkodlu satış, profesyonel stok takibi, CRM müşteri ilişkileri ve detaylı ciro analizi.
-                    </p>
-<div class="mt-auto flex gap-3">
-<button onclick="window.location.href='/project?id=lemora'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            Detayları İncele
-                        </button>
-<button onclick="window.location.href='/project?id=lemora'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-<span class="material-symbols-outlined">play_circle</span>
-</button>
-</div>
-</div>
-</article>
-<!-- App Card 28 (MindWeave) -->
-<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
-<div class="relative h-64 overflow-hidden group">
-<img alt="MindWeave Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/mindwear_kart.jpeg"/>
-<div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
-</div>
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">MindWeave</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        Fikirlerinizi görselleştirin, profesyonel zihin haritaları oluşturun ve düşüncelerinizi düzenleyin.
-                    </p>
-<div class="mt-auto flex gap-3">
-<button onclick="window.location.href='/project?id=mindweave'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            Detayları İncele
-                        </button>
-<button onclick="window.location.href='/project?id=mindweave'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-<span class="material-symbols-outlined">play_circle</span>
-</button>
-</div>
-</div>
-</article>
-<!-- App Card 29 (OneTake) -->
-<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
-<div class="relative h-64 overflow-hidden group">
-<img alt="OneTake Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/onetake_kart.jpeg"/>
-<div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
-</div>
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">OneTake</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        Kusursuz videolar çekin! Akıllı teleprompter, pratik modu (WPM hız analizörlü) ve analizler.
-                    </p>
-<div class="mt-auto flex gap-3">
-<button onclick="window.location.href='/project?id=onetake'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            Detayları İncele
-                        </button>
-<button onclick="window.location.href='/project?id=onetake'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-<span class="material-symbols-outlined">description</span>
-</button>
-</div>
-</div>
-</article>
-<!-- App Card 30 (QuickBite) -->
-<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
-<div class="relative h-64 overflow-hidden group">
-<img alt="QuickBite Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/quickbite_kart.jpeg"/>
-<div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
-</div>
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">QuickBite</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        Kafeler ve restoranlar için bulut tabanlı (SaaS) sipariş, teslimat ve akıllı operasyon yönetimi.
-                    </p>
-<div class="mt-auto flex gap-3">
-<button onclick="window.location.href='/project?id=quickbite'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            Detayları İncele
-                        </button>
-<button onclick="window.location.href='/project?id=quickbite'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-<span class="material-symbols-outlined">play_circle</span>
-</button>
-</div>
-</div>
-</article>
-<!-- App Card 31 (VoxNote) -->
-<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
-<div class="relative h-64 overflow-hidden group">
-<img alt="VoxNote Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/Voxnoete_kart.jpeg"/>
-<div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
-</div>
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">VoxNote</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        Sesle çalışan alarmlar, size cevap veren neural TTS akıllı hatırlatıcılar ve erişilebilir tasarım.
-                    </p>
-<div class="mt-auto flex gap-3">
-<button onclick="window.location.href='/project?id=voxnote'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            Detayları İncele
-                        </button>
-<button onclick="window.location.href='/project?id=voxnote'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-<span class="material-symbols-outlined">description</span>
-</button>
-</div>
-</div>
-</article>
-<!-- App Card 32 (Wedoria) -->
-<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
-<div class="relative h-64 overflow-hidden group">
-<img alt="Wedoria Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/wedoria_kart.jpeg"/>
-<div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
-</div>
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">Wedoria</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        Hepsi bir arada düğün planlayıcınız: Konuk listeleri, bütçe takibi, oturma düzeni ve zaman çizelgeleri.
-                    </p>
-<div class="mt-auto flex gap-3">
-<button onclick="window.location.href='/project?id=wedoria'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            Detayları İncele
-                        </button>
-<button onclick="window.location.href='/project?id=wedoria'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-<span class="material-symbols-outlined">description</span>
-</button>
-</div>
-</div>
-</article>
-<!-- App Card 33 (Walletra) -->
-<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
-<div class="relative h-64 overflow-hidden group">
-<img alt="Walletra Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/walletra_kart.jpeg"/>
-<div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
-</div>
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">Walletra</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        Harcamalarınızı kontrol altına alın, bütçenizi kolayca yönetin ve hedeflerinize ulaşın.
-                    </p>
-<div class="mt-auto flex gap-3">
-<button onclick="window.location.href='/project?id=walletra'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            Detayları İncele
-                        </button>
-<button onclick="window.location.href='/project?id=walletra'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-<span class="material-symbols-outlined">play_circle</span>
-</button>
-</div>
-</div>
-</article>
-<!-- App Card 34 (Bizora) -->
-<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
-<div class="relative h-64 overflow-hidden group">
-<img alt="Bizora Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/bizora_kart.png"/>
-<div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
-</div>
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">Bizora</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        Cari hesap yönetimi, fatura kesme, stok takibi ve gelişmiş finansal raporlamalarla şirketinizi cebinizden yönetin.
-                    </p>
-<div class="mt-auto flex gap-3">
-<button onclick="window.location.href='/project?id=bizora'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            Detayları İncele
-                        </button>
-<button onclick="window.location.href='/project?id=bizora'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-<span class="material-symbols-outlined">play_circle</span>
-</button>
-</div>
-</article>
-<!-- App Card 35 (Hotel OS) -->
-<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
-<div class="relative h-64 overflow-hidden group">
-<img alt="Hotel OS Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/hotelos_kart.jpeg"/>
-<div class="absolute top-4 left-4">
-<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
-</div>
-</div>
-<div class="p-6 flex flex-col flex-grow">
-<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">Hotel OS</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                        Otel ve konaklama tesisleri için akıllı otomasyon, dijital resepsiyon, oda servisi ve misafir yönetimi platformu.
-                    </p>
-<div class="mt-auto flex gap-3">
-<button onclick="window.location.href='/project?id=hotelos'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                            Detayları İncele
-                        </button>
-<button onclick="window.location.href='/project?id=hotelos'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-<span class="material-symbols-outlined">play_circle</span>
-</button>
-</div>
-</div>
-</article>
+        </div>
+    </main>
+
 </div>
 </main>
 <!-- Footer -->
@@ -981,168 +281,197 @@
             </p>
 </div>
 </footer>
-<script>
-        function filterApps(category) {
-            const cards = document.querySelectorAll('.app-card');
-            const buttons = document.querySelectorAll('.filter-btn');
 
-            // Update buttons
-            buttons.forEach(btn => {
-                btn.classList.remove('active-filter');
-                btn.classList.add('text-on-surface-variant');
-            });
-            document.getElementById(`filter-${category}`).classList.add('active-filter');
-            document.getElementById(`filter-${category}`).classList.remove('text-on-surface-variant');
+<style>
+    .active-cat-btn {
+        background-color: rgba(76, 215, 246, 0.14) !important;
+        color: #4cd7f6 !important;
+        border: 1px solid rgba(76, 215, 246, 0.35) !important;
+    }
+</style>
 
-            // Animate Grid
-            cards.forEach(card => {
-                card.style.opacity = '0';
-                card.style.transform = 'scale(0.95)';
-                
-                setTimeout(() => {
-                    if (category === 'all' || card.getAttribute('data-category') === category) {
-                        card.style.display = 'flex';
-                        setTimeout(() => {
-                            card.style.opacity = '1';
-                            card.style.transform = 'scale(1)';
-                        }, 50);
-                    } else {
-                        card.style.display = 'none';
-                    }
-                }, 300);
-            });
-        }
+<script type="module">
+    import { fetchPortfolioItems } from './js/supabase-client.js';
 
-        // Initialize with slight delay for entrance animation
-        window.onload = () => {
-            const cards = document.querySelectorAll('.app-card');
-            cards.forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                setTimeout(() => {
-                    card.style.transition = 'all 0.6s cubic-bezier(0.22, 1, 0.36, 1)';
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, index * 100);
-            });
-        };
-    </script>
+    let allPortfolioProjects = [];
+    let activeCategory = 'all';
+    let searchQuery = '';
+    let isLatest10Only = false;
 
-    <script type="module">
-        import { fetchPortfolioItems } from './js/supabase-client.js';
-
-        function parseItemMeta(item) {
-            let cleanDesc = item.description || '';
-            let youtubeId = item.youtube_id || item.youtubeId || '';
-            let playstoreUrl = item.playstore_url || item.playstoreUrl || '';
-            let imageUrl = (item.image_url || item.imageUrl || '')
-                .replace('coocmatch_kart.jpeg', 'cookmatch_kart.jpeg')
-                .replace('ardeg_kart.jpeg', 'argep_kart.jpeg')
-                .replace('tripmimd_kart.jpeg', 'tripmind_kart.jpeg')
-                .replace('lemoraxl_kart.jpeg', 'lemoraxl-kart.jpeg')
-                .replace('Voxnoete_kart.jpeg', 'voxnote_kart.jpeg');
-            
-            const metaMatch = cleanDesc.match(/<!--META:([\s\S]*?)-->/);
-            if (metaMatch) {
-                try {
-                    const metaObj = JSON.parse(metaMatch[1]);
-                    if (metaObj.youtube_id !== undefined) youtubeId = metaObj.youtube_id;
-                    if (metaObj.playstore_url !== undefined) playstoreUrl = metaObj.playstore_url;
-                } catch (e) {}
-                cleanDesc = cleanDesc.replace(/<!--META:[\s\S]*?-->/g, '').trim();
-            }
-            
-            return {
-                ...item,
-                image_url: imageUrl,
-                cleanDescription: cleanDesc,
-                youtubeId,
-                playstoreUrl
-            };
-        }
-
-        async function loadDynamicPortfolio() {
+    function parseItemMeta(item) {
+        let cleanDesc = item.description || '';
+        let youtubeId = item.youtube_id || item.youtubeId || '';
+        let playstoreUrl = item.playstore_url || item.playstoreUrl || '';
+        let imageUrl = (item.image_url || item.imageUrl || '')
+            .replace('coocmatch_kart.jpeg', 'cookmatch_kart.jpeg')
+            .replace('ardeg_kart.jpeg', 'argep_kart.jpeg')
+            .replace('tripmimd_kart.jpeg', 'tripmind_kart.jpeg')
+            .replace('lemoraxl_kart.jpeg', 'lemoraxl-kart.jpeg')
+            .replace('Voxnoete_kart.jpeg', 'voxnote_kart.jpeg');
+        
+        const metaMatch = cleanDesc.match(/<!--META:([\s\S]*?)-->/);
+        if (metaMatch) {
             try {
-                let dbItems = [];
+                const metaObj = JSON.parse(metaMatch[1]);
+                if (metaObj.youtube_id !== undefined) youtubeId = metaObj.youtube_id;
+                if (metaObj.playstore_url !== undefined) playstoreUrl = metaObj.playstore_url;
+            } catch (e) {}
+            cleanDesc = cleanDesc.replace(/<!--META:[\s\S]*?-->/g, '').trim();
+        }
+        
+        const tags = (item.category_tags || '').toLowerCase();
+        let categoryAttr = 'mobile';
+        if (tags.includes('web')) categoryAttr = 'web';
+        else if (tags.includes('oyun') || tags.includes('game')) categoryAttr = 'game';
+
+        let mainCategoryTag = 'Mobil';
+        if (categoryAttr === 'web') mainCategoryTag = 'Web';
+        else if (categoryAttr === 'game') mainCategoryTag = 'Oyun';
+        
+        return {
+            ...item,
+            image_url: imageUrl,
+            cleanDescription: cleanDesc,
+            youtubeId,
+            playstoreUrl,
+            categoryAttr,
+            mainCategoryTag
+        };
+    }
+
+    function updateCategoryCounts() {
+        let countAll = allPortfolioProjects.length;
+        let countMobile = 0;
+        let countWeb = 0;
+        let countGame = 0;
+
+        allPortfolioProjects.forEach(item => {
+            if (item.categoryAttr === 'mobile') countMobile++;
+            else if (item.categoryAttr === 'web') countWeb++;
+            else if (item.categoryAttr === 'game') countGame++;
+            else countMobile++;
+        });
+
+        const elAll = document.getElementById('cat-count-all');
+        const elMobile = document.getElementById('cat-count-mobile');
+        const elWeb = document.getElementById('cat-count-web');
+        const elGame = document.getElementById('cat-count-game');
+
+        if (elAll) elAll.textContent = countAll;
+        if (elMobile) elMobile.textContent = countMobile;
+        if (elWeb) elWeb.textContent = countWeb;
+        if (elGame) elGame.textContent = countGame;
+    }
+
+    function applyFiltersAndRender() {
+        const grid = document.getElementById('portfolio-grid');
+        const noResults = document.getElementById('no-results-state');
+        const liveCountText = document.getElementById('live-count-text');
+        if (!grid) return;
+
+        let filtered = allPortfolioProjects.filter(item => {
+            // Category filter
+            if (activeCategory !== 'all' && item.categoryAttr !== activeCategory) {
+                return false;
+            }
+            // Search filter
+            if (searchQuery) {
+                const q = searchQuery.toLowerCase();
+                const titleMatch = (item.title || '').toLowerCase().includes(q);
+                const descMatch = (item.cleanDescription || '').toLowerCase().includes(q);
+                const tagsMatch = (item.category_tags || '').toLowerCase().includes(q);
+                if (!titleMatch && !descMatch && !tagsMatch) return false;
+            }
+            return true;
+        });
+
+        // Latest 10 filter
+        if (isLatest10Only) {
+            filtered = filtered.slice(0, 10);
+        }
+
+        // Update live count text
+        if (liveCountText) {
+            if (isLatest10Only) {
+                liveCountText.textContent = `Son 10 Uygulama Gösteriliyor`;
+            } else if (searchQuery) {
+                liveCountText.textContent = `${filtered.length} Sonuç Bulundu`;
+            } else {
+                liveCountText.textContent = `${filtered.length} Proje Gösteriliyor`;
+            }
+        }
+
+        // Empty state handling
+        if (filtered.length === 0) {
+            grid.classList.add('hidden');
+            if (noResults) noResults.classList.remove('hidden');
+            return;
+        }
+
+        grid.classList.remove('hidden');
+        if (noResults) noResults.classList.add('hidden');
+
+        grid.innerHTML = filtered.map(item => {
+            const playBtnAction = item.playstoreUrl 
+                ? `window.open('${item.playstoreUrl}', '_blank')` 
+                : `window.location.href='${item.link || '/project?id=' + item.title.toLowerCase().replace(/\s+/g, '-')}'`;
+            const playBtnIcon = item.playstoreUrl ? 'play_apps' : 'play_circle';
+            const playBtnTitle = item.playstoreUrl ? 'Google Play Store\'da Gör' : 'Detayları İncele';
+            const projectLink = item.link || ('/project?id=' + item.title.toLowerCase().replace(/\s+/g, '-'));
+
+            return `
+            <article class="app-card glass-card flex flex-col rounded-2xl overflow-hidden border border-outline-variant/20 hover:border-tertiary/40 transition-all duration-300" data-category="${item.categoryAttr}">
+                <div class="relative h-60 overflow-hidden group">
+                    <img alt="${item.title} Preview" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="${item.image_url || 'https://placehold.co/600x400?text=Proje'}"/>
+                    <div class="absolute top-4 left-4">
+                        <span class="bg-surface-dim/80 backdrop-blur-md text-tertiary border border-tertiary/30 px-3 py-1 rounded-full font-label-sm uppercase tracking-wider font-semibold">${item.mainCategoryTag}</span>
+                    </div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <h3 class="font-headline-lg text-2xl font-bold mb-2 text-on-surface">${item.title}</h3>
+                    <p class="font-body-md text-sm text-on-surface-variant mb-6 line-clamp-3 leading-relaxed">
+                        ${item.cleanDescription || item.description || ''}
+                    </p>
+                    <div class="mt-auto flex gap-3">
+                        <button onclick="window.location.href='${projectLink}'" class="flex-1 bg-secondary-container text-on-secondary-container py-3 rounded-xl font-label-md font-semibold transition-all hover:brightness-110 active:scale-95 shadow-md flex items-center justify-center gap-1.5">
+                            Detayları İncele
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </button>
+                        <button onclick="${playBtnAction}" title="${playBtnTitle}" class="w-12 h-12 flex items-center justify-center border border-outline-variant/40 rounded-xl text-tertiary hover:bg-tertiary/10 transition-all active:scale-95 flex-shrink-0">
+                            <span class="material-symbols-outlined">${playBtnIcon}</span>
+                        </button>
+                    </div>
+                </div>
+            </article>
+            `;
+        }).join('');
+
+        // Card entrance animation
+        const cards = grid.querySelectorAll('.app-card');
+        cards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(15px)';
+            setTimeout(() => {
+                card.style.transition = 'all 0.4s cubic-bezier(0.22, 1, 0.36, 1)';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, index * 40);
+        });
+    }
+
+    async function initPortfolio() {
+        try {
+            let dbItems = [];
+            try {
+                dbItems = await fetchPortfolioItems();
+            } catch(e) {}
+
+            let localItems = [];
+            const savedLocal = localStorage.getItem('mga_portfolio_projects');
+            if (savedLocal) {
                 try {
-                    dbItems = await fetchPortfolioItems();
+                    localItems = JSON.parse(savedLocal);
                 } catch(e) {}
-
-                let localItems = [];
-                const savedLocal = localStorage.getItem('mga_portfolio_projects');
-                if (savedLocal) {
-                    try {
-                        localItems = JSON.parse(savedLocal);
-                    } catch(e) {}
-                }
-
-                const combinedMap = new Map();
-                (dbItems || []).forEach(item => {
-                    const key = (item.title || '').toLowerCase().trim();
-                    if (key) combinedMap.set(key, item);
-                });
-                (localItems || []).forEach(item => {
-                    const key = (item.title || '').toLowerCase().trim();
-                    if (key) combinedMap.set(key, item);
-                });
-
-                const allItems = Array.from(combinedMap.values());
-                if (allItems.length === 0) return;
-
-                const grid = document.getElementById('portfolio-grid');
-                if (!grid) return;
-
-                const parsedItems = allItems.map(parseItemMeta);
-                grid.innerHTML = parsedItems.map(item => {
-                    const tags = (item.category_tags || '').toLowerCase();
-                    let categoryAttr = 'mobile';
-                    if (tags.includes('web')) categoryAttr = 'web';
-                    else if (tags.includes('oyun') || tags.includes('game')) categoryAttr = 'game';
-
-                    const playBtnAction = item.playstoreUrl 
-                        ? `window.open('${item.playstoreUrl}', '_blank')` 
-                        : `window.location.href='${item.link}'`;
-                    const playBtnIcon = item.playstoreUrl ? 'play_apps' : 'play_circle';
-                    const playBtnTitle = item.playstoreUrl ? 'Google Play Store\'da Gör' : 'Detayları İncele';
-
-                    return `
-                    <article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="${categoryAttr}">
-                        <div class="relative h-64 overflow-hidden group">
-                            <img alt="${item.title} Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="${item.image_url || 'https://placehold.co/600x400?text=Proje'}"/>
-                            <div class="absolute top-4 left-4">
-                                <span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">${mainCategoryTag}</span>
-                            </div>
-                        </div>
-                        <div class="p-6 flex flex-col flex-grow">
-                            <h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">${item.title}</h3>
-                            <p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
-                                ${item.cleanDescription || item.description || ''}
-                            </p>
-                            <div class="mt-auto flex gap-3">
-                                <button onclick="window.location.href='${item.link}'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
-                                    Detayları İncele
-                                </button>
-                                <button onclick="${playBtnAction}" title="${playBtnTitle}" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-                                    <span class="material-symbols-outlined">${playBtnIcon}</span>
-                                </button>
-                            </div>
-                        </div>
-                    </article>
-                    `;
-                }).join('');
-
-                const cards = document.querySelectorAll('.app-card');
-                cards.forEach((card, index) => {
-                    card.style.opacity = '0';
-                    card.style.transform = 'translateY(20px)';
-                    setTimeout(() => {
-                        card.style.transition = 'all 0.6s cubic-bezier(0.22, 1, 0.36, 1)';
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateY(0)';
-                    }, index * 50);
-                });
-            } catch (e) {
-                console.warn('Could not load dynamic portfolio, using static fallback:', e);
             }
         }
 
