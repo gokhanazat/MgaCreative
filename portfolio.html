@@ -479,8 +479,79 @@
                     localItems = JSON.parse(savedLocal);
                 } catch(e) {}
             }
-        }
 
-        document.addEventListener('DOMContentLoaded', loadDynamicPortfolio);
+            const defaultSeed = [
+                { title: 'Agro Plan', category_tags: 'Ticari Çözüm, Mobil', image_url: 'images/aproplan_kart.png', link: '/project?id=agro-plan', description: 'Tarlalarınızı, ekim süreçlerinizi, sulama ve gelir-giderlerinizi tek yerden yönetin. Modern çiftçiliğin dijital ortağı.' },
+                { title: 'Cardly', category_tags: 'Ticari Çözüm, Mobil', image_url: 'images/cardly_kart.jpeg', link: '/project?id=cardly', description: 'Premium dijital kartvizitler. QR ve NFC ile prestijli bir şekilde paylaşın.' },
+                { title: 'Başvuru Asistanı', category_tags: 'Kişisel Asistan, Mobil', image_url: 'images/basvuru_kart.jpeg', link: '/project?id=basvuru-asistani', description: 'Tüm başvurularınızı tek bir noktadan kolayca yönetin ve takip edin.' },
+                { title: 'ChronoSnap', category_tags: 'Araç & Diğer, Mobil', image_url: 'images/chronosnap_kart.jpeg', link: '/project?id=chronosnap', description: 'Fotoğraf ve videolarınıza otomatik zaman ve konum damgası ekleyin.' },
+                { title: 'CookMatch', category_tags: 'Araç & Diğer, Mobil', image_url: 'images/cookmatch_kart.jpeg', link: '/project?id=cookmatch', description: 'Dolabınızdaki malzemelerle yapılabilecek en lezzetli yemek tariflerini eşleştirin.' },
+                { title: 'DailyLeaf', category_tags: 'Kişisel Asistan, Mobil', image_url: 'images/dailyleaf_kart.jpeg', link: '/project?id=dailyleaf', description: 'Kişisel gelişiminizi takip edin, günlük alışkanlıklar edinin ve yaşam kalitenizi artırın.' },
+                { title: 'DealDraft', category_tags: 'Ticari Çözüm, Mobil', image_url: 'images/dealdraft_kart.jpeg', link: '/project?id=dealdraft', description: 'Hızlı, güvenli ve profesyonel sözleşme ve teklif taslakları hazırlama platformu.' },
+                { title: 'AppBridge', category_tags: 'Araç & Diğer, Mobil', image_url: 'images/appbridge_kart.jpeg', link: '/project?id=appbridge', description: 'Farklı platformlar ve servisler arasında kesintisiz veri köprüsü kuran entegrasyon çözümü.' },
+                { title: 'ARGEP', category_tags: 'Ticari Çözüm, Mobil', image_url: 'images/argep_kart.jpeg', link: '/project?id=argep', description: 'Ar-Ge ve proje süreçlerinizi yönetin, fikirlerinizi ürüne dönüştürürken adımları raporlayın.' },
+                { title: 'CRM XL', category_tags: 'Ticari Çözüm, Mobil', image_url: 'images/lemoraxl-kart.jpeg', link: '/project?id=crm-xl', description: 'Müşteri ilişkileri yönetimi, satış takibi ve saha ekibi koordinasyonu için CRM.' },
+                { title: 'Felsefi Bakış', category_tags: 'Araç & Diğer, Mobil', image_url: 'images/inkvera_kart.jpeg', link: '/project?id=felsefi-bakis', description: 'Tarihin en büyük filozoflarıyla etkileşimli soru-cevap deneyimi.', playstore_url: 'https://play.google.com/store/apps/details?id=com.felsefibakis.app&pcampaignid=web_share' },
+                { title: 'Formex', category_tags: 'Araç & Diğer, Mobil', image_url: 'images/formex_kart.jpeg', link: '/project?id=formex', description: '%100 Çevrimdışı ve gizlilik öncelikli PDF, JPG, PNG, WEBP, CSV, JSON dosya dönüştürme araç seti.' },
+                { title: 'Greenova', category_tags: 'Araç & Diğer, Mobil', image_url: 'images/greenova_kart.jpeg', link: '/project?id=greenova', description: 'Yapay zeka ile bitki türü tanıma, yaprak hastalık teşhisi ve akıllı sulama zamanlayıcısı.', playstore_url: 'https://play.google.com/store/apps/details?id=com.mgacreative.greenova&pcampaignid=web_share' },
+                { title: 'GLOBAL TRADE', category_tags: 'Ticari Çözüm, Mobil', image_url: 'images/globaltrade_kart.jpeg', link: '/project?id=global-trade', description: 'Küresel B2B ticaret merkezi. PDF ürün kataloğu üretici, dış ticaret eğitimi ve eşleştirme.' },
+                { title: 'InkVera', category_tags: 'Araç & Diğer, Mobil', image_url: 'images/inkvera_kart.jpeg', link: '/project?id=inkvera', description: 'Mobil PDF çizim, e-imzalama ve form doldurma aracı.' },
+                { title: 'Lemora XL', category_tags: 'Ticari Çözüm, Mobil', image_url: 'images/lemoraxl-kart.jpeg', link: '/project?id=lemora-xl', description: 'Hepsi bir arada toptan satış, sipariş takibi, bayi portalı ve özel cari fiyatlandırma yönetimi.' },
+                { title: 'Medication Time', category_tags: 'Kişisel Asistan, Mobil', image_url: 'images/medicationtime_kart.jpeg', link: '/project?id=medication-time', description: 'Akıllı ilaç takip ve aile köprüsü uygulaması. Otomatik bakıcı bildirimi.', playstore_url: 'https://play.google.com/store/apps/details?id=com.mga.ilacsaatim&pcampaignid=web_share' },
+                { title: 'MailMind', category_tags: 'Kişisel Asistan, Mobil', image_url: 'images/mailmind_kart.jpeg', link: '/project?id=mail-mind', description: 'NLP Yapay Zeka destekli e-posta ve SMS ajanda asistanı.', playstore_url: 'https://play.google.com/store/apps/details?id=com.mailmind.app&pcampaignid=web_share' },
+                { title: 'TripMind', category_tags: 'Kişisel Asistan, Mobil', image_url: 'images/tripmind_kart.jpeg', link: '/project?id=trip-mind', description: 'Yapay zeka ile kişiselleştirilmiş rota ve seyahat planlama uygulaması.' },
+                { title: 'Viano', category_tags: 'Araç & Diğer, Mobil', image_url: 'images/viano_kart.jpeg', link: '/project?id=viano', description: 'GPS tabanlı canlı rota izleme ve seyahat takip sistemi.', playstore_url: 'https://play.google.com/store/apps/details?id=com.mga.viano&pcampaignid=web_share' },
+                { title: 'My Garage', category_tags: 'Kişisel Asistan, Mobil', image_url: 'images/mygarage_kart.jpeg', link: '/project?id=my-garage', description: 'Araç periyodik bakım takibi, muayene hatırlatıcısı ve yakıt-gider analiz dijital garajınız.', playstore_url: 'https://play.google.com/store/apps/details?id=com.garajim.app&pcampaignid=web_share' },
+                { title: 'MyCity', category_tags: 'Araç & Diğer, Mobil', image_url: 'images/mycity_kart.jpeg', link: '/project?id=mycity', description: 'Şehir içi etkinlikler, duyurular ve belediye hizmetlerinin toplandığı akıllı şehir ekosistemi.', playstore_url: 'https://play.google.com/store/apps/details?id=com.mga.mycity&pcampaignid=web_share' },
+                { title: 'Orbitalis', category_tags: 'Araç & Diğer, Mobil', image_url: 'images/orbitalis_kart.jpeg', link: '/project?id=orbitalis', description: 'Uzay, gezegenler ve gök cisimleri hakkında büyüleyici simülasyon ve astronomi kütüphanesi.', playstore_url: 'https://play.google.com/store/apps/details?id=com.orbitalis.app&pcampaignid=web_share' },
+                { title: 'ProEvent', category_tags: 'Ticari Çözüm, Mobil', image_url: 'images/proevent_kart.jpeg', link: '/project?id=proevent', description: 'Konferans, seminer ve organizasyonlar için biletleme, QR katılım ve program yönetimi.' },
+                { title: 'Projexia', category_tags: 'Ticari Çözüm, Mobil', image_url: 'images/projexia_kart.jpeg', link: '/project?id=projexia', description: 'Takım çalışması, görev takibi ve Kanban panolarıyla proje yönetimi.', playstore_url: 'https://play.google.com/store/apps/details?id=com.mgacreative.projexia&pcampaignid=web_share' },
+                { title: 'SubTrack', category_tags: 'Ticari Çözüm, Mobil', image_url: 'images/subtrack_kart.jpeg', link: '/project?id=subtrack', description: 'Dijital aboneliklerinizi, aylık ödemelerinizi ve bütçenizi tek ekrandan kontrol edin.' },
+                { title: 'Lemora', category_tags: 'Ticari Çözüm, Mobil', image_url: 'images/lemoraxl-kart.jpeg', link: '/project?id=lemora', description: 'Saha satış temsilcileri ve sipariş yönetimi için pratik mobil B2B uygulaması.' },
+                { title: 'MindWeave', category_tags: 'Kişisel Asistan, Mobil', image_url: 'images/mindwear_kart.jpeg', link: '/project?id=mindweave', description: 'Düşünce ve fikirlerinizi görsel zihin haritalarına dönüştüren not alma çözümü.' },
+                { title: 'OneTake', category_tags: 'Araç & Diğer, Mobil', image_url: 'images/onetake_kart.jpeg', link: '/project?id=onetake', description: 'Hızlı, filtresiz ve anlık video kayıt aracı.' },
+                { title: 'QuickBite', category_tags: 'Ticari Çözüm, Mobil', image_url: 'images/quickbite_kart.jpeg', link: '/project?id=quickbite', description: 'Hızlı yemek siparişi, masa içi QR menü ve restoran rezervasyon platformu.' },
+                { title: 'VoxNote', category_tags: 'Kişisel Asistan, Mobil', image_url: 'images/voxnote_kart.jpeg', link: '/project?id=voxnote', description: 'Ses kayıtlarınızı anında yazılı metne dönüştüren akıllı sesli not uygulaması.' },
+                { title: 'Wedoria', category_tags: 'Kişisel Asistan, Mobil', image_url: 'images/wedoria_kart.jpeg', link: '/project?id=wedoria', description: 'Düğün ve davet planlama, LCV takibi ve dijital davetiye platformu.' },
+                { title: 'Walletra', category_tags: 'Kişisel Asistan, Mobil', image_url: 'images/walletra_kart.jpeg', link: '/project?id=walletra', description: 'Kişisel bütçe yönetimi, harcama analizleri ve tasarruf hedefleri belirleme.' },
+                { title: 'Bizora', category_tags: 'Ticari Çözüm, Mobil', image_url: 'images/bizora_kart.png', link: '/project?id=bizora', description: 'Cari hesap yönetimi, fatura kesme, stok takibi ve gelişmiş finansal raporlamalar.', playstore_url: 'https://play.google.com/store/apps/details?id=com.mgacreative.invixa' },
+                { title: 'Hotel OS', category_tags: 'Ticari Çözüm, Mobil', image_url: 'images/hotelos_kart.jpeg', link: '/project?id=hotelos', description: 'Otel ve konaklama tesisleri için akıllı otomasyon, dijital resepsiyon ve misafir yönetimi.' }
+            ];
+
+            const combinedMap = new Map();
+
+            // 1. Seed defaults first
+            defaultSeed.forEach(item => {
+                const key = (item.title || '').toLowerCase().trim();
+                if (key) combinedMap.set(key, item);
+            });
+
+            // 2. Saved local items
+            (localItems || []).forEach(item => {
+                const key = (item.title || '').toLowerCase().trim();
+                if (key) combinedMap.set(key, item);
+            });
+
+            // 3. Supabase DB items (highest priority)
+            (dbItems || []).forEach(item => {
+                const key = (item.title || '').toLowerCase().trim();
+                if (key) combinedMap.set(key, item);
+            });
+
+            const allItems = Array.from(combinedMap.values());
+            allPortfolioProjects = allItems.map(parseItemMeta);
+
+            updateCategoryCounts();
+            applyFiltersAndRender();
+        } catch (e) {
+            console.warn('Portfolio load error:', e);
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initPortfolio);
+    } else {
+        initPortfolio();
+    }
     </script>
 </body></html>
