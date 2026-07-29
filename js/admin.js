@@ -848,10 +848,15 @@ if (addPortfolioForm) {
         const youtubeVal = pYoutubeInput ? pYoutubeInput.value.trim() : '';
         const fullDesc = formatDescriptionWithMeta(rawDesc, playstoreUrl, youtubeVal);
 
+        const catSelect = document.getElementById('p_category');
+        const mainCat = catSelect ? catSelect.value : 'Ticari Çözüm';
+        const subTags = document.getElementById('p_tags').value.trim();
+        const combinedTags = subTags ? `${mainCat}, ${subTags}` : mainCat;
+
         const item = {
             title: document.getElementById('p_title').value.trim(),
             description: fullDesc,
-            category_tags: document.getElementById('p_tags').value.trim(),
+            category_tags: combinedTags,
             image_url: imageUrl,
             link: document.getElementById('p_link').value.trim()
         };
@@ -889,7 +894,22 @@ function openEditModal(id) {
     editIdInput.value = proj.id || proj.title;
     editTitleInput.value = proj.title || '';
     editDescInput.value = proj.cleanDescription || proj.description || '';
-    editTagsInput.value = proj.category_tags || '';
+    
+    // Set category select & clean sub-tags
+    const editCatSelect = document.getElementById('edit_p_category');
+    if (editCatSelect) {
+        const tagsLower = (proj.category_tags || '').toLowerCase();
+        if (tagsLower.includes('kişisel') || tagsLower.includes('kisisel') || tagsLower.includes('asistan')) {
+            editCatSelect.value = 'Kişisel Asistan';
+        } else if (tagsLower.includes('araç') || tagsLower.includes('arac') || tagsLower.includes('diğer') || tagsLower.includes('diger')) {
+            editCatSelect.value = 'Araç & Diğer';
+        } else {
+            editCatSelect.value = 'Ticari Çözüm';
+        }
+    }
+
+    const rawTags = proj.category_tags || '';
+    editTagsInput.value = rawTags.replace(/^(Ticari Çözüm|Kişisel Asistan|Araç & Diğer)[,\s]*/gi, '').trim();
     editImageInput.value = proj.image_url || '';
     editPreview.src = proj.image_url || 'https://placehold.co/100x100?text=Proje';
     editFileInput.value = '';
@@ -930,10 +950,16 @@ if (editPortfolioForm) {
         const youtubeVal = editYoutubeInput ? editYoutubeInput.value.trim() : '';
         const fullDesc = formatDescriptionWithMeta(rawDesc, playstoreUrl, youtubeVal);
 
+        const editCatSelect = document.getElementById('edit_p_category');
+        const mainCat = editCatSelect ? editCatSelect.value : 'Ticari Çözüm';
+        const subTags = editTagsInput.value.trim();
+        const cleanSubTags = subTags.replace(/^(Ticari Çözüm|Kişisel Asistan|Araç & Diğer)[,\s]*/gi, '').trim();
+        const combinedTags = cleanSubTags ? `${mainCat}, ${cleanSubTags}` : mainCat;
+
         const updates = {
             title: editTitleInput.value.trim(),
             description: fullDesc,
-            category_tags: editTagsInput.value.trim(),
+            category_tags: combinedTags,
             image_url: imageUrl,
             link: document.getElementById('edit_p_link').value.trim()
         };

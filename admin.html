@@ -177,10 +177,18 @@
                                 <label class="block text-sm font-medium text-[#c6c6cd] mb-1">Açıklama</label>
                                 <textarea id="p_desc" rows="3" required class="w-full bg-[#101415] border border-[#45464d] rounded-xl px-3.5 py-2 text-white outline-none focus:border-[#4cd7f6] transition-all text-sm" placeholder="Proje hakkında kısa özet..."></textarea>
                             </div>
-                            <div>
-                                <label class="block text-sm font-medium text-[#c6c6cd] mb-1">Kategoriler (Virgülle ayırın)</label>
-                                <input type="text" id="p_tags" required class="w-full bg-[#101415] border border-[#45464d] rounded-xl px-3.5 py-2 text-white outline-none focus:border-[#4cd7f6] transition-all text-sm" placeholder="Örn: Android, Tarım, Kotlin">
-                            </div>
+                             <div>
+                                 <label class="block text-sm font-medium text-[#c6c6cd] mb-1">Ana Kategori</label>
+                                 <select id="p_category" class="w-full bg-[#101415] border border-[#45464d] rounded-xl px-3.5 py-2 text-white outline-none focus:border-[#4cd7f6] transition-all text-sm mb-3">
+                                     <option value="Ticari Çözüm">Ticari Çözümler</option>
+                                     <option value="Kişisel Asistan">Kişisel Asistanlar</option>
+                                     <option value="Araç & Diğer">Araçlar & Diğer</option>
+                                 </select>
+                             </div>
+                             <div>
+                                 <label class="block text-sm font-medium text-[#c6c6cd] mb-1">Alt Etiketler (Virgülle ayırın)</label>
+                                 <input type="text" id="p_tags" class="w-full bg-[#101415] border border-[#45464d] rounded-xl px-3.5 py-2 text-white outline-none focus:border-[#4cd7f6] transition-all text-sm" placeholder="Örn: Android, Kotlin, B2B">
+                             </div>
                             
                             <!-- Dosyadan Resim Yükleme Ve URL Seçeneği -->
                             <div class="space-y-2">
@@ -273,8 +281,16 @@
                     <textarea id="edit_p_desc" rows="3" required class="w-full bg-[#101415] border border-[#45464d] rounded-xl px-3.5 py-2 text-white outline-none focus:border-[#4cd7f6] text-sm"></textarea>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-[#c6c6cd] mb-1">Kategoriler (Virgülle ayırın)</label>
-                    <input type="text" id="edit_p_tags" required class="w-full bg-[#101415] border border-[#45464d] rounded-xl px-3.5 py-2 text-white outline-none focus:border-[#4cd7f6] text-sm">
+                    <label class="block text-sm font-medium text-[#c6c6cd] mb-1">Ana Kategori</label>
+                    <select id="edit_p_category" class="w-full bg-[#101415] border border-[#45464d] rounded-xl px-3.5 py-2 text-white outline-none focus:border-[#4cd7f6] text-sm mb-3">
+                        <option value="Ticari Çözüm">Ticari Çözümler</option>
+                        <option value="Kişisel Asistan">Kişisel Asistanlar</option>
+                        <option value="Araç & Diğer">Araçlar & Diğer</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-[#c6c6cd] mb-1">Alt Etiketler (Virgülle ayırın)</label>
+                    <input type="text" id="edit_p_tags" class="w-full bg-[#101415] border border-[#45464d] rounded-xl px-3.5 py-2 text-white outline-none focus:border-[#4cd7f6] text-sm">
                 </div>
                 
                 <div class="space-y-2">
