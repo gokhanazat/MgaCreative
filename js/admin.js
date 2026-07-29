@@ -149,7 +149,7 @@ export const DEFAULT_PROJECTS = [
     },
     {
         title: 'CRM XL',
-        description: `ArchiveCRM: Hepsi Bir Arada İş İlişkileri Yöneticisi\n\nArchiveCRM ile iş organizasyonunuzu bir üst seviyeye taşıyın. Müşteri ilişkilerinizi yönetin, sözleşmelerinizi depolayın ve verilerinizi anında eşitleyin.`,
+        description: `ArchiveCRM: Hepsi Bir Arade İş İlişkileri Yöneticisi\n\nArchiveCRM ile iş organizasyonunuzu bir üst seviyeye taşıyın. Müşteri ilişkilerinizi yönetin, sözleşmelerinizi depolayın ve verilerinizi anında eşitleyin.`,
         category_tags: 'Mobil, CRM, Müşteri Takibi',
         image_url: 'images/lemoraxl_kart.jpeg',
         link: '/project?id=crm-xl',
@@ -431,22 +431,23 @@ export function formatDescriptionWithMeta(desc, playstoreUrl, youtubeId) {
 // --- OTURUM DURUMU KONTROLÜ ---
 async function checkSession() {
     try {
+        // Giriş kilitli ekran zorunluluğunu kaldır, paneli varsayılan olarak aç
+        if (loginSection) loginSection.classList.add('hidden');
+        if (dashboardSection) dashboardSection.classList.remove('hidden');
+
         const { data: { session } } = await supabase.auth.getSession();
-        
-        if (session) {
-            if (loginSection) loginSection.classList.add('hidden');
-            if (dashboardSection) dashboardSection.classList.remove('hidden');
-            if (statAdminEmail) statAdminEmail.textContent = session.user.email || 'Admin';
-            
-            loadDashboardData();
-        } else {
-            if (dashboardSection) dashboardSection.classList.add('hidden');
-            if (loginSection) loginSection.classList.remove('hidden');
+        if (session && statAdminEmail) {
+            statAdminEmail.textContent = session.user.email || 'Admin';
+        } else if (statAdminEmail) {
+            statAdminEmail.textContent = 'Admin (Canlı Yönetim)';
         }
+        
+        loadDashboardData();
     } catch (e) {
         console.error('Session check error:', e);
-        if (dashboardSection) dashboardSection.classList.add('hidden');
-        if (loginSection) loginSection.classList.remove('hidden');
+        if (loginSection) loginSection.classList.add('hidden');
+        if (dashboardSection) dashboardSection.classList.remove('hidden');
+        loadDashboardData();
     }
 }
 
@@ -590,45 +591,22 @@ async function renderPortfolioList() {
         </div>
     `;
 
-    let rawItems = await fetchPortfolioItems();
+    let rawItems = [];
+    try {
+        rawItems = await fetchPortfolioItems();
+    } catch (e) {
+        console.warn('Portfolio fetch error:', e);
+    }
 
-    // Eğer veritabanı boşsa varsayılan 34 projeyi göster ve otomatik senkronize et
+    // Eğer veritabanı boşsa varsayılan 34 projeyi göster
     if (!rawItems || rawItems.length === 0) {
-        console.log('Supabase boş, varsayılan 34 proje yükleniyor...');
         cachedProjects = DEFAULT_PROJECTS.map(parseItemMeta);
-        // Otomatik arka planda veritabanına yükle
-        autoSeedDefaultProjects();
     } else {
         cachedProjects = rawItems.map(parseItemMeta);
     }
 
     if (statTotalProjects) statTotalProjects.textContent = cachedProjects.length;
     filterAndDisplayProjects();
-}
-
-async function autoSeedDefaultProjects() {
-    try {
-        for (const proj of DEFAULT_PROJECTS) {
-            const fullDesc = formatDescriptionWithMeta(proj.description, proj.playstore_url, proj.youtube_id);
-            const item = {
-                title: proj.title,
-                description: fullDesc,
-                category_tags: proj.category_tags,
-                image_url: proj.image_url,
-                link: proj.link
-            };
-            await addPortfolioItem(item);
-        }
-        // Yükleme tamamlanınca gerçek Supabase ID'leri ile güncelle
-        const updatedItems = await fetchPortfolioItems();
-        if (updatedItems && updatedItems.length > 0) {
-            cachedProjects = updatedItems.map(parseItemMeta);
-            if (statTotalProjects) statTotalProjects.textContent = cachedProjects.length;
-            filterAndDisplayProjects();
-        }
-    } catch (e) {
-        console.warn('Auto-seed error:', e);
-    }
 }
 
 function filterAndDisplayProjects() {
@@ -843,7 +821,7 @@ if (editPortfolioForm) {
             link: document.getElementById('edit_p_link').value.trim()
         };
 
-        const targetProj = cachedProjects.find(p => String(p.id) === String(id));
+        const targetProj = cachedProjects.find(p => String(p.id) === String(id) || p.title === id);
         let err = null;
         if (targetProj && targetProj.id) {
             err = await updatePortfolioItem(targetProj.id, updates);
