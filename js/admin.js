@@ -87,16 +87,6 @@ export const DEFAULT_PROJECTS = [
         youtube_id: '2mxEw26eeb0'
     },
     {
-        id: 'def-3',
-        title: 'Başvuru Asistanı',
-        description: `Başvuru Asistanı: Başvuru Süreçlerinizin Akıllı Yönetim Merkezi!\n\nİş başvuruları, okul kayıtları, vize işlemleri veya resmi müracaatlar… Günlük hayatta karşılaştığınız tüm başvuru süreçlerini takip etmek artık çok daha kolay.`,
-        category_tags: 'Mobil, Asistan, Süreç Takibi',
-        image_url: 'images/basvuru_kart.jpeg',
-        link: '/project?id=basvuru-asistani',
-        playstore_url: 'https://play.google.com/store/apps/details?id=com.basvuru.asistani&pcampaignid=web_share',
-        youtube_id: 'vgWyjpMm358'
-    },
-    {
         id: 'def-4',
         title: 'ChronoSnap',
         description: `Galerinizdeki binlerce fotoğraf arasında kaybolmaktan yoruldunuz mu? ChronoSnap ile hayatınızı gün gün organize edin ve anılarınızı bir takvim düzeni içinde saklayın.\n\nAkıllı takvim arayüzü, kategori yönetimi ve güvenli yerel depolama.`,
