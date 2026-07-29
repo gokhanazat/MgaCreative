@@ -27,6 +27,7 @@ async function updatePageContent() {
             portfolioGrid.innerHTML = '<p class="text-on-surface-variant font-body-md col-span-full">Henüz proje eklenmemiş.</p>';
         } else {
             portfolioGrid.innerHTML = items.map(item => {
+                const cleanDesc = (item.description || '').replace(/<!--META:[\s\S]*?-->/g, '').trim();
                 // Etiketleri (Tags) virgülle ayırıp span'lara dönüştür
                 const tagsHtml = item.category_tags 
                     ? item.category_tags.split(',').map(tag => `<span class="bg-tertiary/10 text-tertiary px-3 py-1 rounded-full font-label-sm text-label-sm">${tag.trim()}</span>`).join('')
@@ -42,7 +43,7 @@ async function updatePageContent() {
                             ${tagsHtml}
                         </div>
                         <h3 class="font-headline-lg text-[24px] leading-tight">${item.title}</h3>
-                        <p class="font-body-md text-body-md text-on-surface-variant flex-grow">${item.description}</p>
+                        <p class="font-body-md text-body-md text-on-surface-variant flex-grow line-clamp-3">${cleanDesc}</p>
                         <a class="inline-flex items-center text-primary-fixed-dim font-label-md text-label-md pt-2 mt-auto" href="${item.link}">
                             Projeyi İncele <span class="material-symbols-outlined ml-2 text-[18px]">open_in_new</span>
                         </a>

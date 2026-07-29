@@ -205,9 +205,17 @@
                                 </div>
                             </div>
 
-                            <div>
+                             <div>
                                 <label class="block text-sm font-medium text-[#c6c6cd] mb-1">Proje Detay Linki</label>
                                 <input type="text" id="p_link" required class="w-full bg-[#101415] border border-[#45464d] rounded-xl px-3.5 py-2 text-white outline-none focus:border-[#4cd7f6] transition-all text-sm" placeholder="Örn: /project?id=agro-plan">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#c6c6cd] mb-1">Google Play Store İndirme Linki</label>
+                                <input type="url" id="p_playstore" class="w-full bg-[#101415] border border-[#45464d] rounded-xl px-3.5 py-2 text-white outline-none focus:border-[#4cd7f6] transition-all text-sm" placeholder="https://play.google.com/store/apps/details?id=...">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#c6c6cd] mb-1">YouTube Video Linki veya Video ID</label>
+                                <input type="text" id="p_youtube" class="w-full bg-[#101415] border border-[#45464d] rounded-xl px-3.5 py-2 text-white outline-none focus:border-[#4cd7f6] transition-all text-sm" placeholder="Örn: F4ki_kJsFtQ veya https://www.youtube.com/watch?v=...">
                             </div>
                             <button type="submit" id="addPortfolioBtn" class="w-full py-3 bg-[#4cd7f6] text-[#003640] font-bold rounded-xl hover:brightness-110 active:scale-95 transition-all shadow-md flex items-center justify-center gap-2">
                                 <span class="material-symbols-outlined text-xl">add</span>
@@ -218,9 +226,15 @@
 
                     <!-- Ekli Uygulamalar Listesi -->
                     <div class="lg:col-span-7 flex flex-col h-full">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-lg font-semibold text-white">Mevcut Projeler</h3>
-                            <span id="projectCountBadge" class="text-xs text-[#c6c6cd] bg-[#1d2022] px-2.5 py-1 rounded-full border border-[#45464d]">0 Kayıt</span>
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                            <div class="flex items-center gap-2">
+                                <h3 class="text-lg font-semibold text-white">Mevcut Projeler</h3>
+                                <span id="projectCountBadge" class="text-xs text-[#c6c6cd] bg-[#1d2022] px-2.5 py-1 rounded-full border border-[#45464d]">0 Kayıt</span>
+                            </div>
+                            <button id="syncDefaultsBtn" type="button" class="px-3 py-1.5 bg-[#4cd7f6]/10 text-[#4cd7f6] hover:bg-[#4cd7f6]/20 border border-[#4cd7f6]/30 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-sm">cloud_sync</span>
+                                <span>Tüm Uygulamaları Veritabanına Yükle</span>
+                            </button>
                         </div>
                         <div id="portfolioList" class="space-y-3 overflow-y-auto max-h-[620px] pr-2 custom-scrollbar flex-1">
                             <div class="text-center py-12 text-[#c6c6cd]">
@@ -279,6 +293,16 @@
                 <div>
                     <label class="block text-sm font-medium text-[#c6c6cd] mb-1">Proje Detay Linki</label>
                     <input type="text" id="edit_p_link" required class="w-full bg-[#101415] border border-[#45464d] rounded-xl px-3.5 py-2 text-white outline-none focus:border-[#4cd7f6] text-sm">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-[#c6c6cd] mb-1">Google Play Store İndirme Linki</label>
+                    <input type="url" id="edit_p_playstore" class="w-full bg-[#101415] border border-[#45464d] rounded-xl px-3.5 py-2 text-white outline-none focus:border-[#4cd7f6] text-sm" placeholder="https://play.google.com/store/apps/details?id=...">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-[#c6c6cd] mb-1">YouTube Video Linki veya Video ID</label>
+                    <input type="text" id="edit_p_youtube" class="w-full bg-[#101415] border border-[#45464d] rounded-xl px-3.5 py-2 text-white outline-none focus:border-[#4cd7f6] text-sm" placeholder="Örn: F4ki_kJsFtQ veya https://www.youtube.com/watch?v=...">
                 </div>
 
                 <div class="flex items-center gap-3 pt-4 border-t border-[#45464d]">

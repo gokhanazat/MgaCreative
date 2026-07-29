@@ -1005,4 +1005,91 @@
             });
         };
     </script>
+
+    <script type="module">
+        import { fetchPortfolioItems } from './js/supabase-client.js';
+
+        function parseItemMeta(item) {
+            let cleanDesc = item.description || '';
+            let youtubeId = item.youtube_id || item.youtubeId || '';
+            let playstoreUrl = item.playstore_url || item.playstoreUrl || '';
+            
+            const metaMatch = cleanDesc.match(/<!--META:([\s\S]*?)-->/);
+            if (metaMatch) {
+                try {
+                    const metaObj = JSON.parse(metaMatch[1]);
+                    if (metaObj.youtube_id) youtubeId = metaObj.youtube_id;
+                    if (metaObj.playstore_url) playstoreUrl = metaObj.playstore_url;
+                } catch (e) {}
+                cleanDesc = cleanDesc.replace(/<!--META:[\s\S]*?-->/g, '').trim();
+            }
+            
+            return {
+                ...item,
+                cleanDescription: cleanDesc,
+                youtubeId,
+                playstoreUrl
+            };
+        }
+
+        async function loadDynamicPortfolio() {
+            try {
+                const dbItems = await fetchPortfolioItems();
+                if (!dbItems || dbItems.length === 0) return;
+
+                const grid = document.getElementById('portfolio-grid');
+                if (!grid) return;
+
+                const parsedItems = dbItems.map(parseItemMeta);
+                grid.innerHTML = parsedItems.map(item => {
+                    const tags = (item.category_tags || '').toLowerCase();
+                    let categoryAttr = 'mobile';
+                    if (tags.includes('web')) categoryAttr = 'web';
+                    else if (tags.includes('oyun') || tags.includes('game')) categoryAttr = 'game';
+
+                    const mainCategoryTag = (item.category_tags || '').split(',')[0].trim() || 'Mobil';
+
+                    return `
+                    <article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="${categoryAttr}">
+                        <div class="relative h-64 overflow-hidden group">
+                            <img alt="${item.title} Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="${item.image_url || 'https://placehold.co/600x400?text=Proje'}"/>
+                            <div class="absolute top-4 left-4">
+                                <span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">${mainCategoryTag}</span>
+                            </div>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">${item.title}</h3>
+                            <p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
+                                ${item.cleanDescription || item.description || ''}
+                            </p>
+                            <div class="mt-auto flex gap-3">
+                                <button onclick="window.location.href='${item.link}'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
+                                    Detayları İncele
+                                </button>
+                                <button onclick="window.location.href='${item.link}'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
+                                    <span class="material-symbols-outlined">play_circle</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                    `;
+                }).join('');
+
+                const cards = document.querySelectorAll('.app-card');
+                cards.forEach((card, index) => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        card.style.transition = 'all 0.6s cubic-bezier(0.22, 1, 0.36, 1)';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, index * 50);
+                });
+            } catch (e) {
+                console.warn('Could not load dynamic portfolio, using static fallback:', e);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadDynamicPortfolio);
+    </script>
 </body></html>
