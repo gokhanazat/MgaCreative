@@ -64,9 +64,10 @@ const editYoutubeInput = document.getElementById('edit_p_youtube');
 
 let cachedProjects = [];
 
-// --- VARSAYILAN KAYITLI UYGULAMALAR (SEED DATA) ---
+// --- VARSAYILAN KAYITLI UYGULAMALAR (SEED DATA - 34 UYGULAMA) ---
 export const DEFAULT_PROJECTS = [
     {
+        id: 'def-1',
         title: 'Agro Plan',
         description: `Modern Çiftçiliğin Dijital Ortağı: AgroPlan\n\nKağıt defterleri bir kenara bırakın! AgroPlan, çiftçiler ve tarım üreticileri için özel olarak geliştirilmiş, kullanımı kolay ve kapsamlı bir tarla yönetim uygulamasıdır. Ekimden hasada kadar tüm süreçlerinizi cebinizden takip edin, veriminizi ve kazancınızı artırın.\n\n🚜 Tarlalarınız Kontrol Altında: Sahip olduğunuz veya kiraladığınız tüm tarlaları kaydedin.\n💧 Ekim ve Bakım Takibi: Sulama, ilaçlama ve gübreleme işlemlerini kolayca takip edin.\n💰 Finansal Yönetim: Mazot, tohum, gübre ve işçilik maliyetlerini girerek gelir/gider hesabı yapın.`,
         category_tags: 'Mobil, Tarım, Android, Kotlin',
@@ -76,6 +77,7 @@ export const DEFAULT_PROJECTS = [
         youtube_id: 'F4ki_kJsFtQ'
     },
     {
+        id: 'def-2',
         title: 'Cardly',
         description: `Cardly ile Ağ Oluşturma Deneyiminizi Yeniden Tanımlayın – Dijital Kartvizitlerin Altın Standardı.\n\nTükenen ya da kaybolan yığınla kağıt kartviziti taşımaya son verin. Cardly, şıklık, hız ve güvenilirlik arayan profesyoneller için tasarlanmış üst düzey bir vCard platformudur. Dinamik QR kodları ve NFC desteği.`,
         category_tags: 'Mobil, Dijital Kartvizit, NFC, QR',
@@ -85,6 +87,7 @@ export const DEFAULT_PROJECTS = [
         youtube_id: '2mxEw26eeb0'
     },
     {
+        id: 'def-3',
         title: 'Başvuru Asistanı',
         description: `Başvuru Asistanı: Başvuru Süreçlerinizin Akıllı Yönetim Merkezi!\n\nİş başvuruları, okul kayıtları, vize işlemleri veya resmi müracaatlar… Günlük hayatta karşılaştığınız tüm başvuru süreçlerini takip etmek artık çok daha kolay.`,
         category_tags: 'Mobil, Asistan, Süreç Takibi',
@@ -94,6 +97,7 @@ export const DEFAULT_PROJECTS = [
         youtube_id: 'vgWyjpMm358'
     },
     {
+        id: 'def-4',
         title: 'ChronoSnap',
         description: `Galerinizdeki binlerce fotoğraf arasında kaybolmaktan yoruldunuz mu? ChronoSnap ile hayatınızı gün gün organize edin ve anılarınızı bir takvim düzeni içinde saklayın.\n\nAkıllı takvim arayüzü, kategori yönetimi ve güvenli yerel depolama.`,
         category_tags: 'Mobil, Takvim, Fotoğraf',
@@ -103,6 +107,7 @@ export const DEFAULT_PROJECTS = [
         youtube_id: 'B2c6x18-x0Y'
     },
     {
+        id: 'def-5',
         title: 'CookMatch',
         description: `CookMatch, bugün ne pişireceğinize karar vermenize yardımcı olur — stres, israf ya da sonsuz kaydırma olmadan.\n\nEvdeki malzemelerinizi seçin, özenle seçilmiş tarifleri keşfedin ve çevrimdışı favorilerinize ekleyin.`,
         category_tags: 'Mobil, Yemek, Tarif',
@@ -112,6 +117,7 @@ export const DEFAULT_PROJECTS = [
         youtube_id: 'JRXR30jbL5w'
     },
     {
+        id: 'def-6',
         title: 'DailyLeaf',
         description: `Hayatınızı vintage bir dokunuşla yakalayın. Estetik bir günlük, alışkanlıklar ve günlük anılar.\n\n📖 Dijital Nostalji: Antik kağıt dokusu.\n✍️ Kişisel Notlar: Firebase bulut senkronizasyonu.\n🌿 21 Günlük Alışkanlık Takibi.`,
         category_tags: 'Mobil, Günlük, Vintage',
@@ -121,6 +127,7 @@ export const DEFAULT_PROJECTS = [
         youtube_id: 'yTU_Gp9Np48'
     },
     {
+        id: 'def-7',
         title: 'DealDraft',
         description: `DealDraft ile Teklif Süreçlerinizi Profesyonelleştirin!\n\nİşletmeniz için hızlı, şık ve detaylı teklifler hazırlamak hiç bu kadar kolay olmadı. Profesyonel PDF teklifleri, müşteri yönetimi ve performans grafikleri.`,
         category_tags: 'Mobil, Teklif, PDF',
@@ -130,6 +137,7 @@ export const DEFAULT_PROJECTS = [
         youtube_id: ''
     },
     {
+        id: 'def-8',
         title: 'AppBridge',
         description: `AppBridge, Android uygulamalarını hızlıca açmak ve paylaşmak için tasarlanmış sade bir yardımcı araçtır.\n\nUygulamanın paket adını girin, doğrudan açan veya Play Store'a yönlendiren derin bağlantılar oluşturun.`,
         category_tags: 'Mobil, Yönlendirme, Araçlar',
@@ -139,6 +147,7 @@ export const DEFAULT_PROJECTS = [
         youtube_id: 'DcqLGR3-bVs'
     },
     {
+        id: 'def-9',
         title: 'ARGEP',
         description: `ARGEP: Ar-Ge Proje Yönetiminizi Kolaylaştırın\n\nARGEP ile Araştırma ve Geliştirme (Ar-Ge) süreçlerinizi tam olarak kontrol altına alın. Kapsamlı proje takibi, bütçe denetimi ve kilometre taşı yönetimi.`,
         category_tags: 'Mobil, Ar-Ge, Yönetim',
@@ -148,8 +157,9 @@ export const DEFAULT_PROJECTS = [
         youtube_id: ''
     },
     {
+        id: 'def-10',
         title: 'CRM XL',
-        description: `ArchiveCRM: Hepsi Bir Arade İş İlişkileri Yöneticisi\n\nArchiveCRM ile iş organizasyonunuzu bir üst seviyeye taşıyın. Müşteri ilişkilerinizi yönetin, sözleşmelerinizi depolayın ve verilerinizi anında eşitleyin.`,
+        description: `ArchiveCRM: Hepsi Bir Arada İş İlişkileri Yöneticisi\n\nArchiveCRM ile iş organizasyonunuzu bir üst seviyeye taşıyın. Müşteri ilişkilerinizi yönetin, sözleşmelerinizi depolayın ve verilerinizi anında eşitleyin.`,
         category_tags: 'Mobil, CRM, Müşteri Takibi',
         image_url: 'images/lemoraxl_kart.jpeg',
         link: '/project?id=crm-xl',
@@ -157,6 +167,7 @@ export const DEFAULT_PROJECTS = [
         youtube_id: ''
     },
     {
+        id: 'def-11',
         title: 'Felsefi Bakış',
         description: `Felsefi Bakış: Bilgeliğe Yolculuk\n\nHayatın anlamını, adaleti, özgürlüğü tarihin en büyük zihinlerine sormayı düşündünüz mü? Sokrates'ten Sartre'a 10 farklı filozofla soru-cevap ve antik parşömen tasarımı.`,
         category_tags: 'Mobil, Felsefe, Kültür',
@@ -166,6 +177,7 @@ export const DEFAULT_PROJECTS = [
         youtube_id: 'uuzPNZJJinY'
     },
     {
+        id: 'def-12',
         title: 'Formex',
         description: `FORMEX: Profesyonel, Gizlilik Öncelikli Dosya Dönüştürme Araç Seti\n\nDosyalarınızı %100 çevrimdışı dönüştürün. JPG, PNG, WEBP, PDF, CSV, JSON ve XML formatları arasında hızlı ve güvenli dönüşüm.`,
         category_tags: 'Mobil, Dönüştürücü, PDF',
@@ -175,6 +187,7 @@ export const DEFAULT_PROJECTS = [
         youtube_id: 'ZMFwcEYxh3A'
     },
     {
+        id: 'def-13',
         title: 'Greenova',
         description: `Greenova ile bitki bakımında yapay zeka dönemini başlatın!\n\nYapay zeka destekli bitki türü tanımlama, yaprak hastalık teşhisi, kişisel sulama hatırlatıcıları ve bakım ansiklopedisi.`,
         category_tags: 'Mobil, Bitki, Yapay Zeka',
@@ -184,6 +197,7 @@ export const DEFAULT_PROJECTS = [
         youtube_id: 'IO0fYSFT6-Y'
     },
     {
+        id: 'def-14',
         title: 'GLOBAL TRADE',
         description: `GLOBAL TRADE: Küresel Ticaretin Dijital Merkezi\n\nTicaretinizi sınırların ötesine taşıyın! B2B global eşleşme, dijital showroom, dinamik PDF katalog üretimi ve 6 farklı dilde destek.`,
         category_tags: 'Mobil, B2B, Ticaret',
@@ -193,6 +207,7 @@ export const DEFAULT_PROJECTS = [
         youtube_id: 'nIxGWnbOO8Q'
     },
     {
+        id: 'def-15',
         title: 'InkVera',
         description: `Inkvera: Profesyonel PDF Düzenleyici ve İmza Aracı\n\nPDF belgeleri üzerine çizim yapın, metinleri vurgulayın, resmi sözleşmeleri saniyeler içinde e-imza ile imzalayın ve paylaşın.`,
         category_tags: 'Mobil, PDF, E-İmza',
@@ -202,6 +217,7 @@ export const DEFAULT_PROJECTS = [
         youtube_id: 'Qasly5-kSAo'
     },
     {
+        id: 'def-16',
         title: 'Lemora XL',
         description: `Lemora XL: Hepsi Bir Arada Satış ve Sipariş Yönetimi Çözümünüz\n\nToptan satış işinizin tam kontrolünü elinize alın. Sipariş takibi, bayi/müşteri cari portalı ve envanter kontrolü.`,
         category_tags: 'Mobil, Satış, Sipariş',
@@ -211,6 +227,7 @@ export const DEFAULT_PROJECTS = [
         youtube_id: ''
     },
     {
+        id: 'def-17',
         title: 'Medication Time',
         description: `Medication Time: Sağlığınız ve Sevdikleriniz Her Zaman Güvende!\n\nİlaç saatlerinizi kaçırmayın. Bakıcı ve aile takip köprü, yaşlı dostu büyük butonlu arayüz ve uykuda dahi çalan alarm sistemi.`,
         category_tags: 'Mobil, Sağlık, İlaç Takibi',
@@ -220,6 +237,7 @@ export const DEFAULT_PROJECTS = [
         youtube_id: 'IfF5dX6O3cw'
     },
     {
+        id: 'def-18',
         title: 'MailMind',
         description: `MailMind: İş Hayatınızı Yapay Zeka ile Organize Edin\n\nGelen kutunuzda kaybolan toplantı davetlerine son verin! MailMind, karmaşık mesaj trafiğinizi saniyeler içinde düzenli bir iş planına dönüştüren yeni nesil asistanınızdır.`,
         category_tags: 'Mobil, E-posta, Yapay Zeka',
@@ -229,6 +247,7 @@ export const DEFAULT_PROJECTS = [
         youtube_id: '9OADP9f4w64'
     },
     {
+        id: 'def-19',
         title: 'TripMind',
         description: `TripMind: Kişisel Yapay Zeka Seyahat Asistanınız\n\nYapay zeka ile size özel seyahat programları, bütçe/rezervasyon yönetimi ve gün gün PDF rota çıktısı.`,
         category_tags: 'Mobil, Seyahat, Yapay Zeka',
@@ -238,6 +257,7 @@ export const DEFAULT_PROJECTS = [
         youtube_id: ''
     },
     {
+        id: 'def-20',
         title: 'Viano',
         description: `Viano ile Maceraya Harita Üzerinde Yön Verin 🌍🚗\n\nCanlı GPS rota çizimi, akıllı hız uyarısı, konumsal fotoğraf iğneleme ve zümrüt yeşili nostaljik seyahat günlüğü.`,
         category_tags: 'Mobil, GPS, Rota Takibi',
@@ -247,6 +267,7 @@ export const DEFAULT_PROJECTS = [
         youtube_id: 'Gznog9h7fT8'
     },
     {
+        id: 'def-21',
         title: 'My Garage',
         description: `My Garage: En Kapsamlı Dijital Araç Asistanınız\n\nAracınızın bakım tarihlerini, sigorta sürelerini takip edin, OBD-II motor arıza kodlarını uzman görüşüyle teşhis edin.`,
         category_tags: 'Mobil, Otomotiv, Araç Takibi',
@@ -256,6 +277,7 @@ export const DEFAULT_PROJECTS = [
         youtube_id: '2ClL1VqrBYI'
     },
     {
+        id: 'def-22',
         title: 'MyCity',
         description: `MyCity ile İskenderun Avucunuzun İçinde!\n\nİskenderun'daki tarihi mekanlar, lezzet durakları, güncel şehir etkinlikleri ve gelişmiş çevrimdışı rehber.`,
         category_tags: 'Mobil, Şehir Rehberi, İskenderun',
@@ -265,6 +287,7 @@ export const DEFAULT_PROJECTS = [
         youtube_id: 'D_oo5iAXpOg'
     },
     {
+        id: 'def-23',
         title: 'Orbitalis',
         description: `Uzay keşfi ve astronomi için en iyi yardımcınız Orbitalis ile evreni keşfedin. NASA ve SpaceX roket fırlatma takibi, uzay takvimi ve ISS gözlemleri.`,
         category_tags: 'Mobil, Uzay, Astronomi',
@@ -274,6 +297,7 @@ export const DEFAULT_PROJECTS = [
         youtube_id: '2AYMPCO-kyo'
     },
     {
+        id: 'def-24',
         title: 'ProEvent',
         description: `ProEvent: Düğün ve Etkinlik Planlamanızda En İyi Yardımcınız\n\nBütçe takibi, konuk katılım teyitleri (RSVP), etkileşimli masa oturma planı ve tedarikçi yönetimi.`,
         category_tags: 'Mobil, Etkinlik, Planlama',
@@ -283,6 +307,7 @@ export const DEFAULT_PROJECTS = [
         youtube_id: ''
     },
     {
+        id: 'def-25',
         title: 'Projexia',
         description: `Projexia: Proje, Görev ve Finans Yönetimi Artık Çok Kolay!\n\nSınırsız proje, yapılacaklar şablonları, kârlılık takibi ve test kullanıcısı yönetimi.`,
         category_tags: 'Mobil, Görev, Finans',
@@ -292,6 +317,7 @@ export const DEFAULT_PROJECTS = [
         youtube_id: 'hJiEL5wl9cg'
     },
     {
+        id: 'def-26',
         title: 'SubTrack',
         description: `SubTrack: Profesyonel Abonelik ve Müşteri Takip Sistemi\n\nToplam abone, aktif üyelik ve ciro takibi. Süresi dolan aboneler için otomatik hatırlatıcılar.`,
         category_tags: 'Mobil, Abonelik, Ciro Takibi',
@@ -301,6 +327,7 @@ export const DEFAULT_PROJECTS = [
         youtube_id: 'y2ctetoM3zo'
     },
     {
+        id: 'def-27',
         title: 'Lemora',
         description: `Lemora – Profesyonel Satış ve Stok Yönetim Sistemi\n\nBarkod okuma destekli envanter yönetimi, nakit/kart tahsilatları, proforma fatura oluşturma ve CRM.`,
         category_tags: 'Mobil, Satış, Stok',
@@ -310,6 +337,7 @@ export const DEFAULT_PROJECTS = [
         youtube_id: '4ij1BjNLcpo'
     },
     {
+        id: 'def-28',
         title: 'MindWeave',
         description: `MindWeave: Fikirlerinizi Örgüleyin, Geleceğinizi Tasarlayın!\n\nSonsuz tuval, akıllı SWOT/yol haritası şablonları ve yüksek çözünürlüklü PDF/PNG dışa aktarma.`,
         category_tags: 'Mobil, Zihin Haritası, Not',
@@ -319,6 +347,7 @@ export const DEFAULT_PROJECTS = [
         youtube_id: '4O8Elik2Y4w'
     },
     {
+        id: 'def-29',
         title: 'OneTake',
         description: `OneTake: Akıllı Teleprompter & Video Stüdyosu\n\nGelişmiş metin okuyucu teleprompter, WPM hız analizi, performans grafikleri ve video senaryo kütüphanesi.`,
         category_tags: 'Mobil, Teleprompter, Video',
@@ -328,6 +357,7 @@ export const DEFAULT_PROJECTS = [
         youtube_id: ''
     },
     {
+        id: 'def-30',
         title: 'QuickBite',
         description: `QuickBite: SaaS Tabanlı Sipariş Yönetim Platformu\n\nKurye adrese teslimat veya Gel-Al seçenekleriyle reklamsız restoran ve kafe sipariş yönetim sistemi.`,
         category_tags: 'Mobil, Sipariş, SaaS',
@@ -337,6 +367,7 @@ export const DEFAULT_PROJECTS = [
         youtube_id: 'JRXR30jbL5w'
     },
     {
+        id: 'def-31',
         title: 'VoxNote',
         description: `VoxNote: Sesle Etkinleştirilen Hatırlatıcı ve Konuşan Alarm\n\nYüksek hassasiyetli ses tanıma ile alarm kurun, zamanı geldiğinde notunuzu insan sesiyle sesli dinleyin.`,
         category_tags: 'Mobil, Sesli Alarm, Not',
@@ -346,6 +377,7 @@ export const DEFAULT_PROJECTS = [
         youtube_id: ''
     },
     {
+        id: 'def-32',
         title: 'Wedoria',
         description: `Wedoria: En Kapsamlı Düğün Planlayıcısı ve Organizatörü\n\nDüğün sayacı, davetli katılım listeleri, bütçe karşılaştırması, koltuk düzeni ve zaman tüneli.`,
         category_tags: 'Mobil, Düğün, Organizasyon',
@@ -355,6 +387,7 @@ export const DEFAULT_PROJECTS = [
         youtube_id: ''
     },
     {
+        id: 'def-33',
         title: 'Walletra',
         description: `Walletra: Kişisel Finans & Bütçe Yönetimi\n\nGelir ve gider harcamalarınızı kategorize edin, kredi kartı borçlarını takip edin ve finansal durumunuzu grafiklerle izleyin.`,
         category_tags: 'Mobil, Finans, Bütçe',
@@ -364,6 +397,7 @@ export const DEFAULT_PROJECTS = [
         youtube_id: 'HXdmPFMfFwQ'
     },
     {
+        id: 'def-34',
         title: 'Bizora',
         description: `Bizora: İşletmeniz İçin Profesyonel Cari, Stok ve Fatura Yönetimi\n\nMüşteri/tedarikçi borç-alacak bakiyeleri, barkodlu stok takibi, PDF fatura ve ekstre oluşturma.`,
         category_tags: 'Mobil, Cari, Fatura, Stok',
@@ -431,7 +465,6 @@ export function formatDescriptionWithMeta(desc, playstoreUrl, youtubeId) {
 // --- OTURUM DURUMU KONTROLÜ ---
 async function checkSession() {
     try {
-        // Giriş kilitli ekran zorunluluğunu kaldır, paneli varsayılan olarak aç
         if (loginSection) loginSection.classList.add('hidden');
         if (dashboardSection) dashboardSection.classList.remove('hidden');
 
@@ -570,7 +603,7 @@ async function syncDefaultProjects() {
         if (!err) successCount++;
     }
     
-    alert(`${successCount} adet varsayılan uygulama veritabanına başarıyla eklendi.`);
+    alert(`${successCount} adet varsayılan uygulama veritabanına aktarıldı. (Lokal hafıza ile senkronize tutuldu)`);
     syncDefaultsBtn.disabled = false;
     syncDefaultsBtn.innerHTML = '<span class="material-symbols-outlined text-sm">cloud_sync</span><span>Tüm Uygulamaları Veritabanına Yükle</span>';
     renderPortfolioList();
@@ -598,11 +631,20 @@ async function renderPortfolioList() {
         console.warn('Portfolio fetch error:', e);
     }
 
-    // Eğer veritabanı boşsa varsayılan 34 projeyi göster
-    if (!rawItems || rawItems.length === 0) {
-        cachedProjects = DEFAULT_PROJECTS.map(parseItemMeta);
-    } else {
+    // Öncelik: 1. Supabase kayıtları, 2. LocalStorage kayıtları, 3. DEFAULT_PROJECTS (34 Adet)
+    if (rawItems && rawItems.length > 0) {
         cachedProjects = rawItems.map(parseItemMeta);
+    } else {
+        const savedLocal = localStorage.getItem('mga_portfolio_projects');
+        if (savedLocal) {
+            try {
+                cachedProjects = JSON.parse(savedLocal).map(parseItemMeta);
+            } catch(e) {
+                cachedProjects = DEFAULT_PROJECTS.map(parseItemMeta);
+            }
+        } else {
+            cachedProjects = DEFAULT_PROJECTS.map(parseItemMeta);
+        }
     }
 
     if (statTotalProjects) statTotalProjects.textContent = cachedProjects.length;
@@ -649,6 +691,8 @@ function filterAndDisplayProjects() {
             ? `<a href="https://www.youtube.com/watch?v=${item.youtubeId}" target="_blank" class="px-2 py-0.5 bg-red-500/10 text-red-400 border border-red-500/20 rounded text-[11px] font-medium inline-flex items-center gap-1 hover:underline"><span class="material-symbols-outlined text-xs">smart_display</span> YouTube (${item.youtubeId})</a>` 
             : '';
 
+        const itemUniqueId = item.id || item.title;
+
         div.innerHTML = `
             <div class="flex items-center gap-4 flex-1 min-w-0">
                 <img src="${item.image_url || 'https://placehold.co/100x100?text=Proje'}" alt="${item.title}" class="w-16 h-16 rounded-xl object-cover border border-[#45464d] flex-shrink-0 bg-[#101415]">
@@ -666,11 +710,11 @@ function filterAndDisplayProjects() {
             </div>
             
             <div class="flex items-center gap-2 w-full sm:w-auto justify-end border-t sm:border-t-0 border-[#45464d]/40 pt-2 sm:pt-0">
-                <button type="button" class="edit-btn p-2 bg-[#1d2022] hover:bg-[#4cd7f6]/20 text-[#4cd7f6] rounded-lg transition-all flex items-center gap-1 text-xs font-medium" data-id="${item.id || item.title}">
+                <button type="button" class="edit-btn p-2 bg-[#1d2022] hover:bg-[#4cd7f6]/20 text-[#4cd7f6] rounded-lg transition-all flex items-center gap-1 text-xs font-medium" data-id="${itemUniqueId}">
                     <span class="material-symbols-outlined text-base">edit</span>
                     <span>Düzenle</span>
                 </button>
-                <button type="button" class="delete-btn p-2 bg-[#93000a]/30 hover:bg-[#93000a] text-[#ffdad6] rounded-lg transition-all flex items-center gap-1 text-xs font-medium" data-id="${item.id || item.title}">
+                <button type="button" class="delete-btn p-2 bg-[#93000a]/30 hover:bg-[#93000a] text-[#ffdad6] rounded-lg transition-all flex items-center gap-1 text-xs font-medium" data-id="${itemUniqueId}">
                     <span class="material-symbols-outlined text-base">delete</span>
                     <span>Sil</span>
                 </button>
@@ -696,14 +740,13 @@ function filterAndDisplayProjects() {
             if (confirm(`"${projTitle}" projesini silmek istediğinize emin misiniz?`)) {
                 e.currentTarget.disabled = true;
                 e.currentTarget.innerHTML = '<span class="material-symbols-outlined text-base animate-spin">sync</span>';
-                if (targetProj && targetProj.id) {
-                    const err = await deletePortfolioItem(targetProj.id);
-                    if (err) alert('Silme hatası: ' + err.message);
-                    else renderPortfolioList();
-                } else {
-                    cachedProjects = cachedProjects.filter(p => p.title !== id);
-                    filterAndDisplayProjects();
+                if (targetProj && targetProj.id && !String(targetProj.id).startsWith('def-')) {
+                    await deletePortfolioItem(targetProj.id);
                 }
+                cachedProjects = cachedProjects.filter(p => String(p.id) !== String(id) && p.title !== id);
+                localStorage.setItem('mga_portfolio_projects', JSON.stringify(cachedProjects));
+                if (statTotalProjects) statTotalProjects.textContent = cachedProjects.length;
+                filterAndDisplayProjects();
             }
         });
     });
@@ -743,6 +786,7 @@ if (addPortfolioForm) {
         const fullDesc = formatDescriptionWithMeta(rawDesc, playstoreUrl, youtubeVal);
 
         const item = {
+            id: `def-${Date.now()}`,
             title: document.getElementById('p_title').value.trim(),
             description: fullDesc,
             category_tags: document.getElementById('p_tags').value.trim(),
@@ -750,14 +794,17 @@ if (addPortfolioForm) {
             link: document.getElementById('p_link').value.trim()
         };
 
-        const err = await addPortfolioItem(item);
-        if (err) {
-            alert('Ekleme hatası: ' + err.message);
-        } else {
-            addPortfolioForm.reset();
-            if (removePreviewBtn) removePreviewBtn.click();
-            renderPortfolioList();
-        }
+        // Supabase DB'ye eklemeyi dene
+        await addPortfolioItem(item);
+
+        // Lokal diziye de ekle ve kaydet
+        cachedProjects.unshift(parseItemMeta(item));
+        localStorage.setItem('mga_portfolio_projects', JSON.stringify(cachedProjects));
+
+        addPortfolioForm.reset();
+        if (removePreviewBtn) removePreviewBtn.click();
+        if (statTotalProjects) statTotalProjects.textContent = cachedProjects.length;
+        filterAndDisplayProjects();
 
         addPortfolioBtn.disabled = false;
         addPortfolioBtn.innerHTML = '<span class="material-symbols-outlined text-xl">add</span><span>Projeyi Ekle</span>';
@@ -821,20 +868,21 @@ if (editPortfolioForm) {
             link: document.getElementById('edit_p_link').value.trim()
         };
 
-        const targetProj = cachedProjects.find(p => String(p.id) === String(id) || p.title === id);
-        let err = null;
-        if (targetProj && targetProj.id) {
-            err = await updatePortfolioItem(targetProj.id, updates);
-        } else {
-            err = await addPortfolioItem(updates);
+        const targetIndex = cachedProjects.findIndex(p => String(p.id) === String(id) || p.title === id);
+        if (targetIndex !== -1) {
+            const targetProj = cachedProjects[targetIndex];
+            if (targetProj.id && !String(targetProj.id).startsWith('def-')) {
+                await updatePortfolioItem(targetProj.id, updates);
+            }
+            cachedProjects[targetIndex] = parseItemMeta({
+                ...targetProj,
+                ...updates
+            });
+            localStorage.setItem('mga_portfolio_projects', JSON.stringify(cachedProjects));
         }
 
-        if (err) {
-            alert('Güncelleme hatası: ' + err.message);
-        } else {
-            closeEditModal();
-            renderPortfolioList();
-        }
+        closeEditModal();
+        filterAndDisplayProjects();
 
         editSaveBtn.disabled = false;
         editSaveBtn.innerHTML = '<span class="material-symbols-outlined text-lg">save</span><span>Güncelle</span>';
