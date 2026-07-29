@@ -899,5 +899,9 @@ async function loadDashboardData() {
     renderPortfolioList();
 }
 
-// --- SAYFA YÜKLENDİĞİNDE BAŞLAT ---
-document.addEventListener('DOMContentLoaded', checkSession);
+// --- SAYFA YÜKLENDİĞİNDE VEYA MODÜL YÜKLENDİĞİNDE ANINDA BAŞLAT ---
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', checkSession);
+} else {
+    checkSession();
+}
