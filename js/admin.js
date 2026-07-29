@@ -212,7 +212,7 @@ export const DEFAULT_PROJECTS = [
     },
     {
         title: 'Medication Time',
-        description: `Medication Time: Sağlığınız ve Sevdikleriniz Her Zaman Güvende!\n\nİlaç saatlerinizi kaçırmayın. Bakıcı ve aile takip köprüsü, yaşlı dostu büyük butonlu arayüz ve uykuda dahi çalan alarm sistemi.`,
+        description: `Medication Time: Sağlığınız ve Sevdikleriniz Her Zaman Güvende!\n\nİlaç saatlerinizi kaçırmayın. Bakıcı ve aile takip köprü, yaşlı dostu büyük butonlu arayüz ve uykuda dahi çalan alarm sistemi.`,
         category_tags: 'Mobil, Sağlık, İlaç Takibi',
         image_url: 'images/medicationtime_kart.jpeg',
         link: '/project?id=medication-time',
@@ -590,11 +590,45 @@ async function renderPortfolioList() {
         </div>
     `;
 
-    const rawItems = await fetchPortfolioItems();
-    cachedProjects = rawItems.map(parseItemMeta);
-    if (statTotalProjects) statTotalProjects.textContent = cachedProjects.length;
+    let rawItems = await fetchPortfolioItems();
 
+    // Eğer veritabanı boşsa varsayılan 34 projeyi göster ve otomatik senkronize et
+    if (!rawItems || rawItems.length === 0) {
+        console.log('Supabase boş, varsayılan 34 proje yükleniyor...');
+        cachedProjects = DEFAULT_PROJECTS.map(parseItemMeta);
+        // Otomatik arka planda veritabanına yükle
+        autoSeedDefaultProjects();
+    } else {
+        cachedProjects = rawItems.map(parseItemMeta);
+    }
+
+    if (statTotalProjects) statTotalProjects.textContent = cachedProjects.length;
     filterAndDisplayProjects();
+}
+
+async function autoSeedDefaultProjects() {
+    try {
+        for (const proj of DEFAULT_PROJECTS) {
+            const fullDesc = formatDescriptionWithMeta(proj.description, proj.playstore_url, proj.youtube_id);
+            const item = {
+                title: proj.title,
+                description: fullDesc,
+                category_tags: proj.category_tags,
+                image_url: proj.image_url,
+                link: proj.link
+            };
+            await addPortfolioItem(item);
+        }
+        // Yükleme tamamlanınca gerçek Supabase ID'leri ile güncelle
+        const updatedItems = await fetchPortfolioItems();
+        if (updatedItems && updatedItems.length > 0) {
+            cachedProjects = updatedItems.map(parseItemMeta);
+            if (statTotalProjects) statTotalProjects.textContent = cachedProjects.length;
+            filterAndDisplayProjects();
+        }
+    } catch (e) {
+        console.warn('Auto-seed error:', e);
+    }
 }
 
 function filterAndDisplayProjects() {
@@ -613,11 +647,7 @@ function filterAndDisplayProjects() {
         portfolioList.innerHTML = `
             <div class="text-center py-12 text-[#c6c6cd] bg-[#101415] rounded-2xl border border-[#45464d] p-6 space-y-4">
                 <span class="material-symbols-outlined text-4xl text-[#45464d]">folder_off</span>
-                <p class="text-sm font-medium">Veritabanında kayıtlı proje bulunamadı.</p>
-                <button type="button" onclick="document.getElementById('syncDefaultsBtn')?.click()" class="px-4 py-2 bg-[#4cd7f6] text-[#003640] font-bold rounded-xl hover:brightness-110 transition-all text-xs inline-flex items-center gap-1.5">
-                    <span class="material-symbols-outlined text-base">cloud_upload</span>
-                    <span>Varsayılan 34 Uygulamayı Veritabanına Yükle</span>
-                </button>
+                <p class="text-sm font-medium">Arama kriterine uygun proje bulunamadı.</p>
             </div>
         `;
         return;
@@ -658,11 +688,11 @@ function filterAndDisplayProjects() {
             </div>
             
             <div class="flex items-center gap-2 w-full sm:w-auto justify-end border-t sm:border-t-0 border-[#45464d]/40 pt-2 sm:pt-0">
-                <button type="button" class="edit-btn p-2 bg-[#1d2022] hover:bg-[#4cd7f6]/20 text-[#4cd7f6] rounded-lg transition-all flex items-center gap-1 text-xs font-medium" data-id="${item.id}">
+                <button type="button" class="edit-btn p-2 bg-[#1d2022] hover:bg-[#4cd7f6]/20 text-[#4cd7f6] rounded-lg transition-all flex items-center gap-1 text-xs font-medium" data-id="${item.id || item.title}">
                     <span class="material-symbols-outlined text-base">edit</span>
                     <span>Düzenle</span>
                 </button>
-                <button type="button" class="delete-btn p-2 bg-[#93000a]/30 hover:bg-[#93000a] text-[#ffdad6] rounded-lg transition-all flex items-center gap-1 text-xs font-medium" data-id="${item.id}">
+                <button type="button" class="delete-btn p-2 bg-[#93000a]/30 hover:bg-[#93000a] text-[#ffdad6] rounded-lg transition-all flex items-center gap-1 text-xs font-medium" data-id="${item.id || item.title}">
                     <span class="material-symbols-outlined text-base">delete</span>
                     <span>Sil</span>
                 </button>
@@ -682,15 +712,20 @@ function filterAndDisplayProjects() {
     document.querySelectorAll('.delete-btn').forEach(btn => {
         btn.addEventListener('click', async (e) => {
             const id = e.currentTarget.getAttribute('data-id');
-            const targetProj = cachedProjects.find(p => String(p.id) === String(id));
+            const targetProj = cachedProjects.find(p => String(p.id) === String(id) || p.title === id);
             const projTitle = targetProj ? targetProj.title : 'Bu projeyi';
             
             if (confirm(`"${projTitle}" projesini silmek istediğinize emin misiniz?`)) {
                 e.currentTarget.disabled = true;
                 e.currentTarget.innerHTML = '<span class="material-symbols-outlined text-base animate-spin">sync</span>';
-                const err = await deletePortfolioItem(id);
-                if (err) alert('Silme hatası: ' + err.message);
-                else renderPortfolioList();
+                if (targetProj && targetProj.id) {
+                    const err = await deletePortfolioItem(targetProj.id);
+                    if (err) alert('Silme hatası: ' + err.message);
+                    else renderPortfolioList();
+                } else {
+                    cachedProjects = cachedProjects.filter(p => p.title !== id);
+                    filterAndDisplayProjects();
+                }
             }
         });
     });
@@ -753,10 +788,10 @@ if (addPortfolioForm) {
 
 // --- DÜZENLEME MODALI FONKSİYONLARI ---
 function openEditModal(id) {
-    const proj = cachedProjects.find(p => String(p.id) === String(id));
+    const proj = cachedProjects.find(p => String(p.id) === String(id) || p.title === id);
     if (!proj) return;
 
-    editIdInput.value = proj.id;
+    editIdInput.value = proj.id || proj.title;
     editTitleInput.value = proj.title || '';
     editDescInput.value = proj.cleanDescription || proj.description || '';
     editTagsInput.value = proj.category_tags || '';
@@ -808,7 +843,14 @@ if (editPortfolioForm) {
             link: document.getElementById('edit_p_link').value.trim()
         };
 
-        const err = await updatePortfolioItem(id, updates);
+        const targetProj = cachedProjects.find(p => String(p.id) === String(id));
+        let err = null;
+        if (targetProj && targetProj.id) {
+            err = await updatePortfolioItem(targetProj.id, updates);
+        } else {
+            err = await addPortfolioItem(updates);
+        }
+
         if (err) {
             alert('Güncelleme hatası: ' + err.message);
         } else {
