@@ -111,7 +111,7 @@ export const DEFAULT_PROJECTS = [
         title: 'CookMatch',
         description: `CookMatch, bugün ne pişireceğinize karar vermenize yardımcı olur — stres, israf ya da sonsuz kaydırma olmadan.\n\nEvdeki malzemelerinizi seçin, özenle seçilmiş tarifleri keşfedin ve çevrimdışı favorilerinize ekleyin.`,
         category_tags: 'Mobil, Yemek, Tarif',
-        image_url: 'images/coocmatch_kart.jpeg',
+        image_url: 'images/cookmatch_kart.jpeg',
         link: '/project?id=cookmatch',
         playstore_url: 'https://play.google.com/store/apps/details?id=com.cookmatch.app&pcampaignid=web_share',
         youtube_id: 'JRXR30jbL5w'
@@ -151,7 +151,7 @@ export const DEFAULT_PROJECTS = [
         title: 'ARGEP',
         description: `ARGEP: Ar-Ge Proje Yönetiminizi Kolaylaştırın\n\nARGEP ile Araştırma ve Geliştirme (Ar-Ge) süreçlerinizi tam olarak kontrol altına alın. Kapsamlı proje takibi, bütçe denetimi ve kilometre taşı yönetimi.`,
         category_tags: 'Mobil, Ar-Ge, Yönetim',
-        image_url: 'images/ardeg_kart.jpeg',
+        image_url: 'images/argep_kart.jpeg',
         link: '/project?id=argep',
         playstore_url: '',
         youtube_id: ''
@@ -161,7 +161,7 @@ export const DEFAULT_PROJECTS = [
         title: 'CRM XL',
         description: `ArchiveCRM: Hepsi Bir Arada İş İlişkileri Yöneticisi\n\nArchiveCRM ile iş organizasyonunuzu bir üst seviyeye taşıyın. Müşteri ilişkilerinizi yönetin, sözleşmelerinizi depolayın ve verilerinizi anında eşitleyin.`,
         category_tags: 'Mobil, CRM, Müşteri Takibi',
-        image_url: 'images/lemoraxl_kart.jpeg',
+        image_url: 'images/lemoraxl-kart.jpeg',
         link: '/project?id=crm-xl',
         playstore_url: '',
         youtube_id: ''
@@ -181,7 +181,7 @@ export const DEFAULT_PROJECTS = [
         title: 'Formex',
         description: `FORMEX: Profesyonel, Gizlilik Öncelikli Dosya Dönüştürme Araç Seti\n\nDosyalarınızı %100 çevrimdışı dönüştürün. JPG, PNG, WEBP, PDF, CSV, JSON ve XML formatları arasında hızlı ve güvenli dönüşüm.`,
         category_tags: 'Mobil, Dönüştürücü, PDF',
-        image_url: 'images/viano_kart.jpeg',
+        image_url: 'images/formex_kart.jpeg',
         link: '/project?id=formex',
         playstore_url: '',
         youtube_id: 'ZMFwcEYxh3A'
@@ -221,7 +221,7 @@ export const DEFAULT_PROJECTS = [
         title: 'Lemora XL',
         description: `Lemora XL: Hepsi Bir Arada Satış ve Sipariş Yönetimi Çözümünüz\n\nToptan satış işinizin tam kontrolünü elinize alın. Sipariş takibi, bayi/müşteri cari portalı ve envanter kontrolü.`,
         category_tags: 'Mobil, Satış, Sipariş',
-        image_url: 'images/lemoraxl_kart.jpeg',
+        image_url: 'images/lemoraxl-kart.jpeg',
         link: '/project?id=lemora-xl',
         playstore_url: '',
         youtube_id: ''
@@ -251,7 +251,7 @@ export const DEFAULT_PROJECTS = [
         title: 'TripMind',
         description: `TripMind: Kişisel Yapay Zeka Seyahat Asistanınız\n\nYapay zeka ile size özel seyahat programları, bütçe/rezervasyon yönetimi ve gün gün PDF rota çıktısı.`,
         category_tags: 'Mobil, Seyahat, Yapay Zeka',
-        image_url: 'images/tripmimd_kart.jpeg',
+        image_url: 'images/tripmind_kart.jpeg',
         link: '/project?id=trip-mind',
         playstore_url: '',
         youtube_id: ''
@@ -331,7 +331,7 @@ export const DEFAULT_PROJECTS = [
         title: 'Lemora',
         description: `Lemora – Profesyonel Satış ve Stok Yönetim Sistemi\n\nBarkod okuma destekli envanter yönetimi, nakit/kart tahsilatları, proforma fatura oluşturma ve CRM.`,
         category_tags: 'Mobil, Satış, Stok',
-        image_url: 'images/lemoraxl_kart.jpeg',
+        image_url: 'images/lemoraxl-kart.jpeg',
         link: '/project?id=lemora',
         playstore_url: '',
         youtube_id: '4ij1BjNLcpo'
@@ -405,6 +405,16 @@ export const DEFAULT_PROJECTS = [
         link: '/project?id=bizora',
         playstore_url: 'https://play.google.com/store/apps/details?id=com.mgacreative.invixa',
         youtube_id: ''
+    },
+    {
+        id: 'def-35',
+        title: 'Hotel OS',
+        description: `Hotel OS: Otel ve Konaklama Tesisleri İçin Akıllı Yönetim Platformu\n\nResepsiyon, oda servisi, rezervasyon ve müşteri ilişkilerinizi tek bir platformdan yönetin. Hızlı otel otomasyonu ve misafir deneyimi.`,
+        category_tags: 'Mobil, Otel, Yönetim',
+        image_url: 'images/hotelos_kart.jpeg',
+        link: '/project?id=hotelos',
+        playstore_url: '',
+        youtube_id: ''
     }
 ];
 
@@ -426,13 +436,19 @@ export function parseItemMeta(item) {
     let cleanDesc = item.description || '';
     let youtubeId = item.youtube_id || item.youtubeId || '';
     let playstoreUrl = item.playstore_url || item.playstoreUrl || '';
+    let imageUrl = (item.image_url || item.imageUrl || '')
+        .replace('coocmatch_kart.jpeg', 'cookmatch_kart.jpeg')
+        .replace('ardeg_kart.jpeg', 'argep_kart.jpeg')
+        .replace('tripmimd_kart.jpeg', 'tripmind_kart.jpeg')
+        .replace('lemoraxl_kart.jpeg', 'lemoraxl-kart.jpeg')
+        .replace('Voxnoete_kart.jpeg', 'voxnote_kart.jpeg');
     
     const metaMatch = cleanDesc.match(/<!--META:([\s\S]*?)-->/);
     if (metaMatch) {
         try {
             const metaObj = JSON.parse(metaMatch[1]);
-            if (metaObj.youtube_id) youtubeId = metaObj.youtube_id;
-            if (metaObj.playstore_url) playstoreUrl = metaObj.playstore_url;
+            if (metaObj.youtube_id !== undefined) youtubeId = metaObj.youtube_id;
+            if (metaObj.playstore_url !== undefined) playstoreUrl = metaObj.playstore_url;
         } catch (e) {
             console.warn('Meta JSON parse error:', e);
         }
@@ -441,6 +457,7 @@ export function parseItemMeta(item) {
     
     return {
         ...item,
+        image_url: imageUrl,
         cleanDescription: cleanDesc,
         youtubeId: extractYoutubeId(youtubeId),
         playstoreUrl: playstoreUrl
@@ -452,14 +469,12 @@ export function formatDescriptionWithMeta(desc, playstoreUrl, youtubeId) {
     const ytId = extractYoutubeId(youtubeId);
     const pUrl = (playstoreUrl || '').trim();
     
-    const metaObj = {};
-    if (pUrl) metaObj.playstore_url = pUrl;
-    if (ytId) metaObj.youtube_id = ytId;
+    const metaObj = {
+        playstore_url: pUrl,
+        youtube_id: ytId
+    };
     
-    if (Object.keys(metaObj).length > 0) {
-        return `${cleanDesc}\n\n<!--META:${JSON.stringify(metaObj)}-->`;
-    }
-    return cleanDesc;
+    return `${cleanDesc}\n\n<!--META:${JSON.stringify(metaObj)}-->`;
 }
 
 // --- OTURUM DURUMU KONTROLÜ ---
@@ -642,21 +657,30 @@ async function renderPortfolioList() {
         } catch(e) {}
     }
 
-    // Öncelik: 1. Supabase kayıtları, 2. LocalStorage dolu kayıtları, 3. DEFAULT_PROJECTS (34 Adet)
-    if (rawItems && rawItems.length > 0) {
-        cachedProjects = rawItems.map(parseItemMeta);
-    } else if (parsedLocal.length > 0) {
-        cachedProjects = parsedLocal.map(parseItemMeta);
-    } else {
-        cachedProjects = DEFAULT_PROJECTS.map(parseItemMeta);
-        try {
-            localStorage.setItem('mga_portfolio_projects', JSON.stringify(DEFAULT_PROJECTS));
-        } catch(e) {}
-    }
+    const combinedMap = new Map();
 
-    if (!cachedProjects || cachedProjects.length === 0) {
-        cachedProjects = DEFAULT_PROJECTS.map(parseItemMeta);
-    }
+    // 1. Varsayılan Seed projeler
+    DEFAULT_PROJECTS.forEach(proj => {
+        const key = (proj.title || '').toLowerCase().trim();
+        if (key) combinedMap.set(key, proj);
+    });
+
+    // 2. Yerel kaydedilmiş projeler
+    parsedLocal.forEach(proj => {
+        const key = (proj.title || '').toLowerCase().trim();
+        if (key) combinedMap.set(key, proj);
+    });
+
+    // 3. Supabase DB verileri
+    (rawItems || []).forEach(proj => {
+        const key = (proj.title || '').toLowerCase().trim();
+        if (key) combinedMap.set(key, proj);
+    });
+
+    cachedProjects = Array.from(combinedMap.values()).map(parseItemMeta);
+    try {
+        localStorage.setItem('mga_portfolio_projects', JSON.stringify(cachedProjects));
+    } catch(e) {}
 
     if (statTotalProjects) statTotalProjects.textContent = cachedProjects.length;
     filterAndDisplayProjects();
@@ -771,6 +795,31 @@ if (searchPortfolio) {
     searchPortfolio.addEventListener('input', filterAndDisplayProjects);
 }
 
+// Proje Adı yazıldığında Otomatik Detay Linki Oluşturucu
+export function slugify(str) {
+    if (!str) return '';
+    return str
+        .toLowerCase()
+        .replace(/ğ/g, 'g')
+        .replace(/ü/g, 'u')
+        .replace(/ş/g, 's')
+        .replace(/ı/g, 'i')
+        .replace(/ö/g, 'o')
+        .replace(/ç/g, 'c')
+        .replace(/[^a-z0-9\s-]/g, '')
+        .trim()
+        .replace(/\s+/g, '-');
+}
+
+const pTitleInput = document.getElementById('p_title');
+const pLinkInput = document.getElementById('p_link');
+
+if (pTitleInput && pLinkInput) {
+    pTitleInput.addEventListener('input', () => {
+        pLinkInput.value = `/project?id=${slugify(pTitleInput.value)}`;
+    });
+}
+
 // --- PORTFÖY EKLEME FORM İŞLEMİ ---
 if (addPortfolioForm) {
     addPortfolioForm.addEventListener('submit', async (e) => {
@@ -800,7 +849,6 @@ if (addPortfolioForm) {
         const fullDesc = formatDescriptionWithMeta(rawDesc, playstoreUrl, youtubeVal);
 
         const item = {
-            id: `def-${Date.now()}`,
             title: document.getElementById('p_title').value.trim(),
             description: fullDesc,
             category_tags: document.getElementById('p_tags').value.trim(),
@@ -809,7 +857,15 @@ if (addPortfolioForm) {
         };
 
         // Supabase DB'ye eklemeyi dene
-        await addPortfolioItem(item);
+        const { data: dbData, error: dbError } = await addPortfolioItem(item);
+        if (dbError) {
+            console.error('Supabase Add Error:', dbError);
+            alert('Veritabanına eklenirken bir hata oluştu: ' + dbError.message);
+        } else if (dbData && dbData[0]) {
+            item.id = dbData[0].id;
+        } else {
+            item.id = `def-${Date.now()}`;
+        }
 
         // Lokal diziye de ekle ve kaydet
         cachedProjects.unshift(parseItemMeta(item));
@@ -888,10 +944,15 @@ if (editPortfolioForm) {
             if (targetProj.id && !String(targetProj.id).startsWith('def-')) {
                 await updatePortfolioItem(targetProj.id, updates);
             }
-            cachedProjects[targetIndex] = parseItemMeta({
+            const updatedItem = parseItemMeta({
                 ...targetProj,
-                ...updates
+                ...updates,
+                playstore_url: playstoreUrl,
+                playstoreUrl: playstoreUrl,
+                youtube_id: youtubeVal,
+                youtubeId: youtubeVal
             });
+            cachedProjects[targetIndex] = updatedItem;
             localStorage.setItem('mga_portfolio_projects', JSON.stringify(cachedProjects));
         }
 

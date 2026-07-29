@@ -389,7 +389,7 @@
             title: 'Formex',
             category: 'Mobil',
             categoryClass: 'bg-tertiary/10 text-tertiary border border-tertiary/20',
-            image: 'images/viano_detay.jpeg',
+            image: 'images/formex_detay.jpeg',
             description: `FORMEX: Profesyonel, Gizlilik Öncelikli Dosya Dönüştürme Araç Seti\n\nDosyalarınızı dönüştürmek için hızlı ve güvenli bir yol mu arıyorsunuz? FORMEX, gizliliğinizden asla ödün vermeden dönüştürme ihtiyaçlarınızı karşılamak üzere tasarlanmış, hafif ve hepsi bir arada bir araç setidir. Diğer dönüştürücülerden farklı olarak FORMEX %100 çevrimdışı çalışır. Dosyalarınız cihazınızdan asla çıkmaz ve hiçbir sunucuya yüklenmez.\n\n📸 Gelişmiş Görüntü Araçları: JPG, PNG ve WEBP dönüştürme, sıkıştırma, yeniden boyutlandırma ve PDF'ye dönüştürme.\n\n📄 Güçlü PDF Yardımcı Programları: PDF'den görsele aktarma ve dosya sıkıştırma.\n\n📊 Ofis & Veri Dönüştürücüler: CSV Excel, JSON CSV ve XML JSON dönüştürme araçları.\n\n🔒 %100 Yerel & Gizlilik Öncelikli: Herhangi bir sunucuya yükleme yapmadan tamamen cihazınızda çevrimdışı çalışır.`,
             youtubeId: 'ZMFwcEYxh3A',
             techStack: ['Android', 'Kotlin', 'Material 3', 'PDF & Image Parser', 'Local Processing'],
@@ -752,6 +752,22 @@
                 'Supabase Bulut Entegrasyonu: Tüm verilerinizi gerçek zamanlı senkronize ederek cihazlar arası kesintisiz veri akışı sağlayın.'
             ],
             playstoreUrl: 'https://play.google.com/store/apps/details?id=com.mgacreative.invixa'
+        },
+        'hotelos': {
+            title: 'Hotel OS',
+            category: 'Mobil',
+            categoryClass: 'bg-tertiary/10 text-tertiary border border-tertiary/20',
+            image: 'images/hotelos_detay.jpeg',
+            description: `Hotel OS: Otel ve Konaklama Tesisleri İçin Akıllı Yönetim Platformu\n\nResepsiyon, oda servisi, rezervasyon ve müşteri ilişkilerinizi tek bir platformdan yönetin. Hızlı otel otomasyonu, dijital oda anahtarları ve misafir deneyimini üst seviyeye taşıyan akıllı asistan.`,
+            youtubeId: '',
+            techStack: ['Android', 'Kotlin', 'Jetpack Compose', 'Supabase Realtime', 'StateFlow'],
+            features: [
+                'Dijital Rezervasyon & Oda Yönetimi: Oda durumlarını, doluluk oranlarını ve rezervasyon takvimini anlık olarak izleyin.',
+                'Oda Servisi & Misafir Talepleri: Misafirlerin oda servisi ve temizlik taleplerini dijital paneller üzerinden yönetin.',
+                'Akıllı Anlık Senkronizasyon: Resepsiyon, kat hizmetleri ve yönetim kadrosu arasında kesintisiz veri iletişimi.',
+                'Güvenli Müşteri Geçmişi: Konuk tercihlerini ve harcama geçmişini güvenle saklayın.'
+            ],
+            playstoreUrl: ''
         }
     };
 
@@ -772,24 +788,33 @@
         let cleanDesc = item.description || '';
         let youtubeId = item.youtube_id || item.youtubeId || '';
         let playstoreUrl = item.playstore_url || item.playstoreUrl || '';
+        let imageUrl = (item.image_url || item.imageUrl || '')
+            .replace('coocmatch_kart.jpeg', 'cookmatch_kart.jpeg')
+            .replace('ardeg_kart.jpeg', 'argep_kart.jpeg')
+            .replace('tripmimd_kart.jpeg', 'tripmind_kart.jpeg')
+            .replace('lemoraxl_kart.jpeg', 'lemoraxl-kart.jpeg')
+            .replace('Voxnoete_kart.jpeg', 'voxnote_kart.jpeg');
         
         const metaMatch = cleanDesc.match(/<!--META:([\s\S]*?)-->/);
         if (metaMatch) {
             try {
                 const metaObj = JSON.parse(metaMatch[1]);
-                if (metaObj.youtube_id) youtubeId = metaObj.youtube_id;
-                if (metaObj.playstore_url) playstoreUrl = metaObj.playstore_url;
+                if (metaObj.youtube_id !== undefined) youtubeId = metaObj.youtube_id;
+                if (metaObj.playstore_url !== undefined) playstoreUrl = metaObj.playstore_url;
             } catch (e) {}
             cleanDesc = cleanDesc.replace(/<!--META:[\s\S]*?-->/g, '').trim();
         }
         
         return {
             ...item,
+            image_url: imageUrl,
             cleanDescription: cleanDesc,
             youtubeId: extractYoutubeId(youtubeId),
             playstoreUrl: playstoreUrl
         };
     }
+    window.extractYoutubeId = extractYoutubeId;
+    window.parseItemMeta = parseItemMeta;
 
     function renderProject(proj) {
         // Set Title
@@ -881,7 +906,7 @@
             });
 
             if (matchedDbItem) {
-                const parsed = parseItemMeta(matchedDbItem);
+                const parsed = window.parseItemMeta ? window.parseItemMeta(matchedDbItem) : matchedDbItem;
                 const localProj = projectsData[projectId] || {};
                 const tags = (parsed.category_tags || '').split(',').map(t => t.trim()).filter(Boolean);
 

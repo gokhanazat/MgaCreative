@@ -22,12 +22,41 @@ async function updatePageContent() {
 
     // Portfolio Öğelerini Çek
     if (portfolioGrid) {
-        const items = await fetchPortfolioItems();
+        let dbItems = [];
+        try {
+            dbItems = await fetchPortfolioItems();
+        } catch(e) {}
+
+        let localItems = [];
+        const savedLocal = localStorage.getItem('mga_portfolio_projects');
+        if (savedLocal) {
+            try {
+                localItems = JSON.parse(savedLocal);
+            } catch(e) {}
+        }
+
+        const combinedMap = new Map();
+        (dbItems || []).forEach(item => {
+            const key = (item.title || '').toLowerCase().trim();
+            if (key) combinedMap.set(key, item);
+        });
+        (localItems || []).forEach(item => {
+            const key = (item.title || '').toLowerCase().trim();
+            if (key) combinedMap.set(key, item);
+        });
+
+        const items = Array.from(combinedMap.values());
         if (items.length === 0) {
             portfolioGrid.innerHTML = '<p class="text-on-surface-variant font-body-md col-span-full">Henüz proje eklenmemiş.</p>';
         } else {
             portfolioGrid.innerHTML = items.map(item => {
                 const cleanDesc = (item.description || '').replace(/<!--META:[\s\S]*?-->/g, '').trim();
+                let imgUrl = (item.image_url || '')
+                    .replace('coocmatch_kart.jpeg', 'cookmatch_kart.jpeg')
+                    .replace('ardeg_kart.jpeg', 'argep_kart.jpeg')
+                    .replace('tripmimd_kart.jpeg', 'tripmind_kart.jpeg')
+                    .replace('lemoraxl_kart.jpeg', 'lemoraxl-kart.jpeg')
+                    .replace('Voxnoete_kart.jpeg', 'voxnote_kart.jpeg');
                 // Etiketleri (Tags) virgülle ayırıp span'lara dönüştür
                 const tagsHtml = item.category_tags 
                     ? item.category_tags.split(',').map(tag => `<span class="bg-tertiary/10 text-tertiary px-3 py-1 rounded-full font-label-sm text-label-sm">${tag.trim()}</span>`).join('')
@@ -36,7 +65,7 @@ async function updatePageContent() {
                 return `
                 <div class="group relative glass-card rounded-[24px] overflow-hidden inner-glow transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col h-full">
                     <div class="h-64 overflow-hidden">
-                        <img alt="${item.title} Preview" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="${item.image_url}"/>
+                        <img alt="${item.title} Preview" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="${imgUrl}"/>
                     </div>
                     <div class="p-8 space-y-4 flex flex-col flex-grow">
                         <div class="flex gap-2 flex-wrap">

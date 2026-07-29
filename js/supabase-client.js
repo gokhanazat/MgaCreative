@@ -49,10 +49,15 @@ export async function fetchPortfolioItems() {
  * portfolio_items tablosuna yeni uygulama ekler
  */
 export async function addPortfolioItem(item) {
-    const { error } = await supabase
+    const itemToInsert = { ...item };
+    if (itemToInsert.id && String(itemToInsert.id).startsWith('def-')) {
+        delete itemToInsert.id;
+    }
+    const { data, error } = await supabase
         .from('portfolio_items')
-        .insert([item]);
-    return error;
+        .insert([itemToInsert])
+        .select();
+    return { data, error };
 }
 
 /**

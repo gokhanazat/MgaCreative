@@ -416,7 +416,7 @@
 <!-- App Card 12 (Formex) -->
 <article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
 <div class="relative h-64 overflow-hidden group">
-<img alt="Formex Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/viano_kart.jpeg"/>
+<img alt="Formex Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/formex_kart.jpeg"/>
 <div class="absolute top-4 left-4">
 <span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
 </div>
@@ -940,6 +940,28 @@
 <span class="material-symbols-outlined">play_circle</span>
 </button>
 </div>
+</article>
+<!-- App Card 35 (Hotel OS) -->
+<article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="mobile">
+<div class="relative h-64 overflow-hidden group">
+<img alt="Hotel OS Preview" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="images/hotelos_kart.jpeg"/>
+<div class="absolute top-4 left-4">
+<span class="bg-tertiary-container text-tertiary px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">Mobil</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">Hotel OS</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-3">
+                        Otel ve konaklama tesisleri için akıllı otomasyon, dijital resepsiyon, oda servisi ve misafir yönetimi platformu.
+                    </p>
+<div class="mt-auto flex gap-3">
+<button onclick="window.location.href='/project?id=hotelos'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
+                            Detayları İncele
+                        </button>
+<button onclick="window.location.href='/project?id=hotelos'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
+<span class="material-symbols-outlined">play_circle</span>
+</button>
+</div>
 </div>
 </article>
 </div>
@@ -1013,19 +1035,26 @@
             let cleanDesc = item.description || '';
             let youtubeId = item.youtube_id || item.youtubeId || '';
             let playstoreUrl = item.playstore_url || item.playstoreUrl || '';
+            let imageUrl = (item.image_url || item.imageUrl || '')
+                .replace('coocmatch_kart.jpeg', 'cookmatch_kart.jpeg')
+                .replace('ardeg_kart.jpeg', 'argep_kart.jpeg')
+                .replace('tripmimd_kart.jpeg', 'tripmind_kart.jpeg')
+                .replace('lemoraxl_kart.jpeg', 'lemoraxl-kart.jpeg')
+                .replace('Voxnoete_kart.jpeg', 'voxnote_kart.jpeg');
             
             const metaMatch = cleanDesc.match(/<!--META:([\s\S]*?)-->/);
             if (metaMatch) {
                 try {
                     const metaObj = JSON.parse(metaMatch[1]);
-                    if (metaObj.youtube_id) youtubeId = metaObj.youtube_id;
-                    if (metaObj.playstore_url) playstoreUrl = metaObj.playstore_url;
+                    if (metaObj.youtube_id !== undefined) youtubeId = metaObj.youtube_id;
+                    if (metaObj.playstore_url !== undefined) playstoreUrl = metaObj.playstore_url;
                 } catch (e) {}
                 cleanDesc = cleanDesc.replace(/<!--META:[\s\S]*?-->/g, '').trim();
             }
             
             return {
                 ...item,
+                image_url: imageUrl,
                 cleanDescription: cleanDesc,
                 youtubeId,
                 playstoreUrl
@@ -1034,20 +1063,47 @@
 
         async function loadDynamicPortfolio() {
             try {
-                const dbItems = await fetchPortfolioItems();
-                if (!dbItems || dbItems.length === 0) return;
+                let dbItems = [];
+                try {
+                    dbItems = await fetchPortfolioItems();
+                } catch(e) {}
+
+                let localItems = [];
+                const savedLocal = localStorage.getItem('mga_portfolio_projects');
+                if (savedLocal) {
+                    try {
+                        localItems = JSON.parse(savedLocal);
+                    } catch(e) {}
+                }
+
+                const combinedMap = new Map();
+                (dbItems || []).forEach(item => {
+                    const key = (item.title || '').toLowerCase().trim();
+                    if (key) combinedMap.set(key, item);
+                });
+                (localItems || []).forEach(item => {
+                    const key = (item.title || '').toLowerCase().trim();
+                    if (key) combinedMap.set(key, item);
+                });
+
+                const allItems = Array.from(combinedMap.values());
+                if (allItems.length === 0) return;
 
                 const grid = document.getElementById('portfolio-grid');
                 if (!grid) return;
 
-                const parsedItems = dbItems.map(parseItemMeta);
+                const parsedItems = allItems.map(parseItemMeta);
                 grid.innerHTML = parsedItems.map(item => {
                     const tags = (item.category_tags || '').toLowerCase();
                     let categoryAttr = 'mobile';
                     if (tags.includes('web')) categoryAttr = 'web';
                     else if (tags.includes('oyun') || tags.includes('game')) categoryAttr = 'game';
 
-                    const mainCategoryTag = (item.category_tags || '').split(',')[0].trim() || 'Mobil';
+                    const playBtnAction = item.playstoreUrl 
+                        ? `window.open('${item.playstoreUrl}', '_blank')` 
+                        : `window.location.href='${item.link}'`;
+                    const playBtnIcon = item.playstoreUrl ? 'play_apps' : 'play_circle';
+                    const playBtnTitle = item.playstoreUrl ? 'Google Play Store\'da Gör' : 'Detayları İncele';
 
                     return `
                     <article class="app-card glass-card flex flex-col rounded-xl overflow-hidden" data-category="${categoryAttr}">
@@ -1066,8 +1122,8 @@
                                 <button onclick="window.location.href='${item.link}'" class="flex-1 bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-md transition-all hover:brightness-110 active:scale-95">
                                     Detayları İncele
                                 </button>
-                                <button onclick="window.location.href='${item.link}'" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
-                                    <span class="material-symbols-outlined">play_circle</span>
+                                <button onclick="${playBtnAction}" title="${playBtnTitle}" class="w-12 h-12 flex items-center justify-center border border-outline-variant rounded-lg text-tertiary hover:bg-tertiary/10 transition-all active:scale-95">
+                                    <span class="material-symbols-outlined">${playBtnIcon}</span>
                                 </button>
                             </div>
                         </div>
