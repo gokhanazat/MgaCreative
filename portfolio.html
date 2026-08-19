@@ -1,294 +1,241 @@
 <!DOCTYPE html>
-
-<html class="dark" lang="tr"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>MGA Creative | Uygulamalarımız</title>
-<link rel="canonical" href="https://www.mgacreative.com/portfolio" />
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;family=Inter:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
+<html lang="tr">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>MGA Creative | Uygulamalarımız</title>
+    <link rel="canonical" href="https://www.mgacreative.com/portfolio" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
       tailwind.config = {
-        darkMode: "class",
         theme: {
           extend: {
-            "colors": {
-                    "surface-variant": "#323537",
-                    "primary-fixed": "#dae2fd",
-                    "surface-container-lowest": "#0b0f10",
-                    "inverse-primary": "#565e74",
-                    "secondary": "#d2bbff",
-                    "surface-container-high": "#272a2c",
-                    "surface-container-highest": "#323537",
-                    "surface-bright": "#363a3b",
-                    "tertiary-fixed-dim": "#4cd7f6",
-                    "on-secondary-container": "#c9aeff",
-                    "tertiary": "#4cd7f6",
-                    "surface-container": "#1d2022",
-                    "on-tertiary-fixed-variant": "#004e5c",
-                    "secondary-fixed": "#eaddff",
-                    "error-container": "#93000a",
-                    "on-tertiary-fixed": "#001f26",
-                    "on-error": "#690005",
-                    "on-surface": "#e0e3e5",
-                    "on-primary-fixed-variant": "#3f465c",
-                    "primary-fixed-dim": "#bec6e0",
-                    "on-tertiary-container": "#008da5",
-                    "inverse-on-surface": "#2d3133",
-                    "on-primary": "#283044",
-                    "secondary-container": "#6001d1",
-                    "on-error-container": "#ffdad6",
-                    "surface-dim": "#101415",
-                    "surface": "#101415",
-                    "primary": "#bec6e0",
-                    "outline": "#909097",
-                    "error": "#ffb4ab",
-                    "on-tertiary": "#003640",
-                    "tertiary-fixed": "#acedff",
-                    "on-secondary-fixed": "#25005a",
-                    "outline-variant": "#45464d",
-                    "on-secondary": "#3f008e",
-                    "background": "#101415",
-                    "inverse-surface": "#e0e3e5",
-                    "surface-tint": "#bec6e0",
-                    "on-background": "#e0e3e5",
-                    "tertiary-container": "#001b21",
-                    "surface-container-low": "#191c1e",
-                    "on-primary-fixed": "#131b2e",
-                    "on-secondary-fixed-variant": "#5a00c6",
-                    "primary-container": "#0f172a",
-                    "secondary-fixed-dim": "#d2bbff",
-                    "on-surface-variant": "#c6c6cd",
-                    "on-primary-container": "#798098"
+            colors: {
+              background: "#F8FAFC",
+              surface: "#FFFFFF",
+              "surface-container": "#F1F5F9",
+              "on-background": "#0F172A",
+              "on-surface": "#0F172A",
+              "on-surface-variant": "#475569",
+              primary: "#0284C7",
+              "primary-hover": "#0369A1",
+              secondary: "#4F46E5",
+              "secondary-container": "#EEF2FF",
+              "on-secondary-container": "#3730A3",
+              tertiary: "#0284C7",
+              "tertiary-container": "#E0F2FE",
+              "on-tertiary-container": "#0369A1",
+              outline: "#CBD5E1",
+              "outline-variant": "#E2E8F0"
             },
-            "borderRadius": {
-                    "DEFAULT": "0.25rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "full": "9999px"
-            },
-            "spacing": {
-                    "gutter": "24px",
-                    "margin-desktop": "48px",
-                    "base": "8px",
-                    "container-max": "1280px",
-                    "margin-mobile": "16px"
-            },
-            "fontFamily": {
-                    "headline-lg-mobile": ["Geist"],
-                    "headline-xl": ["Geist"],
-                    "body-lg": ["Inter"],
-                    "label-md": ["JetBrains Mono"],
-                    "headline-lg": ["Geist"],
-                    "body-md": ["Inter"],
-                    "label-sm": ["JetBrains Mono"]
-            },
-            "fontSize": {
-                    "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
-                    "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
-                    "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
-                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}]
+            fontFamily: {
+              sans: ["'Plus Jakarta Sans'", "sans-serif"],
+              mono: ["'JetBrains Mono'", "monospace"]
             }
-          },
-        },
+          }
+        }
       }
     </script>
-<style>
+    <style>
+        body {
+            background-color: #F8FAFC;
+            color: #0F172A;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
         .glass-card {
-            background: rgba(29, 32, 34, 0.6);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(144, 144, 151, 0.1);
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .glass-card:hover {
-            transform: translateY(-4px) scale(1.01);
-            border-color: rgba(76, 215, 246, 0.4);
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+            transform: translateY(-4px);
+            border-color: #38BDF8;
+            box-shadow: 0 16px 32px -4px rgba(15, 23, 42, 0.1);
         }
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
             vertical-align: middle;
         }
-        .active-filter {
-            background-color: #6001d1;
-            color: #eaddff;
+        .active-cat-btn {
+            background-color: #E0F2FE !important;
+            color: #0369A1 !important;
+            border-color: #BAE6FD !important;
+            font-weight: 700 !important;
         }
     </style>
 </head>
-<body class="bg-background text-on-background min-h-screen font-body-md overflow-x-hidden">
+<body class="selection:bg-sky-100 selection:text-sky-900 min-h-screen">
+
 <!-- TopNavBar -->
-<header class="fixed top-0 left-0 w-full z-50 bg-surface/80 backdrop-blur-xl dark:bg-surface-container/80 border-b border-outline-variant/20 dark:border-outline/10 shadow-sm dark:shadow-none">
-<div class="flex justify-between items-center w-full h-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
-<a class="font-headline-lg text-headline-lg font-bold tracking-tight text-on-surface dark:text-on-background" href="/">MGA Creative</a>
-<nav class="hidden md:flex items-center gap-8">
-<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-tertiary transition-all duration-300" href="/">Ana Sayfa</a>
-<a class="text-primary dark:text-tertiary-fixed-dim font-bold border-b-2 border-primary dark:border-tertiary pb-1" href="/portfolio">Uygulamalarımız</a>
-<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-tertiary transition-all duration-300" href="/about">Hakkımızda</a>
-<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-tertiary transition-all duration-300" href="/contact">İletişim</a>
-</nav>
-<button onclick="window.location.href='/contact'" class="bg-secondary-container text-on-secondary-container px-6 py-2.5 rounded-lg font-label-md hover:backdrop-brightness-110 transition-all duration-300 active:scale-95">
-                İletişime Geç
-            </button>
-</div>
+<header class="fixed top-0 left-0 w-full z-50 bg-white/85 backdrop-blur-xl border-b border-slate-200/80 shadow-sm">
+    <div class="flex justify-between items-center w-full h-20 px-4 md:px-12 max-w-7xl mx-auto">
+        <a class="text-2xl font-extrabold tracking-tight text-slate-900 flex items-center gap-2" href="/">
+            <span class="w-8 h-8 rounded-xl bg-sky-600 text-white flex items-center justify-center text-base font-bold shadow-md shadow-sky-500/20">M</span>
+            <span>MGA Creative</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-8">
+            <a class="text-slate-600 font-semibold hover:text-sky-600 transition-all text-sm" href="/">Ana Sayfa</a>
+            <a class="text-sky-600 font-bold border-b-2 border-sky-600 pb-1 text-sm transition-all" href="/portfolio">Uygulamalarımız</a>
+            <a class="text-slate-600 font-semibold hover:text-sky-600 transition-all text-sm" href="/about">Hakkımızda</a>
+            <a class="text-slate-600 font-semibold hover:text-sky-600 transition-all text-sm" href="/contact">İletişim</a>
+        </nav>
+        <button onclick="window.location.href='/contact'" class="bg-sky-600 hover:bg-sky-700 text-white font-semibold px-6 py-2.5 rounded-xl text-sm shadow-md shadow-sky-600/20 active:scale-95 transition-all">
+            İletişime Geç
+        </button>
+    </div>
 </header>
-<main class="pt-32 pb-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
-<!-- Hero Header -->
-<div class="mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 pb-8 border-b border-outline-variant/20">
-    <div>
-        <h1 class="font-headline-xl text-headline-xl mb-3 text-primary-fixed-dim">Uygulamalar &amp; <span class="text-tertiary">Kategoriler</span></h1>
-        <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
-            Mobil, Web ve Dijital ürünlerimiz arasından anında arama yapın, kategorilere göre filtreleyin veya en son eklenen projeleri keşfedin.
-        </p>
-    </div>
-    <!-- Live Count Badge -->
-    <div id="project-count-badge" class="px-5 py-2.5 bg-surface-container/80 backdrop-blur-md rounded-2xl border border-outline-variant/30 text-on-surface text-sm font-semibold flex items-center gap-3 flex-shrink-0 shadow-lg">
-        <span class="relative flex h-3 w-3">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-3 w-3 bg-tertiary"></span>
-        </span>
-        <span id="live-count-text" class="font-mono text-tertiary font-bold">Yükleniyor...</span>
-    </div>
-</div>
 
-<!-- Mobile Filter Toggle Button (< lg screens) -->
-<div class="lg:hidden mb-6">
-    <button id="mobile-filter-toggle-btn" class="w-full flex items-center justify-between px-5 py-3.5 bg-surface-container/90 rounded-2xl border border-outline-variant/40 text-on-surface font-semibold text-sm shadow-md">
-        <span class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-tertiary">tune</span>
-            Filtrele &amp; Arama Yap
-        </span>
-        <span class="material-symbols-outlined transition-transform duration-300" id="mobile-toggle-icon">expand_more</span>
-    </button>
-</div>
-
-<!-- Sidebar + Grid Container -->
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-    
-    <!-- LEFT SIDEBAR (SOL PANEL) -->
-    <aside id="portfolio-sidebar" class="hidden lg:block lg:col-span-4 xl:col-span-3 lg:sticky lg:top-28 space-y-6 z-20 transition-all duration-300">
-        <div class="glass-card rounded-3xl p-6 space-y-6 border border-outline-variant/30 shadow-2xl backdrop-blur-xl bg-surface-container-lowest/60">
-            
-            <!-- Arama Kutusu -->
-            <div>
-                <label class="block text-xs font-bold text-tertiary uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
-                    <span class="material-symbols-outlined text-base">search</span>
-                    Proje Ara
-                </label>
-                <div class="relative">
-                    <input type="text" id="sidebar-search-input" placeholder="Uygulama adı veya konu..." 
-                        class="w-full bg-surface-dim/80 border border-outline-variant/40 rounded-2xl px-4 py-3 pl-11 pr-9 text-sm text-on-surface placeholder:text-on-surface-variant/60 outline-none focus:border-tertiary focus:ring-2 focus:ring-tertiary/20 transition-all">
-                    <span class="material-symbols-outlined absolute left-3.5 top-3.5 text-on-surface-variant text-lg">search</span>
-                    <button id="clear-search-btn" class="hidden absolute right-3 top-3 text-on-surface-variant hover:text-white p-0.5 rounded-full hover:bg-surface-container transition-all">
-                        <span class="material-symbols-outlined text-base">close</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Kategori Listesi -->
-            <div>
-                <label class="block text-xs font-bold text-tertiary uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
-                    <span class="material-symbols-outlined text-base">category</span>
-                    Kategoriler
-                </label>
-                <div class="space-y-1.5" id="category-filter-list">
-                    <button class="category-btn active-cat-btn w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200" data-cat="all">
-                        <span class="flex items-center gap-2.5">
-                            <span class="material-symbols-outlined text-lg">apps</span> Tüm Projeler
-                        </span>
-                        <span id="cat-count-all" class="text-xs px-2.5 py-0.5 rounded-full bg-tertiary/10 text-tertiary font-mono font-bold">0</span>
-                    </button>
-                    <button class="category-btn w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-on-surface-variant hover:bg-surface-container/50 hover:text-white" data-cat="business">
-                        <span class="flex items-center gap-2.5">
-                            <span class="material-symbols-outlined text-lg">business_center</span> Ticari Çözümler
-                        </span>
-                        <span id="cat-count-business" class="text-xs px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-mono font-medium">0</span>
-                    </button>
-                    <button class="category-btn w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-on-surface-variant hover:bg-surface-container/50 hover:text-white" data-cat="assistant">
-                        <span class="flex items-center gap-2.5">
-                            <span class="material-symbols-outlined text-lg">smart_toy</span> Kişisel Asistanlar
-                        </span>
-                        <span id="cat-count-assistant" class="text-xs px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-mono font-medium">0</span>
-                    </button>
-                    <button class="category-btn w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-on-surface-variant hover:bg-surface-container/50 hover:text-white" data-cat="utility">
-                        <span class="flex items-center gap-2.5">
-                            <span class="material-symbols-outlined text-lg">widgets</span> Araçlar & Diğer
-                        </span>
-                        <span id="cat-count-utility" class="text-xs px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-mono font-medium">0</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Hızlı Görünüm & Sıralama -->
-            <div class="pt-4 border-t border-outline-variant/20 space-y-2.5">
-                <label class="block text-xs font-bold text-tertiary uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                    <span class="material-symbols-outlined text-base">tune</span>
-                    Hızlı Görünüm
-                </label>
-                <button id="quick-filter-latest10" class="w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium bg-surface-dim hover:bg-tertiary/10 text-on-surface border border-outline-variant/30 hover:border-tertiary/40 transition-all duration-200 group">
-                    <span class="flex items-center gap-2.5">
-                        <span class="material-symbols-outlined text-lg text-tertiary group-hover:scale-110 transition-transform">new_releases</span> Son 10 Uygulama
-                    </span>
-                    <span id="latest10-badge" class="text-xs px-2 py-0.5 rounded-full bg-tertiary/20 text-tertiary font-bold font-mono">İlk 10</span>
-                </button>
-                <button id="reset-all-filters-btn" class="w-full py-2.5 text-center text-xs text-on-surface-variant hover:text-tertiary transition-colors flex items-center justify-center gap-1.5 font-medium">
-                    <span class="material-symbols-outlined text-base">restart_alt</span> Tüm Filtreleri Sıfırla
-                </button>
-            </div>
-
-        </div>
-    </aside>
-
-    <!-- RIGHT MAIN GRID (SAĞ UYGULAMA LİSTESİ) -->
-    <main class="lg:col-span-8 xl:col-span-9">
-        <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            <!-- App cards populated dynamically -->
-        </div>
-        
-        <!-- Boş Arama Sonucu Durumu -->
-        <div id="no-results-state" class="hidden text-center py-20 px-6 glass-card rounded-3xl border border-outline-variant/30 space-y-5 backdrop-blur-xl">
-            <div class="w-20 h-20 rounded-2xl bg-tertiary/10 text-tertiary flex items-center justify-center mx-auto text-4xl shadow-inner">
-                <span class="material-symbols-outlined text-5xl">search_off</span>
-            </div>
-            <div>
-                <h3 class="text-xl font-bold text-on-surface mb-2">Aranan Kriterlere Uygun Proje Bulunamadı</h3>
-                <p class="text-sm text-on-surface-variant max-w-md mx-auto">Farklı bir arama terimi deneyebilir veya aktif filtreleri temizleyebilirsiniz.</p>
-            </div>
-            <button id="empty-reset-btn" class="px-6 py-3 bg-secondary-container text-on-secondary-container rounded-2xl font-label-md hover:brightness-110 active:scale-95 transition-all shadow-md inline-flex items-center gap-2">
-                <span class="material-symbols-outlined text-base">restart_alt</span>
-                Filtreleri Sıfırla
-            </button>
-        </div>
-    </main>
-
-</div>
-</main>
-<!-- Footer -->
-<footer class="w-full py-12 bg-surface-container-lowest dark:bg-surface-dim border-t border-outline-variant/10">
-<div class="flex flex-col md:flex-row justify-between items-center gap-8 max-w-container-max mx-auto px-margin-desktop">
-<div class="text-on-surface font-headline-lg text-headline-lg">MGA Creative</div>
-<div class="flex gap-6">
-<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-tertiary transition-colors duration-200 hover:translate-y-[-2px] transition-transform" href="#">LinkedIn</a>
-<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-tertiary transition-colors duration-200 hover:translate-y-[-2px] transition-transform" href="#">GitHub</a>
-<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-tertiary transition-colors duration-200 hover:translate-y-[-2px] transition-transform" href="#">Twitter</a>
-<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-tertiary transition-colors duration-200 hover:translate-y-[-2px] transition-transform" href="#">Dribbble</a>
-</div>
-<p class="font-body-md text-body-md text-on-surface-variant">
-                 © 2026 MGA Creative. Tüm hakları saklıdır. Özenle tasarlanıp kodlanmıştır.
+<main class="pt-28 pb-20 px-4 md:px-12 max-w-7xl mx-auto">
+    <!-- Hero Header -->
+    <div class="mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 pb-8 border-b border-slate-200">
+        <div>
+            <span class="text-sky-600 font-bold text-xs uppercase tracking-wider">Dijital Portföy</span>
+            <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 mt-1">Uygulamalar &amp; <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 to-indigo-600">Kategoriler</span></h1>
+            <p class="text-slate-600 text-sm md:text-base mt-2 max-w-2xl">
+                Mobil, Web ve Dijital ürünlerimiz arasından anında arama yapın, kategorilere göre filtreleyin veya keşfedin.
             </p>
-</div>
-</footer>
+        </div>
+        <!-- Live Count Badge -->
+        <div id="project-count-badge" class="px-4 py-2 bg-white rounded-2xl border border-slate-200 text-slate-800 text-sm font-semibold flex items-center gap-3 flex-shrink-0 shadow-sm">
+            <span class="relative flex h-3 w-3">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+            </span>
+            <span id="live-count-text" class="text-sky-700 font-bold">Yükleniyor...</span>
+        </div>
+    </div>
 
-<style>
-    .active-cat-btn {
-        background-color: rgba(76, 215, 246, 0.14) !important;
-        color: #4cd7f6 !important;
-        border: 1px solid rgba(76, 215, 246, 0.35) !important;
-    }
-</style>
+    <!-- Mobile Filter Toggle Button (< lg screens) -->
+    <div class="lg:hidden mb-6">
+        <button id="mobile-filter-toggle-btn" class="w-full flex items-center justify-between px-5 py-3.5 bg-white rounded-2xl border border-slate-200 text-slate-800 font-semibold text-sm shadow-sm">
+            <span class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-sky-600">tune</span>
+                Filtrele &amp; Arama Yap
+            </span>
+            <span class="material-symbols-outlined transition-transform duration-300" id="mobile-toggle-icon">expand_more</span>
+        </button>
+    </div>
+
+    <!-- Sidebar + Grid Container -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- LEFT SIDEBAR (SOL PANEL) -->
+        <aside id="portfolio-sidebar" class="hidden lg:block lg:col-span-4 xl:col-span-3 lg:sticky lg:top-28 space-y-6 z-20">
+            <div class="glass-card rounded-3xl p-6 space-y-6">
+                
+                <!-- Arama Kutusu -->
+                <div>
+                    <label class="block text-xs font-bold text-sky-700 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-base">search</span>
+                        Proje Ara
+                    </label>
+                    <div class="relative">
+                        <input type="text" id="sidebar-search-input" placeholder="Uygulama adı veya konu..." 
+                            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 pl-10 pr-9 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100 transition-all">
+                        <span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-400 text-lg">search</span>
+                        <button id="clear-search-btn" class="hidden absolute right-3 top-2.5 text-slate-400 hover:text-slate-700 p-0.5 rounded-full hover:bg-slate-200 transition-all">
+                            <span class="material-symbols-outlined text-base">close</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Kategori Listesi -->
+                <div>
+                    <label class="block text-xs font-bold text-sky-700 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-base">category</span>
+                        Kategoriler
+                    </label>
+                    <div class="space-y-1.5" id="category-filter-list">
+                        <button class="category-btn active-cat-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all border border-transparent hover:bg-slate-100 text-slate-700" data-cat="all">
+                            <span class="flex items-center gap-2.5">
+                                <span class="material-symbols-outlined text-lg">apps</span> Tüm Projeler
+                            </span>
+                            <span id="cat-count-all" class="text-xs px-2 py-0.5 rounded-full bg-slate-200 text-slate-700 font-mono font-bold">0</span>
+                        </button>
+                        <button class="category-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all border border-transparent hover:bg-slate-100 text-slate-700" data-cat="business">
+                            <span class="flex items-center gap-2.5">
+                                <span class="material-symbols-outlined text-lg">business_center</span> Ticari Çözümler
+                            </span>
+                            <span id="cat-count-business" class="text-xs px-2 py-0.5 rounded-full bg-slate-200 text-slate-700 font-mono font-medium">0</span>
+                        </button>
+                        <button class="category-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all border border-transparent hover:bg-slate-100 text-slate-700" data-cat="assistant">
+                            <span class="flex items-center gap-2.5">
+                                <span class="material-symbols-outlined text-lg">smart_toy</span> Kişisel Asistanlar
+                            </span>
+                            <span id="cat-count-assistant" class="text-xs px-2 py-0.5 rounded-full bg-slate-200 text-slate-700 font-mono font-medium">0</span>
+                        </button>
+                        <button class="category-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all border border-transparent hover:bg-slate-100 text-slate-700" data-cat="utility">
+                            <span class="flex items-center gap-2.5">
+                                <span class="material-symbols-outlined text-lg">widgets</span> Araçlar &amp; Diğer
+                            </span>
+                            <span id="cat-count-utility" class="text-xs px-2 py-0.5 rounded-full bg-slate-200 text-slate-700 font-mono font-medium">0</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Hızlı Görünüm & Sıralama -->
+                <div class="pt-4 border-t border-slate-200 space-y-2">
+                    <label class="block text-xs font-bold text-sky-700 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-base">tune</span>
+                        Hızlı Görünüm
+                    </label>
+                    <button id="quick-filter-latest10" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium bg-slate-50 hover:bg-sky-50 text-slate-800 border border-slate-200 hover:border-sky-300 transition-all group">
+                        <span class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-lg text-sky-600 group-hover:scale-110 transition-transform">new_releases</span> Son 10 Uygulama
+                        </span>
+                        <span id="latest10-badge" class="text-xs px-2 py-0.5 rounded-full bg-sky-100 text-sky-800 font-bold font-mono">İlk 10</span>
+                    </button>
+                    <button id="reset-all-filters-btn" class="w-full py-2 text-center text-xs text-slate-500 hover:text-sky-600 transition-colors flex items-center justify-center gap-1 font-semibold">
+                        <span class="material-symbols-outlined text-base">restart_alt</span> Tüm Filtreleri Sıfırla
+                    </button>
+                </div>
+
+            </div>
+        </aside>
+
+        <!-- RIGHT MAIN GRID (SAĞ UYGULAMA LİSTESİ) -->
+        <main class="lg:col-span-8 xl:col-span-9">
+            <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                <!-- App cards populated dynamically -->
+            </div>
+            
+            <!-- Boş Arama Sonucu Durumu -->
+            <div id="no-results-state" class="hidden text-center py-16 px-6 glass-card rounded-3xl space-y-4">
+                <div class="w-16 h-16 rounded-2xl bg-sky-50 text-sky-600 flex items-center justify-center mx-auto text-3xl shadow-inner">
+                    <span class="material-symbols-outlined text-4xl">search_off</span>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1">Aranan Kriterlere Uygun Proje Bulunamadı</h3>
+                    <p class="text-sm text-slate-500 max-w-md mx-auto">Farklı bir arama terimi deneyebilir veya aktif filtreleri temizleyebilirsiniz.</p>
+                </div>
+                <button id="empty-reset-btn" class="px-6 py-2.5 bg-sky-600 text-white rounded-xl font-semibold text-sm hover:bg-sky-700 active:scale-95 transition-all shadow-md inline-flex items-center gap-2">
+                    <span class="material-symbols-outlined text-base">restart_alt</span>
+                    Filtreleri Sıfırla
+                </button>
+            </div>
+        </main>
+
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="w-full py-12 bg-white border-t border-slate-200 mt-12">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-6 max-w-7xl mx-auto px-4 md:px-12">
+        <div class="space-y-1 text-center md:text-left">
+            <div class="text-lg font-extrabold text-slate-900">MGA Creative</div>
+            <p class="text-sm text-slate-500">© 2026 MGA Creative. Tüm hakları saklıdır. Özenle tasarlanıp kodlanmıştır.</p>
+        </div>
+        <div class="flex gap-6 text-sm font-semibold text-slate-600">
+            <a class="hover:text-sky-600 transition-colors" href="/portfolio">Uygulamalar</a>
+            <a class="hover:text-sky-600 transition-colors" href="/about">Hakkımızda</a>
+            <a class="hover:text-sky-600 transition-colors" href="/contact">İletişim</a>
+            <a class="hover:text-sky-600 transition-colors" href="/admin">Yönetim</a>
+        </div>
+    </div>
+</footer>
 
 <script type="module">
     import { fetchPortfolioItems } from './js/supabase-client.js';
@@ -376,11 +323,9 @@
         if (!grid) return;
 
         let filtered = allPortfolioProjects.filter(item => {
-            // Category filter
             if (activeCategory !== 'all' && item.categoryAttr !== activeCategory) {
                 return false;
             }
-            // Search filter
             if (searchQuery) {
                 const q = searchQuery.toLowerCase();
                 const titleMatch = (item.title || '').toLowerCase().includes(q);
@@ -391,15 +336,13 @@
             return true;
         });
 
-        // Latest 10 filter
         if (isLatest10Only) {
             filtered = filtered.slice(0, 10);
         }
 
-        // Update live count text
         if (liveCountText) {
             if (isLatest10Only) {
-                liveCountText.textContent = `Son 10 Uygulama Gösteriliyor`;
+                liveCountText.textContent = `Son 10 Proje`;
             } else if (searchQuery) {
                 liveCountText.textContent = `${filtered.length} Sonuç Bulundu`;
             } else {
@@ -407,7 +350,6 @@
             }
         }
 
-        // Empty state handling
         if (filtered.length === 0) {
             grid.classList.add('hidden');
             if (noResults) noResults.classList.remove('hidden');
@@ -418,35 +360,30 @@
         if (noResults) noResults.classList.add('hidden');
 
         grid.innerHTML = filtered.map(item => {
-            const playBtnAction = item.playstoreUrl 
-                ? `window.open('${item.playstoreUrl}', '_blank')` 
-                : `window.location.href='${item.link || '/project?id=' + item.title.toLowerCase().replace(/\s+/g, '-')}'`;
-            const playBtnIcon = item.playstoreUrl ? 'play_apps' : 'play_circle';
-            const playBtnTitle = item.playstoreUrl ? 'Google Play Store\'da Gör' : 'Detayları İncele';
             const projectLink = item.link || ('/project?id=' + item.title.toLowerCase().replace(/\s+/g, '-'));
 
             return `
-            <article class="app-card glass-card flex flex-col rounded-2xl overflow-hidden border border-outline-variant/20 hover:border-tertiary/40 transition-all duration-300" data-category="${item.categoryAttr}">
-                <div class="relative h-60 overflow-hidden group">
-                    <img alt="${item.title} Preview" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="${item.image_url || 'https://placehold.co/600x400?text=Proje'}"/>
-                    <div class="absolute top-4 left-4">
-                        <span class="bg-surface-dim/80 backdrop-blur-md text-tertiary border border-tertiary/30 px-3 py-1 rounded-full font-label-sm uppercase tracking-wider font-semibold">${item.mainCategoryTag}</span>
+            <article class="glass-card flex flex-col rounded-2xl overflow-hidden group">
+                <div class="relative h-56 overflow-hidden bg-slate-100">
+                    <img alt="${item.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="${item.image_url || 'https://placehold.co/600x400?text=Proje'}"/>
+                    <div class="absolute top-3 left-3">
+                        <span class="bg-white/95 backdrop-blur-md text-sky-800 border border-slate-200/80 px-2.5 py-1 rounded-md text-xs font-bold shadow-sm">${item.mainCategoryTag}</span>
                     </div>
                 </div>
-                <div class="p-6 flex flex-col flex-grow">
-                    <h3 class="font-headline-lg text-2xl font-bold mb-2 text-on-surface">${item.title}</h3>
-                    <p class="font-body-md text-sm text-on-surface-variant mb-6 line-clamp-3 leading-relaxed">
+                <div class="p-5 flex flex-col flex-grow space-y-3">
+                    <h3 class="text-lg font-bold text-slate-900 group-hover:text-sky-600 transition-colors">${item.title}</h3>
+                    <p class="text-xs text-slate-600 line-clamp-3 leading-relaxed flex-grow">
                         ${item.cleanDescription || item.description || ''}
                     </p>
-                    <div class="mt-auto space-y-2 pt-2">
-                        <button onclick="window.location.href='${projectLink}'" class="w-full bg-secondary-container text-on-secondary-container py-3 px-4 rounded-xl font-label-md font-semibold transition-all hover:brightness-110 active:scale-95 shadow-md flex items-center justify-center gap-2 group">
+                    <div class="pt-3 border-t border-slate-100 mt-auto space-y-2">
+                        <button onclick="window.location.href='${projectLink}'" class="w-full bg-sky-600 hover:bg-sky-700 text-white py-2.5 px-4 rounded-xl text-xs font-bold transition-all shadow-md shadow-sky-600/15 active:scale-95 flex items-center justify-center gap-1.5">
                             <span>Detayları İncele</span>
-                            <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
                         </button>
                         ${item.playstoreUrl ? `
-                        <button onclick="window.open('${item.playstoreUrl}', '_blank')" class="w-full bg-surface-dim/90 hover:bg-tertiary/10 text-tertiary border border-tertiary/30 py-2.5 px-4 rounded-xl font-label-md text-xs font-semibold transition-all active:scale-95 flex items-center justify-center gap-2">
-                            <span class="material-symbols-outlined text-base">android</span>
-                            <span>Google Play Store'da Gör</span>
+                        <button onclick="window.open('${item.playstoreUrl}', '_blank')" class="w-full bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 py-2 px-3 rounded-xl text-xs font-semibold transition-all active:scale-95 flex items-center justify-center gap-1.5">
+                            <span class="material-symbols-outlined text-base text-emerald-600">play_apps</span>
+                            <span>Play Store</span>
                         </button>
                         ` : ''}
                     </div>
@@ -454,18 +391,6 @@
             </article>
             `;
         }).join('');
-
-        // Card entrance animation
-        const cards = grid.querySelectorAll('.app-card');
-        cards.forEach((card, index) => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(15px)';
-            setTimeout(() => {
-                card.style.transition = 'all 0.4s cubic-bezier(0.22, 1, 0.36, 1)';
-                card.style.opacity = '1';
-                card.style.transform = 'translateY(0)';
-            }, index * 40);
-        });
     }
 
     async function initPortfolio() {
@@ -521,20 +446,14 @@
             ];
 
             const combinedMap = new Map();
-
-            // 1. Seed defaults first
             defaultSeed.forEach(item => {
                 const key = (item.title || '').toLowerCase().trim();
                 if (key) combinedMap.set(key, item);
             });
-
-            // 2. Saved local items
             (localItems || []).forEach(item => {
                 const key = (item.title || '').toLowerCase().trim();
                 if (key) combinedMap.set(key, item);
             });
-
-            // 3. Supabase DB items (highest priority)
             (dbItems || []).forEach(item => {
                 const key = (item.title || '').toLowerCase().trim();
                 if (key) combinedMap.set(key, item);
@@ -550,10 +469,93 @@
         }
     }
 
+    // Event listeners
+    document.querySelectorAll('.category-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active-cat-btn'));
+            const currentBtn = e.currentTarget;
+            currentBtn.classList.add('active-cat-btn');
+            activeCategory = currentBtn.getAttribute('data-cat');
+            applyFiltersAndRender();
+        });
+    });
+
+    const searchInput = document.getElementById('sidebar-search-input');
+    const clearBtn = document.getElementById('clear-search-btn');
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value.trim();
+            if (clearBtn) {
+                if (searchQuery) clearBtn.classList.remove('hidden');
+                else clearBtn.classList.add('hidden');
+            }
+            applyFiltersAndRender();
+        });
+    }
+
+    if (clearBtn && searchInput) {
+        clearBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            searchQuery = '';
+            clearBtn.classList.add('hidden');
+            applyFiltersAndRender();
+        });
+    }
+
+    const quickLatestBtn = document.getElementById('quick-filter-latest10');
+    if (quickLatestBtn) {
+        quickLatestBtn.addEventListener('click', () => {
+            isLatest10Only = !isLatest10Only;
+            if (isLatest10Only) {
+                quickLatestBtn.classList.add('bg-sky-100', 'border-sky-400');
+            } else {
+                quickLatestBtn.classList.remove('bg-sky-100', 'border-sky-400');
+            }
+            applyFiltersAndRender();
+        });
+    }
+
+    const resetBtn = document.getElementById('reset-all-filters-btn');
+    const emptyResetBtn = document.getElementById('empty-reset-btn');
+    const doReset = () => {
+        activeCategory = 'all';
+        searchQuery = '';
+        isLatest10Only = false;
+        if (searchInput) searchInput.value = '';
+        if (clearBtn) clearBtn.classList.add('hidden');
+        if (quickLatestBtn) quickLatestBtn.classList.remove('bg-sky-100', 'border-sky-400');
+        document.querySelectorAll('.category-btn').forEach(b => {
+            if (b.getAttribute('data-cat') === 'all') b.classList.add('active-cat-btn');
+            else b.classList.remove('active-cat-btn');
+        });
+        applyFiltersAndRender();
+    };
+
+    if (resetBtn) resetBtn.addEventListener('click', doReset);
+    if (emptyResetBtn) emptyResetBtn.addEventListener('click', doReset);
+
+    // Mobile sidebar toggle
+    const mobileToggleBtn = document.getElementById('mobile-filter-toggle-btn');
+    const sidebar = document.getElementById('portfolio-sidebar');
+    const toggleIcon = document.getElementById('mobile-toggle-icon');
+    if (mobileToggleBtn && sidebar) {
+        mobileToggleBtn.addEventListener('click', () => {
+            const isHidden = sidebar.classList.contains('hidden');
+            if (isHidden) {
+                sidebar.classList.remove('hidden');
+                if (toggleIcon) toggleIcon.textContent = 'expand_less';
+            } else {
+                sidebar.classList.add('hidden');
+                if (toggleIcon) toggleIcon.textContent = 'expand_more';
+            }
+        });
+    }
+
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initPortfolio);
     } else {
         initPortfolio();
     }
-    </script>
-</body></html>
+</script>
+</body>
+</html>

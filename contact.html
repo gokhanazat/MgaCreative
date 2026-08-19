@@ -1,301 +1,243 @@
 <!DOCTYPE html>
-
-<html class="dark" lang="tr"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>MGA Creative | İletişim</title>
-<link rel="canonical" href="https://www.mgacreative.com/contact" />
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@600;700;800&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
+<html lang="tr">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>MGA Creative | İletişim</title>
+    <link rel="canonical" href="https://www.mgacreative.com/contact" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
       tailwind.config = {
-        darkMode: "class",
         theme: {
           extend: {
-            "colors": {
-                    "surface-variant": "#323537",
-                    "primary-fixed": "#dae2fd",
-                    "surface-container-lowest": "#0b0f10",
-                    "inverse-primary": "#565e74",
-                    "secondary": "#d2bbff",
-                    "surface-container-high": "#272a2c",
-                    "surface-container-highest": "#323537",
-                    "surface-bright": "#363a3b",
-                    "tertiary-fixed-dim": "#4cd7f6",
-                    "on-secondary-container": "#c9aeff",
-                    "tertiary": "#4cd7f6",
-                    "surface-container": "#1d2022",
-                    "on-tertiary-fixed-variant": "#004e5c",
-                    "secondary-fixed": "#eaddff",
-                    "error-container": "#93000a",
-                    "on-tertiary-fixed": "#001f26",
-                    "on-error": "#690005",
-                    "on-surface": "#e0e3e5",
-                    "on-primary-fixed-variant": "#3f465c",
-                    "primary-fixed-dim": "#bec6e0",
-                    "on-tertiary-container": "#008da5",
-                    "inverse-on-surface": "#2d3133",
-                    "on-primary": "#283044",
-                    "secondary-container": "#6001d1",
-                    "on-error-container": "#ffdad6",
-                    "surface-dim": "#101415",
-                    "surface": "#101415",
-                    "primary": "#bec6e0",
-                    "outline": "#909097",
-                    "error": "#ffb4ab",
-                    "on-tertiary": "#003640",
-                    "tertiary-fixed": "#acedff",
-                    "on-secondary-fixed": "#25005a",
-                    "outline-variant": "#45464d",
-                    "on-secondary": "#3f008e",
-                    "background": "#101415",
-                    "inverse-surface": "#e0e3e5",
-                    "surface-tint": "#bec6e0",
-                    "on-background": "#e0e3e5",
-                    "tertiary-container": "#001b21",
-                    "surface-container-low": "#191c1e",
-                    "on-primary-fixed": "#131b2e",
-                    "on-secondary-fixed-variant": "#5a00c6",
-                    "primary-container": "#0f172a",
-                    "secondary-fixed-dim": "#d2bbff",
-                    "on-surface-variant": "#c6c6cd",
-                    "on-primary-container": "#798098"
+            colors: {
+              background: "#F8FAFC",
+              surface: "#FFFFFF",
+              "surface-container": "#F1F5F9",
+              "on-background": "#0F172A",
+              "on-surface": "#0F172A",
+              "on-surface-variant": "#475569",
+              primary: "#0284C7",
+              "primary-hover": "#0369A1",
+              secondary: "#4F46E5",
+              "secondary-container": "#EEF2FF",
+              "on-secondary-container": "#3730A3",
+              tertiary: "#0284C7",
+              "tertiary-container": "#E0F2FE",
+              "on-tertiary-container": "#0369A1",
+              outline: "#CBD5E1",
+              "outline-variant": "#E2E8F0"
             },
-            "borderRadius": {
-                    "DEFAULT": "0.25rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "full": "9999px"
-            },
-            "spacing": {
-                    "gutter": "24px",
-                    "margin-desktop": "48px",
-                    "base": "8px",
-                    "container-max": "1280px",
-                    "margin-mobile": "16px"
-            },
-            "fontFamily": {
-                    "headline-lg-mobile": ["Geist"],
-                    "headline-xl": ["Geist"],
-                    "body-lg": ["Inter"],
-                    "label-md": ["JetBrains Mono"],
-                    "headline-lg": ["Geist"],
-                    "body-md": ["Inter"],
-                    "label-sm": ["JetBrains Mono"]
-            },
-            "fontSize": {
-                    "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
-                    "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
-                    "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
-                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}]
+            fontFamily: {
+              sans: ["'Plus Jakarta Sans'", "sans-serif"],
+              mono: ["'JetBrains Mono'", "monospace"]
             }
-          },
-        },
+          }
+        }
       }
     </script>
-<style>
+    <style>
         body {
-            background-color: #101415;
-            color: #e0e3e5;
-            font-family: 'Inter', sans-serif;
+            background-color: #F8FAFC;
+            color: #0F172A;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
         }
         .glass-card {
-            background: rgba(29, 32, 34, 0.4);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(144, 144, 151, 0.1);
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .glass-card:hover {
-            border-color: rgba(76, 215, 246, 0.3);
-            box-shadow: 0 0 20px rgba(76, 215, 246, 0.05);
-        }
-        .input-glow:focus {
-            box-shadow: 0 0 10px rgba(76, 215, 246, 0.2);
-            border-color: #4cd7f6;
+            border-color: #38BDF8;
+            box-shadow: 0 16px 32px -4px rgba(15, 23, 42, 0.1);
         }
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col">
+<body class="selection:bg-sky-100 selection:text-sky-900 min-h-screen flex flex-col">
+
 <!-- TopNavBar -->
-<nav class="fixed top-0 left-0 w-full z-50 bg-surface/80 backdrop-blur-xl dark:bg-surface-container/80 border-b border-outline-variant/20 dark:border-outline/10 shadow-sm dark:shadow-none h-20">
-<div class="flex justify-between items-center w-full h-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
-<a class="font-headline-lg text-headline-lg font-bold tracking-tight text-on-surface dark:text-on-background" href="/">MGA Creative</a>
-<div class="hidden md:flex items-center gap-8">
-<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-tertiary transition-all duration-300" href="/">Ana Sayfa</a>
-<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-tertiary transition-all duration-300" href="/portfolio">Uygulamalarımız</a>
-<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary dark:hover:text-tertiary transition-all duration-300" href="/about">Hakkımızda</a>
-<a class="text-primary dark:text-tertiary-fixed-dim font-bold border-b-2 border-primary dark:border-tertiary pb-1" href="/contact">İletişim</a>
-</div>
-<button onclick="window.location.href='/contact'" class="bg-secondary-container text-on-secondary-container px-6 py-2.5 rounded-lg font-label-md text-label-md hover:backdrop-brightness-110 active:scale-95 transition-all duration-300 hover:drop-shadow-[0_0_12px_rgba(76,215,246,0.3)]">
-                İletişime Geç
-            </button>
-</div>
-</nav>
-<main class="flex-grow pt-32 pb-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full">
-<!-- Header Section -->
-<header class="mb-16 md:mb-24 text-center max-w-3xl mx-auto">
-<h1 class="font-headline-xl text-headline-lg-mobile md:text-headline-xl text-on-surface mb-6">Birlikte <span class="text-tertiary">sıra dışı</span> bir şeyler inşa edelim.</h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant">Aklınızda belirli bir proje olsun ya da sadece yazılım mimarileri hakkında konuşmak isteyin, her zaman yeni fikirlere ve iş birliklerine açığım.</p>
+<header class="fixed top-0 left-0 w-full z-50 bg-white/85 backdrop-blur-xl border-b border-slate-200/80 shadow-sm">
+    <nav class="flex justify-between items-center w-full h-20 px-4 md:px-12 max-w-7xl mx-auto">
+        <a class="text-2xl font-extrabold tracking-tight text-slate-900 flex items-center gap-2" href="/">
+            <span class="w-8 h-8 rounded-xl bg-sky-600 text-white flex items-center justify-center text-base font-bold shadow-md shadow-sky-500/20">M</span>
+            <span>MGA Creative</span>
+        </a>
+        <div class="hidden md:flex items-center gap-8">
+            <a class="text-slate-600 font-semibold hover:text-sky-600 transition-all text-sm" href="/">Ana Sayfa</a>
+            <a class="text-slate-600 font-semibold hover:text-sky-600 transition-all text-sm" href="/portfolio">Uygulamalarımız</a>
+            <a class="text-slate-600 font-semibold hover:text-sky-600 transition-all text-sm" href="/about">Hakkımızda</a>
+            <a class="text-sky-600 font-bold border-b-2 border-sky-600 pb-1 text-sm transition-all" href="/contact">İletişim</a>
+        </div>
+        <button onclick="window.location.href='/contact'" class="bg-sky-600 hover:bg-sky-700 text-white font-semibold px-6 py-2.5 rounded-xl text-sm shadow-md shadow-sky-600/20 active:scale-95 transition-all">
+            İletişime Geç
+        </button>
+    </nav>
 </header>
-<!-- Main Layout: Form + Info Sidebar -->
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
-<!-- Contact Form Section (Bento Card style) -->
-<section class="lg:col-span-8 glass-card p-8 md:p-12 rounded-xl">
-<form class="space-y-8" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
-<!-- Web3Forms Access Key Option (User can change this token) -->
-<input type="hidden" name="access_key" value="3c8dd5d4-e7bf-4920-b145-85efa478bd3f">
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<div class="space-y-2">
-<label class="font-label-sm text-label-sm text-on-surface-variant block ml-1" for="name">ADINIZ SOYADINIZ</label>
-<input class="w-full bg-surface-container-lowest border border-outline-variant/30 rounded-lg px-4 py-3 text-on-surface font-body-md focus:outline-none input-glow transition-all duration-300" id="name" name="name" placeholder="Ahmet Yılmaz" required="" type="text"/>
-</div>
-<div class="space-y-2">
-<label class="font-label-sm text-label-sm text-on-surface-variant block ml-1" for="email">E-POSTA ADRESİNİZ</label>
-<input class="w-full bg-surface-container-lowest border border-outline-variant/30 rounded-lg px-4 py-3 text-on-surface font-body-md focus:outline-none input-glow transition-all duration-300" id="email" name="email" placeholder="ahmet@ornek.com" required="" type="email"/>
-</div>
-</div>
-<div class="space-y-2">
-<label class="font-label-sm text-label-sm text-on-surface-variant block ml-1" for="subject">KONU</label>
-<input class="w-full bg-surface-container-lowest border border-outline-variant/30 rounded-lg px-4 py-3 text-on-surface font-body-md focus:outline-none input-glow transition-all duration-300" id="subject" name="subject" placeholder="Proje Talebi" required="" type="text"/>
-</div>
-<div class="space-y-2">
-<label class="font-label-sm text-label-sm text-on-surface-variant block ml-1" for="message">MESAJINIZ</label>
-<textarea class="w-full bg-surface-container-lowest border border-outline-variant/30 rounded-lg px-4 py-3 text-on-surface font-body-md focus:outline-none input-glow transition-all duration-300 resize-none" id="message" name="message" placeholder="Bize hayalinizdeki projeden bahsedin..." required="" rows="6"></textarea>
-</div>
-<button class="w-full md:w-auto bg-secondary-container hover:bg-secondary text-on-secondary-container hover:text-on-secondary px-10 py-4 rounded-lg font-label-md text-label-md flex items-center justify-center gap-3 transition-all duration-300 active:scale-[0.98] group" type="submit">
-                        Mesajı Gönder
-                        <span class="material-symbols-outlined transition-transform group-hover:translate-x-1">send</span>
-</button>
-</form>
-</section>
-<!-- Sidebar Info Section -->
-<aside class="lg:col-span-4 space-y-6">
-<!-- Location/Contact Info -->
-<div class="glass-card p-8 rounded-xl space-y-8">
-<div class="flex items-start gap-4">
-<div class="w-12 h-12 rounded-lg bg-tertiary/10 flex items-center justify-center text-tertiary">
-<span class="material-symbols-outlined">alternate_email</span>
-</div>
-<div>
-<p class="font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase tracking-widest">E-posta</p>
-<p class="font-body-md text-body-md text-on-surface">mgacreative.tr@gmail.com</p>
-</div>
-</div>
-<div class="flex items-start gap-4">
-<div class="w-12 h-12 rounded-lg bg-tertiary/10 flex items-center justify-center text-tertiary">
-<span class="material-symbols-outlined">location_on</span>
-</div>
-<div>
-<p class="font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase tracking-widest">Konum</p>
-<p class="font-body-md text-body-md text-on-surface">İskenderun, Türkiye</p>
-</div>
-</div>
-<div class="pt-4 border-t border-outline-variant/10">
-<p class="font-label-sm text-label-sm text-on-surface-variant mb-4 uppercase tracking-widest">Dijital Kanallar</p>
-<div class="flex gap-4">
-<a class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant hover:text-tertiary hover:bg-tertiary/10 transition-all duration-300" href="#" title="LinkedIn">
-<span class="material-symbols-outlined">link</span>
-</a>
-<a class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant hover:text-tertiary hover:bg-tertiary/10 transition-all duration-300" href="#" title="GitHub">
-<span class="material-symbols-outlined">code</span>
-</a>
-<a class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant hover:text-tertiary hover:bg-tertiary/10 transition-all duration-300" href="#" title="Twitter">
-<span class="material-symbols-outlined">share</span>
-</a>
-</div>
-</div>
-</div>
-<!-- Abstract Visual / Map Placeholder -->
-<div class="relative overflow-hidden rounded-xl h-64 glass-card group">
-<img alt="Digital Map Visualization" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A highly stylized, dark-themed 3D topographical map showing glowing data connections over a simplified representation of San Francisco. The aesthetic is futuristic and high-tech, using a palette of deep slate blacks and electric cyan highlights. Soft ambient light from the glowing nodes illuminates the terrain, creating a sense of global connectivity and architectural depth in a minimalist dark-mode environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwlwxcNYwHaV7U3iX4oGyxP6AmI3eDhV4R3VHfajPG9J-L76ywBVSwprMNqw3SUyf18K1BJg1MV2E4yanHXOdbh_J5DO_j2jw8HOi1aE_kmD4XcTb3ZjPNZUYDiwsfuud-iFdhOG_QxsIJ5IkDM0d207g94LyjXa6c9LdvaduDD-kFUTWqIc5o5ZAYRTqmeFY1cGC8KbvKDj7m6D4LEwW_K7XlfsTZIQz4z1z4cHUKp3WAK2p0v2xOUGe_5frYnkS69J83B5kiSwyT"/>
-<div class="absolute inset-0 bg-gradient-to-t from-surface/80 to-transparent flex flex-col justify-end p-6">
-<span class="font-label-sm text-label-sm text-tertiary mb-1">KÜRESEL ERİŞİM</span>
-<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Uzaktan Çalışma ve Projeler İçin Müsait</h3>
-</div>
-</div>
-</aside>
-</div>
-</main>
-<!-- Footer -->
-<footer class="bg-surface-container-lowest dark:bg-surface-dim border-t border-outline-variant/10 w-full py-12">
-<div class="flex flex-col md:flex-row justify-between items-center gap-8 max-w-container-max mx-auto px-margin-desktop">
-<div class="font-headline-lg text-headline-lg text-on-surface">
-                MGA Creative
-            </div>
-<p class="font-body-md text-body-md text-on-surface-variant text-center md:text-left">
-                © 2026 MGA Creative. Tüm hakları saklıdır. Özenle tasarlanıp kodlanmıştır.
-            </p>
-<div class="flex gap-8">
-<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-tertiary transition-colors duration-200 hover:translate-y-[-2px] transition-transform" href="#">LinkedIn</a>
-<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-tertiary transition-colors duration-200 hover:translate-y-[-2px] transition-transform" href="#">GitHub</a>
-<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-tertiary transition-colors duration-200 hover:translate-y-[-2px] transition-transform" href="#">Twitter</a>
-<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-tertiary transition-colors duration-200 hover:translate-y-[-2px] transition-transform" href="#">Dribbble</a>
-</div>
-</div>
-</footer>
-<script>
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const btn = e.target.querySelector('button');
-            const originalText = btn.innerHTML;
-            
-            // Interaction: Loading state
-            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">refresh</span> Gönderiliyor...';
-            btn.disabled = true;
 
-            const formData = new FormData(e.target);
+<main class="flex-grow pt-28 pb-20 px-4 md:px-12 max-w-7xl mx-auto w-full">
+    <!-- Header Section -->
+    <header class="mb-14 text-center max-w-2xl mx-auto">
+        <span class="text-sky-600 font-bold text-xs uppercase tracking-wider">Bize Ulaşın</span>
+        <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 mt-1 mb-4">
+            Birlikte <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 to-indigo-600">sıra dışı</span> bir şeyler inşa edelim.
+        </h1>
+        <p class="text-slate-600 text-sm md:text-base leading-relaxed">
+            Aklınızda bir mobil veya web projesi olsun ya da teknoloji ortaklığı düşünün, her zaman yeni fikirlere ve iş birliklerine açığız.
+        </p>
+    </header>
 
-            fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json'
-                },
-                body: formData
-            })
-            .then(async (response) => {
-                let json = await response.json();
-                if (response.status == 200) {
-                    btn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> Mesaj Gönderildi!';
-                    btn.classList.replace('bg-secondary-container', 'bg-tertiary');
-                    btn.classList.replace('text-on-secondary-container', 'text-on-tertiary');
-                    e.target.reset();
-                } else {
-                    btn.innerHTML = '<span class="material-symbols-outlined">error</span> Hata Oluştu!';
-                }
-                setTimeout(() => {
-                    btn.innerHTML = originalText;
-                    btn.classList.replace('bg-tertiary', 'bg-secondary-container');
-                    btn.classList.replace('text-on-tertiary', 'text-on-secondary-container');
-                    btn.disabled = false;
-                }, 3000);
-            })
-            .catch(error => {
-                btn.innerHTML = '<span class="material-symbols-outlined">error</span> Bağlantı Hatası!';
-                setTimeout(() => {
-                    btn.innerHTML = originalText;
-                    btn.disabled = false;
-                }, 3000);
-            });
-        });
-
-        // Atmospheric effect: Subtle mouse-following glow on form
-        const formContainer = document.querySelector('.lg\\:col-span-8');
-        formContainer.addEventListener('mousemove', (e) => {
-            const rect = formContainer.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            formContainer.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(76, 215, 246, 0.05) 0%, rgba(29, 32, 34, 0.4) 50%)`;
-        });
+    <!-- Main Layout: Form + Info Sidebar -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
-        formContainer.addEventListener('mouseleave', () => {
-            formContainer.style.background = `rgba(29, 32, 34, 0.4)`;
+        <!-- Contact Form Section -->
+        <section class="lg:col-span-8 glass-card p-6 md:p-10 rounded-3xl space-y-6">
+            <form class="space-y-6" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="3c8dd5d4-e7bf-4920-b145-85efa478bd3f">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold text-slate-700 uppercase tracking-wider block" for="name">ADINIZ SOYADINIZ</label>
+                        <input class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 text-sm focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100 transition-all" id="name" name="name" placeholder="Ahmet Yılmaz" required="" type="text"/>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold text-slate-700 uppercase tracking-wider block" for="email">E-POSTA ADRESİNİZ</label>
+                        <input class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 text-sm focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100 transition-all" id="email" name="email" placeholder="ahmet@ornek.com" required="" type="email"/>
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-xs font-bold text-slate-700 uppercase tracking-wider block" for="subject">KONU</label>
+                    <input class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 text-sm focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100 transition-all" id="subject" name="subject" placeholder="Mobil Uygulama Geliştirme Talebi" required="" type="text"/>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-xs font-bold text-slate-700 uppercase tracking-wider block" for="message">MESAJINIZ</label>
+                    <textarea class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 text-sm focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100 transition-all resize-none" id="message" name="message" placeholder="Bize hayalinizdeki projeden bahsedin..." required="" rows="5"></textarea>
+                </div>
+
+                <button class="w-full md:w-auto bg-sky-600 hover:bg-sky-700 text-white font-bold px-8 py-3.5 rounded-xl text-sm flex items-center justify-center gap-2 shadow-lg shadow-sky-600/20 active:scale-95 transition-all group" type="submit">
+                    <span>Mesajı Gönder</span>
+                    <span class="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform">send</span>
+                </button>
+            </form>
+        </section>
+
+        <!-- Sidebar Info Section -->
+        <aside class="lg:col-span-4 space-y-6">
+            <div class="glass-card p-6 md:p-8 rounded-3xl space-y-6">
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center flex-shrink-0">
+                        <span class="material-symbols-outlined text-xl">alternate_email</span>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">E-posta</p>
+                        <p class="text-sm font-semibold text-slate-900 mt-0.5">mgacreative.tr@gmail.com</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center flex-shrink-0">
+                        <span class="material-symbols-outlined text-xl">location_on</span>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Konum</p>
+                        <p class="text-sm font-semibold text-slate-900 mt-0.5">İskenderun, Hatay / Türkiye</p>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-slate-100">
+                    <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Teknoloji Kanalları</p>
+                    <div class="flex gap-3 text-slate-600">
+                        <a class="w-9 h-9 rounded-xl bg-slate-100 flex items-center justify-center hover:bg-sky-50 hover:text-sky-600 transition-colors" href="https://github.com/gokhanazat" target="_blank" title="GitHub">
+                            <span class="material-symbols-outlined text-lg">code</span>
+                        </a>
+                        <a class="w-9 h-9 rounded-xl bg-slate-100 flex items-center justify-center hover:bg-sky-50 hover:text-sky-600 transition-colors" href="/portfolio" title="Uygulamalar">
+                            <span class="material-symbols-outlined text-lg">apps</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visual Info Card -->
+            <div class="glass-card p-6 rounded-3xl space-y-3 bg-gradient-to-br from-sky-50/50 to-white">
+                <span class="text-xs font-bold text-sky-700 uppercase tracking-wider flex items-center gap-1">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                    Küresel Erişim
+                </span>
+                <h3 class="text-base font-bold text-slate-900">Uzaktan Çalışma ve Projeler İçin Müsait</h3>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                    Türkiye ve global pazardaki kurumsal ve bireysel projeler için uçtan uca mimari geliştirme sağlıyoruz.
+                </p>
+            </div>
+        </aside>
+
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="w-full py-12 bg-white border-t border-slate-200 mt-12">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-6 max-w-7xl mx-auto px-4 md:px-12">
+        <div class="space-y-1 text-center md:text-left">
+            <div class="text-lg font-extrabold text-slate-900">MGA Creative</div>
+            <p class="text-sm text-slate-500">© 2026 MGA Creative. Tüm hakları saklıdır. Özenle tasarlanıp kodlanmıştır.</p>
+        </div>
+        <div class="flex gap-6 text-sm font-semibold text-slate-600">
+            <a class="hover:text-sky-600 transition-colors" href="/portfolio">Uygulamalar</a>
+            <a class="hover:text-sky-600 transition-colors" href="/about">Hakkımızda</a>
+            <a class="hover:text-sky-600 transition-colors" href="/contact">İletişim</a>
+            <a class="hover:text-sky-600 transition-colors" href="/admin">Yönetim</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const btn = e.target.querySelector('button');
+        const originalText = btn.innerHTML;
+        
+        btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-base">sync</span><span>Gönderiliyor...</span>';
+        btn.disabled = true;
+
+        const formData = new FormData(e.target);
+
+        fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json'
+            },
+            body: formData
+        })
+        .then(async (response) => {
+            if (response.status == 200) {
+                btn.innerHTML = '<span class="material-symbols-outlined text-base">check_circle</span><span>Mesaj Gönderildi!</span>';
+                btn.classList.remove('bg-sky-600');
+                btn.classList.add('bg-emerald-600');
+                e.target.reset();
+            } else {
+                btn.innerHTML = '<span class="material-symbols-outlined text-base">error</span><span>Hata Oluştu!</span>';
+            }
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.remove('bg-emerald-600');
+                btn.classList.add('bg-sky-600');
+                btn.disabled = false;
+            }, 3500);
+        })
+        .catch(error => {
+            btn.innerHTML = '<span class="material-symbols-outlined text-base">error</span><span>Bağlantı Hatası!</span>';
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }, 3500);
         });
-    </script>
-</body></html>
+    });
+</script>
+</body>
+</html>

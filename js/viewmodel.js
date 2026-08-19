@@ -47,9 +47,10 @@ async function updatePageContent() {
 
         const items = Array.from(combinedMap.values());
         if (items.length === 0) {
-            portfolioGrid.innerHTML = '<p class="text-on-surface-variant font-body-md col-span-full">Henüz proje eklenmemiş.</p>';
+            portfolioGrid.innerHTML = '<p class="text-slate-500 font-medium col-span-full">Henüz proje eklenmemiş.</p>';
         } else {
-            portfolioGrid.innerHTML = items.map(item => {
+            // Ana sayfada ilk 8 projeyi göster
+            portfolioGrid.innerHTML = items.slice(0, 8).map(item => {
                 const cleanDesc = (item.description || '').replace(/<!--META:[\s\S]*?-->/g, '').trim();
                 let imgUrl = (item.image_url || '')
                     .replace('coocmatch_kart.jpeg', 'cookmatch_kart.jpeg')
@@ -57,25 +58,29 @@ async function updatePageContent() {
                     .replace('tripmimd_kart.jpeg', 'tripmind_kart.jpeg')
                     .replace('lemoraxl_kart.jpeg', 'lemoraxl-kart.jpeg')
                     .replace('Voxnoete_kart.jpeg', 'voxnote_kart.jpeg');
-                // Etiketleri (Tags) virgülle ayırıp span'lara dönüştür
+
+                // Etiketleri virgülle ayırıp modern badge haline getir
                 const tagsHtml = item.category_tags 
-                    ? item.category_tags.split(',').map(tag => `<span class="bg-tertiary/10 text-tertiary px-3 py-1 rounded-full font-label-sm text-label-sm">${tag.trim()}</span>`).join('')
+                    ? item.category_tags.split(',').slice(0, 3).map(tag => `<span class="bg-sky-50 text-sky-700 border border-sky-200/80 px-2.5 py-0.5 rounded-md text-xs font-semibold">${tag.trim()}</span>`).join(' ')
                     : '';
 
                 return `
-                <div class="group relative glass-card rounded-[24px] overflow-hidden inner-glow transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col h-full">
-                    <div class="h-64 overflow-hidden">
-                        <img alt="${item.title} Preview" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="${imgUrl}"/>
+                <div class="glass-card rounded-2xl overflow-hidden flex flex-col h-full group hover:shadow-xl transition-all duration-300">
+                    <div class="h-48 overflow-hidden bg-slate-100 relative">
+                        <img alt="${item.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="${imgUrl}"/>
                     </div>
-                    <div class="p-8 space-y-4 flex flex-col flex-grow">
-                        <div class="flex gap-2 flex-wrap">
+                    <div class="p-5 space-y-3 flex flex-col flex-grow">
+                        <div class="flex gap-1.5 flex-wrap">
                             ${tagsHtml}
                         </div>
-                        <h3 class="font-headline-lg text-[24px] leading-tight">${item.title}</h3>
-                        <p class="font-body-md text-body-md text-on-surface-variant flex-grow line-clamp-3">${cleanDesc}</p>
-                        <a class="inline-flex items-center text-primary-fixed-dim font-label-md text-label-md pt-2 mt-auto" href="${item.link}">
-                            Projeyi İncele <span class="material-symbols-outlined ml-2 text-[18px]">open_in_new</span>
-                        </a>
+                        <h3 class="text-lg font-bold text-slate-900 leading-snug group-hover:text-sky-600 transition-colors">${item.title}</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed flex-grow line-clamp-3">${cleanDesc}</p>
+                        <div class="pt-3 border-t border-slate-100 mt-auto flex items-center justify-between">
+                            <a class="inline-flex items-center gap-1 text-sky-600 hover:text-sky-700 font-bold text-xs" href="${item.link}">
+                                <span>İncele</span>
+                                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 `;
