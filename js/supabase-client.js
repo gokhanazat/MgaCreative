@@ -102,20 +102,24 @@ export async function updatePortfolioItem(id, updates) {
 }
 
 /**
- * portfolio_items tablosundan uygulama siler
+ * portfolio_items tablosundan uygulama siler (ID veya Title bazlı)
  */
-export async function deletePortfolioItem(id) {
+export async function deletePortfolioItem(id, title = null) {
     try {
-        const deletePromise = supabase
-            .from('portfolio_items')
-            .delete()
-            .eq('id', id);
+        let deleteQuery = supabase.from('portfolio_items').delete();
+        if (id && !String(id).startsWith('def-')) {
+            deleteQuery = deleteQuery.eq('id', id);
+        } else if (title) {
+            deleteQuery = deleteQuery.eq('title', title);
+        } else {
+            return null;
+        }
 
         const timeoutPromise = new Promise((_, reject) => 
             setTimeout(() => reject(new Error('Veritabanı silme süresi aşıldı')), 5000)
         );
 
-        const { error } = await Promise.race([deletePromise, timeoutPromise]);
+        const { error } = await Promise.race([deleteQuery, timeoutPromise]);
         return error;
     } catch (e) {
         console.warn('deletePortfolioItem notice:', e);

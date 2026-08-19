@@ -626,28 +626,69 @@ if (syncDefaultsBtn) {
     syncDefaultsBtn.addEventListener('click', syncDefaultProjects);
 }
 
+// --- SİLİNEN PROJELERİN KALICI YÖNETİMİ (TOMBSTONE) ---
+function getDeletedProjects() {
+    try {
+        const del = localStorage.getItem('mga_deleted_projects');
+        return del ? JSON.parse(del) : [];
+    } catch(e) {
+        return [];
+    }
+}
+
+function addDeletedProject(id, title) {
+    try {
+        const delList = getDeletedProjects();
+        if (id && !delList.includes(String(id))) delList.push(String(id));
+        if (title && !delList.includes(title.toLowerCase().trim())) delList.push(title.toLowerCase().trim());
+        localStorage.setItem('mga_deleted_projects', JSON.stringify(delList));
+    } catch(e) {}
+}
+
+function unmarkDeletedProject(title) {
+    try {
+        let delList = getDeletedProjects();
+        if (title) {
+            const key = title.toLowerCase().trim();
+            delList = delList.filter(item => item !== key);
+            localStorage.setItem('mga_deleted_projects', JSON.stringify(delList));
+        }
+    } catch(e) {}
+}
+
 // --- PORTFÖY LİSTESİNİ ÇEK VE RENDER ET (HIZLI / OPTİMİSTİK) ---
 function loadLocalProjects() {
+    const deletedList = getDeletedProjects();
     let parsedLocal = [];
     const savedLocal = localStorage.getItem('mga_portfolio_projects');
+    
     if (savedLocal) {
         try {
             const arr = JSON.parse(savedLocal);
-            if (Array.isArray(arr) && arr.length > 0) {
+            if (Array.isArray(arr)) {
                 parsedLocal = arr;
             }
         } catch(e) {}
     }
 
     const combinedMap = new Map();
+
+    // 1. Varsayılan Seed projeler (Silinenler hariç)
     DEFAULT_PROJECTS.forEach(proj => {
         const key = (proj.title || '').toLowerCase().trim();
-        if (key) combinedMap.set(key, proj);
+        const idKey = String(proj.id);
+        if (key && !deletedList.includes(key) && !deletedList.includes(idKey)) {
+            combinedMap.set(key, proj);
+        }
     });
 
+    // 2. Lokal projeler (Silinenler hariç)
     parsedLocal.forEach(proj => {
         const key = (proj.title || '').toLowerCase().trim();
-        if (key) combinedMap.set(key, proj);
+        const idKey = String(proj.id);
+        if (key && !deletedList.includes(key) && !deletedList.includes(idKey)) {
+            combinedMap.set(key, proj);
+        }
     });
 
     cachedProjects = Array.from(combinedMap.values()).map(parseItemMeta);
@@ -665,21 +706,35 @@ async function renderPortfolioList(skipNetwork = false) {
 
     // 2. ARKA PLANDA ÇEK: Supabase'den veri gelince sessizce güncelle
     try {
+        const deletedList = getDeletedProjects();
         const rawItems = await fetchPortfolioItems();
         if (rawItems && rawItems.length > 0) {
             const combinedMap = new Map();
+
             DEFAULT_PROJECTS.forEach(proj => {
                 const key = (proj.title || '').toLowerCase().trim();
-                if (key) combinedMap.set(key, proj);
+                const idKey = String(proj.id);
+                if (key && !deletedList.includes(key) && !deletedList.includes(idKey)) {
+                    combinedMap.set(key, proj);
+                }
             });
+
             cachedProjects.forEach(proj => {
                 const key = (proj.title || '').toLowerCase().trim();
-                if (key) combinedMap.set(key, proj);
+                const idKey = String(proj.id);
+                if (key && !deletedList.includes(key) && !deletedList.includes(idKey)) {
+                    combinedMap.set(key, proj);
+                }
             });
+
             rawItems.forEach(proj => {
                 const key = (proj.title || '').toLowerCase().trim();
-                if (key) combinedMap.set(key, proj);
+                const idKey = String(proj.id);
+                if (key && !deletedList.includes(key) && !deletedList.includes(idKey)) {
+                    combinedMap.set(key, proj);
+                }
             });
+
             cachedProjects = Array.from(combinedMap.values()).map(parseItemMeta);
             localStorage.setItem('mga_portfolio_projects', JSON.stringify(cachedProjects));
             if (statTotalProjects) statTotalProjects.textContent = cachedProjects.length;
@@ -777,19 +832,17 @@ function filterAndDisplayProjects() {
             const projTitle = targetProj ? targetProj.title : 'Bu projeyi';
             
             if (confirm(`"${projTitle}" projesini silmek istediğinize emin misiniz?`)) {
-                // Optimistik: Hemen listeden çıkar
+                // 1. Kalıcı silinenler listesine (Tombstone) kaydet
+                addDeletedProject(targetProj?.id || id, targetProj?.title || id);
+
+                // 2. Optimistik: Hemen listeden çıkar ve hafızaya kaydet
                 cachedProjects = cachedProjects.filter(p => String(p.id) !== String(id) && p.title !== id);
-                if (cachedProjects.length === 0) {
-                    cachedProjects = DEFAULT_PROJECTS.map(parseItemMeta);
-                }
                 localStorage.setItem('mga_portfolio_projects', JSON.stringify(cachedProjects));
                 if (statTotalProjects) statTotalProjects.textContent = cachedProjects.length;
                 filterAndDisplayProjects();
 
-                // Arka planda DB'den sil
-                if (targetProj && targetProj.id && !String(targetProj.id).startsWith('def-')) {
-                    deletePortfolioItem(targetProj.id).catch(() => {});
-                }
+                // 3. Arka planda DB'den kesin sil (ID veya Title bazlı)
+                deletePortfolioItem(targetProj?.id, targetProj?.title).catch(() => {});
             }
         });
     });
@@ -872,6 +925,7 @@ if (addPortfolioForm) {
             };
 
             // 1. ANINDA EKLE & GÖSTER (0 GECİKME)
+            unmarkDeletedProject(item.title);
             cachedProjects.unshift(parseItemMeta(item));
             localStorage.setItem('mga_portfolio_projects', JSON.stringify(cachedProjects));
 
