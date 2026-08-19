@@ -718,31 +718,31 @@ function filterAndDisplayProjects() {
     portfolioList.innerHTML = '';
     filtered.forEach(item => {
         const div = document.createElement('div');
-        div.className = 'glass-card p-4 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border border-[#45464d]/60 hover:border-[#4cd7f6]/40 transition-all';
+        div.className = 'glass-card p-4 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border border-slate-200 hover:border-sky-300 transition-all';
         
         const tagsHtml = (item.category_tags || '')
             .split(',')
-            .map(t => `<span class="px-2 py-0.5 bg-[#4cd7f6]/10 text-[#4cd7f6] rounded text-[11px] font-medium">${t.trim()}</span>`)
+            .map(t => `<span class="px-2 py-0.5 bg-sky-50 text-sky-700 border border-sky-100 rounded-md text-[11px] font-semibold">${t.trim()}</span>`)
             .join(' ');
 
         const playstoreBadge = item.playstoreUrl 
-            ? `<a href="${item.playstoreUrl}" target="_blank" class="px-2 py-0.5 bg-green-500/10 text-green-400 border border-green-500/20 rounded text-[11px] font-medium inline-flex items-center gap-1 hover:underline"><span class="material-symbols-outlined text-xs">play_apps</span> Play Store</a>` 
+            ? `<a href="${item.playstoreUrl}" target="_blank" class="px-2 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-md text-[11px] font-semibold inline-flex items-center gap-1 hover:underline"><span class="material-symbols-outlined text-xs">play_apps</span> Play Store</a>` 
             : '';
 
         const youtubeBadge = item.youtubeId 
-            ? `<a href="https://www.youtube.com/watch?v=${item.youtubeId}" target="_blank" class="px-2 py-0.5 bg-red-500/10 text-red-400 border border-red-500/20 rounded text-[11px] font-medium inline-flex items-center gap-1 hover:underline"><span class="material-symbols-outlined text-xs">smart_display</span> YouTube (${item.youtubeId})</a>` 
+            ? `<a href="https://www.youtube.com/watch?v=${item.youtubeId}" target="_blank" class="px-2 py-0.5 bg-red-50 text-red-700 border border-red-200 rounded-md text-[11px] font-semibold inline-flex items-center gap-1 hover:underline"><span class="material-symbols-outlined text-xs">smart_display</span> YouTube</a>` 
             : '';
 
         const itemUniqueId = item.id || item.title;
 
         div.innerHTML = `
             <div class="flex items-center gap-4 flex-1 min-w-0">
-                <img src="${item.image_url || 'https://placehold.co/100x100?text=Proje'}" alt="${item.title}" class="w-16 h-16 rounded-xl object-cover border border-[#45464d] flex-shrink-0 bg-[#101415]">
+                <img src="${item.image_url || 'https://placehold.co/100x100?text=Proje'}" alt="${item.title}" class="w-14 h-14 rounded-xl object-cover border border-slate-200 flex-shrink-0 bg-slate-100">
                 <div class="space-y-1 min-w-0">
                     <div class="flex items-center gap-2">
-                        <h4 class="text-white font-semibold text-base truncate">${item.title}</h4>
+                        <h4 class="text-slate-900 font-bold text-sm truncate">${item.title}</h4>
                     </div>
-                    <p class="text-xs text-[#c6c6cd] line-clamp-2">${item.cleanDescription || item.description || ''}</p>
+                    <p class="text-xs text-slate-500 line-clamp-2">${item.cleanDescription || item.description || ''}</p>
                     <div class="flex flex-wrap items-center gap-1.5 pt-1">
                         ${tagsHtml}
                         ${playstoreBadge}
@@ -751,12 +751,12 @@ function filterAndDisplayProjects() {
                 </div>
             </div>
             
-            <div class="flex items-center gap-2 w-full sm:w-auto justify-end border-t sm:border-t-0 border-[#45464d]/40 pt-2 sm:pt-0">
-                <button type="button" class="edit-btn p-2 bg-[#1d2022] hover:bg-[#4cd7f6]/20 text-[#4cd7f6] rounded-lg transition-all flex items-center gap-1 text-xs font-medium" data-id="${itemUniqueId}">
+            <div class="flex items-center gap-2 w-full sm:w-auto justify-end border-t sm:border-t-0 border-slate-100 pt-2 sm:pt-0">
+                <button type="button" class="edit-btn px-3 py-1.5 bg-sky-50 hover:bg-sky-100 text-sky-700 border border-sky-200 rounded-lg transition-all flex items-center gap-1 text-xs font-bold" data-id="${itemUniqueId}">
                     <span class="material-symbols-outlined text-base">edit</span>
                     <span>Düzenle</span>
                 </button>
-                <button type="button" class="delete-btn p-2 bg-[#93000a]/30 hover:bg-[#93000a] text-[#ffdad6] rounded-lg transition-all flex items-center gap-1 text-xs font-medium" data-id="${itemUniqueId}">
+                <button type="button" class="delete-btn px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 rounded-lg transition-all flex items-center gap-1 text-xs font-bold" data-id="${itemUniqueId}">
                     <span class="material-symbols-outlined text-base">delete</span>
                     <span>Sil</span>
                 </button>
