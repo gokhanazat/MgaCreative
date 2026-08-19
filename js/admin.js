@@ -558,7 +558,9 @@ if (pFileInput) {
             fileSelectLabel.textContent = file.name;
             const reader = new FileReader();
             reader.onload = (evt) => {
-                pPreview.src = evt.target.result;
+                const base64Data = evt.target.result;
+                pPreview.src = base64Data;
+                pImageInput.value = base64Data; // Anında inputa aktar
                 pPreviewContainer.classList.remove('hidden');
             };
             reader.readAsDataURL(file);
@@ -584,7 +586,9 @@ if (editFileInput) {
             editFileSelectLabel.textContent = file.name;
             const reader = new FileReader();
             reader.onload = (evt) => {
-                editPreview.src = evt.target.result;
+                const base64Data = evt.target.result;
+                editPreview.src = base64Data;
+                editImageInput.value = base64Data; // Anında inputa aktar
             };
             reader.readAsDataURL(file);
         }
@@ -1001,9 +1005,14 @@ if (editPortfolioForm) {
         const id = editIdInput.value;
         let imageUrl = editImageInput.value.trim();
 
+        // Eğer preview'da yeni bir base64 / url varsa ve input boşsa önizlemedekini kullan
+        if (!imageUrl && editPreview.src && !editPreview.src.includes('placehold.co')) {
+            imageUrl = editPreview.src;
+        }
+
         // Eğer yeni dosya seçilmişse hızlıca oku
         const newFile = editFileInput.files[0];
-        if (newFile) {
+        if (newFile && (!imageUrl || !imageUrl.startsWith('data:'))) {
             const uploadedUrl = await uploadPortfolioImage(newFile);
             if (uploadedUrl) imageUrl = uploadedUrl;
         }
