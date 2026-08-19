@@ -723,7 +723,7 @@ function filterAndDisplayProjects() {
             .join(' ');
 
         const playstoreBadge = item.playstoreUrl 
-            ? `<a href="${item.playstoreUrl}" target="_blank" class="px-2 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-md text-[11px] font-semibold inline-flex items-center gap-1 hover:underline"><span class="material-symbols-outlined text-xs">play_apps</span> Play Store</a>` 
+            ? `<a href="${item.playstoreUrl}" target="_blank" class="px-2.5 py-1 bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 rounded-md text-[11px] font-bold inline-flex items-center gap-1.5 hover:border-slate-300 transition-all shadow-xs"><svg class="w-3 h-3 flex-shrink-0" viewBox="0 0 24 24" fill="none"><path d="M3.609 1.814L13.793 12 3.61 22.186A2.25 2.25 0 0 1 3 20.61V3.39c0-.622.22-1.2.609-1.576z" fill="#00D763"/><path d="M17.382 8.411l-3.589 3.589 3.589 3.589 4.098-2.342c1.173-.67 1.173-2.424 0-3.094l-4.098-2.342z" fill="#FFC107"/><path d="M13.793 12L3.609 1.814c.389-.377.967-.597 1.589-.597.555 0 1.107.18 1.574.448l10.61 6.064L13.793 12z" fill="#0288D1"/><path d="M17.382 15.589l-10.61 6.064c-.467.268-1.019.448-1.574.448-.622 0-1.2-.22-1.589-.597L13.793 12l3.589 3.589z" fill="#F44336"/></svg> Google Play</a>` 
             : '';
 
         const youtubeBadge = item.youtubeId 
