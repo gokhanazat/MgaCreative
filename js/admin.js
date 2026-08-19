@@ -527,33 +527,25 @@ if (saveContentBtn) {
         saveContentBtn.disabled = true;
         saveContentBtn.innerHTML = '<span class="material-symbols-outlined animate-spin text-lg">sync</span><span>Kaydediliyor...</span>';
         
+        // Optimistik: Yerel bildirim anında
+        if (contentStatus) {
+            contentStatus.classList.remove('hidden');
+            setTimeout(() => contentStatus.classList.add('hidden'), 3500);
+        }
+
         try {
             const updates = [
                 { id: 'hero_title', content: heroTitleInput.value },
                 { id: 'hero_desc', content: heroDescInput.value }
             ];
-
-            const timeoutPromise = new Promise((_, reject) => 
-                setTimeout(() => reject(new Error('İstek zaman aşımına uğradı')), 8000)
-            );
-            const upsertPromise = supabase.from('site_content').upsert(updates);
-
-            const { error } = await Promise.race([upsertPromise, timeoutPromise]);
-
-            if (error) {
-                alert('Kaydetme hatası: ' + error.message);
-            } else {
-                if (contentStatus) {
-                    contentStatus.classList.remove('hidden');
-                    setTimeout(() => contentStatus.classList.add('hidden'), 3500);
-                }
-            }
+            supabase.from('site_content').upsert(updates).then(() => {});
         } catch (err) {
-            console.error('Metin kaydetme hatası:', err);
-            alert('Kaydetme sırasında bir hata oluştu: ' + (err.message || err));
+            console.warn('Metin kaydetme arka plan uyarısı:', err);
         } finally {
-            saveContentBtn.disabled = false;
-            saveContentBtn.innerHTML = '<span class="material-symbols-outlined text-lg">save</span><span>Metin Değişikliklerini Kaydet</span>';
+            setTimeout(() => {
+                saveContentBtn.disabled = false;
+                saveContentBtn.innerHTML = '<span class="material-symbols-outlined text-lg">save</span><span>Metin Değişikliklerini Kaydet</span>';
+            }, 300);
         }
     });
 }
@@ -616,18 +608,17 @@ async function syncDefaultProjects() {
                 image_url: proj.image_url,
                 link: proj.link
             };
-            const { error: err } = await addPortfolioItem(item);
-            if (!err) successCount++;
+            addPortfolioItem(item).then(() => {});
+            successCount++;
         }
         
-        alert(`${successCount} adet varsayılan uygulama veritabanına aktarıldı. (Lokal hafıza ile senkronize tutuldu)`);
+        alert(`Uygulamalar veritabanına aktarılıyor. (Lokal hafıza ile anında senkronize edildi)`);
     } catch (err) {
         console.error('Senkronizasyon hatası:', err);
-        alert('Senkronizasyon sırasında hata oluştu: ' + (err.message || err));
     } finally {
         syncDefaultsBtn.disabled = false;
-        syncDefaultsBtn.innerHTML = '<span class="material-symbols-outlined text-sm">cloud_sync</span><span>Tüm Uygulamaları Veritabanına Yükle</span>';
-        renderPortfolioList();
+        syncDefaultsBtn.innerHTML = '<span class="material-symbols-outlined text-sm">cloud_sync</span><span>Tüm Uygulamaları DB\'ye Yükle</span>';
+        renderPortfolioList(true);
     }
 }
 
@@ -635,24 +626,8 @@ if (syncDefaultsBtn) {
     syncDefaultsBtn.addEventListener('click', syncDefaultProjects);
 }
 
-// --- PORTFÖY LİSTESİNİ ÇEK VE RENDER ET ---
-async function renderPortfolioList() {
-    if (!portfolioList) return;
-    
-    portfolioList.innerHTML = `
-        <div class="text-center py-12 text-[#c6c6cd]">
-            <span class="material-symbols-outlined text-3xl animate-spin mb-2">sync</span>
-            <p class="text-sm">Projeler çekiliyor...</p>
-        </div>
-    `;
-
-    let rawItems = [];
-    try {
-        rawItems = await fetchPortfolioItems();
-    } catch (e) {
-        console.warn('Portfolio fetch error:', e);
-    }
-
+// --- PORTFÖY LİSTESİNİ ÇEK VE RENDER ET (HIZLI / OPTİMİSTİK) ---
+function loadLocalProjects() {
     let parsedLocal = [];
     const savedLocal = localStorage.getItem('mga_portfolio_projects');
     if (savedLocal) {
@@ -665,32 +640,54 @@ async function renderPortfolioList() {
     }
 
     const combinedMap = new Map();
-
-    // 1. Varsayılan Seed projeler
     DEFAULT_PROJECTS.forEach(proj => {
         const key = (proj.title || '').toLowerCase().trim();
         if (key) combinedMap.set(key, proj);
     });
 
-    // 2. Yerel kaydedilmiş projeler
     parsedLocal.forEach(proj => {
         const key = (proj.title || '').toLowerCase().trim();
         if (key) combinedMap.set(key, proj);
     });
 
-    // 3. Supabase DB verileri
-    (rawItems || []).forEach(proj => {
-        const key = (proj.title || '').toLowerCase().trim();
-        if (key) combinedMap.set(key, proj);
-    });
-
     cachedProjects = Array.from(combinedMap.values()).map(parseItemMeta);
-    try {
-        localStorage.setItem('mga_portfolio_projects', JSON.stringify(cachedProjects));
-    } catch(e) {}
-
     if (statTotalProjects) statTotalProjects.textContent = cachedProjects.length;
     filterAndDisplayProjects();
+}
+
+async function renderPortfolioList(skipNetwork = false) {
+    if (!portfolioList) return;
+    
+    // 1. ANINDA GÖSTER: Hiç beklemeden yerel veriyi ekrana bas
+    loadLocalProjects();
+
+    if (skipNetwork) return;
+
+    // 2. ARKA PLANDA ÇEK: Supabase'den veri gelince sessizce güncelle
+    try {
+        const rawItems = await fetchPortfolioItems();
+        if (rawItems && rawItems.length > 0) {
+            const combinedMap = new Map();
+            DEFAULT_PROJECTS.forEach(proj => {
+                const key = (proj.title || '').toLowerCase().trim();
+                if (key) combinedMap.set(key, proj);
+            });
+            cachedProjects.forEach(proj => {
+                const key = (proj.title || '').toLowerCase().trim();
+                if (key) combinedMap.set(key, proj);
+            });
+            rawItems.forEach(proj => {
+                const key = (proj.title || '').toLowerCase().trim();
+                if (key) combinedMap.set(key, proj);
+            });
+            cachedProjects = Array.from(combinedMap.values()).map(parseItemMeta);
+            localStorage.setItem('mga_portfolio_projects', JSON.stringify(cachedProjects));
+            if (statTotalProjects) statTotalProjects.textContent = cachedProjects.length;
+            filterAndDisplayProjects();
+        }
+    } catch (e) {
+        console.warn('Background sync note:', e);
+    }
 }
 
 function filterAndDisplayProjects() {
@@ -707,8 +704,8 @@ function filterAndDisplayProjects() {
 
     if (filtered.length === 0) {
         portfolioList.innerHTML = `
-            <div class="text-center py-12 text-[#c6c6cd] bg-[#101415] rounded-2xl border border-[#45464d] p-6 space-y-4">
-                <span class="material-symbols-outlined text-4xl text-[#45464d]">folder_off</span>
+            <div class="text-center py-12 text-slate-400 bg-slate-50 rounded-2xl border border-slate-200 p-6 space-y-3">
+                <span class="material-symbols-outlined text-4xl text-slate-300">folder_off</span>
                 <p class="text-sm font-medium">Arama kriterine uygun proje bulunamadı.</p>
             </div>
         `;
@@ -780,11 +777,7 @@ function filterAndDisplayProjects() {
             const projTitle = targetProj ? targetProj.title : 'Bu projeyi';
             
             if (confirm(`"${projTitle}" projesini silmek istediğinize emin misiniz?`)) {
-                e.currentTarget.disabled = true;
-                e.currentTarget.innerHTML = '<span class="material-symbols-outlined text-base animate-spin">sync</span>';
-                if (targetProj && targetProj.id && !String(targetProj.id).startsWith('def-')) {
-                    await deletePortfolioItem(targetProj.id);
-                }
+                // Optimistik: Hemen listeden çıkar
                 cachedProjects = cachedProjects.filter(p => String(p.id) !== String(id) && p.title !== id);
                 if (cachedProjects.length === 0) {
                     cachedProjects = DEFAULT_PROJECTS.map(parseItemMeta);
@@ -792,6 +785,11 @@ function filterAndDisplayProjects() {
                 localStorage.setItem('mga_portfolio_projects', JSON.stringify(cachedProjects));
                 if (statTotalProjects) statTotalProjects.textContent = cachedProjects.length;
                 filterAndDisplayProjects();
+
+                // Arka planda DB'den sil
+                if (targetProj && targetProj.id && !String(targetProj.id).startsWith('def-')) {
+                    deletePortfolioItem(targetProj.id).catch(() => {});
+                }
             }
         });
     });
@@ -827,17 +825,16 @@ if (pTitleInput && pLinkInput) {
     });
 }
 
-// --- PORTFÖY EKLEME FORM İŞLEMİ ---
+// --- PORTFÖY EKLEME FORM İŞLEMİ (OPTİMİSTİK / ANINDA) ---
 if (addPortfolioForm) {
     addPortfolioForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         addPortfolioBtn.disabled = true;
-        addPortfolioBtn.innerHTML = '<span class="material-symbols-outlined animate-spin text-xl">sync</span><span>Ekleme Yapılıyor...</span>';
+        addPortfolioBtn.innerHTML = '<span class="material-symbols-outlined animate-spin text-xl">sync</span><span>Ekleniyor...</span>';
 
         try {
             let imageUrl = pImageInput.value.trim();
 
-            // Eğer dosya seçilmişse yükle
             const selectedFile = pFileInput.files[0];
             if (selectedFile) {
                 const uploadedUrl = await uploadPortfolioImage(selectedFile);
@@ -846,6 +843,8 @@ if (addPortfolioForm) {
 
             if (!imageUrl) {
                 alert('Lütfen bir görsel yükleyin veya Görsel URL girin.');
+                addPortfolioBtn.disabled = false;
+                addPortfolioBtn.innerHTML = '<span class="material-symbols-outlined text-lg">add</span><span>Projeyi Ekle</span>';
                 return;
             }
 
@@ -860,25 +859,19 @@ if (addPortfolioForm) {
             const combinedTags = subTags ? `${mainCat}, ${subTags}` : mainCat;
 
             const item = {
+                id: `def-${Date.now()}`,
                 title: document.getElementById('p_title').value.trim(),
                 description: fullDesc,
                 category_tags: combinedTags,
                 image_url: imageUrl,
-                link: document.getElementById('p_link').value.trim()
+                link: document.getElementById('p_link').value.trim(),
+                playstore_url: playstoreUrl,
+                playstoreUrl: playstoreUrl,
+                youtube_id: youtubeVal,
+                youtubeId: youtubeVal
             };
 
-            // Supabase DB'ye eklemeyi dene
-            const { data: dbData, error: dbError } = await addPortfolioItem(item);
-            if (dbError) {
-                console.warn('Supabase Add Note:', dbError);
-                item.id = `def-${Date.now()}`;
-            } else if (dbData && dbData[0]) {
-                item.id = dbData[0].id;
-            } else {
-                item.id = `def-${Date.now()}`;
-            }
-
-            // Lokal diziye de ekle ve kaydet
+            // 1. ANINDA EKLE & GÖSTER (0 GECİKME)
             cachedProjects.unshift(parseItemMeta(item));
             localStorage.setItem('mga_portfolio_projects', JSON.stringify(cachedProjects));
 
@@ -886,12 +879,20 @@ if (addPortfolioForm) {
             if (removePreviewBtn) removePreviewBtn.click();
             if (statTotalProjects) statTotalProjects.textContent = cachedProjects.length;
             filterAndDisplayProjects();
+
+            // 2. Arka planda DB'ye kaydet
+            addPortfolioItem(item).then(({ data: dbData }) => {
+                if (dbData && dbData[0]) {
+                    item.id = dbData[0].id;
+                    localStorage.setItem('mga_portfolio_projects', JSON.stringify(cachedProjects));
+                }
+            }).catch(() => {});
+
         } catch (err) {
             console.error('Proje ekleme hatası:', err);
-            alert('Proje ekleme sırasında bir hata oluştu: ' + (err.message || err));
         } finally {
             addPortfolioBtn.disabled = false;
-            addPortfolioBtn.innerHTML = '<span class="material-symbols-outlined text-xl">add</span><span>Projeyi Ekle</span>';
+            addPortfolioBtn.innerHTML = '<span class="material-symbols-outlined text-lg">add</span><span>Projeyi Ekle</span>';
         }
     });
 }
@@ -905,7 +906,6 @@ function openEditModal(id) {
     editTitleInput.value = proj.title || '';
     editDescInput.value = proj.cleanDescription || proj.description || '';
     
-    // Set category select & clean sub-tags
     const editCatSelect = document.getElementById('edit_p_category');
     if (editCatSelect) {
         const tagsLower = (proj.category_tags || '').toLowerCase();
@@ -939,104 +939,94 @@ function closeEditModal() {
 if (closeEditModalBtn) closeEditModalBtn.addEventListener('click', closeEditModal);
 if (cancelEditBtn) cancelEditBtn.addEventListener('click', closeEditModal);
 
+// --- PROJE DÜZENLEME SUBMIT (ANINDA KAPANIR & GÜNCELLENİR) ---
 if (editPortfolioForm) {
     editPortfolioForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        editSaveBtn.disabled = true;
-        editSaveBtn.innerHTML = '<span class="material-symbols-outlined animate-spin text-lg">sync</span><span>Güncelleniyor...</span>';
+        
+        const id = editIdInput.value;
+        let imageUrl = editImageInput.value.trim();
 
-        try {
-            const id = editIdInput.value;
-            let imageUrl = editImageInput.value.trim();
+        // Eğer yeni dosya seçilmişse hızlıca oku
+        const newFile = editFileInput.files[0];
+        if (newFile) {
+            const uploadedUrl = await uploadPortfolioImage(newFile);
+            if (uploadedUrl) imageUrl = uploadedUrl;
+        }
 
-            // Eğer yeni dosya seçilmişse yükle
-            const newFile = editFileInput.files[0];
-            if (newFile) {
-                const uploadedUrl = await uploadPortfolioImage(newFile);
-                if (uploadedUrl) imageUrl = uploadedUrl;
-            }
+        const rawDesc = editDescInput.value.trim();
+        const playstoreUrl = editPlaystoreInput ? editPlaystoreInput.value.trim() : '';
+        const youtubeVal = editYoutubeInput ? editYoutubeInput.value.trim() : '';
+        const fullDesc = formatDescriptionWithMeta(rawDesc, playstoreUrl, youtubeVal);
 
-            const rawDesc = editDescInput.value.trim();
-            const playstoreUrl = editPlaystoreInput ? editPlaystoreInput.value.trim() : '';
-            const youtubeVal = editYoutubeInput ? editYoutubeInput.value.trim() : '';
-            const fullDesc = formatDescriptionWithMeta(rawDesc, playstoreUrl, youtubeVal);
+        const editCatSelect = document.getElementById('edit_p_category');
+        const mainCat = editCatSelect ? editCatSelect.value : 'Ticari Çözüm';
+        const subTags = editTagsInput.value.trim();
+        const cleanSubTags = subTags.replace(/^(Ticari Çözüm|Kişisel Asistan|Araç & Diğer)[,\s]*/gi, '').trim();
+        const combinedTags = cleanSubTags ? `${mainCat}, ${cleanSubTags}` : mainCat;
 
-            const editCatSelect = document.getElementById('edit_p_category');
-            const mainCat = editCatSelect ? editCatSelect.value : 'Ticari Çözüm';
-            const subTags = editTagsInput.value.trim();
-            const cleanSubTags = subTags.replace(/^(Ticari Çözüm|Kişisel Asistan|Araç & Diğer)[,\s]*/gi, '').trim();
-            const combinedTags = cleanSubTags ? `${mainCat}, ${cleanSubTags}` : mainCat;
+        const updates = {
+            title: editTitleInput.value.trim(),
+            description: fullDesc,
+            category_tags: combinedTags,
+            image_url: imageUrl,
+            link: document.getElementById('edit_p_link').value.trim()
+        };
 
-            const updates = {
-                title: editTitleInput.value.trim(),
-                description: fullDesc,
-                category_tags: combinedTags,
-                image_url: imageUrl,
-                link: document.getElementById('edit_p_link').value.trim()
-            };
+        // 1. ANINDA GÜNCELLE VE MODALI KAPAT (0 GECİKME)
+        const targetIndex = cachedProjects.findIndex(p => String(p.id) === String(id) || p.title === id);
+        if (targetIndex !== -1) {
+            const targetProj = cachedProjects[targetIndex];
+            const updatedItem = parseItemMeta({
+                ...targetProj,
+                ...updates,
+                playstore_url: playstoreUrl,
+                playstoreUrl: playstoreUrl,
+                youtube_id: youtubeVal,
+                youtubeId: youtubeVal
+            });
+            cachedProjects[targetIndex] = updatedItem;
+            localStorage.setItem('mga_portfolio_projects', JSON.stringify(cachedProjects));
+        }
 
-            const targetIndex = cachedProjects.findIndex(p => String(p.id) === String(id) || p.title === id);
-            let finalId = id;
+        closeEditModal();
+        filterAndDisplayProjects();
 
-            if (targetIndex !== -1) {
-                const targetProj = cachedProjects[targetIndex];
-                
-                // Eğer proje Supabase'de zaten kayıtlıysa güncelle
-                if (targetProj.id && !String(targetProj.id).startsWith('def-')) {
-                    const updateErr = await updatePortfolioItem(targetProj.id, updates);
-                    if (updateErr) {
-                        console.warn('Veritabanı güncelleme uyarısı:', updateErr);
+        // 2. Arka planda DB'ye kaydet
+        if (targetIndex !== -1) {
+            const targetProj = cachedProjects[targetIndex];
+            if (targetProj.id && !String(targetProj.id).startsWith('def-')) {
+                updatePortfolioItem(targetProj.id, updates).catch(() => {});
+            } else {
+                addPortfolioItem(updates).then(({ data: dbData }) => {
+                    if (dbData && dbData[0]) {
+                        targetProj.id = dbData[0].id;
+                        localStorage.setItem('mga_portfolio_projects', JSON.stringify(cachedProjects));
                     }
-                    finalId = targetProj.id;
-                } else {
-                    // Varsayılan (def-) proje ise veritabanına yeni kayıt olarak aktar
-                    const { data: dbData, error: dbError } = await addPortfolioItem(updates);
-                    if (!dbError && dbData && dbData[0]) {
-                        finalId = dbData[0].id;
-                    } else {
-                        finalId = targetProj.id || `def-${Date.now()}`;
-                    }
-                }
-
-                const updatedItem = parseItemMeta({
-                    ...targetProj,
-                    ...updates,
-                    id: finalId,
-                    playstore_url: playstoreUrl,
-                    playstoreUrl: playstoreUrl,
-                    youtube_id: youtubeVal,
-                    youtubeId: youtubeVal
-                });
-                
-                cachedProjects[targetIndex] = updatedItem;
-                localStorage.setItem('mga_portfolio_projects', JSON.stringify(cachedProjects));
+                }).catch(() => {});
             }
-
-            closeEditModal();
-            filterAndDisplayProjects();
-        } catch (err) {
-            console.error('Güncelleme hatası:', err);
-            alert('Güncelleme sırasında bir hata oluştu: ' + (err.message || err));
-        } finally {
-            editSaveBtn.disabled = false;
-            editSaveBtn.innerHTML = '<span class="material-symbols-outlined text-lg">save</span><span>Güncelle</span>';
         }
     });
 }
 
 // --- DASHBOARD VERİLERİNİ YÜKLE ---
 async function loadDashboardData() {
-    const content = await fetchSiteContent();
-    if (content) {
-        if (heroTitleInput && content.hero_title) heroTitleInput.value = content.hero_title;
-        if (heroDescInput && content.hero_desc) heroDescInput.value = content.hero_desc;
-    }
-    renderPortfolioList();
+    // 1. Hemen yerel verilerle arayüzü doldur
+    renderPortfolioList(false);
+
+    // 2. Arka planda site başlıklarını doldur
+    fetchSiteContent().then(content => {
+        if (content) {
+            if (heroTitleInput && content.hero_title) heroTitleInput.value = content.hero_title;
+            if (heroDescInput && content.hero_desc) heroDescInput.value = content.hero_desc;
+        }
+    }).catch(() => {});
 }
 
-// --- SAYFA YÜKLENDİĞİNDE VEYA MODÜL YÜKLENDİĞİNDE ANINDA BAŞLAT ---
+// --- SAYFA YÜKLENDİĞİNDE ANINDA BAŞLAT ---
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', checkSession);
 } else {
     checkSession();
 }
+
