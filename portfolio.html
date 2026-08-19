@@ -459,16 +459,19 @@
             } catch(e) {}
 
             const combinedMap = new Map();
+            // 1. Varsayılanlar
             defaultSeed.forEach(item => {
                 const key = (item.title || '').toLowerCase().trim();
                 if (key && !deletedList.includes(key)) combinedMap.set(key, item);
             });
-            (localItems || []).forEach(item => {
+            // 2. Veritabanı
+            (dbItems || []).forEach(item => {
                 const key = (item.title || '').toLowerCase().trim();
                 const idKey = String(item.id || '');
                 if (key && !deletedList.includes(key) && !deletedList.includes(idKey)) combinedMap.set(key, item);
             });
-            (dbItems || []).forEach(item => {
+            // 3. Kullanıcının yerel en güncel değişiklikleri (EN YÜKSEK ÖNCELİK)
+            (localItems || []).forEach(item => {
                 const key = (item.title || '').toLowerCase().trim();
                 const idKey = String(item.id || '');
                 if (key && !deletedList.includes(key) && !deletedList.includes(idKey)) combinedMap.set(key, item);

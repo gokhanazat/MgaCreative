@@ -583,14 +583,23 @@ if (editFileInput) {
     editFileInput.addEventListener('change', (e) => {
         const file = e.target.files[0];
         if (file) {
-            editFileSelectLabel.textContent = file.name;
+            if (editFileSelectLabel) editFileSelectLabel.textContent = file.name;
             const reader = new FileReader();
             reader.onload = (evt) => {
                 const base64Data = evt.target.result;
-                editPreview.src = base64Data;
-                editImageInput.value = base64Data; // Anında inputa aktar
+                if (editPreview) editPreview.src = base64Data;
+                if (editImageInput) editImageInput.value = base64Data; // Anında inputa aktar
             };
             reader.readAsDataURL(file);
+        }
+    });
+}
+
+if (editImageInput) {
+    editImageInput.addEventListener('input', () => {
+        const val = editImageInput.value.trim();
+        if (val && editPreview) {
+            editPreview.src = val;
         }
     });
 }
@@ -715,6 +724,7 @@ async function renderPortfolioList(skipNetwork = false) {
         if (rawItems && rawItems.length > 0) {
             const combinedMap = new Map();
 
+            // 1. Varsayılanlar (En düşük öncelik)
             DEFAULT_PROJECTS.forEach(proj => {
                 const key = (proj.title || '').toLowerCase().trim();
                 const idKey = String(proj.id);
@@ -723,7 +733,8 @@ async function renderPortfolioList(skipNetwork = false) {
                 }
             });
 
-            cachedProjects.forEach(proj => {
+            // 2. Veritabanından gelenler
+            rawItems.forEach(proj => {
                 const key = (proj.title || '').toLowerCase().trim();
                 const idKey = String(proj.id);
                 if (key && !deletedList.includes(key) && !deletedList.includes(idKey)) {
@@ -731,7 +742,8 @@ async function renderPortfolioList(skipNetwork = false) {
                 }
             });
 
-            rawItems.forEach(proj => {
+            // 3. Kullanıcının en son yaptığı güncel değişiklikler (EN YÜKSEK ÖNCELİK)
+            cachedProjects.forEach(proj => {
                 const key = (proj.title || '').toLowerCase().trim();
                 const idKey = String(proj.id);
                 if (key && !deletedList.includes(key) && !deletedList.includes(idKey)) {
