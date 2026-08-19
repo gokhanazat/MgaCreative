@@ -80,22 +80,26 @@
                         <h1 class="text-3xl font-extrabold text-slate-900">Yönetim Konsolu</h1>
                         <span class="px-3 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full text-xs font-bold uppercase tracking-wider">Canlı Mod</span>
                     </div>
-                    <p class="text-sm text-slate-500 mt-1">Sistem içeriğini, projeleri ve görselleri tek noktadan yönetin.</p>
+                    <p class="text-sm text-slate-500 mt-1">Uygulamalarınızı, blog makalelerinizi ve site içeriklerini tek noktadan yönetin.</p>
                 </div>
                 <div class="flex items-center gap-3 w-full md:w-auto">
-                    <a href="/" target="_blank" class="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-xl text-sm font-semibold shadow-sm transition-all">
-                        <span class="material-symbols-outlined text-lg text-sky-600">public</span>
-                        <span>Siteyi Görüntüle</span>
+                    <a href="/blog" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-xl text-sm font-semibold shadow-sm transition-all">
+                        <span class="material-symbols-outlined text-lg text-sky-600">article</span>
+                        <span>Blog'a Git</span>
                     </a>
-                    <button id="logoutBtn" class="flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-red-50 text-red-700 hover:bg-red-100 border border-red-200 rounded-xl text-sm font-semibold transition-all">
+                    <a href="/" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-xl text-sm font-semibold shadow-sm transition-all">
+                        <span class="material-symbols-outlined text-lg text-sky-600">public</span>
+                        <span>Siteyi Aç</span>
+                    </a>
+                    <button id="logoutBtn" class="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-red-50 text-red-700 hover:bg-red-100 border border-red-200 rounded-xl text-sm font-semibold transition-all">
                         <span class="material-symbols-outlined text-lg">logout</span>
-                        <span>Çıkış Yap</span>
+                        <span>Çıkış</span>
                     </button>
                 </div>
             </div>
 
             <!-- İstatistik Kartları -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
                 <div class="glass-card rounded-2xl p-5 flex items-center justify-between">
                     <div>
                         <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Toplam Proje</p>
@@ -107,8 +111,17 @@
                 </div>
                 <div class="glass-card rounded-2xl p-5 flex items-center justify-between">
                     <div>
-                        <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Site İçerik Durumu</p>
-                        <h3 id="statContentStatus" class="text-base font-bold text-emerald-600 mt-1">Aktif &amp; Yayında</h3>
+                        <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Toplam Blog</p>
+                        <h3 id="statTotalBlogs" class="text-3xl font-extrabold text-slate-900 mt-1">3</h3>
+                    </div>
+                    <div class="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-2xl">edit_document</span>
+                    </div>
+                </div>
+                <div class="glass-card rounded-2xl p-5 flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Sistem Durumu</p>
+                        <h3 id="statContentStatus" class="text-base font-bold text-emerald-600 mt-1">Aktif & Yayında</h3>
                     </div>
                     <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
                         <span class="material-symbols-outlined text-2xl">check_circle</span>
@@ -117,144 +130,234 @@
                 <div class="glass-card rounded-2xl p-5 flex items-center justify-between">
                     <div>
                         <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Aktif Oturum</p>
-                        <h3 id="statAdminEmail" class="text-sm font-bold text-slate-900 mt-1 truncate max-w-[180px]">Admin</h3>
+                        <h3 id="statAdminEmail" class="text-sm font-bold text-slate-900 mt-1 truncate max-w-[140px]">Admin</h3>
                     </div>
-                    <div class="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
+                    <div class="w-12 h-12 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center">
                         <span class="material-symbols-outlined text-2xl">account_circle</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Site İçerik Yönetimi -->
-            <div class="glass-card rounded-3xl p-6">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="flex items-center gap-2">
-                        <span class="material-symbols-outlined text-sky-600">edit_note</span>
-                        <h2 class="text-lg font-bold text-slate-900">Ana Sayfa Metin Yönetimi</h2>
+            <!-- TAB NAVİGASYONU -->
+            <div class="flex items-center gap-2 p-1.5 bg-slate-200/80 rounded-2xl w-fit">
+                <button id="tabProjectsBtn" class="tab-nav-btn px-6 py-2.5 rounded-xl text-xs font-bold transition-all bg-white text-sky-700 shadow-sm flex items-center gap-2" data-tab="tabProjects">
+                    <span class="material-symbols-outlined text-base">apps</span>
+                    <span>Uygulamalarımız (Portföy)</span>
+                </button>
+                <button id="tabBlogBtn" class="tab-nav-btn px-6 py-2.5 rounded-xl text-xs font-bold transition-all text-slate-700 hover:text-slate-900 flex items-center gap-2" data-tab="tabBlog">
+                    <span class="material-symbols-outlined text-base">auto_stories</span>
+                    <span>Blog & Makale Yönetimi</span>
+                </button>
+                <button id="tabSiteTextBtn" class="tab-nav-btn px-6 py-2.5 rounded-xl text-xs font-bold transition-all text-slate-700 hover:text-slate-900 flex items-center gap-2" data-tab="tabSiteText">
+                    <span class="material-symbols-outlined text-base">edit_note</span>
+                    <span>Ana Sayfa Metinleri</span>
+                </button>
+            </div>
+
+            <!-- ================= SEKME 1: PORTFÖY YÖNETİMİ ================= -->
+            <div id="tabProjects" class="tab-content space-y-6">
+                <div class="glass-card rounded-3xl p-6">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-sky-600">apps</span>
+                            <h2 class="text-lg font-bold text-slate-900">Uygulamalarımız (Portföy Yönetimi)</h2>
+                        </div>
+                        <div class="relative w-full md:w-72">
+                            <span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-400 text-lg">search</span>
+                            <input type="text" id="searchPortfolio" placeholder="Projelerde ara..." class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-4 py-2 text-xs text-slate-900 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100 transition-all">
+                        </div>
                     </div>
-                    <span id="contentStatus" class="text-xs text-emerald-700 bg-emerald-50 px-3 py-1 rounded-md font-bold hidden flex items-center gap-1">
-                        <span class="material-symbols-outlined text-sm">check</span> Değişiklikler Kaydedildi
-                    </span>
-                </div>
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Ana Sayfa Başlık (hero_title)</label>
-                        <input type="text" id="hero_title" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-slate-900 text-sm outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100 transition-all">
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                        <!-- Yeni Proje Ekle Formu -->
+                        <div class="lg:col-span-5 space-y-4 bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm">
+                            <div class="flex items-center gap-2 text-slate-900 font-bold text-base pb-3 border-b border-slate-200">
+                                <span class="material-symbols-outlined text-sky-600">add_circle</span>
+                                <h3>Yeni Proje Ekle</h3>
+                            </div>
+                            <form id="addPortfolioForm" class="space-y-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Proje Adı</label>
+                                    <input type="text" id="p_title" required class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-slate-900 outline-none focus:border-sky-500 text-xs" placeholder="Örn: AgroPlan">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Açıklama</label>
+                                    <textarea id="p_desc" rows="3" required class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-slate-900 outline-none focus:border-sky-500 text-xs" placeholder="Proje hakkında kısa özet..."></textarea>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Ana Kategori</label>
+                                    <select id="p_category" class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-slate-900 outline-none focus:border-sky-500 text-xs mb-2">
+                                        <option value="Ticari Çözüm">Ticari Çözümler</option>
+                                        <option value="Kişisel Asistan">Kişisel Asistanlar</option>
+                                        <option value="Araç & Diğer">Araçlar & Diğer</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Alt Etiketler (Virgülle ayırın)</label>
+                                    <input type="text" id="p_tags" class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-slate-900 outline-none focus:border-sky-500 text-xs" placeholder="Örn: Android, Kotlin, B2B">
+                                </div>
+                                
+                                <div class="space-y-2">
+                                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Proje Resmi</label>
+                                    <div class="flex flex-col gap-2">
+                                        <label class="cursor-pointer border-2 border-dashed border-slate-300 hover:border-sky-500 rounded-xl p-3 text-center transition-all bg-white flex flex-col items-center justify-center gap-1 group">
+                                            <span class="material-symbols-outlined text-2xl text-slate-400 group-hover:text-sky-600">cloud_upload</span>
+                                            <span class="text-xs text-slate-600 group-hover:text-slate-900 font-medium" id="fileSelectLabel">Bilgisayardan Görsel Seç</span>
+                                            <input type="file" id="p_file" accept="image/*" class="hidden">
+                                        </label>
+                                        
+                                        <div id="p_preview_container" class="hidden relative w-full h-32 rounded-xl overflow-hidden border border-slate-200">
+                                            <img id="p_preview" src="" alt="Önizleme" class="w-full h-full object-cover">
+                                            <button type="button" id="removePreviewBtn" class="absolute top-2 right-2 bg-red-600 text-white rounded-full p-1 hover:bg-red-700 shadow-md">
+                                                <span class="material-symbols-outlined text-xs block">close</span>
+                                            </button>
+                                        </div>
+
+                                        <input type="text" id="p_image" class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-slate-900 outline-none focus:border-sky-500 text-xs" placeholder="Veya manuel Görsel URL (https://...)">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Proje Detay Linki</label>
+                                    <input type="text" id="p_link" required class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-slate-900 outline-none focus:border-sky-500 text-xs" placeholder="Örn: /project?id=agro-plan">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Google Play Store Linki</label>
+                                    <input type="text" id="p_playstore" class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-slate-900 outline-none focus:border-sky-500 text-xs" placeholder="https://play.google.com/store/apps/details?id=...">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">YouTube Video Linki veya Video ID</label>
+                                    <input type="text" id="p_youtube" class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-slate-900 outline-none focus:border-sky-500 text-xs" placeholder="Örn: F4ki_kJsFtQ veya https://www.youtube.com/watch?v=...">
+                                </div>
+                                <button type="submit" id="addPortfolioBtn" class="w-full py-3 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-xl active:scale-95 transition-all shadow-md shadow-sky-600/20 flex items-center justify-center gap-2 text-sm">
+                                    <span class="material-symbols-outlined text-lg">add</span>
+                                    <span>Projeyi Ekle</span>
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Proje Listesi -->
+                        <div class="lg:col-span-7 flex flex-col h-full">
+                            <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                                <div class="flex items-center gap-2">
+                                    <h3 class="text-base font-bold text-slate-900">Mevcut Projeler</h3>
+                                    <span id="projectCountBadge" class="text-xs text-slate-600 bg-slate-100 px-2.5 py-1 rounded-full border border-slate-200 font-semibold">0 Kayıt</span>
+                                </div>
+                                <button id="syncDefaultsBtn" type="button" class="px-3 py-1.5 bg-sky-50 text-sky-700 hover:bg-sky-100 border border-sky-200 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5">
+                                    <span class="material-symbols-outlined text-sm">cloud_sync</span>
+                                    <span>Tüm Uygulamaları DB'ye Yükle</span>
+                                </button>
+                            </div>
+                            <div id="portfolioList" class="space-y-3 overflow-y-auto max-h-[620px] pr-2 custom-scrollbar flex-1">
+                                <div class="text-center py-12 text-slate-400">
+                                    <span class="material-symbols-outlined text-3xl animate-spin mb-2 text-sky-600">sync</span>
+                                    <p class="text-sm font-medium">Projeler yükleniyor...</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Ana Sayfa Açıklama (hero_desc)</label>
-                        <textarea id="hero_desc" rows="3" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-slate-900 text-sm outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100 transition-all"></textarea>
-                    </div>
-                    <button id="saveContentBtn" class="px-6 py-2.5 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-xl text-sm active:scale-95 transition-all inline-flex items-center gap-2 shadow-sm">
-                        <span class="material-symbols-outlined text-lg">save</span>
-                        <span>Metin Değişikliklerini Kaydet</span>
-                    </button>
                 </div>
             </div>
 
-            <!-- Portföy Yönetimi (CRUD) -->
-            <div class="glass-card rounded-3xl p-6">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
-                    <div class="flex items-center gap-2">
-                        <span class="material-symbols-outlined text-sky-600">apps</span>
-                        <h2 class="text-lg font-bold text-slate-900">Uygulamalarımız (Portföy Yönetimi)</h2>
-                    </div>
-                    <!-- Arama Çubuğu -->
-                    <div class="relative w-full md:w-72">
-                        <span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-400 text-lg">search</span>
-                        <input type="text" id="searchPortfolio" placeholder="Projelerde ara..." class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-4 py-2 text-xs text-slate-900 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100 transition-all">
-                    </div>
-                </div>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                    <!-- Yeni Uygulama Ekle Formu -->
-                    <div class="lg:col-span-5 space-y-4 bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm">
-                        <div class="flex items-center gap-2 text-slate-900 font-bold text-base pb-3 border-b border-slate-200">
-                            <span class="material-symbols-outlined text-sky-600">add_circle</span>
-                            <h3>Yeni Proje Ekle</h3>
+            <!-- ================= SEKME 2: BLOG YÖNETİMİ ================= -->
+            <div id="tabBlog" class="tab-content hidden space-y-6">
+                <div class="glass-card rounded-3xl p-6">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-indigo-600">auto_stories</span>
+                            <h2 class="text-lg font-bold text-slate-900">Blog & Makale Yönetimi</h2>
                         </div>
-                        <form id="addPortfolioForm" class="space-y-4">
-                            <div>
-                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Proje Adı</label>
-                                <input type="text" id="p_title" required class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-slate-900 outline-none focus:border-sky-500 text-xs" placeholder="Örn: AgroPlan">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Açıklama</label>
-                                <textarea id="p_desc" rows="3" required class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-slate-900 outline-none focus:border-sky-500 text-xs" placeholder="Proje hakkında kısa özet..."></textarea>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Ana Kategori</label>
-                                <select id="p_category" class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-slate-900 outline-none focus:border-sky-500 text-xs mb-2">
-                                    <option value="Ticari Çözüm">Ticari Çözümler</option>
-                                    <option value="Kişisel Asistan">Kişisel Asistanlar</option>
-                                    <option value="Araç & Diğer">Araçlar & Diğer</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Alt Etiketler (Virgülle ayırın)</label>
-                                <input type="text" id="p_tags" class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-slate-900 outline-none focus:border-sky-500 text-xs" placeholder="Örn: Android, Kotlin, B2B">
-                            </div>
-                            
-                            <!-- Dosyadan Resim Yükleme Ve URL Seçeneği -->
-                            <div class="space-y-2">
-                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">Proje Resmi</label>
-                                
-                                <div class="flex flex-col gap-2">
-                                    <label class="cursor-pointer border-2 border-dashed border-slate-300 hover:border-sky-500 rounded-xl p-3 text-center transition-all bg-white flex flex-col items-center justify-center gap-1 group">
-                                        <span class="material-symbols-outlined text-2xl text-slate-400 group-hover:text-sky-600">cloud_upload</span>
-                                        <span class="text-xs text-slate-600 group-hover:text-slate-900 font-medium" id="fileSelectLabel">Bilgisayardan Görsel Seç</span>
-                                        <input type="file" id="p_file" accept="image/*" class="hidden">
-                                    </label>
-                                    
-                                    <!-- Anlık Önizleme -->
-                                    <div id="p_preview_container" class="hidden relative w-full h-32 rounded-xl overflow-hidden border border-slate-200">
-                                        <img id="p_preview" src="" alt="Önizleme" class="w-full h-full object-cover">
-                                        <button type="button" id="removePreviewBtn" class="absolute top-2 right-2 bg-red-600 text-white rounded-full p-1 hover:bg-red-700 shadow-md">
-                                            <span class="material-symbols-outlined text-xs block">close</span>
-                                        </button>
-                                    </div>
+                        <div class="relative w-full md:w-72">
+                            <span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-400 text-lg">search</span>
+                            <input type="text" id="searchBlog" placeholder="Makalelerde ara..." class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-4 py-2 text-xs text-slate-900 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100 transition-all">
+                        </div>
+                    </div>
 
-                                    <input type="text" id="p_image" class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-slate-900 outline-none focus:border-sky-500 text-xs" placeholder="Veya manuel Görsel URL (https://...)">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                        <!-- Yeni Blog Ekle Formu -->
+                        <div class="lg:col-span-5 space-y-4 bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-sm">
+                            <div class="flex items-center gap-2 text-slate-900 font-bold text-base pb-3 border-b border-slate-200">
+                                <span class="material-symbols-outlined text-indigo-600">edit_square</span>
+                                <h3>Yeni Blog Makalesi Yayınla</h3>
+                            </div>
+                            <form id="addBlogForm" class="space-y-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Makale Başlığı</label>
+                                    <input type="text" id="b_title" required class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-slate-900 outline-none focus:border-sky-500 text-xs" placeholder="Örn: 2026'da Mobil Yazılım Trendleri">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Kısa Özet (Meta Description)</label>
+                                    <textarea id="b_summary" rows="2" required class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-slate-900 outline-none focus:border-sky-500 text-xs" placeholder="Makalenin 1-2 cümlelik arama motoru özeti..."></textarea>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Kategori</label>
+                                    <select id="b_category" class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-slate-900 outline-none focus:border-sky-500 text-xs mb-2">
+                                        <option value="Mobil Yazılım">Mobil Yazılım</option>
+                                        <option value="Yapay Zeka">Yapay Zeka</option>
+                                        <option value="Tarım Teknolojileri">Tarım Teknolojileri</option>
+                                        <option value="B2B Çözümler">B2B Çözümler</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Yazar</label>
+                                    <input type="text" id="b_author" required class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-slate-900 outline-none focus:border-sky-500 text-xs" value="MGA Creative Ekibi">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Makale Görseli (URL veya Dosya)</label>
+                                    <input type="text" id="b_image" required class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-slate-900 outline-none focus:border-sky-500 text-xs mb-1" placeholder="images/aproplan_detay.png">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Makale İçeriği (Markdown & Düz Metin)</label>
+                                    <textarea id="b_content" rows="6" required class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-slate-900 outline-none focus:border-sky-500 text-xs leading-relaxed" placeholder="### Alt Başlık&#10;Paragraf metni...&#10;- Madde 1&#10;- Madde 2"></textarea>
+                                </div>
+                                <button type="submit" id="addBlogBtn" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl active:scale-95 transition-all shadow-md shadow-indigo-600/20 flex items-center justify-center gap-2 text-sm">
+                                    <span class="material-symbols-outlined text-lg">publish</span>
+                                    <span>Makaleyi Yayınla</span>
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Blog Listesi -->
+                        <div class="lg:col-span-7 flex flex-col h-full">
+                            <div class="flex items-center justify-between gap-2 mb-4">
+                                <div class="flex items-center gap-2">
+                                    <h3 class="text-base font-bold text-slate-900">Yayınlanmış Makaleler</h3>
+                                    <span id="blogCountBadge" class="text-xs text-slate-600 bg-slate-100 px-2.5 py-1 rounded-full border border-slate-200 font-semibold">3 Makale</span>
                                 </div>
                             </div>
-
-                            <div>
-                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Proje Detay Linki</label>
-                                <input type="text" id="p_link" required class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-slate-900 outline-none focus:border-sky-500 text-xs" placeholder="Örn: /project?id=agro-plan">
+                            <div id="blogList" class="space-y-3 overflow-y-auto max-h-[620px] pr-2 custom-scrollbar flex-1">
+                                <!-- Dynamic Blog Items -->
                             </div>
-                            <div>
-                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Google Play Store Linki</label>
-                                <input type="text" id="p_playstore" class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-slate-900 outline-none focus:border-sky-500 text-xs" placeholder="https://play.google.com/store/apps/details?id=...">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">YouTube Video Linki veya Video ID</label>
-                                <input type="text" id="p_youtube" class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-slate-900 outline-none focus:border-sky-500 text-xs" placeholder="Örn: F4ki_kJsFtQ veya https://www.youtube.com/watch?v=...">
-                            </div>
-                            <button type="submit" id="addPortfolioBtn" class="w-full py-3 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-xl active:scale-95 transition-all shadow-md shadow-sky-600/20 flex items-center justify-center gap-2 text-sm">
-                                <span class="material-symbols-outlined text-lg">add</span>
-                                <span>Projeyi Ekle</span>
-                            </button>
-                        </form>
+                        </div>
                     </div>
+                </div>
+            </div>
 
-                    <!-- Ekli Uygulamalar Listesi -->
-                    <div class="lg:col-span-7 flex flex-col h-full">
-                        <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
-                            <div class="flex items-center gap-2">
-                                <h3 class="text-base font-bold text-slate-900">Mevcut Projeler</h3>
-                                <span id="projectCountBadge" class="text-xs text-slate-600 bg-slate-100 px-2.5 py-1 rounded-full border border-slate-200 font-semibold">0 Kayıt</span>
-                            </div>
-                            <button id="syncDefaultsBtn" type="button" class="px-3 py-1.5 bg-sky-50 text-sky-700 hover:bg-sky-100 border border-sky-200 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5">
-                                <span class="material-symbols-outlined text-sm">cloud_sync</span>
-                                <span>Tüm Uygulamaları DB'ye Yükle</span>
-                            </button>
+            <!-- ================= SEKME 3: ANA SAYFA METİNLERİ ================= -->
+            <div id="tabSiteText" class="tab-content hidden space-y-6">
+                <div class="glass-card rounded-3xl p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-sky-600">edit_note</span>
+                            <h2 class="text-lg font-bold text-slate-900">Ana Sayfa Metin Yönetimi</h2>
                         </div>
-                        <div id="portfolioList" class="space-y-3 overflow-y-auto max-h-[620px] pr-2 custom-scrollbar flex-1">
-                            <div class="text-center py-12 text-slate-400">
-                                <span class="material-symbols-outlined text-3xl animate-spin mb-2 text-sky-600">sync</span>
-                                <p class="text-sm font-medium">Projeler yükleniyor...</p>
-                            </div>
+                        <span id="contentStatus" class="text-xs text-emerald-700 bg-emerald-50 px-3 py-1 rounded-md font-bold hidden flex items-center gap-1">
+                            <span class="material-symbols-outlined text-sm">check</span> Değişiklikler Kaydedildi
+                        </span>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Ana Sayfa Başlık (hero_title)</label>
+                            <input type="text" id="hero_title" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-slate-900 text-sm outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100 transition-all">
                         </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Ana Sayfa Açıklama (hero_desc)</label>
+                            <textarea id="hero_desc" rows="3" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-slate-900 text-sm outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100 transition-all"></textarea>
+                        </div>
+                        <button id="saveContentBtn" class="px-6 py-2.5 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-xl text-sm active:scale-95 transition-all inline-flex items-center gap-2 shadow-sm">
+                            <span class="material-symbols-outlined text-lg">save</span>
+                            <span>Metin Değişikliklerini Kaydet</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -262,7 +365,7 @@
         </div>
     </div>
 
-    <!-- Düzenleme Modalı (Edit Modal) -->
+    <!-- Proje Düzenleme Modalı (Edit Project Modal) -->
     <div id="editModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm hidden p-4">
         <div class="bg-white rounded-3xl p-6 md:p-8 w-full max-w-lg shadow-2xl border border-slate-200 max-h-[90vh] overflow-y-auto custom-scrollbar">
             <div class="flex items-center justify-between pb-4 border-b border-slate-200 mb-6">
@@ -338,7 +441,7 @@
     </div>
 
     <!-- Script yükleme -->
-    <script type="module" src="js/admin.js?v=3.1.0"></script>
+    <script type="module" src="js/admin.js?v=4.0.0"></script>
 
 </body>
 </html>

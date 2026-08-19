@@ -1072,10 +1072,202 @@ if (editPortfolioForm) {
     });
 }
 
+// --- TAB (SEKME) YÖNETİMİ ---
+const tabButtons = document.querySelectorAll('.tab-nav-btn');
+const tabContents = document.querySelectorAll('.tab-content');
+
+tabButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        const targetTabId = e.currentTarget.getAttribute('data-tab');
+
+        // Tab buton stilleri
+        tabButtons.forEach(b => {
+            b.className = 'tab-nav-btn px-6 py-2.5 rounded-xl text-xs font-bold transition-all text-slate-700 hover:text-slate-900 flex items-center gap-2';
+        });
+        e.currentTarget.className = 'tab-nav-btn px-6 py-2.5 rounded-xl text-xs font-bold transition-all bg-white text-sky-700 shadow-sm flex items-center gap-2';
+
+        // Tab içeriklerini göster / gizle
+        tabContents.forEach(tc => {
+            if (tc.id === targetTabId) {
+                tc.classList.remove('hidden');
+            } else {
+                tc.classList.add('hidden');
+            }
+        });
+    });
+});
+
+// --- BLOG YÖNETİMİ ---
+const DEFAULT_ADMIN_BLOGS = [
+    {
+        slug: 'modern-mobil-uygulama-gelistirme-kotlin-jetpack-compose',
+        title: "2026'da Modern Mobil Uygulama Geliştirme: Kotlin & Jetpack Compose Neden Tercih Edilmeli?",
+        summary: "Android ekosisteminde bildirimli UI (Declarative UI) devrimi, yüksek performanslı mimariler ve Clean Architecture standartları.",
+        category: "Mobil Yazılım",
+        readTime: "5 dk okuma",
+        date: "18 Ağustos 2026",
+        author: "MGA Creative Mühendislik Ekibi",
+        image: "images/agroplan_detay.png",
+        content: "Modern mobil yazılım dünyasında kullanıcı deneyimi..."
+    },
+    {
+        slug: 'dijital-tarimda-verimlilik-ve-tarla-yonetimi',
+        title: "Dijital Tarımda Verimlilik: AgroPlan ile Tarla ve Finans Yönetimi Nasıl Yapılır?",
+        summary: "Geleneksel tarımsal üretim süreçlerinin dijitalleşmesi, gübreleme, sulama ve hasat maliyetlerinin akıllı takibi.",
+        category: "Tarım Teknolojileri",
+        readTime: "4 dk okuma",
+        date: "15 Ağustos 2026",
+        author: "Gökhan Azat",
+        image: "images/aproplan_detay.png",
+        content: "Tarım sektörü, artan girdi maliyetleri..."
+    },
+    {
+        slug: 'yapay-zeka-ve-nlp-ile-is-akisi-otomasyonu',
+        title: "Yapay Zeka ve NLP ile Günlük İş Akışınızı Otomatize Edin: Akıllı Ajanda ve vCard Sistemleri",
+        summary: "Doğal Dil İşleme (NLP) teknolojileriyle e-postalardan görev çıkarma ve temassız dijital kartvizit ekosistemi.",
+        category: "Yapay Zeka",
+        readTime: "6 dk okuma",
+        date: "10 Ağustos 2026",
+        author: "MGA Creative AI Lab",
+        image: "images/cardly_detay.jpeg",
+        content: "Günümüz iş dünyasında en büyük zaman kaybı..."
+    }
+];
+
+let cachedBlogs = [];
+
+function loadAdminBlogs() {
+    let localBlogs = [];
+    const saved = localStorage.getItem('mga_blog_posts');
+    if (saved) {
+        try { localBlogs = JSON.parse(saved); } catch(e) {}
+    }
+
+    const map = new Map();
+    DEFAULT_ADMIN_BLOGS.forEach(b => map.set(b.slug, b));
+    localBlogs.forEach(b => map.set(b.slug, b));
+
+    cachedBlogs = Array.from(map.values());
+    const statTotalBlogs = document.getElementById('statTotalBlogs');
+    const blogCountBadge = document.getElementById('blogCountBadge');
+    if (statTotalBlogs) statTotalBlogs.textContent = cachedBlogs.length;
+    if (blogCountBadge) blogCountBadge.textContent = `${cachedBlogs.length} Makale`;
+
+    renderAdminBlogList();
+}
+
+function renderAdminBlogList() {
+    const blogList = document.getElementById('blogList');
+    const searchBlog = document.getElementById('searchBlog');
+    if (!blogList) return;
+
+    const query = searchBlog ? searchBlog.value.toLowerCase().trim() : '';
+    const filtered = cachedBlogs.filter(b => {
+        return b.title.toLowerCase().includes(query) || 
+               b.summary.toLowerCase().includes(query) || 
+               b.category.toLowerCase().includes(query);
+    });
+
+    if (filtered.length === 0) {
+        blogList.innerHTML = `
+            <div class="text-center py-12 text-slate-400 bg-slate-50 rounded-2xl border border-slate-200 p-6 space-y-3">
+                <span class="material-symbols-outlined text-4xl text-slate-300">article</span>
+                <p class="text-sm font-medium">Arama kriterine uygun makale bulunamadı.</p>
+            </div>
+        `;
+        return;
+    }
+
+    blogList.innerHTML = filtered.map(b => `
+        <div class="glass-card p-4 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border border-slate-200 hover:border-indigo-300 transition-all">
+            <div class="flex items-center gap-4 flex-1 min-w-0">
+                <img src="${b.image || 'images/agroplan_detay.png'}" alt="${b.title}" class="w-14 h-14 rounded-xl object-cover border border-slate-200 flex-shrink-0 bg-slate-100">
+                <div class="space-y-1 min-w-0">
+                    <div class="flex items-center gap-2">
+                        <span class="px-2 py-0.5 bg-indigo-50 text-indigo-700 border border-indigo-100 rounded-md text-[10px] font-bold uppercase">${b.category}</span>
+                        <h4 class="text-slate-900 font-bold text-sm truncate">${b.title}</h4>
+                    </div>
+                    <p class="text-xs text-slate-500 line-clamp-2">${b.summary}</p>
+                    <div class="text-[11px] text-slate-400 font-medium pt-0.5">
+                        <span>${b.date || 'Bugün'} • ${b.author || 'MGA Ekibi'}</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-2 w-full sm:w-auto justify-end border-t sm:border-t-0 border-slate-100 pt-2 sm:pt-0">
+                <a href="/blog-detail?slug=${b.slug}" target="_blank" class="px-3 py-1.5 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-lg transition-all flex items-center gap-1 text-xs font-bold">
+                    <span class="material-symbols-outlined text-base text-sky-600">visibility</span>
+                    <span>Görüntüle</span>
+                </a>
+                <button type="button" class="delete-blog-btn px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 rounded-lg transition-all flex items-center gap-1 text-xs font-bold" data-slug="${b.slug}">
+                    <span class="material-symbols-outlined text-base">delete</span>
+                    <span>Sil</span>
+                </button>
+            </div>
+        </div>
+    `).join('');
+
+    // Silme butonlarını dinle
+    document.querySelectorAll('.delete-blog-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const slug = e.currentTarget.getAttribute('data-slug');
+            const target = cachedBlogs.find(b => b.slug === slug);
+            if (confirm(`"${target ? target.title : 'Bu makaleyi'}" silmek istediğinize emin misiniz?`)) {
+                cachedBlogs = cachedBlogs.filter(b => b.slug !== slug);
+                localStorage.setItem('mga_blog_posts', JSON.stringify(cachedBlogs));
+                loadAdminBlogs();
+            }
+        });
+    });
+}
+
+// Blog Arama Dinleyicisi
+const searchBlogInput = document.getElementById('searchBlog');
+if (searchBlogInput) {
+    searchBlogInput.addEventListener('input', renderAdminBlogList);
+}
+
+// Yeni Blog Makalesi Ekleme Formu
+const addBlogForm = document.getElementById('addBlogForm');
+const addBlogBtn = document.getElementById('addBlogBtn');
+if (addBlogForm) {
+    addBlogForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const title = document.getElementById('b_title').value.trim();
+        const summary = document.getElementById('b_summary').value.trim();
+        const category = document.getElementById('b_category').value;
+        const author = document.getElementById('b_author').value.trim() || 'MGA Creative Ekibi';
+        const image = document.getElementById('b_image').value.trim() || 'images/agroplan_detay.png';
+        const content = document.getElementById('b_content').value.trim();
+        const slug = slugify(title);
+
+        const newPost = {
+            slug: slug,
+            title: title,
+            summary: summary,
+            category: category,
+            author: author,
+            image: image,
+            content: content,
+            readTime: `${Math.max(3, Math.ceil(content.split(' ').length / 150))} dk okuma`,
+            date: new Date().toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' })
+        };
+
+        cachedBlogs.unshift(newPost);
+        localStorage.setItem('mga_blog_posts', JSON.stringify(cachedBlogs));
+
+        addBlogForm.reset();
+        alert('Yeni blog makalesi başarıyla yayınlandı!');
+        loadAdminBlogs();
+    });
+}
+
 // --- DASHBOARD VERİLERİNİ YÜKLE ---
 async function loadDashboardData() {
-    // 1. Hemen yerel verilerle arayüzü doldur
+    // 1. Projeleri ve Blogları yerel verilerle anında doldur
     renderPortfolioList(false);
+    loadAdminBlogs();
 
     // 2. Arka planda site başlıklarını doldur
     fetchSiteContent().then(content => {

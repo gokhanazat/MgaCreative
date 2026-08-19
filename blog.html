@@ -226,14 +226,28 @@ Kağıt kartvizitlerin %88'i ilk hafta içinde çöpe gitmektedir. **Cardly** vC
     let currentCategory = 'all';
     let searchQuery = '';
 
+    function getAllBlogPosts() {
+        let localPosts = [];
+        try {
+            const saved = localStorage.getItem('mga_blog_posts');
+            if (saved) localPosts = JSON.parse(saved);
+        } catch(e) {}
+
+        const map = new Map();
+        DEFAULT_BLOG_POSTS.forEach(p => map.set(p.slug, p));
+        localPosts.forEach(p => map.set(p.slug, p));
+        return Array.from(map.values());
+    }
+
     function renderBlog() {
+        const allPosts = getAllBlogPosts();
         const blogGrid = document.getElementById('blogGrid');
         const featuredSection = document.getElementById('featuredPostSection');
         const noResults = document.getElementById('noResults');
         const postCountBadge = document.getElementById('postCountBadge');
 
         // Filtreleme
-        const filtered = DEFAULT_BLOG_POSTS.filter(post => {
+        const filtered = allPosts.filter(post => {
             const matchesCat = currentCategory === 'all' || post.category === currentCategory;
             const matchesSearch = !searchQuery || 
                 post.title.toLowerCase().includes(searchQuery) || 

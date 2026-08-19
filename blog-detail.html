@@ -310,11 +310,25 @@ Kağıt kartvizitlerin %88'i ilk hafta içinde çöpe gitmektedir. **Cardly** vC
         return `<p>${html}</p>`;
     }
 
+    function getAllBlogPosts() {
+        let localPosts = [];
+        try {
+            const saved = localStorage.getItem('mga_blog_posts');
+            if (saved) localPosts = JSON.parse(saved);
+        } catch(e) {}
+
+        const map = new Map();
+        DEFAULT_BLOG_POSTS.forEach(p => map.set(p.slug, p));
+        localPosts.forEach(p => map.set(p.slug, p));
+        return Array.from(map.values());
+    }
+
     function initPost() {
         const urlParams = new URLSearchParams(window.location.search);
         const slug = urlParams.get('slug');
 
-        const post = DEFAULT_BLOG_POSTS.find(p => p.slug === slug) || DEFAULT_BLOG_POSTS[0];
+        const allPosts = getAllBlogPosts();
+        const post = allPosts.find(p => p.slug === slug) || allPosts[0];
 
         // Fill Metadata & Content
         document.getElementById('pageTitle').textContent = `${post.title} | MGA Creative Blog`;
