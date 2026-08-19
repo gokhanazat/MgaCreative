@@ -49,37 +49,70 @@ export async function fetchPortfolioItems() {
  * portfolio_items tablosuna yeni uygulama ekler
  */
 export async function addPortfolioItem(item) {
-    const itemToInsert = { ...item };
-    if (itemToInsert.id && String(itemToInsert.id).startsWith('def-')) {
-        delete itemToInsert.id;
+    try {
+        const itemToInsert = { ...item };
+        if (itemToInsert.id && String(itemToInsert.id).startsWith('def-')) {
+            delete itemToInsert.id;
+        }
+        const insertPromise = supabase
+            .from('portfolio_items')
+            .insert([itemToInsert])
+            .select();
+        
+        const timeoutPromise = new Promise((_, reject) => 
+            setTimeout(() => reject(new Error('Veritabanı yanıt süresi aşıldı')), 8000)
+        );
+
+        const { data, error } = await Promise.race([insertPromise, timeoutPromise]);
+        return { data, error };
+    } catch (e) {
+        console.error('addPortfolioItem hatası:', e);
+        return { data: null, error: e };
     }
-    const { data, error } = await supabase
-        .from('portfolio_items')
-        .insert([itemToInsert])
-        .select();
-    return { data, error };
 }
 
 /**
  * portfolio_items tablosundaki uygulamayı günceller
  */
 export async function updatePortfolioItem(id, updates) {
-    const { error } = await supabase
-        .from('portfolio_items')
-        .update(updates)
-        .eq('id', id);
-    return error;
+    try {
+        const updatePromise = supabase
+            .from('portfolio_items')
+            .update(updates)
+            .eq('id', id);
+
+        const timeoutPromise = new Promise((_, reject) => 
+            setTimeout(() => reject(new Error('Veritabanı güncelleme süresi aşıldı')), 8000)
+        );
+
+        const { error } = await Promise.race([updatePromise, timeoutPromise]);
+        return error;
+    } catch (e) {
+        console.error('updatePortfolioItem hatası:', e);
+        return e;
+    }
 }
 
 /**
  * portfolio_items tablosundan uygulama siler
  */
 export async function deletePortfolioItem(id) {
-    const { error } = await supabase
-        .from('portfolio_items')
-        .delete()
-        .eq('id', id);
-    return error;
+    try {
+        const deletePromise = supabase
+            .from('portfolio_items')
+            .delete()
+            .eq('id', id);
+
+        const timeoutPromise = new Promise((_, reject) => 
+            setTimeout(() => reject(new Error('Veritabanı silme süresi aşıldı')), 8000)
+        );
+
+        const { error } = await Promise.race([deletePromise, timeoutPromise]);
+        return error;
+    } catch (e) {
+        console.error('deletePortfolioItem hatası:', e);
+        return e;
+    }
 }
 
 /**
@@ -93,10 +126,16 @@ export async function uploadPortfolioImage(file) {
         const fileName = `${Date.now()}_${Math.random().toString(36).substring(2)}.${fileExt}`;
         const filePath = `portfolio/${fileName}`;
 
-        // Supabase Storage'a yüklemeyi dene
-        const { data, error } = await supabase.storage
+        // Supabase Storage'a yüklemeyi dene (6sn timeout ile)
+        const storagePromise = supabase.storage
             .from('portfolio')
             .upload(filePath, file);
+
+        const timeoutPromise = new Promise((_, reject) => 
+            setTimeout(() => reject(new Error('Storage yükleme süresi aşıldı')), 6000)
+        );
+
+        const { data, error } = await Promise.race([storagePromise, timeoutPromise]);
 
         if (!error && data) {
             const { data: publicUrlData } = supabase.storage
