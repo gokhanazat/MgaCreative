@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" class="scroll-smooth">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -50,48 +50,56 @@
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
         .article-content h2 {
-            font-size: 1.5rem;
+            font-size: 1.65rem;
             font-weight: 800;
             color: #0F172A;
-            margin-top: 2rem;
+            margin-top: 2.5rem;
             margin-bottom: 1rem;
             letter-spacing: -0.02em;
+            scroll-margin-top: 6.5rem;
         }
         .article-content h3 {
-            font-size: 1.25rem;
+            font-size: 1.3rem;
             font-weight: 700;
             color: #0F172A;
-            margin-top: 1.5rem;
+            margin-top: 2rem;
             margin-bottom: 0.75rem;
+            scroll-margin-top: 6.5rem;
         }
         .article-content p {
-            font-size: 1rem;
-            line-height: 1.8;
+            font-size: 1.05rem;
+            line-height: 1.85;
             color: #334155;
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.35rem;
         }
         .article-content ul {
             list-style-type: disc;
             padding-left: 1.5rem;
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.35rem;
             color: #334155;
         }
         .article-content li {
             margin-bottom: 0.5rem;
-            line-height: 1.7;
+            line-height: 1.75;
         }
         .article-content blockquote {
             border-left: 4px solid #0284C7;
             background-color: #F0F9FF;
-            padding: 1rem 1.25rem;
+            padding: 1.15rem 1.35rem;
             border-radius: 0.75rem;
-            margin: 1.5rem 0;
+            margin: 1.75rem 0;
             color: #0369A1;
             font-style: italic;
         }
         .article-content strong {
             color: #0F172A;
             font-weight: 700;
+        }
+        .toc-item.active {
+            color: #0284C7;
+            font-weight: 700;
+            border-left-color: #0284C7;
+            background-color: #F0F9FF;
         }
     </style>
 </head>
@@ -117,77 +125,130 @@
     </nav>
 </header>
 
-<main class="flex-grow pt-28 pb-20 px-4 md:px-12 max-w-4xl mx-auto w-full">
+<main class="flex-grow pt-28 pb-20 px-4 md:px-12 max-w-7xl mx-auto w-full">
     <!-- Back button -->
     <a href="/blog" class="inline-flex items-center gap-1.5 text-sky-600 hover:text-sky-700 font-bold text-sm mb-8 group transition-all">
         <span class="material-symbols-outlined text-lg transition-transform group-hover:-translate-x-1">arrow_back</span>
         <span>Tüm Makalelere Dön</span>
     </a>
 
-    <!-- Article Header -->
-    <header class="space-y-4 mb-8">
-        <div class="flex flex-wrap items-center gap-3">
-            <span id="postCategory" class="px-3 py-1 bg-sky-50 text-sky-700 border border-sky-200 rounded-md text-xs font-bold uppercase tracking-wider">Kategori</span>
-            <span class="text-xs text-slate-400">•</span>
-            <span id="postReadTime" class="text-xs font-semibold text-slate-500">5 dk okuma</span>
-            <span class="text-xs text-slate-400">•</span>
-            <span id="postDate" class="text-xs font-medium text-slate-500">Tarih</span>
-        </div>
-
-        <h1 id="postTitle" class="text-3xl md:text-5xl font-extrabold text-slate-900 leading-tight tracking-tight">
-            Makale Başlığı Yükleniyor...
-        </h1>
-
-        <p id="postSummary" class="text-base md:text-lg text-slate-600 leading-relaxed font-medium">
-            Özet açıklama...
-        </p>
-
-        <div class="pt-4 pb-2 border-t border-b border-slate-200 flex flex-wrap items-center justify-between gap-4">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-sky-100 text-sky-700 flex items-center justify-center font-bold text-sm">
-                    MGA
+    <!-- 2-Kolonlu Ana Izgara (Sol: İçerik, Sağ: Sticky Table of Contents) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        
+        <!-- SOL KOLON: Makale İçeriği (8 Kolon) -->
+        <div class="lg:col-span-8 space-y-8">
+            <!-- Article Header -->
+            <header class="space-y-4">
+                <div class="flex flex-wrap items-center gap-3">
+                    <span id="postCategory" class="px-3 py-1 bg-sky-50 text-sky-700 border border-sky-200 rounded-md text-xs font-bold uppercase tracking-wider">Kategori</span>
+                    <span class="text-xs text-slate-400">•</span>
+                    <span id="postReadTime" class="text-xs font-semibold text-slate-500">5 dk okuma</span>
+                    <span class="text-xs text-slate-400">•</span>
+                    <span id="postDate" class="text-xs font-medium text-slate-500">Tarih</span>
                 </div>
-                <div>
-                    <div id="postAuthor" class="text-sm font-bold text-slate-900">Yazar Adı</div>
-                    <div class="text-xs text-slate-500">Yazılım & Teknoloji Editörü</div>
+
+                <h1 id="postTitle" class="text-3xl md:text-5xl font-extrabold text-slate-900 leading-tight tracking-tight">
+                    Makale Başlığı Yükleniyor...
+                </h1>
+
+                <p id="postSummary" class="text-base md:text-lg text-slate-600 leading-relaxed font-medium">
+                    Özet açıklama...
+                </p>
+
+                <div class="pt-4 pb-2 border-t border-b border-slate-200 flex flex-wrap items-center justify-between gap-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-sky-100 text-sky-700 flex items-center justify-center font-bold text-sm">
+                            MGA
+                        </div>
+                        <div>
+                            <div id="postAuthor" class="text-sm font-bold text-slate-900">Yazar Adı</div>
+                            <div class="text-xs text-slate-500">Yazılım &amp; Teknoloji Editörü</div>
+                        </div>
+                    </div>
+                    <!-- Share Buttons -->
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold text-slate-400 uppercase mr-1">Paylaş:</span>
+                        <button onclick="shareLinkedIn()" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-sky-50 hover:text-sky-600 text-slate-600 flex items-center justify-center text-xs font-bold transition-all" title="LinkedIn">in</button>
+                        <button onclick="shareTwitter()" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-sky-50 hover:text-sky-600 text-slate-600 flex items-center justify-center text-xs font-bold transition-all" title="X / Twitter">𝕏</button>
+                        <button onclick="copyArticleLink()" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-sky-50 hover:text-sky-600 text-slate-600 flex items-center justify-center transition-all" title="Bağlantıyı Kopyala">
+                            <span class="material-symbols-outlined text-sm">link</span>
+                        </button>
+                    </div>
                 </div>
+            </header>
+
+            <!-- Main Image -->
+            <div class="rounded-3xl overflow-hidden border border-slate-200 shadow-md bg-slate-100 max-h-[460px]">
+                <img id="postImage" src="" alt="Makale Görseli" class="w-full h-full object-cover"/>
             </div>
-            <!-- Share Buttons -->
-            <div class="flex items-center gap-2">
-                <span class="text-xs font-bold text-slate-400 uppercase mr-1">Paylaş:</span>
-                <button onclick="shareLinkedIn()" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-sky-50 hover:text-sky-600 text-slate-600 flex items-center justify-center text-xs font-bold transition-all" title="LinkedIn">in</button>
-                <button onclick="shareTwitter()" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-sky-50 hover:text-sky-600 text-slate-600 flex items-center justify-center text-xs font-bold transition-all" title="X / Twitter">𝕏</button>
-                <button onclick="copyArticleLink()" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-sky-50 hover:text-sky-600 text-slate-600 flex items-center justify-center transition-all" title="Bağlantıyı Kopyala">
-                    <span class="material-symbols-outlined text-sm">link</span>
-                </button>
+
+            <!-- Content Body -->
+            <article id="postContent" class="article-content bg-white p-6 md:p-10 rounded-3xl border border-slate-200 shadow-sm">
+                <!-- Rendered HTML Content -->
+            </article>
+
+            <!-- Call to action Banner -->
+            <div class="p-8 rounded-3xl bg-sky-600 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="space-y-2 text-center md:text-left">
+                    <h3 class="text-xl font-bold">Bu Teknolojiyi Projenize Uygulayalım mı?</h3>
+                    <p class="text-sky-100 text-sm max-w-md">Mobil yazılım, yapay zeka veya dijital dönüşüm gereksinimleriniz için uzman ekibimizle görüşün.</p>
+                </div>
+                <a href="/contact" class="px-6 py-3 bg-white hover:bg-slate-100 text-sky-700 font-bold rounded-xl text-sm shadow-md active:scale-95 transition-all whitespace-nowrap">
+                    Hemen Konuşalım
+                </a>
             </div>
         </div>
-    </header>
 
-    <!-- Main Image -->
-    <div class="rounded-3xl overflow-hidden mb-10 border border-slate-200 shadow-md bg-slate-100 max-h-[420px]">
-        <img id="postImage" src="" alt="Makale Görseli" class="w-full h-full object-cover"/>
-    </div>
+        <!-- SAĞ KOLON: Yapışkan İçindekiler (Sticky Table of Contents) (4 Kolon) -->
+        <aside class="lg:col-span-4 lg:sticky lg:top-28 space-y-6">
+            <!-- İçindekiler Kartı -->
+            <div class="glass-card p-6 rounded-3xl border border-slate-200 shadow-sm">
+                <div class="flex items-center gap-2 pb-3 mb-4 border-b border-slate-100">
+                    <span class="material-symbols-outlined text-sky-600 text-xl">format_list_bulleted</span>
+                    <h3 class="text-sm font-extrabold text-slate-900 uppercase tracking-wider">İçindekiler</h3>
+                </div>
+                
+                <nav id="tocNav" class="space-y-1">
+                    <!-- Dinamik TOC başlıkları buraya gelir -->
+                    <p class="text-xs text-slate-400">Başlıklar taranıyor...</p>
+                </nav>
+            </div>
 
-    <!-- Content Body -->
-    <article id="postContent" class="article-content bg-white p-6 md:p-10 rounded-3xl border border-slate-200 shadow-sm">
-        <!-- Rendered HTML Content -->
-    </article>
+            <!-- Yazar & MGA Creative Kutusu -->
+            <div class="glass-card p-6 rounded-3xl border border-slate-200 space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-2xl bg-sky-600 text-white flex items-center justify-center font-extrabold text-lg shadow-md shadow-sky-600/20">
+                        M
+                    </div>
+                    <div>
+                        <div class="text-sm font-bold text-slate-900">MGA Creative</div>
+                        <div class="text-xs text-slate-500">Yazılım &amp; Sistem Mimarisi</div>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                    Android Native, Jetpack Compose ve Yapay Zeka destekli modern dijital çözümler üretiyoruz.
+                </p>
+                <a href="/portfolio" class="inline-flex items-center gap-1.5 text-xs font-bold text-sky-600 hover:text-sky-700 transition-colors">
+                    <span>Geliştirdiğimiz Uygulamalar</span>
+                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                </a>
+            </div>
+        </aside>
 
-    <!-- Call to action Banner -->
-    <div class="mt-12 p-8 rounded-3xl bg-sky-600 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
-        <div class="space-y-2 text-center md:text-left">
-            <h3 class="text-xl font-bold">Projenizi Hayata Geçirelim mi?</h3>
-            <p class="text-sky-100 text-sm max-w-md">Mobil yazılım veya yapay zeka çözümlerimizle işinizi büyütmek için bizimle iletişime geçin.</p>
-        </div>
-        <a href="/contact" class="px-6 py-3 bg-white hover:bg-slate-100 text-sky-700 font-bold rounded-xl text-sm shadow-md active:scale-95 transition-all whitespace-nowrap">
-            Hemen Konuşalım
-        </a>
     </div>
 
     <!-- Related Articles -->
-    <section class="mt-16">
-        <h2 class="text-2xl font-bold text-slate-900 mb-6">İlginizi Çekebilecek Diğer Makaleler</h2>
+    <section class="mt-20 pt-12 border-t border-slate-200">
+        <div class="flex items-center justify-between mb-8">
+            <div>
+                <span class="text-sky-600 font-bold text-xs uppercase tracking-wider">Keşfetmeye Devam Edin</span>
+                <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 mt-1">İlginizi Çekebilecek Diğer Makaleler</h2>
+            </div>
+            <a href="/blog" class="text-sky-600 hover:text-sky-700 font-bold text-sm hidden md:flex items-center gap-1">
+                <span>Tüm Makaleler</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+        </div>
         <div id="relatedGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Dynamic Related Posts -->
         </div>
@@ -250,7 +311,8 @@ Geleneksel arayüz geliştirmede görünüm durumunu (state) elle senkronize etm
 ### Clean Architecture & StateFlow ile Kararlılık
 MGA Creative olarak geliştirdiğimiz tüm Android projelerinde (Hotel OS, AgroPlan, Cardly) **Clean Architecture** prensiplerini uyguluyoruz. Veri katmanı (Data), iş mantığı (Domain) ve arayüz katmanı (Presentation) birbirinden bağımsız inşa edilerek uzun vadeli bakım kolaylığı sağlanır.
 
-> **Sonuç:** 2026 yılında kurumsal ölçekte bir mobil uygulama geliştirmeyi hedefliyorsanız, Kotlin & Jetpack Compose ikilisi hem performans hem de geliştirme hızı açısından altın standarttır.`
+### Sonuç ve 2026 Vizyonu
+2026 yılında kurumsal ölçekte bir mobil uygulama geliştirmeyi hedefliyorsanız, Kotlin & Jetpack Compose ikilisi hem performans hem de geliştirme hızı açısından altın standarttır.`
         },
         {
             slug: 'dijital-tarimda-verimlilik-ve-tarla-yonetimi',
@@ -269,7 +331,8 @@ MGA Creative olarak geliştirdiğimiz tüm Android projelerinde (Hotel OS, AgroP
 3. **Maliyet ve Kâr Analizi:** Sezon boyunca yapılan tüm harcamalar kaydedilir, hasat satışı yapıldığında net kâr grafiği anında elde edilir.
 4. **Çevrimdışı (Offline) Çalışma:** Tarlada internet çekmese dahi kayıtlar yerel veritabanında güvenle tutulur, internet bağlantısı sağlandığında buluta senkronize edilir.
 
-> **Özet:** Dijital tarım araçları artık lüks değil; maliyetlerini kontrol altında tutmak ve kazancını artırmak isteyen her üretici için vazgeçilmez bir ihtiyaçtır.`
+### Geleceğin Tarım Yönetimi
+Dijital tarım araçları artık lüks değil; maliyetlerini kontrol altında tutmak ve kazancını artırmak isteyen her üretici için vazgeçilmez bir ihtiyaçtır.`
         },
         {
             slug: 'yapay-zeka-ve-nlp-ile-is-akisi-otomasyonu',
@@ -291,16 +354,35 @@ Kağıt kartvizitlerin %88'i ilk hafta içinde çöpe gitmektedir. **Cardly** vC
 - **Dinamik Güncelleme:** Telefon numarası veya unvan değiştiğinde tüm paylaşılan kartvizitler anında güncellenir.
 - **Çevre Dostu & Prestijli:** Sıfır kağıt israfı ile modern kurumsal imaj.
 
-> **Geleceğin Teknolojisi:** Yapay zeka ve akıllı paylaşım protokolleri, küçük işletmelerden küresel şirketlere kadar iş yapış biçimlerini temelden dönüştürmektedir.`
+### Sonuç: Akıllı Otomasyon
+Yapay zeka ve akıllı paylaşım protokolleri, küçük işletmelerden küresel şirketlere kadar iş yapış biçimlerini temelden dönüştürmektedir.`
         }
     ];
 
+    let headingCounter = 0;
+
+    function slugify(text) {
+        return text.toString().toLowerCase()
+            .replace(/\s+/g, '-')
+            .replace(/[^\w\-]+/g, '')
+            .replace(/\-\-+/g, '-')
+            .replace(/^-+/, '')
+            .replace(/-+$/, '') || `sec-${++headingCounter}`;
+    }
+
     function parseMarkdown(md) {
         if (!md) return '';
+        headingCounter = 0;
+        
         let html = md
-            .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-            .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-            .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+            .replace(/^### (.*$)/gim, (match, p1) => {
+                const id = slugify(p1);
+                return `<h3 id="${id}" class="blog-heading">${p1}</h3>`;
+            })
+            .replace(/^## (.*$)/gim, (match, p1) => {
+                const id = slugify(p1);
+                return `<h2 id="${id}" class="blog-heading">${p1}</h2>`;
+            })
             .replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>')
             .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
             .replace(/\*(.*)\*/gim, '<em>$1</em>')
@@ -323,6 +405,52 @@ Kağıt kartvizitlerin %88'i ilk hafta içinde çöpe gitmektedir. **Cardly** vC
         return Array.from(map.values());
     }
 
+    function buildTableOfContents() {
+        const tocNav = document.getElementById('tocNav');
+        const headings = document.querySelectorAll('#postContent h2, #postContent h3');
+        
+        if (!headings || headings.length === 0) {
+            tocNav.innerHTML = `<p class="text-xs text-slate-400">Bu makale için alt başlık bulunamadı.</p>`;
+            return;
+        }
+
+        tocNav.innerHTML = Array.from(headings).map((h, idx) => {
+            const isH3 = h.tagName.toLowerCase() === 'h3';
+            const indentClass = isH3 ? 'pl-5 text-xs' : 'pl-3 text-xs font-semibold';
+            return `
+                <a href="#${h.id}" class="toc-item block py-1.5 pr-2 ${indentClass} text-slate-600 hover:text-sky-600 hover:bg-sky-50/60 rounded-lg border-l-2 border-transparent transition-all truncate" data-target="${h.id}">
+                    ${h.textContent}
+                </a>
+            `;
+        }).join('');
+
+        setupScrollSpy(headings);
+    }
+
+    function setupScrollSpy(headings) {
+        const tocLinks = document.querySelectorAll('.toc-item');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    tocLinks.forEach(link => {
+                        if (link.getAttribute('data-target') === id) {
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    });
+                }
+            });
+        }, {
+            rootMargin: '0px 0px -65% 0px',
+            threshold: 0
+        });
+
+        headings.forEach(h => observer.observe(h));
+    }
+
     function initPost() {
         const urlParams = new URLSearchParams(window.location.search);
         const slug = urlParams.get('slug');
@@ -330,7 +458,7 @@ Kağıt kartvizitlerin %88'i ilk hafta içinde çöpe gitmektedir. **Cardly** vC
         const allPosts = getAllBlogPosts();
         const post = allPosts.find(p => p.slug === slug) || allPosts[0];
 
-        // Fill Metadata & Content
+        // Metadata & Content
         document.getElementById('pageTitle').textContent = `${post.title} | MGA Creative Blog`;
         document.getElementById('metaDescription').setAttribute('content', post.summary);
         document.getElementById('postTitle').textContent = post.title;
@@ -344,7 +472,10 @@ Kağıt kartvizitlerin %88'i ilk hafta içinde çöpe gitmektedir. **Cardly** vC
 
         document.getElementById('postContent').innerHTML = parseMarkdown(post.content);
 
-        // JSON-LD SEO injection
+        // Dinamik İçindekiler Menüsünü Oluştur
+        buildTableOfContents();
+
+        // JSON-LD SEO Schema
         const schemaEl = document.getElementById('articleSchema');
         if (schemaEl) {
             const schemaData = {
@@ -367,8 +498,8 @@ Kağıt kartvizitlerin %88'i ilk hafta içinde çöpe gitmektedir. **Cardly** vC
             schemaEl.textContent = JSON.stringify(schemaData);
         }
 
-        // Related Posts
-        const related = DEFAULT_BLOG_POSTS.filter(p => p.slug !== post.slug).slice(0, 2);
+        // İlgili Diğer Makaleler
+        const related = allPosts.filter(p => p.slug !== post.slug).slice(0, 2);
         const relatedGrid = document.getElementById('relatedGrid');
         relatedGrid.innerHTML = related.map(rel => `
             <article class="glass-card rounded-2xl p-5 flex flex-col justify-between group">
