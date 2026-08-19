@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Blog & Teknoloji Rehberi | MGA Creative</title>
+    <meta name="description" content="Mobil uygulama geliştirme, Kotlin, Jetpack Compose, Yapay Zeka ve dijital dönüşüm trendleri hakkında uzman makaleler ve sektörel rehberler."/>
+    <link rel="canonical" href="https://www.mgacreative.com/blog" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              background: "#F8FAFC",
+              surface: "#FFFFFF",
+              "surface-container": "#F1F5F9",
+              "on-background": "#0F172A",
+              "on-surface": "#0F172A",
+              "on-surface-variant": "#475569",
+              primary: "#0284C7",
+              "primary-hover": "#0369A1",
+              secondary: "#4F46E5",
+              outline: "#CBD5E1",
+              "outline-variant": "#E2E8F0"
+            },
+            fontFamily: {
+              sans: ["'Plus Jakarta Sans'", "sans-serif"]
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+        body {
+            background-color: #F8FAFC;
+            color: #0F172A;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glass-card {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            border-color: #38BDF8;
+            box-shadow: 0 16px 32px -4px rgba(15, 23, 42, 0.1);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="selection:bg-sky-100 selection:text-sky-900 min-h-screen flex flex-col">
+
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-white/85 backdrop-blur-xl border-b border-slate-200/80 shadow-sm">
+    <nav class="flex justify-between items-center w-full h-20 px-4 md:px-12 max-w-7xl mx-auto">
+        <a class="text-2xl font-extrabold tracking-tight text-slate-900 flex items-center gap-2" href="/">
+            <span class="w-8 h-8 rounded-xl bg-sky-600 text-white flex items-center justify-center text-base font-bold shadow-md shadow-sky-500/20">M</span>
+            <span>MGA Creative</span>
+        </a>
+        <div class="hidden md:flex items-center gap-8">
+            <a class="text-slate-600 font-semibold hover:text-sky-600 transition-all text-sm" href="/">Ana Sayfa</a>
+            <a class="text-slate-600 font-semibold hover:text-sky-600 transition-all text-sm" href="/portfolio">Uygulamalarımız</a>
+            <a class="text-sky-600 font-bold border-b-2 border-sky-600 pb-1 text-sm transition-all" href="/blog">Blog & Rehber</a>
+            <a class="text-slate-600 font-semibold hover:text-sky-600 transition-all text-sm" href="/about">Hakkımızda</a>
+            <a class="text-slate-600 font-semibold hover:text-sky-600 transition-all text-sm" href="/contact">İletişim</a>
+        </div>
+        <button onclick="window.location.href='/contact'" class="bg-sky-600 hover:bg-sky-700 text-white font-semibold px-6 py-2.5 rounded-xl text-sm shadow-md shadow-sky-600/20 active:scale-95 transition-all">
+            İletişime Geç
+        </button>
+    </nav>
+</header>
+
+<main class="flex-grow pt-28 pb-20 px-4 md:px-12 max-w-7xl mx-auto w-full">
+    <!-- Hero Section -->
+    <section class="text-center py-12 md:py-16 max-w-3xl mx-auto space-y-4">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-50 border border-sky-200/80 text-sky-700 text-xs font-bold uppercase tracking-wider shadow-xs">
+            <span class="material-symbols-outlined text-sm">auto_stories</span>
+            <span>MGA Teknoloji & Yazılım Günlüğü</span>
+        </div>
+        <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
+            Mobil Yazılım, Yapay Zeka ve Dijital Gelecek
+        </h1>
+        <p class="text-slate-600 text-base md:text-lg leading-relaxed">
+            Sektörel analizler, Android Native mimariler, akıllı otomasyonlar ve dijital dönüşüm hakkında derinlemesine rehberler.
+        </p>
+    </section>
+
+    <!-- Search and Categories -->
+    <section class="mb-10 space-y-6">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+            <!-- Filter Pills -->
+            <div class="flex flex-wrap items-center gap-2 w-full md:w-auto" id="categoryFilterContainer">
+                <button class="cat-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-sky-600 text-white shadow-sm" data-category="all">Tüm Yazılar</button>
+                <button class="cat-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-slate-100 text-slate-700 hover:bg-slate-200" data-category="Mobil Yazılım">Mobil Yazılım</button>
+                <button class="cat-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-slate-100 text-slate-700 hover:bg-slate-200" data-category="Yapay Zeka">Yapay Zeka</button>
+                <button class="cat-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-slate-100 text-slate-700 hover:bg-slate-200" data-category="Tarım Teknolojileri">Tarım Teknolojileri</button>
+                <button class="cat-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-slate-100 text-slate-700 hover:bg-slate-200" data-category="B2B Çözümler">B2B Çözümler</button>
+            </div>
+            
+            <!-- Search Box -->
+            <div class="relative w-full md:w-80">
+                <span class="material-symbols-outlined absolute left-3.5 top-2.5 text-slate-400 text-lg">search</span>
+                <input type="text" id="blogSearchInput" placeholder="Makalelerde ara..." class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-2 text-xs text-slate-900 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100 transition-all font-medium"/>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Post -->
+    <section id="featuredPostSection" class="mb-12">
+        <!-- Dynamic Featured Card -->
+    </section>
+
+    <!-- Articles Grid -->
+    <section>
+        <div class="flex items-center justify-between mb-6">
+            <h2 class="text-xl font-bold text-slate-900" id="gridTitle">Son Yayınlanan Makaleler</h2>
+            <span id="postCountBadge" class="text-xs font-bold text-slate-500 bg-slate-100 px-3 py-1 rounded-full border border-slate-200">0 Makale</span>
+        </div>
+        
+        <div id="blogGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Dynamic Cards -->
+        </div>
+
+        <div id="noResults" class="hidden text-center py-16 space-y-3 bg-white rounded-3xl border border-slate-200 p-8">
+            <span class="material-symbols-outlined text-slate-300 text-5xl">article</span>
+            <h3 class="text-lg font-bold text-slate-800">Arama Kriterine Uygun Makale Bulunamadı</h3>
+            <p class="text-slate-500 text-xs">Farklı bir anahtar kelime veya kategori seçebilirsiniz.</p>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="w-full py-12 bg-white border-t border-slate-200 mt-auto">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-6 max-w-7xl mx-auto px-4 md:px-12">
+        <div class="space-y-1 text-center md:text-left">
+            <div class="text-lg font-extrabold text-slate-900">MGA Creative</div>
+            <p class="text-sm text-slate-500">© 2026 MGA Creative. Tüm hakları saklıdır. Özenle tasarlanıp kodlanmıştır.</p>
+        </div>
+        <div class="flex gap-6 text-sm font-semibold text-slate-600">
+            <a class="hover:text-sky-600 transition-colors" href="/portfolio">Uygulamalar</a>
+            <a class="hover:text-sky-600 transition-colors" href="/blog">Blog</a>
+            <a class="hover:text-sky-600 transition-colors" href="/about">Hakkımızda</a>
+            <a class="hover:text-sky-600 transition-colors" href="/contact">İletişim</a>
+            <a class="hover:text-sky-600 transition-colors" href="/admin">Yönetim</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // --- 3 ADET KALİTELİ & GEO/AI UYUMLU SEED MAKALE ---
+    const DEFAULT_BLOG_POSTS = [
+        {
+            slug: 'modern-mobil-uygulama-gelistirme-kotlin-jetpack-compose',
+            title: "2026'da Modern Mobil Uygulama Geliştirme: Kotlin & Jetpack Compose Neden Tercih Edilmeli?",
+            summary: "Android ekosisteminde bildirimli UI (Declarative UI) devrimi, yüksek performanslı mimariler ve Clean Architecture standartlarının uygulama başarısındaki kritik rolü.",
+            category: "Mobil Yazılım",
+            readTime: "5 dk okuma",
+            date: "18 Ağustos 2026",
+            author: "MGA Creative Mühendislik Ekibi",
+            image: "images/agroplan_detay.png",
+            featured: true,
+            content: `Modern mobil yazılım dünyasında kullanıcı deneyimi, hız ve kararlılık her zamankinden daha belirleyicidir. Google'ın Android için geliştirdiği modern UI araç seti **Jetpack Compose**, klasik XML tabanlı arayüz geliştirme yaklaşımını tamamen geride bıraktı.
+
+### Declarative UI (Bildirimli Arayüz) Gücü
+Geleneksel arayüz geliştirmede görünüm durumunu (state) elle senkronize etmek zorundayken, Jetpack Compose ile durum değiştikçe arayüz otomatik olarak yeniden çizilir (recomposition). Bu mimari:
+- **%40 daha az kod:** XML dosyaları ve boilerplate bağlama kodları ortadan kalkar.
+- **Hızlı geliştirme döngüsü:** Canlı önizleme ve modüler bileşen yapısı sayesinde tasarım anında test edilir.
+- **Daha az çökme (Crash-Free):** Kotlin'in Type Safety ve Null Safety özellikleri sayesinde çalışma zamanı hataları minimize edilir.
+
+### Clean Architecture & StateFlow ile Kararlılık
+MGA Creative olarak geliştirdiğimiz tüm Android projelerinde (Hotel OS, AgroPlan, Cardly) **Clean Architecture** prensiplerini uyguluyoruz. Veri katmanı (Data), iş mantığı (Domain) ve arayüz katmanı (Presentation) birbirinden bağımsız inşa edilerek uzun vadeli bakım kolaylığı sağlanır.
+
+> **Sonuç:** 2026 yılında kurumsal ölçekte bir mobil uygulama geliştirmeyi hedefliyorsanız, Kotlin & Jetpack Compose ikilisi hem performans hem de geliştirme hızı açısından altın standarttır.`
+        },
+        {
+            slug: 'dijital-tarimda-verimlilik-ve-tarla-yonetimi',
+            title: "Dijital Tarımda Verimlilik: AgroPlan ile Tarla ve Finans Yönetimi Nasıl Yapılır?",
+            summary: "Geleneksel tarımsal üretim süreçlerinin dijitalleşmesi, gübreleme, sulama ve hasat maliyetlerinin akıllı telefonlardan takibinin getirdiği kâr artışı.",
+            category: "Tarım Teknolojileri",
+            readTime: "4 dk okuma",
+            date: "15 Ağustos 2026",
+            author: "Gökhan Azat",
+            image: "images/aproplan_detay.png",
+            featured: false,
+            content: `Tarım sektörü, artan girdi maliyetleri (mazot, tohum, gübre, ilaçlama) ve iklim koşulları nedeniyle her dönümün hesaplanmasını zorunlu kılmaktadır. Geleneksel defter tutma yöntemleri, sezon sonunda çiftçinin gerçek kâr/zarar durumunu görmesini engellemektedir.
+
+### AgroPlan ile Neler Değişiyor?
+1. **Arazi ve Parsel Dijitalleştirmesi:** Sahip olunan veya kiralanan tüm tarlalar dönüm ve ürün türüne göre haritalandırılır.
+2. **Periyodik Bakım & Sulama Hatırlatıcıları:** İlaçlama ve sulama periyotları zamanında yapılarak ürün kaybı önlenir.
+3. **Maliyet ve Kâr Analizi:** Sezon boyunca yapılan tüm harcamalar kaydedilir, hasat satışı yapıldığında net kâr grafiği anında elde edilir.
+4. **Çevrimdışı (Offline) Çalışma:** Tarlada internet çekmese dahi kayıtlar yerel veritabanında güvenle tutulur, internet bağlantısı sağlandığında buluta senkronize edilir.
+
+> **Özet:** Dijital tarım araçları artık lüks değil; maliyetlerini kontrol altında tutmak ve kazancını artırmak isteyen her üretici için vazgeçilmez bir ihtiyaçtır.`
+        },
+        {
+            slug: 'yapay-zeka-ve-nlp-ile-is-akisi-otomasyonu',
+            title: "Yapay Zeka ve NLP ile Günlük İş Akışınızı Otomatize Edin: Akıllı Ajanda ve vCard Sistemleri",
+            summary: "Doğal Dil İşleme (NLP) teknolojileriyle e-postalardan ve mesajlardan otomatik görev çıkarma ve yeni nesil temassız dijital kartvizit ekosistemi.",
+            category: "Yapay Zeka",
+            readTime: "6 dk okuma",
+            date: "10 Ağustos 2026",
+            author: "MGA Creative AI Lab",
+            image: "images/cardly_detay.jpeg",
+            featured: false,
+            content: `Günümüz iş dünyasında en büyük zaman kaybı, dağınık iletişim kanallarından (e-posta, WhatsApp, toplantı notları) çıkan görevleri elle takvime işlemektir.
+
+### NLP ile Akıllı Ajanda Çıkarımı (MailMind Yaklaşımı)
+Doğal Dil İşleme (Natural Language Processing) algoritmaları, gelen e-postalardaki tarih, saat ve görev ifadelerini otomatik olarak ayrıştırarak tek dokunuşla ajandanıza ekler.
+
+### Ağ Oluşturmada Dijital Dönüşüm: Cardly
+Kağıt kartvizitlerin %88'i ilk hafta içinde çöpe gitmektedir. **Cardly** vCard sistemiyle:
+- **NFC ve Dinamik QR:** Telefonu dokundurarak veya QR okutarak rehbere anında kayıt.
+- **Dinamik Güncelleme:** Telefon numarası veya unvan değiştiğinde tüm paylaşılan kartvizitler anında güncellenir.
+- **Çevre Dostu & Prestijli:** Sıfır kağıt israfı ile modern kurumsal imaj.
+
+> **Geleceğin Teknolojisi:** Yapay zeka ve akıllı paylaşım protokolleri, küçük işletmelerden küresel şirketlere kadar iş yapış biçimlerini temelden dönüştürmektedir.`
+        }
+    ];
+
+    let currentCategory = 'all';
+    let searchQuery = '';
+
+    function renderBlog() {
+        const blogGrid = document.getElementById('blogGrid');
+        const featuredSection = document.getElementById('featuredPostSection');
+        const noResults = document.getElementById('noResults');
+        const postCountBadge = document.getElementById('postCountBadge');
+
+        // Filtreleme
+        const filtered = DEFAULT_BLOG_POSTS.filter(post => {
+            const matchesCat = currentCategory === 'all' || post.category === currentCategory;
+            const matchesSearch = !searchQuery || 
+                post.title.toLowerCase().includes(searchQuery) || 
+                post.summary.toLowerCase().includes(searchQuery) ||
+                post.category.toLowerCase().includes(searchQuery);
+            return matchesCat && matchesSearch;
+        });
+
+        postCountBadge.textContent = `${filtered.length} Makale`;
+
+        if (filtered.length === 0) {
+            blogGrid.innerHTML = '';
+            featuredSection.innerHTML = '';
+            noResults.classList.remove('hidden');
+            return;
+        }
+
+        noResults.classList.add('hidden');
+
+        // Featured post (Kategori tümü ve arama yoksa göster)
+        if (currentCategory === 'all' && !searchQuery) {
+            const feat = DEFAULT_BLOG_POSTS.find(p => p.featured) || filtered[0];
+            featuredSection.innerHTML = `
+                <article class="glass-card rounded-3xl overflow-hidden border border-slate-200 p-6 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center group">
+                    <div class="lg:col-span-6 space-y-4">
+                        <div class="flex items-center gap-3">
+                            <span class="px-3 py-1 bg-sky-50 text-sky-700 border border-sky-200 rounded-md text-xs font-bold uppercase tracking-wider">${feat.category}</span>
+                            <span class="text-xs font-semibold text-slate-500">${feat.readTime}</span>
+                        </div>
+                        <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 group-hover:text-sky-600 transition-colors leading-tight">
+                            <a href="/blog-detail?slug=${feat.slug}">${feat.title}</a>
+                        </h2>
+                        <p class="text-slate-600 text-sm leading-relaxed">${feat.summary}</p>
+                        <div class="pt-2 flex items-center justify-between">
+                            <span class="text-xs text-slate-400 font-medium">${feat.date} • ${feat.author}</span>
+                            <a href="/blog-detail?slug=${feat.slug}" class="inline-flex items-center gap-1.5 text-sky-600 hover:text-sky-700 font-bold text-xs group-hover:translate-x-1 transition-all">
+                                <span>Devamını Oku</span>
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-6 h-64 md:h-80 rounded-2xl overflow-hidden bg-slate-100 border border-slate-200">
+                        <img src="${feat.image}" alt="${feat.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+                    </div>
+                </article>
+            `;
+            featuredSection.classList.remove('hidden');
+        } else {
+            featuredSection.innerHTML = '';
+            featuredSection.classList.add('hidden');
+        }
+
+        // Grid cards
+        const gridPosts = (currentCategory === 'all' && !searchQuery) 
+            ? filtered.filter(p => !p.featured) 
+            : filtered;
+
+        blogGrid.innerHTML = gridPosts.map(post => `
+            <article class="glass-card flex flex-col rounded-2xl overflow-hidden group">
+                <div class="h-48 overflow-hidden bg-slate-100 relative">
+                    <img src="${post.image}" alt="${post.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+                    <div class="absolute top-3 left-3">
+                        <span class="bg-white/95 backdrop-blur-md text-sky-800 border border-slate-200 px-2.5 py-1 rounded-md text-xs font-bold shadow-sm">${post.category}</span>
+                    </div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow space-y-3">
+                    <div class="flex items-center justify-between text-xs text-slate-400 font-medium">
+                        <span>${post.date}</span>
+                        <span>${post.readTime}</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 group-hover:text-sky-600 transition-colors leading-snug">
+                        <a href="/blog-detail?slug=${post.slug}">${post.title}</a>
+                    </h3>
+                    <p class="text-xs text-slate-600 line-clamp-3 leading-relaxed flex-grow">
+                        ${post.summary}
+                    </p>
+                    <div class="pt-3 border-t border-slate-100 mt-auto flex items-center justify-between">
+                        <span class="text-[11px] text-slate-500 font-semibold truncate max-w-[150px]">${post.author}</span>
+                        <a href="/blog-detail?slug=${post.slug}" class="inline-flex items-center gap-1 text-sky-600 hover:text-sky-700 font-bold text-xs group-hover:translate-x-1 transition-all">
+                            <span>Oku</span>
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+        `).join('');
+    }
+
+    // Kategori ve arama filtre dinleyicileri
+    document.querySelectorAll('.cat-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            document.querySelectorAll('.cat-btn').forEach(b => {
+                b.className = 'cat-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-slate-100 text-slate-700 hover:bg-slate-200';
+            });
+            e.currentTarget.className = 'cat-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-sky-600 text-white shadow-sm';
+            currentCategory = e.currentTarget.getAttribute('data-category');
+            renderBlog();
+        });
+    });
+
+    const searchInput = document.getElementById('blogSearchInput');
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value.toLowerCase().trim();
+            renderBlog();
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', renderBlog);
+</script>
+</body>
+</html>

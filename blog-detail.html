@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title id="pageTitle">Blog Yazısı | MGA Creative</title>
+    <meta name="description" id="metaDescription" content="MGA Creative teknoloji ve mobil yazılım makalesi."/>
+    <link rel="canonical" href="https://www.mgacreative.com/blog-detail" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              background: "#F8FAFC",
+              surface: "#FFFFFF",
+              "surface-container": "#F1F5F9",
+              "on-background": "#0F172A",
+              "on-surface": "#0F172A",
+              "on-surface-variant": "#475569",
+              primary: "#0284C7",
+              "primary-hover": "#0369A1",
+              secondary: "#4F46E5",
+              outline: "#CBD5E1",
+              "outline-variant": "#E2E8F0"
+            },
+            fontFamily: {
+              sans: ["'Plus Jakarta Sans'", "sans-serif"],
+              mono: ["'JetBrains Mono'", "monospace"]
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+        body {
+            background-color: #F8FAFC;
+            color: #0F172A;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glass-card {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .article-content h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #0F172A;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+        .article-content h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #0F172A;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .article-content p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #334155;
+            margin-bottom: 1.25rem;
+        }
+        .article-content ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+            margin-bottom: 1.25rem;
+            color: #334155;
+        }
+        .article-content li {
+            margin-bottom: 0.5rem;
+            line-height: 1.7;
+        }
+        .article-content blockquote {
+            border-left: 4px solid #0284C7;
+            background-color: #F0F9FF;
+            padding: 1rem 1.25rem;
+            border-radius: 0.75rem;
+            margin: 1.5rem 0;
+            color: #0369A1;
+            font-style: italic;
+        }
+        .article-content strong {
+            color: #0F172A;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="selection:bg-sky-100 selection:text-sky-900 min-h-screen flex flex-col">
+
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-white/85 backdrop-blur-xl border-b border-slate-200/80 shadow-sm">
+    <nav class="flex justify-between items-center w-full h-20 px-4 md:px-12 max-w-7xl mx-auto">
+        <a class="text-2xl font-extrabold tracking-tight text-slate-900 flex items-center gap-2" href="/">
+            <span class="w-8 h-8 rounded-xl bg-sky-600 text-white flex items-center justify-center text-base font-bold shadow-md shadow-sky-500/20">M</span>
+            <span>MGA Creative</span>
+        </a>
+        <div class="hidden md:flex items-center gap-8">
+            <a class="text-slate-600 font-semibold hover:text-sky-600 transition-all text-sm" href="/">Ana Sayfa</a>
+            <a class="text-slate-600 font-semibold hover:text-sky-600 transition-all text-sm" href="/portfolio">Uygulamalarımız</a>
+            <a class="text-sky-600 font-bold border-b-2 border-sky-600 pb-1 text-sm transition-all" href="/blog">Blog & Rehber</a>
+            <a class="text-slate-600 font-semibold hover:text-sky-600 transition-all text-sm" href="/about">Hakkımızda</a>
+            <a class="text-slate-600 font-semibold hover:text-sky-600 transition-all text-sm" href="/contact">İletişim</a>
+        </div>
+        <button onclick="window.location.href='/contact'" class="bg-sky-600 hover:bg-sky-700 text-white font-semibold px-6 py-2.5 rounded-xl text-sm shadow-md shadow-sky-600/20 active:scale-95 transition-all">
+            İletişime Geç
+        </button>
+    </nav>
+</header>
+
+<main class="flex-grow pt-28 pb-20 px-4 md:px-12 max-w-4xl mx-auto w-full">
+    <!-- Back button -->
+    <a href="/blog" class="inline-flex items-center gap-1.5 text-sky-600 hover:text-sky-700 font-bold text-sm mb-8 group transition-all">
+        <span class="material-symbols-outlined text-lg transition-transform group-hover:-translate-x-1">arrow_back</span>
+        <span>Tüm Makalelere Dön</span>
+    </a>
+
+    <!-- Article Header -->
+    <header class="space-y-4 mb-8">
+        <div class="flex flex-wrap items-center gap-3">
+            <span id="postCategory" class="px-3 py-1 bg-sky-50 text-sky-700 border border-sky-200 rounded-md text-xs font-bold uppercase tracking-wider">Kategori</span>
+            <span class="text-xs text-slate-400">•</span>
+            <span id="postReadTime" class="text-xs font-semibold text-slate-500">5 dk okuma</span>
+            <span class="text-xs text-slate-400">•</span>
+            <span id="postDate" class="text-xs font-medium text-slate-500">Tarih</span>
+        </div>
+
+        <h1 id="postTitle" class="text-3xl md:text-5xl font-extrabold text-slate-900 leading-tight tracking-tight">
+            Makale Başlığı Yükleniyor...
+        </h1>
+
+        <p id="postSummary" class="text-base md:text-lg text-slate-600 leading-relaxed font-medium">
+            Özet açıklama...
+        </p>
+
+        <div class="pt-4 pb-2 border-t border-b border-slate-200 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-sky-100 text-sky-700 flex items-center justify-center font-bold text-sm">
+                    MGA
+                </div>
+                <div>
+                    <div id="postAuthor" class="text-sm font-bold text-slate-900">Yazar Adı</div>
+                    <div class="text-xs text-slate-500">Yazılım & Teknoloji Editörü</div>
+                </div>
+            </div>
+            <!-- Share Buttons -->
+            <div class="flex items-center gap-2">
+                <span class="text-xs font-bold text-slate-400 uppercase mr-1">Paylaş:</span>
+                <button onclick="shareLinkedIn()" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-sky-50 hover:text-sky-600 text-slate-600 flex items-center justify-center text-xs font-bold transition-all" title="LinkedIn">in</button>
+                <button onclick="shareTwitter()" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-sky-50 hover:text-sky-600 text-slate-600 flex items-center justify-center text-xs font-bold transition-all" title="X / Twitter">𝕏</button>
+                <button onclick="copyArticleLink()" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-sky-50 hover:text-sky-600 text-slate-600 flex items-center justify-center transition-all" title="Bağlantıyı Kopyala">
+                    <span class="material-symbols-outlined text-sm">link</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Image -->
+    <div class="rounded-3xl overflow-hidden mb-10 border border-slate-200 shadow-md bg-slate-100 max-h-[420px]">
+        <img id="postImage" src="" alt="Makale Görseli" class="w-full h-full object-cover"/>
+    </div>
+
+    <!-- Content Body -->
+    <article id="postContent" class="article-content bg-white p-6 md:p-10 rounded-3xl border border-slate-200 shadow-sm">
+        <!-- Rendered HTML Content -->
+    </article>
+
+    <!-- Call to action Banner -->
+    <div class="mt-12 p-8 rounded-3xl bg-sky-600 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="space-y-2 text-center md:text-left">
+            <h3 class="text-xl font-bold">Projenizi Hayata Geçirelim mi?</h3>
+            <p class="text-sky-100 text-sm max-w-md">Mobil yazılım veya yapay zeka çözümlerimizle işinizi büyütmek için bizimle iletişime geçin.</p>
+        </div>
+        <a href="/contact" class="px-6 py-3 bg-white hover:bg-slate-100 text-sky-700 font-bold rounded-xl text-sm shadow-md active:scale-95 transition-all whitespace-nowrap">
+            Hemen Konuşalım
+        </a>
+    </div>
+
+    <!-- Related Articles -->
+    <section class="mt-16">
+        <h2 class="text-2xl font-bold text-slate-900 mb-6">İlginizi Çekebilecek Diğer Makaleler</h2>
+        <div id="relatedGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Dynamic Related Posts -->
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="w-full py-12 bg-white border-t border-slate-200 mt-auto">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-6 max-w-7xl mx-auto px-4 md:px-12">
+        <div class="space-y-1 text-center md:text-left">
+            <div class="text-lg font-extrabold text-slate-900">MGA Creative</div>
+            <p class="text-sm text-slate-500">© 2026 MGA Creative. Tüm hakları saklıdır. Özenle tasarlanıp kodlanmıştır.</p>
+        </div>
+        <div class="flex gap-6 text-sm font-semibold text-slate-600">
+            <a class="hover:text-sky-600 transition-colors" href="/portfolio">Uygulamalar</a>
+            <a class="hover:text-sky-600 transition-colors" href="/blog">Blog</a>
+            <a class="hover:text-sky-600 transition-colors" href="/about">Hakkımızda</a>
+            <a class="hover:text-sky-600 transition-colors" href="/contact">İletişim</a>
+            <a class="hover:text-sky-600 transition-colors" href="/admin">Yönetim</a>
+        </div>
+    </div>
+</footer>
+
+<!-- JSON-LD SEO / GEO Schema Markup -->
+<script type="application/ld+json" id="articleSchema">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "MGA Creative Blog",
+  "publisher": {
+    "@type": "Organization",
+    "name": "MGA Creative",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.mgacreative.com/images/logo.png"
+    }
+  }
+}
+</script>
+
+<script>
+    const DEFAULT_BLOG_POSTS = [
+        {
+            slug: 'modern-mobil-uygulama-gelistirme-kotlin-jetpack-compose',
+            title: "2026'da Modern Mobil Uygulama Geliştirme: Kotlin & Jetpack Compose Neden Tercih Edilmeli?",
+            summary: "Android ekosisteminde bildirimli UI (Declarative UI) devrimi, yüksek performanslı mimariler ve Clean Architecture standartlarının uygulama başarısındaki kritik rolü.",
+            category: "Mobil Yazılım",
+            readTime: "5 dk okuma",
+            date: "18 Ağustos 2026",
+            author: "MGA Creative Mühendislik Ekibi",
+            image: "images/agroplan_detay.png",
+            content: `Modern mobil yazılım dünyasında kullanıcı deneyimi, hız ve kararlılık her zamankinden daha belirleyicidir. Google'ın Android için geliştirdiği modern UI araç seti **Jetpack Compose**, klasik XML tabanlı arayüz geliştirme yaklaşımını tamamen geride bıraktı.
+
+### Declarative UI (Bildirimli Arayüz) Gücü
+Geleneksel arayüz geliştirmede görünüm durumunu (state) elle senkronize etmek zorundayken, Jetpack Compose ile durum değiştikçe arayüz otomatik olarak yeniden çizilir (recomposition). Bu mimari:
+- **%40 daha az kod:** XML dosyaları ve boilerplate bağlama kodları ortadan kalkar.
+- **Hızlı geliştirme döngüsü:** Canlı önizleme ve modüler bileşen yapısı sayesinde tasarım anında test edilir.
+- **Daha az çökme (Crash-Free):** Kotlin'in Type Safety ve Null Safety özellikleri sayesinde çalışma zamanı hataları minimize edilir.
+
+### Clean Architecture & StateFlow ile Kararlılık
+MGA Creative olarak geliştirdiğimiz tüm Android projelerinde (Hotel OS, AgroPlan, Cardly) **Clean Architecture** prensiplerini uyguluyoruz. Veri katmanı (Data), iş mantığı (Domain) ve arayüz katmanı (Presentation) birbirinden bağımsız inşa edilerek uzun vadeli bakım kolaylığı sağlanır.
+
+> **Sonuç:** 2026 yılında kurumsal ölçekte bir mobil uygulama geliştirmeyi hedefliyorsanız, Kotlin & Jetpack Compose ikilisi hem performans hem de geliştirme hızı açısından altın standarttır.`
+        },
+        {
+            slug: 'dijital-tarimda-verimlilik-ve-tarla-yonetimi',
+            title: "Dijital Tarımda Verimlilik: AgroPlan ile Tarla ve Finans Yönetimi Nasıl Yapılır?",
+            summary: "Geleneksel tarımsal üretim süreçlerinin dijitalleşmesi, gübreleme, sulama ve hasat maliyetlerinin akıllı telefonlardan takibinin getirdiği kâr artışı.",
+            category: "Tarım Teknolojileri",
+            readTime: "4 dk okuma",
+            date: "15 Ağustos 2026",
+            author: "Gökhan Azat",
+            image: "images/aproplan_detay.png",
+            content: `Tarım sektörü, artan girdi maliyetleri (mazot, tohum, gübre, ilaçlama) ve iklim koşulları nedeniyle her dönümün hesaplanmasını zorunlu kılmaktadır. Geleneksel defter tutma yöntemleri, sezon sonunda çiftçinin gerçek kâr/zarar durumunu görmesini engellemektedir.
+
+### AgroPlan ile Neler Değişiyor?
+1. **Arazi ve Parsel Dijitalleştirmesi:** Sahip olunan veya kiralanan tüm tarlalar dönüm ve ürün türüne göre haritalandırılır.
+2. **Periyodik Bakım & Sulama Hatırlatıcıları:** İlaçlama ve sulama periyotları zamanında yapılarak ürün kaybı önlenir.
+3. **Maliyet ve Kâr Analizi:** Sezon boyunca yapılan tüm harcamalar kaydedilir, hasat satışı yapıldığında net kâr grafiği anında elde edilir.
+4. **Çevrimdışı (Offline) Çalışma:** Tarlada internet çekmese dahi kayıtlar yerel veritabanında güvenle tutulur, internet bağlantısı sağlandığında buluta senkronize edilir.
+
+> **Özet:** Dijital tarım araçları artık lüks değil; maliyetlerini kontrol altında tutmak ve kazancını artırmak isteyen her üretici için vazgeçilmez bir ihtiyaçtır.`
+        },
+        {
+            slug: 'yapay-zeka-ve-nlp-ile-is-akisi-otomasyonu',
+            title: "Yapay Zeka ve NLP ile Günlük İş Akışınızı Otomatize Edin: Akıllı Ajanda ve vCard Sistemleri",
+            summary: "Doğal Dil İşleme (NLP) teknolojileriyle e-postalardan ve mesajlardan otomatik görev çıkarma ve yeni nesil temassız dijital kartvizit ekosistemi.",
+            category: "Yapay Zeka",
+            readTime: "6 dk okuma",
+            date: "10 Ağustos 2026",
+            author: "MGA Creative AI Lab",
+            image: "images/cardly_detay.jpeg",
+            content: `Günümüz iş dünyasında en büyük zaman kaybı, dağınık iletişim kanallarından (e-posta, WhatsApp, toplantı notları) çıkan görevleri elle takvime işlemektir.
+
+### NLP ile Akıllı Ajanda Çıkarımı (MailMind Yaklaşımı)
+Doğal Dil İşleme (Natural Language Processing) algoritmaları, gelen e-postalardaki tarih, saat ve görev ifadelerini otomatik olarak ayrıştırarak tek dokunuşla ajandanıza ekler.
+
+### Ağ Oluşturmada Dijital Dönüşüm: Cardly
+Kağıt kartvizitlerin %88'i ilk hafta içinde çöpe gitmektedir. **Cardly** vCard sistemiyle:
+- **NFC ve Dinamik QR:** Telefonu dokundurarak veya QR okutarak rehbere anında kayıt.
+- **Dinamik Güncelleme:** Telefon numarası veya unvan değiştiğinde tüm paylaşılan kartvizitler anında güncellenir.
+- **Çevre Dostu & Prestijli:** Sıfır kağıt israfı ile modern kurumsal imaj.
+
+> **Geleceğin Teknolojisi:** Yapay zeka ve akıllı paylaşım protokolleri, küçük işletmelerden küresel şirketlere kadar iş yapış biçimlerini temelden dönüştürmektedir.`
+        }
+    ];
+
+    function parseMarkdown(md) {
+        if (!md) return '';
+        let html = md
+            .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+            .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+            .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+            .replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>')
+            .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
+            .replace(/\*(.*)\*/gim, '<em>$1</em>')
+            .replace(/\n\n/gim, '</p><p>')
+            .replace(/^- (.*$)/gim, '<li>$1</li>')
+            .replace(/^\d+\. (.*$)/gim, '<li>$1</li>');
+        return `<p>${html}</p>`;
+    }
+
+    function initPost() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const slug = urlParams.get('slug');
+
+        const post = DEFAULT_BLOG_POSTS.find(p => p.slug === slug) || DEFAULT_BLOG_POSTS[0];
+
+        // Fill Metadata & Content
+        document.getElementById('pageTitle').textContent = `${post.title} | MGA Creative Blog`;
+        document.getElementById('metaDescription').setAttribute('content', post.summary);
+        document.getElementById('postTitle').textContent = post.title;
+        document.getElementById('postSummary').textContent = post.summary;
+        document.getElementById('postCategory').textContent = post.category;
+        document.getElementById('postReadTime').textContent = post.readTime;
+        document.getElementById('postDate').textContent = post.date;
+        document.getElementById('postAuthor').textContent = post.author;
+        document.getElementById('postImage').src = post.image;
+        document.getElementById('postImage').alt = post.title;
+
+        document.getElementById('postContent').innerHTML = parseMarkdown(post.content);
+
+        // JSON-LD SEO injection
+        const schemaEl = document.getElementById('articleSchema');
+        if (schemaEl) {
+            const schemaData = {
+                "@context": "https://schema.org",
+                "@type": "BlogPosting",
+                "headline": post.title,
+                "description": post.summary,
+                "author": {
+                    "@type": "Person",
+                    "name": post.author
+                },
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "MGA Creative",
+                    "url": "https://www.mgacreative.com"
+                },
+                "datePublished": "2026-08-18",
+                "image": "https://www.mgacreative.com/" + post.image
+            };
+            schemaEl.textContent = JSON.stringify(schemaData);
+        }
+
+        // Related Posts
+        const related = DEFAULT_BLOG_POSTS.filter(p => p.slug !== post.slug).slice(0, 2);
+        const relatedGrid = document.getElementById('relatedGrid');
+        relatedGrid.innerHTML = related.map(rel => `
+            <article class="glass-card rounded-2xl p-5 flex flex-col justify-between group">
+                <div class="space-y-2">
+                    <span class="px-2.5 py-0.5 bg-sky-50 text-sky-700 border border-sky-200 rounded text-[11px] font-bold uppercase">${rel.category}</span>
+                    <h4 class="text-base font-bold text-slate-900 group-hover:text-sky-600 transition-colors">
+                        <a href="/blog-detail?slug=${rel.slug}">${rel.title}</a>
+                    </h4>
+                    <p class="text-xs text-slate-500 line-clamp-2">${rel.summary}</p>
+                </div>
+                <div class="pt-4 mt-3 border-t border-slate-100 flex items-center justify-between">
+                    <span class="text-[11px] text-slate-400 font-medium">${rel.readTime}</span>
+                    <a href="/blog-detail?slug=${rel.slug}" class="text-sky-600 font-bold text-xs inline-flex items-center gap-1 group-hover:translate-x-1 transition-all">
+                        <span>Oku</span>
+                        <span class="material-symbols-outlined text-xs">arrow_forward</span>
+                    </a>
+                </div>
+            </article>
+        `).join('');
+    }
+
+    function shareLinkedIn() {
+        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}`, '_blank');
+    }
+
+    function shareTwitter() {
+        const title = document.getElementById('postTitle').textContent;
+        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(window.location.href)}`, '_blank');
+    }
+
+    function copyArticleLink() {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+            alert('Makale bağlantısı panoya kopyalandı!');
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', initPost);
+</script>
+</body>
+</html>
