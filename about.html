@@ -220,6 +220,138 @@
                 <p class="text-slate-600 text-sm leading-relaxed">Temiz kod prensipleriyle (Clean Architecture) projeyi tamamlayıp, test edilmiş şekilde canlıya alıyoruz.</p>
             </div>
         </div>
+    <!-- Dual Discovery Hub: Sol Proje & Sağ Blog Blokları -->
+    <section class="mb-20">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- SOL BLOK: Proje & Portföy Keşfi (Görseldeki Tasarım) -->
+            <div class="lg:col-span-6 glass-card rounded-3xl p-6 md:p-8 space-y-6 border border-slate-200">
+                <!-- Proje Ara -->
+                <div>
+                    <label class="block text-xs font-bold text-sky-700 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-base">search</span>
+                        Proje Ara
+                    </label>
+                    <form action="/portfolio" method="GET" class="relative">
+                        <input type="text" name="search" placeholder="Uygulama adı veya konu..." 
+                            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 pl-10 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100 transition-all">
+                        <span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-400 text-lg">search</span>
+                    </form>
+                </div>
+
+                <!-- Proje Kategorileri -->
+                <div>
+                    <label class="block text-xs font-bold text-sky-700 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-base">category</span>
+                        Uygulama Kategorileri
+                    </label>
+                    <div class="space-y-2">
+                        <a href="/portfolio" class="flex items-center justify-between px-4 py-3 rounded-2xl text-sm font-bold bg-sky-50 text-sky-700 border border-sky-200 hover:bg-sky-100 transition-all">
+                            <span class="flex items-center gap-2.5">
+                                <span class="material-symbols-outlined text-lg">apps</span> Tüm Projeler
+                            </span>
+                            <span class="text-xs px-2 py-0.5 rounded-full bg-sky-600 text-white font-mono font-bold">35</span>
+                        </a>
+                        <a href="/portfolio?cat=business" class="flex items-center justify-between px-4 py-3 rounded-2xl text-sm font-medium bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 hover:border-slate-300 transition-all">
+                            <span class="flex items-center gap-2.5">
+                                <span class="material-symbols-outlined text-lg text-slate-500">business_center</span> Ticari Çözümler
+                            </span>
+                            <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono font-bold">14</span>
+                        </a>
+                        <a href="/portfolio?cat=assistant" class="flex items-center justify-between px-4 py-3 rounded-2xl text-sm font-medium bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 hover:border-slate-300 transition-all">
+                            <span class="flex items-center gap-2.5">
+                                <span class="material-symbols-outlined text-lg text-slate-500">smart_toy</span> Kişisel Asistanlar
+                            </span>
+                            <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono font-bold">9</span>
+                        </a>
+                        <a href="/portfolio?cat=utility" class="flex items-center justify-between px-4 py-3 rounded-2xl text-sm font-medium bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 hover:border-slate-300 transition-all">
+                            <span class="flex items-center gap-2.5">
+                                <span class="material-symbols-outlined text-lg text-slate-500">widgets</span> Araçlar &amp; Diğer
+                            </span>
+                            <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono font-bold">12</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hızlı Görünüm -->
+                <div class="pt-4 border-t border-slate-200">
+                    <label class="block text-xs font-bold text-sky-700 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-base">tune</span>
+                        Hızlı Görünüm
+                    </label>
+                    <a href="/portfolio" class="flex items-center justify-between px-4 py-3 rounded-2xl text-sm font-medium bg-slate-50 hover:bg-sky-50 text-slate-800 border border-slate-200 hover:border-sky-300 transition-all group">
+                        <span class="flex items-center gap-2 font-semibold">
+                            <span class="material-symbols-outlined text-lg text-sky-600 group-hover:scale-110 transition-transform">new_releases</span> Son 10 Uygulama
+                        </span>
+                        <span class="text-xs px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-800 font-bold font-mono">İlk 10</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- SAĞ BLOK: Blog Makale Başlıkları & Arama (Aynı Eşleşen Tasarım) -->
+            <div class="lg:col-span-6 glass-card rounded-3xl p-6 md:p-8 space-y-6 border border-slate-200">
+                <!-- Blog Ara -->
+                <div>
+                    <label class="block text-xs font-bold text-indigo-700 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-base">search</span>
+                        Blogda Ara
+                    </label>
+                    <form action="/blog" method="GET" class="relative">
+                        <input type="text" name="search" placeholder="Makale, konu veya teknoloji ara..." 
+                            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 pl-10 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition-all">
+                        <span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-400 text-lg">search</span>
+                    </form>
+                </div>
+
+                <!-- Blog Makale Başlıkları -->
+                <div>
+                    <label class="block text-xs font-bold text-indigo-700 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-base">auto_stories</span>
+                        Öne Çıkan Makale Başlıkları
+                    </label>
+                    <div class="space-y-2.5">
+                        <a href="/blog-detail?slug=modern-mobil-uygulama-gelistirme-kotlin-jetpack-compose" class="block p-3.5 rounded-2xl bg-white hover:bg-slate-50 border border-slate-200 hover:border-indigo-300 transition-all group">
+                            <div class="flex items-center justify-between gap-2 mb-1">
+                                <span class="px-2 py-0.5 bg-sky-50 text-sky-700 rounded text-[10px] font-bold uppercase">Mobil Yazılım</span>
+                                <span class="text-[11px] text-slate-400 font-medium">5 dk okuma</span>
+                            </div>
+                            <h4 class="text-xs md:text-sm font-bold text-slate-900 group-hover:text-indigo-600 transition-colors line-clamp-1">
+                                2026'da Mobil Uygulama: Kotlin &amp; Jetpack Compose Neden Seçilmeli?
+                            </h4>
+                        </a>
+                        <a href="/blog-detail?slug=dijital-tarimda-verimlilik-ve-tarla-yonetimi" class="block p-3.5 rounded-2xl bg-white hover:bg-slate-50 border border-slate-200 hover:border-indigo-300 transition-all group">
+                            <div class="flex items-center justify-between gap-2 mb-1">
+                                <span class="px-2 py-0.5 bg-emerald-50 text-emerald-700 rounded text-[10px] font-bold uppercase">Tarım Teknolojileri</span>
+                                <span class="text-[11px] text-slate-400 font-medium">4 dk okuma</span>
+                            </div>
+                            <h4 class="text-xs md:text-sm font-bold text-slate-900 group-hover:text-indigo-600 transition-colors line-clamp-1">
+                                Dijital Tarımda Verimlilik: AgroPlan ile Tarla ve Finans Yönetimi
+                            </h4>
+                        </a>
+                        <a href="/blog-detail?slug=yapay-zeka-ve-nlp-ile-is-akisi-otomasyonu" class="block p-3.5 rounded-2xl bg-white hover:bg-slate-50 border border-slate-200 hover:border-indigo-300 transition-all group">
+                            <div class="flex items-center justify-between gap-2 mb-1">
+                                <span class="px-2 py-0.5 bg-purple-50 text-purple-700 rounded text-[10px] font-bold uppercase">Yapay Zeka</span>
+                                <span class="text-[11px] text-slate-400 font-medium">6 dk okuma</span>
+                            </div>
+                            <h4 class="text-xs md:text-sm font-bold text-slate-900 group-hover:text-indigo-600 transition-colors line-clamp-1">
+                                Yapay Zeka ve NLP ile İş Akışınızı Otomatize Edin: Akıllı Ajanda
+                            </h4>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Tüm Bloga Git Butonu -->
+                <div class="pt-4 border-t border-slate-200">
+                    <a href="/blog" class="w-full flex items-center justify-between px-4 py-3 rounded-2xl text-sm font-bold bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 transition-all group">
+                        <span class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-lg text-indigo-600 group-hover:scale-110 transition-transform">menu_book</span> Tüm Blog &amp; Rehber Yazılarını Gör
+                        </span>
+                        <span class="material-symbols-outlined text-base transition-transform group-hover:translate-x-1">arrow_forward</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
     </section>
 </main>
 
