@@ -976,22 +976,38 @@ if (editPortfolioForm) {
             };
 
             const targetIndex = cachedProjects.findIndex(p => String(p.id) === String(id) || p.title === id);
+            let finalId = id;
+
             if (targetIndex !== -1) {
                 const targetProj = cachedProjects[targetIndex];
+                
+                // Eğer proje Supabase'de zaten kayıtlıysa güncelle
                 if (targetProj.id && !String(targetProj.id).startsWith('def-')) {
                     const updateErr = await updatePortfolioItem(targetProj.id, updates);
                     if (updateErr) {
-                        console.warn('Veritabanı güncelleme uyarısı (yerel hafızaya kaydedildi):', updateErr);
+                        console.warn('Veritabanı güncelleme uyarısı:', updateErr);
+                    }
+                    finalId = targetProj.id;
+                } else {
+                    // Varsayılan (def-) proje ise veritabanına yeni kayıt olarak aktar
+                    const { data: dbData, error: dbError } = await addPortfolioItem(updates);
+                    if (!dbError && dbData && dbData[0]) {
+                        finalId = dbData[0].id;
+                    } else {
+                        finalId = targetProj.id || `def-${Date.now()}`;
                     }
                 }
+
                 const updatedItem = parseItemMeta({
                     ...targetProj,
                     ...updates,
+                    id: finalId,
                     playstore_url: playstoreUrl,
                     playstoreUrl: playstoreUrl,
                     youtube_id: youtubeVal,
                     youtubeId: youtubeVal
                 });
+                
                 cachedProjects[targetIndex] = updatedItem;
                 localStorage.setItem('mga_portfolio_projects', JSON.stringify(cachedProjects));
             }
