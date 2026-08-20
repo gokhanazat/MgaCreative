@@ -223,3 +223,25 @@ export async function updateReviewStatus(reviewId, isCompleted) {
     }
 }
 
+/**
+ * app_reviews kaydını siler
+ */
+export async function deleteAppReview(reviewId) {
+    try {
+        const { error } = await supabase
+            .from('app_reviews')
+            .delete()
+            .eq('id', reviewId);
+
+        if (error) {
+            console.warn('deleteAppReview notice:', error);
+            return false;
+        }
+        return true;
+    } catch (e) {
+        console.warn('deleteAppReview error:', e);
+        return false;
+    }
+}
+
+

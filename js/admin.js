@@ -7,7 +7,8 @@ import {
     deletePortfolioItem,
     uploadPortfolioImage,
     fetchAppReviewsFromDB,
-    updateReviewStatus 
+    updateReviewStatus,
+    deleteAppReview
 } from './supabase-client.js';
 
 // DOM Elementleri - Login
@@ -1499,12 +1500,22 @@ function renderAdminReviewsList() {
         
         const isDone = Boolean(review.is_completed);
 
-        const replyButton = review.reply_url 
-            ? `<a href="${review.reply_url}" target="_blank" class="px-3 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 rounded-lg transition-all flex items-center gap-1.5 text-xs font-bold shadow-sm">
+        let consoleUrl = 'https://play.google.com/console/';
+        if (review.reply_url && !review.reply_url.includes('YOUR_PLAY_CONSOLE_DEVELOPER_ID')) {
+            consoleUrl = review.reply_url;
+        }
+
+        const replyButton = `
+            <a href="${consoleUrl}" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 rounded-lg transition-all flex items-center gap-1.5 text-xs font-bold shadow-sm" title="Google Play Console">
                 <span class="material-symbols-outlined text-sm text-amber-600">reply</span>
                 <span>Console'da Yanıtla</span>
-               </a>`
-            : '';
+            </a>`;
+
+        const deleteButton = `
+            <button type="button" class="delete-review-btn px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 rounded-lg transition-all flex items-center gap-1.5 text-xs font-bold shadow-sm" data-id="${review.id}" title="Yorumu Sil">
+                <span class="material-symbols-outlined text-sm text-red-600">delete</span>
+                <span>Sil</span>
+            </button>`;
 
         const doneButton = isDone
             ? `<button type="button" class="toggle-done-btn px-3 py-1.5 bg-emerald-100 hover:bg-emerald-200 text-emerald-800 border border-emerald-300 rounded-lg transition-all flex items-center gap-1.5 text-xs font-bold shadow-sm" data-id="${review.id}" data-status="true">
@@ -1544,6 +1555,7 @@ function renderAdminReviewsList() {
                 <div class="w-full sm:w-auto flex flex-wrap items-center justify-end gap-2 flex-shrink-0 pt-2 sm:pt-0">
                     ${doneButton}
                     ${replyButton}
+                    ${deleteButton}
                 </div>
             </div>
         `;
@@ -1565,6 +1577,25 @@ function renderAdminReviewsList() {
 
             // Arka planda DB güncelle
             updateReviewStatus(reviewId, newStatus).catch(() => {});
+        });
+    });
+
+    // Sil butonlarını dinle
+    document.querySelectorAll('.delete-review-btn').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            const reviewId = e.currentTarget.getAttribute('data-id');
+            if (!confirm('Bu inceleme/yorum kaydını silmek istediğinize emin misiniz?')) {
+                return;
+            }
+
+            // Optimistik UI: Listeden ve sayaçlardan kaldır
+            cachedReviews = cachedReviews.filter(r => r.id !== reviewId);
+            updateReviewStats();
+            populateReviewAppFilter();
+            renderAdminReviewsList();
+
+            // Veritabanından sil
+            await deleteAppReview(reviewId);
         });
     });
 }

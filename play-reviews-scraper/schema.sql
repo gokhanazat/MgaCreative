@@ -42,3 +42,11 @@ CREATE POLICY "Allow service role full access to app_reviews"
     FOR ALL
     USING (true)
     WITH CHECK (true);
+
+-- 3. Panelden güncelleme ve silme politikası
+DROP POLICY IF EXISTS "Allow anon update and delete on app_reviews" ON public.app_reviews;
+CREATE POLICY "Allow anon update and delete on app_reviews"
+    ON public.app_reviews
+    FOR ALL
+    USING (true)
+    WITH CHECK (true);

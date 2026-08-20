@@ -25,9 +25,9 @@ export async function fetchAppReviews(appId, developerId, options = {}) {
     });
 
     const reviews = result.data || [];
-    const replyUrl = developerId
-      ? `https://play.google.com/console/developers/${developerId}/app/${appId}/user-feedback/reviews`
-      : null;
+    const replyUrl = (developerId && developerId !== 'YOUR_PLAY_CONSOLE_DEVELOPER_ID')
+      ? `https://play.google.com/console/u/0/developers/${developerId}/app/${appId}/user-feedback/reviews`
+      : 'https://play.google.com/console/';
 
     return reviews.map((review) => ({
       id: review.id,
