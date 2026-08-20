@@ -91,9 +91,12 @@ export async function syncAllReviews() {
 // Dosya doğrudan çalıştırıldığında senkronizasyonu başlat
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   syncAllReviews()
-    .then(() => process.exit(0))
+    .then(() => {
+      process.exitCode = 0;
+    })
     .catch((err) => {
       console.error('[Kritik Hata]:', err);
-      process.exit(1);
+      process.exitCode = 1;
     });
 }
+
