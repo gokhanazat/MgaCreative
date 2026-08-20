@@ -201,3 +201,25 @@ export async function fetchAppReviewsFromDB(options = {}) {
         return [];
     }
 }
+
+/**
+ * app_reviews kaydının yapıldı (is_completed) durumunu günceller
+ */
+export async function updateReviewStatus(reviewId, isCompleted) {
+    try {
+        const { data, error } = await supabase
+            .from('app_reviews')
+            .update({ is_completed: isCompleted })
+            .eq('id', reviewId);
+
+        if (error) {
+            console.warn('updateReviewStatus notice:', error);
+            return false;
+        }
+        return true;
+    } catch (e) {
+        console.warn('updateReviewStatus error:', e);
+        return false;
+    }
+}
+

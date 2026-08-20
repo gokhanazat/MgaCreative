@@ -6,7 +6,8 @@ import {
     updatePortfolioItem, 
     deletePortfolioItem,
     uploadPortfolioImage,
-    fetchAppReviewsFromDB 
+    fetchAppReviewsFromDB,
+    updateReviewStatus 
 } from './supabase-client.js';
 
 // DOM Elementleri - Login
@@ -1393,6 +1394,7 @@ let cachedReviews = [];
 const searchReviewsInput = document.getElementById('searchReviews');
 const filterReviewAppSelect = document.getElementById('filterReviewApp');
 const filterReviewScoreSelect = document.getElementById('filterReviewScore');
+const filterReviewStatusSelect = document.getElementById('filterReviewStatus');
 const refreshReviewsBtn = document.getElementById('refreshReviewsBtn');
 const reviewsList = document.getElementById('reviewsList');
 
@@ -1464,15 +1466,18 @@ function renderAdminReviewsList() {
     const query = searchReviewsInput ? searchReviewsInput.value.toLowerCase().trim() : '';
     const selectedApp = filterReviewAppSelect ? filterReviewAppSelect.value : 'all';
     const selectedScore = filterReviewScoreSelect ? filterReviewScoreSelect.value : 'all';
+    const selectedStatus = filterReviewStatusSelect ? filterReviewStatusSelect.value : 'all';
 
     const filtered = cachedReviews.filter(r => {
         const matchApp = selectedApp === 'all' || r.app_id === selectedApp;
         const matchScore = selectedScore === 'all' || String(r.score) === selectedScore;
+        const matchStatus = selectedStatus === 'all' || 
+            (selectedStatus === 'completed' ? Boolean(r.is_completed) : !r.is_completed);
         const matchQuery = !query || 
             (r.text && r.text.toLowerCase().includes(query)) ||
             (r.user_name && r.user_name.toLowerCase().includes(query)) ||
             (r.app_id && r.app_id.toLowerCase().includes(query));
-        return matchApp && matchScore && matchQuery;
+        return matchApp && matchScore && matchStatus && matchQuery;
     });
 
     if (filtered.length === 0) {
@@ -1491,6 +1496,8 @@ function renderAdminReviewsList() {
         const formattedDate = review.review_date 
             ? new Date(review.review_date).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' })
             : 'Tarih belirtilmedi';
+        
+        const isDone = Boolean(review.is_completed);
 
         const replyButton = review.reply_url 
             ? `<a href="${review.reply_url}" target="_blank" class="px-3 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 rounded-lg transition-all flex items-center gap-1.5 text-xs font-bold shadow-sm">
@@ -1499,12 +1506,24 @@ function renderAdminReviewsList() {
                </a>`
             : '';
 
+        const doneButton = isDone
+            ? `<button type="button" class="toggle-done-btn px-3 py-1.5 bg-emerald-100 hover:bg-emerald-200 text-emerald-800 border border-emerald-300 rounded-lg transition-all flex items-center gap-1.5 text-xs font-bold shadow-sm" data-id="${review.id}" data-status="true">
+                <span class="material-symbols-outlined text-sm text-emerald-700">check_circle</span>
+                <span>Yapıldı</span>
+               </button>`
+            : `<button type="button" class="toggle-done-btn px-3 py-1.5 bg-slate-50 hover:bg-emerald-50 text-slate-600 hover:text-emerald-700 border border-slate-200 hover:border-emerald-300 rounded-lg transition-all flex items-center gap-1.5 text-xs font-semibold shadow-sm" data-id="${review.id}" data-status="false">
+                <span class="material-symbols-outlined text-sm text-slate-400">radio_button_unchecked</span>
+                <span>Yapıldı Olarak İşaretle</span>
+               </button>`;
+
         const scoreColorClass = score >= 4 
             ? 'text-amber-500 bg-amber-50/80 border-amber-200' 
             : (score <= 2 ? 'text-red-500 bg-red-50/80 border-red-200' : 'text-slate-600 bg-slate-100 border-slate-200');
 
+        const cardBorderClass = isDone ? 'border-emerald-200 bg-emerald-50/20' : 'border-slate-200';
+
         return `
-            <div class="glass-card p-4 rounded-2xl flex flex-col sm:flex-row items-start justify-between gap-4 border border-slate-200 hover:border-amber-300 transition-all">
+            <div class="glass-card p-4 rounded-2xl flex flex-col sm:flex-row items-start justify-between gap-4 border ${cardBorderClass} hover:border-amber-300 transition-all" id="review-card-${review.id}">
                 <div class="space-y-2 flex-1 min-w-0">
                     <div class="flex flex-wrap items-center gap-2">
                         <span class="px-2 py-0.5 rounded-md text-[11px] font-bold tracking-wide border ${scoreColorClass}">
@@ -1514,6 +1533,7 @@ function renderAdminReviewsList() {
                             ${review.app_id || 'Uygulama'}
                         </span>
                         <span class="text-xs font-bold text-slate-800">${review.user_name || 'Anonim Kullanıcı'}</span>
+                        ${isDone ? '<span class="px-2 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full text-[10px] font-bold flex items-center gap-0.5"><span class="material-symbols-outlined text-[12px]">done</span>Yapıldı</span>' : ''}
                     </div>
                     <p class="text-xs text-slate-700 leading-relaxed break-words bg-slate-50/70 p-3 rounded-xl border border-slate-100">${review.text || '<em>(Metin girilmemiş)</em>'}</p>
                     <div class="text-[11px] text-slate-400 font-medium flex items-center gap-2">
@@ -1521,17 +1541,38 @@ function renderAdminReviewsList() {
                         <span>${formattedDate}</span>
                     </div>
                 </div>
-                <div class="w-full sm:w-auto flex justify-end flex-shrink-0 pt-2 sm:pt-0">
+                <div class="w-full sm:w-auto flex flex-wrap items-center justify-end gap-2 flex-shrink-0 pt-2 sm:pt-0">
+                    ${doneButton}
                     ${replyButton}
                 </div>
             </div>
         `;
     }).join('');
+
+    // Yapıldı butonlarını dinle
+    document.querySelectorAll('.toggle-done-btn').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            const reviewId = e.currentTarget.getAttribute('data-id');
+            const currentStatus = e.currentTarget.getAttribute('data-status') === 'true';
+            const newStatus = !currentStatus;
+
+            // Optimistik UI: Yerel hafızada anında güncelle
+            const target = cachedReviews.find(r => r.id === reviewId);
+            if (target) {
+                target.is_completed = newStatus;
+            }
+            renderAdminReviewsList();
+
+            // Arka planda DB güncelle
+            updateReviewStatus(reviewId, newStatus).catch(() => {});
+        });
+    });
 }
 
 if (searchReviewsInput) searchReviewsInput.addEventListener('input', renderAdminReviewsList);
 if (filterReviewAppSelect) filterReviewAppSelect.addEventListener('change', renderAdminReviewsList);
 if (filterReviewScoreSelect) filterReviewScoreSelect.addEventListener('change', renderAdminReviewsList);
+if (filterReviewStatusSelect) filterReviewStatusSelect.addEventListener('change', renderAdminReviewsList);
 
 if (refreshReviewsBtn) {
     refreshReviewsBtn.addEventListener('click', () => {
@@ -1561,5 +1602,6 @@ if (document.readyState === 'loading') {
 } else {
     checkSession();
 }
+
 
 

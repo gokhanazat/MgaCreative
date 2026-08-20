@@ -399,7 +399,7 @@
                     </div>
 
                     <!-- Filtreleme ve Arama Çubuğu -->
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 p-4 bg-slate-50 rounded-2xl border border-slate-200 mb-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 p-4 bg-slate-50 rounded-2xl border border-slate-200 mb-6">
                         <div class="relative">
                             <span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-400 text-lg">search</span>
                             <input type="text" id="searchReviews" placeholder="Yorum veya kullanıcı ara..." class="w-full bg-white border border-slate-200 rounded-xl pl-9 pr-4 py-2 text-xs text-slate-900 outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100 transition-all">
@@ -417,6 +417,13 @@
                                 <option value="3">⭐⭐⭐ (3 Yıldız)</option>
                                 <option value="2">⭐⭐ (2 Yıldız)</option>
                                 <option value="1">⭐ (1 Yıldız)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <select id="filterReviewStatus" class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-slate-900 outline-none focus:border-amber-500 text-xs">
+                                <option value="all">Tüm Durumlar (Tümü)</option>
+                                <option value="pending">⏳ Bekleyenler (İşlem Yapılmadı)</option>
+                                <option value="completed">✅ Tamamlananlar (Yapıldı / Tikli)</option>
                             </select>
                         </div>
                     </div>
