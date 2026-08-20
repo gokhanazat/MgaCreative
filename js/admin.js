@@ -1614,19 +1614,31 @@ function renderAdminReviewsList() {
     // Sil butonlarını dinle
     document.querySelectorAll('.delete-review-btn').forEach(btn => {
         btn.addEventListener('click', async (e) => {
-            const reviewId = e.currentTarget.getAttribute('data-id');
+            e.preventDefault();
+            e.stopPropagation();
+            const targetBtn = e.target.closest('.delete-review-btn') || e.currentTarget;
+            const reviewId = targetBtn.getAttribute('data-id');
+            if (!reviewId) return;
+
             if (!confirm('Bu inceleme/yorum kaydını silmek istediğinize emin misiniz?')) {
                 return;
             }
 
-            // Optimistik UI: Listeden ve sayaçlardan kaldır
-            cachedReviews = cachedReviews.filter(r => r.id !== reviewId);
+            // Optimistik UI: Listeden ve sayaçlardan derhal kaldır
+            cachedReviews = cachedReviews.filter(r => String(r.id) !== String(reviewId));
             updateReviewStats();
             populateReviewAppFilter();
             renderAdminReviewsList();
 
             // Veritabanından sil
-            await deleteAppReview(reviewId);
+            try {
+                const isDeleted = await deleteAppReview(reviewId);
+                if (!isDeleted) {
+                    console.warn('Veritabanından silinemedi (RLS veya bağlantı hatası).');
+                }
+            } catch (err) {
+                console.error('Silme hatası:', err);
+            }
         });
     });
 }
