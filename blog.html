@@ -289,16 +289,15 @@
     let isLatestOnly = false;
 
     function getAllBlogPosts() {
-        let localPosts = [];
-        try {
-            const saved = localStorage.getItem('mga_blog_posts');
-            if (saved) localPosts = JSON.parse(saved);
-        } catch(e) {}
-
-        const map = new Map();
-        DEFAULT_BLOG_POSTS.forEach(p => map.set(p.slug, p));
-        localPosts.forEach(p => map.set(p.slug, p));
-        return Array.from(map.values());
+        const saved = localStorage.getItem('mga_blog_posts');
+        if (saved !== null) {
+            try { 
+                return JSON.parse(saved); 
+            } catch(e) {
+                return [...DEFAULT_BLOG_POSTS];
+            }
+        }
+        return [...DEFAULT_BLOG_POSTS];
     }
 
     function updateCategoryCounts() {

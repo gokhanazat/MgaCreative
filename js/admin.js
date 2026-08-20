@@ -1149,17 +1149,19 @@ const DEFAULT_ADMIN_BLOGS = [
 let cachedBlogs = [];
 
 function loadAdminBlogs() {
-    let localBlogs = [];
     const saved = localStorage.getItem('mga_blog_posts');
-    if (saved) {
-        try { localBlogs = JSON.parse(saved); } catch(e) {}
+    if (saved !== null) {
+        try { 
+            cachedBlogs = JSON.parse(saved); 
+        } catch(e) {
+            cachedBlogs = [...DEFAULT_ADMIN_BLOGS];
+            localStorage.setItem('mga_blog_posts', JSON.stringify(cachedBlogs));
+        }
+    } else {
+        cachedBlogs = [...DEFAULT_ADMIN_BLOGS];
+        localStorage.setItem('mga_blog_posts', JSON.stringify(cachedBlogs));
     }
 
-    const map = new Map();
-    DEFAULT_ADMIN_BLOGS.forEach(b => map.set(b.slug, b));
-    localBlogs.forEach(b => map.set(b.slug, b));
-
-    cachedBlogs = Array.from(map.values());
     const statTotalBlogs = document.getElementById('statTotalBlogs');
     const blogCountBadge = document.getElementById('blogCountBadge');
     if (statTotalBlogs) statTotalBlogs.textContent = cachedBlogs.length;
