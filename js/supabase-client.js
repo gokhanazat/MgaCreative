@@ -167,3 +167,37 @@ export async function uploadPortfolioImage(file) {
         reader.readAsDataURL(file);
     });
 }
+
+/**
+ * app_reviews tablosundaki yorumları çeker
+ */
+export async function fetchAppReviewsFromDB(options = {}) {
+    try {
+        let query = supabase
+            .from('app_reviews')
+            .select('*')
+            .order('review_date', { ascending: false });
+
+        if (options.appId && options.appId !== 'all') {
+            query = query.eq('app_id', options.appId);
+        }
+        if (options.score && options.score !== 'all') {
+            query = query.eq('score', Number(options.score));
+        }
+        if (options.limit) {
+            query = query.limit(options.limit);
+        }
+
+        const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 4000));
+        const { data, error } = await Promise.race([query, timeoutPromise]);
+
+        if (error) {
+            console.warn('fetchAppReviews notice:', error);
+            return [];
+        }
+        return data || [];
+    } catch (e) {
+        console.warn('fetchAppReviews error:', e);
+        return [];
+    }
+}

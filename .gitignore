@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+play-reviews-scraper/node_modules/
+
+# Environment variables
+.env
+play-reviews-scraper/.env
+*.env
+
+# IDE / System files
+.idea/
+.DS_Store
+Thumbs.db

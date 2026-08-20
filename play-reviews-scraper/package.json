@@ -1,0 +1,16 @@
+{
+  "name": "play-reviews-scraper",
+  "version": "1.0.0",
+  "description": "Google Play Store reviews scraper and Supabase sync service",
+  "main": "sync.js",
+  "type": "module",
+  "scripts": {
+    "start": "node sync.js",
+    "sync": "node sync.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.1",
+    "dotenv": "^16.4.7",
+    "google-play-scraper": "^10.0.0"
+  }
+}

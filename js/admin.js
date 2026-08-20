@@ -5,7 +5,8 @@ import {
     addPortfolioItem, 
     updatePortfolioItem, 
     deletePortfolioItem,
-    uploadPortfolioImage 
+    uploadPortfolioImage,
+    fetchAppReviewsFromDB 
 } from './supabase-client.js';
 
 // DOM Elementleri - Login
@@ -1386,11 +1387,164 @@ if (addBlogForm) {
     });
 }
 
+// --- GOOGLE PLAY STORE YORUM YÖNETİMİ ---
+let cachedReviews = [];
+
+const searchReviewsInput = document.getElementById('searchReviews');
+const filterReviewAppSelect = document.getElementById('filterReviewApp');
+const filterReviewScoreSelect = document.getElementById('filterReviewScore');
+const refreshReviewsBtn = document.getElementById('refreshReviewsBtn');
+const reviewsList = document.getElementById('reviewsList');
+
+const statReviewsCount = document.getElementById('statReviewsCount');
+const statReviewsAvg = document.getElementById('statReviewsAvg');
+const statReviewsPositive = document.getElementById('statReviewsPositive');
+const statReviewsCritical = document.getElementById('statReviewsCritical');
+
+async function loadAdminReviews() {
+    if (!reviewsList) return;
+    
+    reviewsList.innerHTML = `
+        <div class="text-center py-12 text-slate-400 bg-slate-50 rounded-2xl border border-slate-200 p-6 space-y-2">
+            <span class="material-symbols-outlined text-3xl animate-spin text-amber-500">sync</span>
+            <p class="text-xs font-semibold">Yorumlar yükleniyor...</p>
+        </div>
+    `;
+
+    try {
+        const data = await fetchAppReviewsFromDB();
+        cachedReviews = data || [];
+        updateReviewStats();
+        populateReviewAppFilter();
+        renderAdminReviewsList();
+    } catch (err) {
+        console.warn('Yorum yükleme hatası:', err);
+        reviewsList.innerHTML = `
+            <div class="text-center py-8 text-slate-400 bg-slate-50 rounded-2xl border border-slate-200 p-6">
+                <p class="text-xs font-semibold text-red-500">Yorumlar yüklenirken bir hata oluştu veya henüz veri aktarılmadı.</p>
+            </div>
+        `;
+    }
+}
+
+function updateReviewStats() {
+    if (!statReviewsCount) return;
+    const total = cachedReviews.length;
+    statReviewsCount.textContent = total;
+
+    if (total === 0) {
+        if (statReviewsAvg) statReviewsAvg.textContent = '0.0';
+        if (statReviewsPositive) statReviewsPositive.textContent = '0';
+        if (statReviewsCritical) statReviewsCritical.textContent = '0';
+        return;
+    }
+
+    const sumScores = cachedReviews.reduce((sum, r) => sum + (r.score || 0), 0);
+    const avg = (sumScores / total).toFixed(1);
+    const positiveCount = cachedReviews.filter(r => (r.score || 0) >= 4).length;
+    const criticalCount = cachedReviews.filter(r => (r.score || 0) <= 2).length;
+
+    if (statReviewsAvg) statReviewsAvg.textContent = avg;
+    if (statReviewsPositive) statReviewsPositive.textContent = positiveCount;
+    if (statReviewsCritical) statReviewsCritical.textContent = criticalCount;
+}
+
+function populateReviewAppFilter() {
+    if (!filterReviewAppSelect) return;
+    const currentVal = filterReviewAppSelect.value;
+    const uniqueApps = [...new Set(cachedReviews.map(r => r.app_id).filter(Boolean))];
+
+    filterReviewAppSelect.innerHTML = '<option value="all">Tüm Uygulamalar</option>' + 
+        uniqueApps.map(app => `<option value="${app}" ${currentVal === app ? 'selected' : ''}>${app}</option>`).join('');
+}
+
+function renderAdminReviewsList() {
+    if (!reviewsList) return;
+
+    const query = searchReviewsInput ? searchReviewsInput.value.toLowerCase().trim() : '';
+    const selectedApp = filterReviewAppSelect ? filterReviewAppSelect.value : 'all';
+    const selectedScore = filterReviewScoreSelect ? filterReviewScoreSelect.value : 'all';
+
+    const filtered = cachedReviews.filter(r => {
+        const matchApp = selectedApp === 'all' || r.app_id === selectedApp;
+        const matchScore = selectedScore === 'all' || String(r.score) === selectedScore;
+        const matchQuery = !query || 
+            (r.text && r.text.toLowerCase().includes(query)) ||
+            (r.user_name && r.user_name.toLowerCase().includes(query)) ||
+            (r.app_id && r.app_id.toLowerCase().includes(query));
+        return matchApp && matchScore && matchQuery;
+    });
+
+    if (filtered.length === 0) {
+        reviewsList.innerHTML = `
+            <div class="text-center py-12 text-slate-400 bg-slate-50 rounded-2xl border border-slate-200 p-6 space-y-3">
+                <span class="material-symbols-outlined text-4xl text-slate-300">reviews</span>
+                <p class="text-sm font-medium">Kriterlere uygun inceleme/yorum bulunamadı.</p>
+            </div>
+        `;
+        return;
+    }
+
+    reviewsList.innerHTML = filtered.map(review => {
+        const score = review.score || 0;
+        const stars = '★'.repeat(score) + '☆'.repeat(Math.max(0, 5 - score));
+        const formattedDate = review.review_date 
+            ? new Date(review.review_date).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' })
+            : 'Tarih belirtilmedi';
+
+        const replyButton = review.reply_url 
+            ? `<a href="${review.reply_url}" target="_blank" class="px-3 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 rounded-lg transition-all flex items-center gap-1.5 text-xs font-bold shadow-sm">
+                <span class="material-symbols-outlined text-sm text-amber-600">reply</span>
+                <span>Console'da Yanıtla</span>
+               </a>`
+            : '';
+
+        const scoreColorClass = score >= 4 
+            ? 'text-amber-500 bg-amber-50/80 border-amber-200' 
+            : (score <= 2 ? 'text-red-500 bg-red-50/80 border-red-200' : 'text-slate-600 bg-slate-100 border-slate-200');
+
+        return `
+            <div class="glass-card p-4 rounded-2xl flex flex-col sm:flex-row items-start justify-between gap-4 border border-slate-200 hover:border-amber-300 transition-all">
+                <div class="space-y-2 flex-1 min-w-0">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="px-2 py-0.5 rounded-md text-[11px] font-bold tracking-wide border ${scoreColorClass}">
+                            ${stars} (${score}/5)
+                        </span>
+                        <span class="px-2 py-0.5 bg-slate-100 text-slate-700 border border-slate-200 rounded-md text-[10px] font-bold font-mono">
+                            ${review.app_id || 'Uygulama'}
+                        </span>
+                        <span class="text-xs font-bold text-slate-800">${review.user_name || 'Anonim Kullanıcı'}</span>
+                    </div>
+                    <p class="text-xs text-slate-700 leading-relaxed break-words bg-slate-50/70 p-3 rounded-xl border border-slate-100">${review.text || '<em>(Metin girilmemiş)</em>'}</p>
+                    <div class="text-[11px] text-slate-400 font-medium flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[13px]">schedule</span>
+                        <span>${formattedDate}</span>
+                    </div>
+                </div>
+                <div class="w-full sm:w-auto flex justify-end flex-shrink-0 pt-2 sm:pt-0">
+                    ${replyButton}
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+if (searchReviewsInput) searchReviewsInput.addEventListener('input', renderAdminReviewsList);
+if (filterReviewAppSelect) filterReviewAppSelect.addEventListener('change', renderAdminReviewsList);
+if (filterReviewScoreSelect) filterReviewScoreSelect.addEventListener('change', renderAdminReviewsList);
+
+if (refreshReviewsBtn) {
+    refreshReviewsBtn.addEventListener('click', () => {
+        loadAdminReviews();
+    });
+}
+
 // --- DASHBOARD VERİLERİNİ YÜKLE ---
 async function loadDashboardData() {
-    // 1. Projeleri ve Blogları yerel verilerle anında doldur
+    // 1. Projeleri, Blogları ve Yorumları yerel/veritabanı verileriyle anında doldur
     renderPortfolioList(false);
     loadAdminBlogs();
+    loadAdminReviews();
 
     // 2. Arka planda site başlıklarını doldur
     fetchSiteContent().then(content => {
@@ -1407,4 +1561,5 @@ if (document.readyState === 'loading') {
 } else {
     checkSession();
 }
+
 
