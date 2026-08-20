@@ -1200,8 +1200,9 @@ function renderAdminBlogList() {
                         <h4 class="text-slate-900 font-bold text-sm truncate">${b.title}</h4>
                     </div>
                     <p class="text-xs text-slate-500 line-clamp-2">${b.summary}</p>
-                    <div class="text-[11px] text-slate-400 font-medium pt-0.5">
+                    <div class="text-[11px] text-slate-400 font-medium pt-0.5 flex items-center gap-3">
                         <span>${b.date || 'Bugün'} • ${b.author || 'MGA Ekibi'}</span>
+                        ${b.link ? `<span class="text-indigo-600 font-semibold flex items-center gap-0.5"><span class="material-symbols-outlined text-[12px]">link</span>Linkli</span>` : ''}
                     </div>
                 </div>
             </div>
@@ -1211,6 +1212,10 @@ function renderAdminBlogList() {
                     <span class="material-symbols-outlined text-base text-sky-600">visibility</span>
                     <span>Görüntüle</span>
                 </a>
+                <button type="button" class="edit-blog-btn px-3 py-1.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 rounded-lg transition-all flex items-center gap-1 text-xs font-bold" data-slug="${b.slug}">
+                    <span class="material-symbols-outlined text-base">edit</span>
+                    <span>Düzenle</span>
+                </button>
                 <button type="button" class="delete-blog-btn px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 rounded-lg transition-all flex items-center gap-1 text-xs font-bold" data-slug="${b.slug}">
                     <span class="material-symbols-outlined text-base">delete</span>
                     <span>Sil</span>
@@ -1218,6 +1223,14 @@ function renderAdminBlogList() {
             </div>
         </div>
     `).join('');
+
+    // Düzenleme butonlarını dinle
+    document.querySelectorAll('.edit-blog-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const slug = e.currentTarget.getAttribute('data-slug');
+            openEditBlogModal(slug);
+        });
+    });
 
     // Silme butonlarını dinle
     document.querySelectorAll('.delete-blog-btn').forEach(btn => {
@@ -1231,6 +1244,100 @@ function renderAdminBlogList() {
             }
         });
     });
+}
+
+// --- BLOG DÜZENLEME MODAL FONKSİYONLARI ---
+const editBlogModal = document.getElementById('editBlogModal');
+const closeEditBlogModalBtn = document.getElementById('closeEditBlogModalBtn');
+const cancelEditBlogBtn = document.getElementById('cancelEditBlogBtn');
+const editBlogForm = document.getElementById('editBlogForm');
+
+function openEditBlogModal(slug) {
+    const post = cachedBlogs.find(b => b.slug === slug);
+    if (!post || !editBlogModal) return;
+
+    document.getElementById('edit_b_slug').value = post.slug;
+    document.getElementById('edit_b_title').value = post.title || '';
+    document.getElementById('edit_b_summary').value = post.summary || '';
+    document.getElementById('edit_b_category').value = post.category || 'Mobil Yazılım';
+    document.getElementById('edit_b_author').value = post.author || 'MGA Creative Ekibi';
+    document.getElementById('edit_b_image').value = post.image || '';
+    const editLinkInput = document.getElementById('edit_b_link');
+    if (editLinkInput) editLinkInput.value = post.link || '';
+    document.getElementById('edit_b_content').value = post.content || '';
+
+    editBlogModal.classList.remove('hidden');
+}
+
+function closeEditBlogModal() {
+    if (editBlogModal) editBlogModal.classList.add('hidden');
+}
+
+if (closeEditBlogModalBtn) closeEditBlogModalBtn.addEventListener('click', closeEditBlogModal);
+if (cancelEditBlogBtn) cancelEditBlogBtn.addEventListener('click', closeEditBlogModal);
+
+if (editBlogForm) {
+    editBlogForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const origSlug = document.getElementById('edit_b_slug').value;
+        const targetIndex = cachedBlogs.findIndex(b => b.slug === origSlug);
+        if (targetIndex === -1) return;
+
+        const title = document.getElementById('edit_b_title').value.trim();
+        const summary = document.getElementById('edit_b_summary').value.trim();
+        const category = document.getElementById('edit_b_category').value;
+        const author = document.getElementById('edit_b_author').value.trim() || 'MGA Creative Ekibi';
+        const image = document.getElementById('edit_b_image').value.trim() || 'images/agroplan_detay.png';
+        const editLinkInput = document.getElementById('edit_b_link');
+        const link = editLinkInput ? editLinkInput.value.trim() : '';
+        const content = document.getElementById('edit_b_content').value.trim();
+
+        const updatedPost = {
+            ...cachedBlogs[targetIndex],
+            title: title,
+            summary: summary,
+            category: category,
+            author: author,
+            image: image,
+            link: link,
+            content: content,
+            readTime: `${Math.max(3, Math.ceil(content.split(' ').length / 150))} dk okuma`
+        };
+
+        cachedBlogs[targetIndex] = updatedPost;
+        localStorage.setItem('mga_blog_posts', JSON.stringify(cachedBlogs));
+
+        closeEditBlogModal();
+        loadAdminBlogs();
+    });
+}
+
+// Yardımcı Hızlı Link Ekleme Fonksiyonu
+function helperInsertLink(textareaId) {
+    const textarea = document.getElementById(textareaId);
+    if (!textarea) return;
+
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const selectedText = textarea.value.substring(start, end) || 'Bağlantı Metni';
+
+    const url = prompt('Eklemek istediğiniz Link URL adresini girin (örn: https://mgacreative.com veya /project?id=agro-plan):', 'https://');
+    if (!url) return;
+
+    const textToInsert = `[${selectedText}](${url.trim()})`;
+    textarea.setRangeText(textToInsert, start, end, 'end');
+    textarea.focus();
+}
+
+const insertLinkBtn = document.getElementById('insertLinkBtn');
+if (insertLinkBtn) {
+    insertLinkBtn.addEventListener('click', () => helperInsertLink('b_content'));
+}
+
+const editInsertLinkBtn = document.getElementById('editInsertLinkBtn');
+if (editInsertLinkBtn) {
+    editInsertLinkBtn.addEventListener('click', () => helperInsertLink('edit_b_content'));
 }
 
 // Blog Arama Dinleyicisi
@@ -1251,6 +1358,8 @@ if (addBlogForm) {
         const category = document.getElementById('b_category').value;
         const author = document.getElementById('b_author').value.trim() || 'MGA Creative Ekibi';
         const image = document.getElementById('b_image').value.trim() || 'images/agroplan_detay.png';
+        const linkInput = document.getElementById('b_link');
+        const link = linkInput ? linkInput.value.trim() : '';
         const content = document.getElementById('b_content').value.trim();
         const slug = slugify(title);
 
@@ -1261,6 +1370,7 @@ if (addBlogForm) {
             category: category,
             author: author,
             image: image,
+            link: link,
             content: content,
             readTime: `${Math.max(3, Math.ceil(content.split(' ').length / 150))} dk okuma`,
             date: new Date().toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' })
@@ -1270,7 +1380,6 @@ if (addBlogForm) {
         localStorage.setItem('mga_blog_posts', JSON.stringify(cachedBlogs));
 
         addBlogForm.reset();
-        alert('Yeni blog makalesi başarıyla yayınlandı!');
         loadAdminBlogs();
     });
 }

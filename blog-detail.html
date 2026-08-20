@@ -95,6 +95,35 @@
             color: #0F172A;
             font-weight: 700;
         }
+        .article-content a {
+            color: #0284C7;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        .article-content a:hover {
+            color: #0369A1;
+            text-decoration-color: #0284C7;
+        }
+        .article-content a.content-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.5rem 1rem;
+            background-color: #0284C7;
+            color: #FFFFFF !important;
+            border-radius: 0.75rem;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 700;
+            margin: 0.75rem 0;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+        }
+        .article-content a.content-btn:hover {
+            background-color: #0369A1;
+            transform: translateY(-1px);
+        }
         .toc-item.active {
             color: #0284C7;
             font-weight: 700;
@@ -386,6 +415,14 @@ Yapay zeka ve akıllı paylaşım protokolleri, küçük işletmelerden küresel
             .replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>')
             .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
             .replace(/\*(.*)\*/gim, '<em>$1</em>')
+            .replace(/\[\[(.*?)\|(.*?)\]\]/g, (match, text, url) => {
+                return `<a href="${url.trim()}" target="_blank" rel="noopener noreferrer" class="content-btn"><span>${text.trim()}</span><span class="material-symbols-outlined text-sm">open_in_new</span></a>`;
+            })
+            .replace(/\[(.*?)\]\((.*?)\)/g, (match, text, url) => {
+                const isInternal = url.startsWith('/') || url.startsWith('#');
+                const target = isInternal ? '' : 'target="_blank" rel="noopener noreferrer"';
+                return `<a href="${url.trim()}" ${target} class="text-sky-600 hover:text-sky-800 underline font-semibold">${text.trim()}</a>`;
+            })
             .replace(/\n\n/gim, '</p><p>')
             .replace(/^- (.*$)/gim, '<li>$1</li>')
             .replace(/^\d+\. (.*$)/gim, '<li>$1</li>');
@@ -470,7 +507,29 @@ Yapay zeka ve akıllı paylaşım protokolleri, küçük işletmelerden küresel
         document.getElementById('postImage').src = post.image;
         document.getElementById('postImage').alt = post.title;
 
-        document.getElementById('postContent').innerHTML = parseMarkdown(post.content);
+        let contentHtml = parseMarkdown(post.content);
+        
+        // Eğer makaleye özel bir bağlantı/proje linki atanmışsa altına şık bir kart ekle
+        if (post.link) {
+            const isInternal = post.link.startsWith('/');
+            const targetAttr = isInternal ? '' : 'target="_blank" rel="noopener noreferrer"';
+            contentHtml += `
+                <div class="mt-8 p-5 bg-gradient-to-r from-sky-50 to-indigo-50 border border-sky-200 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div class="space-y-1">
+                        <span class="text-xs font-bold text-sky-800 uppercase tracking-wider flex items-center gap-1">
+                            <span class="material-symbols-outlined text-sm">link</span> İlgili Bağlantı / Kaynak
+                        </span>
+                        <p class="text-xs text-slate-600 font-medium">Bu makalede bahsedilen projeyi veya kaynağı hemen inceleyebilirsiniz.</p>
+                    </div>
+                    <a href="${post.link}" ${targetAttr} class="px-5 py-2.5 bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs rounded-xl shadow-sm transition-all flex items-center gap-1.5 whitespace-nowrap active:scale-95">
+                        <span>Bağlantıyı Ziyaret Et</span>
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </a>
+                </div>
+            `;
+        }
+
+        document.getElementById('postContent').innerHTML = contentHtml;
 
         // Dinamik İçindekiler Menüsünü Oluştur
         buildTableOfContents();
