@@ -470,25 +470,47 @@ export function formatDescriptionWithMeta(desc, playstoreUrl, youtubeId) {
     return `${cleanDesc}\n\n<!--META:${JSON.stringify(metaObj)}-->`;
 }
 
+// --- EKRAN GEÇİŞ YARDIMCILARI ---
+function showDashboard(userEmail) {
+    if (loginSection) {
+        loginSection.classList.add('hidden');
+        loginSection.classList.remove('flex');
+        loginSection.style.display = 'none';
+    }
+    if (dashboardSection) {
+        dashboardSection.classList.remove('hidden');
+        dashboardSection.style.display = 'block';
+    }
+    if (statAdminEmail) {
+        statAdminEmail.textContent = userEmail || 'Admin (Canlı Yönetim)';
+    }
+    loadDashboardData();
+}
+
+function showLogin() {
+    if (dashboardSection) {
+        dashboardSection.classList.add('hidden');
+        dashboardSection.style.display = 'none';
+    }
+    if (loginSection) {
+        loginSection.classList.remove('hidden');
+        loginSection.classList.add('flex');
+        loginSection.style.display = 'flex';
+    }
+}
+
 // --- OTURUM DURUMU KONTROLÜ ---
 async function checkSession() {
     try {
-        if (loginSection) loginSection.classList.add('hidden');
-        if (dashboardSection) dashboardSection.classList.remove('hidden');
-
         const { data: { session } } = await supabase.auth.getSession();
-        if (session && statAdminEmail) {
-            statAdminEmail.textContent = session.user.email || 'Admin';
-        } else if (statAdminEmail) {
-            statAdminEmail.textContent = 'Admin (Canlı Yönetim)';
+        if (session && session.user) {
+            showDashboard(session.user.email);
+        } else {
+            showDashboard('Admin (Canlı Yönetim)');
         }
-        
-        loadDashboardData();
     } catch (e) {
         console.error('Session check error:', e);
-        if (loginSection) loginSection.classList.add('hidden');
-        if (dashboardSection) dashboardSection.classList.remove('hidden');
-        loadDashboardData();
+        showDashboard('Admin (Canlı Yönetim)');
     }
 }
 
@@ -500,18 +522,27 @@ if (loginForm) {
         loginBtn.innerHTML = '<span class="material-symbols-outlined animate-spin text-xl">sync</span><span>Giriş Yapılıyor...</span>';
         loginError.classList.add('hidden');
 
-        const { data, error } = await supabase.auth.signInWithPassword({
-            email: emailInput.value.trim(),
-            password: passwordInput.value,
-        });
+        try {
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email: emailInput.value.trim(),
+                password: passwordInput.value,
+            });
 
-        if (error) {
-            loginError.textContent = 'Giriş başarısız: ' + error.message;
+            if (error) {
+                loginError.textContent = 'Giriş başarısız: ' + error.message;
+                loginError.classList.remove('hidden');
+                loginBtn.disabled = false;
+                loginBtn.innerHTML = '<span>Giriş Yap</span><span class="material-symbols-outlined text-xl">login</span>';
+            } else {
+                loginBtn.disabled = false;
+                loginBtn.innerHTML = '<span>Giriş Yap</span><span class="material-symbols-outlined text-xl">login</span>';
+                showDashboard(data?.user?.email);
+            }
+        } catch (err) {
+            loginError.textContent = 'Giriş hatası: ' + err.message;
             loginError.classList.remove('hidden');
             loginBtn.disabled = false;
             loginBtn.innerHTML = '<span>Giriş Yap</span><span class="material-symbols-outlined text-xl">login</span>';
-        } else {
-            checkSession();
         }
     });
 }
@@ -520,7 +551,7 @@ if (loginForm) {
 if (logoutBtn) {
     logoutBtn.addEventListener('click', async () => {
         await supabase.auth.signOut();
-        checkSession();
+        showLogin();
     });
 }
 
