@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="tr"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>CookMatch</title><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "primary-fixed-dim": "#ffb4a1", "on-error": "#ffffff", "surface-container": "#f9ebe7", "on-surface": "#211a18", "on-tertiary": "#ffffff", "on-surface-variant": "#59413b", "on-secondary-container": "#6a2a00", "surface-variant": "#ede0dc", "on-secondary-fixed-variant": "#793100", "tertiary-fixed-dim": "#90d794", "secondary-container": "#fd8949", "surface-container-highest": "#ede0dc", "tertiary": "#256932", "inverse-on-surface": "#fceeea", "on-primary-fixed-variant": "#891e00", "outline": "#8d716a", "surface-bright": "#fff8f6", "surface-tint": "#ac3312", "primary-container": "#cb4927", "background": "#fff8f6", "primary": "#a93110", "surface-container-high": "#f3e5e2", "secondary": "#9f4201", "on-tertiary-fixed-variant": "#07521f", "on-error-container": "#93000a", "on-secondary-fixed": "#341100", "tertiary-fixed": "#abf4ae", "surface-container-low": "#fff1ed", "surface-container-lowest": "#ffffff", "on-primary": "#ffffff", "surface-dim": "#e4d7d4", "inverse-surface": "#362f2d", "secondary-fixed": "#ffdbcb", "inverse-primary": "#ffb4a1", "surface": "#fff8f6", "error": "#ba1a1a", "on-primary-fixed": "#3c0800", "on-tertiary-container": "#f7fff2", "on-secondary": "#ffffff", "outline-variant": "#e1bfb7", "on-background": "#211a18", "on-tertiary-fixed": "#002107", "primary-fixed": "#ffdbd2", "on-primary-container": "#fffbff", "secondary-fixed-dim": "#ffb692", "tertiary-container": "#3f8249", "error-container": "#ffdad6" }, "borderRadius": { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, "spacing": { "margin-mobile": "1.25rem", "gutter-mobile": "1rem", "space-md": "1.25rem", "gutter": "1.5rem", "space-sm": "0.75rem", "space-xs": "0.375rem", "space-lg": "2rem", "space-xl": "3.5rem", "margin": "3rem" }, "fontFamily": { "headline-lg-mobile": [ "Epilogue" ], "label-sm": [ "Plus Jakarta Sans" ], "display-hero": [ "Epilogue" ], "label-md": [ "Plus Jakarta Sans" ], "headline-md": [ "Epilogue" ], "headline-lg": [ "Epilogue" ], "display-hero-mobile": [ "Epilogue" ], "headline-sm": [ "Epilogue" ], "body-lg": [ "Plus Jakarta Sans" ], "body-md": [ "Plus Jakarta Sans" ], "body-sm": [ "Plus Jakarta Sans" ], "label-lg": [ "Plus Jakarta Sans" ] }, "fontSize": { "headline-lg-mobile": [ "28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "label-sm": [ "12px", { "lineHeight": "16px", "fontWeight": "500" } ], "display-hero": [ "52px", { "lineHeight": "60px", "letterSpacing": "-0.03em", "fontWeight": "700" } ], "label-md": [ "14px", { "lineHeight": "18px", "fontWeight": "600" } ], "headline-md": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "headline-lg": [ "38px", { "lineHeight": "46px", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "display-hero-mobile": [ "36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "headline-sm": [ "20px", { "lineHeight": "28px", "fontWeight": "600" } ], "body-lg": [ "18px", { "lineHeight": "28px", "fontWeight": "400" } ], "body-md": [ "16px", { "lineHeight": "24px", "fontWeight": "400" } ], "body-sm": [ "14px", { "lineHeight": "20px", "fontWeight": "400" } ], "label-lg": [ "16px", { "lineHeight": "22px", "fontWeight": "600" } ] } } } };</script></head><body class="bg-surface font-body-md text-on-surface min-h-screen antialiased"><header class="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(44,37,35,0.04)]"><div class="h-20 max-w-[1160px] mx-auto px-gutter flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-sm"><img alt="CookMatch Logo" class="h-8 w-auto object-contain" src="./assets/img_1.png"/><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-semibold">CookMatch</span></div><nav class="hidden lg:flex items-center gap-space-lg" data-active-classes="text-on-surface bg-surface-container-high font-label-md text-label-md px-space-sm py-space-xs rounded-full"><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="nasil-calisir" href="#">Nasıl Çalışır</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="neler-pisirebilirsin" href="#">Neler Pişirebilirsin</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="ozellikler" href="#">Özellikler</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="iletisim" href="#">İletişim</a></nav><div class="flex items-center gap-space-sm"><a class="hidden sm:inline-flex items-center font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface px-space-sm py-space-xs transition-colors" href="mailto:mga@mgacreative.com">Destek</a><a class="inline-flex items-center gap-space-xs bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md px-space-md py-space-sm rounded-full transition-all duration-200 shadow-[0_4px_16px_-2px_rgba(44,37,35,0.06)] hover:shadow-[0_8px_24px_-4px_rgba(169,49,16,0.25)]" href="https://play.google.com/store/apps/details?id=com.cookmatch.app" rel="noopener noreferrer" target="_blank"><span>Google Play'den İndir</span></a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface min-h-[calc(100vh-5rem)]"><div class="flex flex-col w-full">
+<!-- HERO SECTION -->
+<section class="relative w-full overflow-hidden bg-gradient-to-b from-surface to-surface-container-low pb-space-xl">
+<div class="max-w-[1160px] mx-auto px-gutter pt-space-lg lg:pt-space-xl">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-center">
+<!-- Hero Text Content -->
+<div class="lg:col-span-7 flex flex-col items-start space-y-space-md">
+<div class="inline-flex items-center gap-space-xs px-space-sm py-space-xs rounded-full bg-secondary-container/20 text-secondary">
+<span class="material-symbols-outlined text-[18px]">temp_preferences_custom</span>
+<span class="font-label-md text-label-md">Akıllı Mutfak &amp; Malzeme Asistanı</span>
+</div>
+<h1 class="font-display-hero text-display-hero text-on-surface tracking-tight leading-[1.1]">
+            Dolabındakilerle Ne Pişireceğini Düşünme, <span class="text-primary underline decoration-secondary-container decoration-wavy decoration-2">CookMatch</span> ile Keşfet.
+          </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+            Evindeki malzemeleri seç veya fotoğrafını çek; sana ve damak zevkine en uygun, denenmiş leziz tarifleri anında eşleştirelim. İsrafı önle, mutfakta yaratıcılığını konuştur.
+          </p>
+<!-- CTAs -->
+<div class="flex flex-wrap items-center gap-space-sm pt-space-xs w-full sm:w-auto">
+<a class="inline-flex items-center justify-center gap-space-xs bg-primary hover:bg-primary-container text-on-primary font-label-lg text-label-lg px-space-lg py-space-md rounded-full transition-all duration-200 shadow-[0_8px_24px_-4px_rgba(169,49,16,0.25)] hover:shadow-[0_12px_32px_-4px_rgba(169,49,16,0.35)]" href="https://play.google.com/store/apps/details?id=com.cookmatch.app" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[24px]">android</span>
+<span>Google Play'den Hemen İndir</span>
+</a>
+<a class="inline-flex items-center justify-center gap-space-xs bg-surface-container-high hover:bg-surface-variant text-on-surface font-label-md text-label-md px-space-md py-space-md rounded-full transition-colors" href="#nasil-calisir">
+<span class="material-symbols-outlined text-[20px]">explore</span>
+<span>Nasıl Çalışır?</span>
+</a>
+</div>
+<!-- Trust Badges -->
+<div class="flex flex-wrap items-center gap-space-md pt-space-sm">
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-tertiary text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-sm text-label-sm">Ücretsiz İndir</span>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-tertiary text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-sm text-label-sm">Reklamsız Deneyim</span>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-tertiary text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-sm text-label-sm">Binlerce Özgün Tarif</span>
+</div>
+</div>
+</div>
+<!-- Hero Visual Showcase -->
+<div class="lg:col-span-5 relative">
+<div class="relative mx-auto max-w-[460px]">
+<!-- Decorative Backing Blur -->
+<div class="absolute -inset-4 bg-gradient-to-tr from-secondary-container/20 to-primary-fixed/40 rounded-3xl blur-2xl -z-10"></div>
+<!-- Main Hero Photo -->
+<div class="rounded-2xl overflow-hidden shadow-xl bg-surface-container-lowest">
+<img alt="CookMatch ile mutfakta yemek fotoğrafı çeken kullanıcı" class="w-full h-80 lg:h-96 object-cover hover:scale-105 transition-transform duration-500" src="./assets/img_2.png"/>
+</div>
+<!-- Floating Preview Card (IMAGE_5) -->
+<div class="absolute -bottom-8 -left-6 sm:-left-10 w-48 sm:w-56 rounded-xl overflow-hidden shadow-2xl bg-surface-container-lowest p-space-xs">
+<div class="relative rounded-lg overflow-hidden h-52 sm:h-64">
+<img alt="CookMatch uygulamasında malzeme seçimi" class="w-full h-full object-cover" src="./assets/img_3.png"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-space-xs">
+<div class="bg-surface/90 backdrop-blur-md px-space-xs py-1 rounded-full text-on-surface font-label-sm text-label-sm flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-tertiary text-[14px]">eco</span>
+<span>12 Malzeme Eşleşti</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Floating Stat Chip -->
+<div class="absolute top-4 -right-4 bg-surface-container-lowest/95 backdrop-blur-md px-space-md py-space-sm rounded-full shadow-lg flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface leading-none">%98</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Uyum Oranı</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- INGREDIENT INTERACTION DEMO BAR -->
+<section class="w-full bg-surface-container-high/60 py-space-lg">
+<div class="max-w-[1160px] mx-auto px-gutter">
+<div class="bg-surface-container-lowest p-space-md lg:p-space-lg rounded-2xl shadow-sm flex flex-col lg:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-[28px]">grocery</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Şimdi Elindeki Malzemeleri Hayal Et</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Tıklayarak eşleşen nefis alternatifleri anında gözlemle</p>
+</div>
+</div>
+<!-- Interactive Chip Selection -->
+<div class="flex flex-wrap gap-space-xs items-center justify-center lg:justify-end" id="ingredient-chips-container">
+<button class="ingredient-toggle px-space-sm py-space-xs rounded-full font-label-md text-label-md transition-all duration-200 bg-tertiary text-on-tertiary shadow-sm flex items-center gap-1" data-ingredient="domates" type="button">
+<span class="material-symbols-outlined text-[16px]">check</span> Domates
+          </button>
+<button class="ingredient-toggle px-space-sm py-space-xs rounded-full font-label-md text-label-md transition-all duration-200 bg-tertiary text-on-tertiary shadow-sm flex items-center gap-1" data-ingredient="makarna" type="button">
+<span class="material-symbols-outlined text-[16px]">check</span> Makarna
+          </button>
+<button class="ingredient-toggle px-space-sm py-space-xs rounded-full font-label-md text-label-md transition-all duration-200 bg-surface-container-high hover:bg-surface-variant text-on-surface flex items-center gap-1" data-ingredient="zeytinyagi" type="button">
+<span>+</span> Zeytinyağı
+          </button>
+<button class="ingredient-toggle px-space-sm py-space-xs rounded-full font-label-md text-label-md transition-all duration-200 bg-surface-container-high hover:bg-surface-variant text-on-surface flex items-center gap-1" data-ingredient="feslegen" type="button">
+<span>+</span> Fesleğen
+          </button>
+<button class="ingredient-toggle px-space-sm py-space-xs rounded-full font-label-md text-label-md transition-all duration-200 bg-surface-container-high hover:bg-surface-variant text-on-surface flex items-center gap-1" data-ingredient="sarimsak" type="button">
+<span>+</span> Sarımsak
+          </button>
+<div class="ml-space-xs px-space-sm py-space-xs bg-secondary-container text-on-secondary-container font-label-sm text-label-sm rounded-full" id="ingredient-match-count">
+            2 Malzeme = 34 Tarif
+          </div>
+</div>
+</div>
+</div>
+</section>
+<!-- HOW IT WORKS SECTION (3 SAMİMİ ADIM) -->
+<section class="w-full py-space-xl bg-surface" id="nasil-calisir">
+<div class="max-w-[1160px] mx-auto px-gutter">
+<!-- Section Header -->
+<div class="flex flex-col items-center text-center max-w-2xl mx-auto mb-space-xl space-y-space-xs">
+<span class="font-label-md text-label-md text-secondary tracking-wider uppercase font-semibold">Zahmetsiz Lezzet Yolculuğu</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">3 Samimi Adımda Sofranı Kur</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Akşam ne pişireceğim derdi tarihe karışıyor. Mutfakta eğlence ve pratiklik başlıyor.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-center">
+<!-- Steps List -->
+<div class="lg:col-span-7 flex flex-col space-y-space-md">
+<!-- Step 1 -->
+<div class="group p-space-md rounded-2xl bg-surface-container-low hover:bg-surface-container transition-all duration-300 shadow-sm flex items-start gap-space-md">
+<div class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center shrink-0 font-headline-sm text-headline-sm font-bold shadow-md">
+              1
+            </div>
+<div class="space-y-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+<span>Dolabını Aç &amp; Malzemelerini Gir</span>
+<span class="material-symbols-outlined text-secondary text-[20px]">photo_camera</span>
+</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                Buzdolabında, kilerde ne varsa liste üzerinden kolayca işaretle ya da kameranı açıp malzemelerin fotoğrafını çek. Akıllı nesne algılama saniyeler içinde elindekileri tanır.
+              </p>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="group p-space-md rounded-2xl bg-surface-container-low hover:bg-surface-container transition-all duration-300 shadow-sm flex items-start gap-space-md">
+<div class="w-12 h-12 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0 font-headline-sm text-headline-sm font-bold shadow-md">
+              2
+            </div>
+<div class="space-y-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+<span>Akıllı Eşleşme ile Tarifleri Gör</span>
+<span class="material-symbols-outlined text-secondary text-[20px]">auto_fix_high</span>
+</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                CookMatch algoritması elindeki malzemelerle %100 veya en yüksek oranda eşleşen denenmiş lezzetleri önceliklendirir. Eksik malzemeler için alternatif ipuçları sunar.
+              </p>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="group p-space-md rounded-2xl bg-surface-container-low hover:bg-surface-container transition-all duration-300 shadow-sm flex items-start gap-space-md">
+<div class="w-12 h-12 rounded-full bg-tertiary text-on-tertiary flex items-center justify-center shrink-0 font-headline-sm text-headline-sm font-bold shadow-md">
+              3
+            </div>
+<div class="space-y-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+<span>Keyifle Pişir &amp; Paylaş</span>
+<span class="material-symbols-outlined text-tertiary text-[20px]">dinner_dining</span>
+</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                Adım adım net açıklamalar, pişirme süreleri ve püf noktaları ile kusursuz tabaklar hazırla. Yemeğinin fotoğrafını çekip sevdiklerinle paylaşmanın keyfini çıkar.
+              </p>
+</div>
+</div>
+</div>
+<!-- Featured App Visual (IMAGE_2) -->
+<div class="lg:col-span-5 flex justify-center">
+<div class="relative w-full max-w-md">
+<div class="rounded-3xl overflow-hidden shadow-2xl bg-surface-container-lowest p-2">
+<img alt="CookMatch tarif eşleştirme sonuçlarını gösteren mutlu kullanıcı" class="w-full h-[440px] object-cover rounded-2xl" src="./assets/img_4.png"/>
+</div>
+<!-- Trust Floater -->
+<div class="absolute -bottom-5 right-4 bg-surface-container-lowest/95 backdrop-blur-md px-space-md py-space-sm rounded-2xl shadow-lg max-w-[240px]">
+<div class="flex items-center gap-1 text-secondary mb-1">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface font-semibold">"Dolaptaki kalan sebzelerle harika bir risotto yaptık!"</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- RECIPE GALLERY & COMMUNITY SECTION -->
+<section class="w-full py-space-xl bg-surface-container-low" id="neler-pisirebilirsin">
+<div class="max-w-[1160px] mx-auto px-gutter space-y-space-xl">
+<!-- Gallery Block 1: Flavor Spotlight (IMAGE_3) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-center">
+<div class="lg:col-span-6 relative order-2 lg:order-1">
+<div class="rounded-3xl overflow-hidden shadow-xl bg-surface-container-lowest">
+<img alt="Taze domatesli ve fesleğenli dumanı üstünde makarna tabağı" class="w-full h-80 lg:h-96 object-cover hover:scale-105 transition-transform duration-500" src="./assets/img_5.png"/>
+</div>
+<div class="absolute top-4 left-4 bg-surface-container-lowest/90 backdrop-blur-md px-space-sm py-space-xs rounded-full text-on-surface font-label-sm text-label-sm shadow flex items-center gap-1">
+<span class="material-symbols-outlined text-primary text-[18px]">timer</span>
+<span>Hazırlama: 15 Dakika</span>
+</div>
+</div>
+<div class="lg:col-span-6 space-y-space-sm order-1 lg:order-2">
+<div class="inline-flex items-center gap-space-xs px-space-sm py-space-xs rounded-full bg-primary-fixed text-on-primary-fixed">
+<span class="material-symbols-outlined text-[16px]">skillet</span>
+<span class="font-label-sm text-label-sm">İlham Dolu Tarifler</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Her Damak Zevkine Uygun Binlerce Fikir</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+            Basit bir paket makarna ve iki domatesi bir şefe layık gurme tabağa dönüştürmek hiç zor değil. CookMatch, mutfağındaki en sade malzemeleri bile tutkulu bir lezzet şölenine çevirir.
+          </p>
+<div class="grid grid-cols-2 gap-space-sm pt-space-xs">
+<div class="p-space-sm rounded-xl bg-surface-container flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[24px]">nutrition</span>
+<span class="font-label-md text-label-md text-on-surface">Kalori ve Besin Değerleri</span>
+</div>
+<div class="p-space-sm rounded-xl bg-surface-container flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-tertiary text-[24px]">tips_and_updates</span>
+<span class="font-label-md text-label-md text-on-surface">Pratik Şef İpuçları</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Gallery Block 2: Community & Warmth (IMAGE_4) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-center pt-space-md">
+<div class="lg:col-span-6 space-y-space-sm">
+<div class="inline-flex items-center gap-space-xs px-space-sm py-space-xs rounded-full bg-secondary-fixed text-on-secondary-fixed">
+<span class="material-symbols-outlined text-[16px]">groups</span>
+<span class="font-label-sm text-label-sm">Birlikte Pişirmenin Keyfi</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Sofralar Paylaştıkça Güzelleşir</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+            Yemek yapmak yalnızca doymak değil; sevdiklerinle bir araya gelmek, gülümsemeleri paylaşmak ve sıcacık anılar biriktirmektir. Arkadaşlarınla birlikte ortak malzeme sepeti oluşturun, akşamın menüsüne birlikte karar verin.
+          </p>
+<div class="flex items-center gap-space-md pt-space-xs text-on-surface-variant">
+<div class="flex -space-x-3 overflow-hidden">
+<div class="inline-block h-10 w-10 rounded-full ring-2 ring-surface bg-primary/20 flex items-center justify-center font-bold text-primary">A</div>
+<div class="inline-block h-10 w-10 rounded-full ring-2 ring-surface bg-secondary/20 flex items-center justify-center font-bold text-secondary">E</div>
+<div class="inline-block h-10 w-10 rounded-full ring-2 ring-surface bg-tertiary/20 flex items-center justify-center font-bold text-tertiary">M</div>
+</div>
+<span class="font-body-sm text-body-sm font-medium">Binlerce mutlu ev şefi sofrasını paylaşıyor</span>
+</div>
+</div>
+<div class="lg:col-span-6 relative">
+<div class="rounded-3xl overflow-hidden shadow-xl bg-surface-container-lowest">
+<img alt="Sıcak bir mutfakta birlikte neşeyle yemek pişiren arkadaş grubu" class="w-full h-80 lg:h-96 object-cover hover:scale-105 transition-transform duration-500" src="./assets/img_6.png"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- WHY COOKMATCH? (DÜRÜST & ŞEFFAF YAKLAŞIM) -->
+<section class="w-full py-space-xl bg-surface" id="ozellikler">
+<div class="max-w-[1160px] mx-auto px-gutter">
+<div class="flex flex-col items-center text-center max-w-2xl mx-auto mb-space-xl space-y-space-xs">
+<span class="font-label-md text-label-md text-tertiary tracking-wider uppercase font-semibold">Dürüst ve Şeffaf</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Neden CookMatch Tercih Edilmeli?</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Karmaşık alışveriş listelerine ve boşa harcanan gıdalara veda edin.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Feature 1 -->
+<div class="bg-surface-container-low p-space-lg rounded-2xl flex flex-col space-y-space-sm hover:shadow-md transition-shadow">
+<div class="w-14 h-14 rounded-2xl bg-tertiary/10 text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-[32px]">recycling</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Sıfır İsraf İlkesi</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Bozulmaya yüz tutan sebzeleri ve dolapta unutulmuş lezzetleri öncelikli tariflerle değerlendirerek mutfakta gıda israfını en aza indirin.
+          </p>
+</div>
+<!-- Feature 2 -->
+<div class="bg-surface-container-low p-space-lg rounded-2xl flex flex-col space-y-space-sm hover:shadow-md transition-shadow">
+<div class="w-14 h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[32px]">inventory_2</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Elindekiler Yeterli</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Uzak marketlerde aramak zorunda kalacağınız egzotik soslar yerine, her evde bulunan temel malzemelerle harikalar yaratın.
+          </p>
+</div>
+<!-- Feature 3 -->
+<div class="bg-surface-container-low p-space-lg rounded-2xl flex flex-col space-y-space-sm hover:shadow-md transition-shadow">
+<div class="w-14 h-14 rounded-2xl bg-secondary/10 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[32px]">favorite</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Dengeli &amp; Sağlıklı Beslenme</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Pratik filtrelerle vejetaryen, glutensiz veya yüksek proteinli alternatifleri tek dokunuşla keşfedin, bedenine iyi gelen lezzetleri seçin.
+          </p>
+</div>
+</div>
+</div>
+</section>
+<!-- CONTACT & DIRECT DOWNLOAD CLEAN FINISH (NO ENTERPRISE SALES / NO FOOTBAR) -->
+<section class="w-full py-space-xl bg-surface-container-high/40 pb-space-xl" id="iletisim">
+<div class="max-w-[1160px] mx-auto px-gutter">
+<div class="bg-surface-container-lowest rounded-3xl p-space-lg lg:p-space-xl shadow-md">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-center">
+<div class="lg:col-span-8 space-y-space-sm">
+<div class="inline-flex items-center gap-space-xs px-space-sm py-space-xs rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-primary text-[16px]">chat</span>
+<span>Her Zaman Buradayız</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">
+              Soruların, Önerilerin veya Yeni Bir Tarifin mi Var?
+            </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+              CookMatch deneyimini daha da geliştirmek için fikirlerini duymak isteriz. Bizimle her zaman doğrudan samimi bir e-posta ile iletişime geçebilirsin.
+            </p>
+<div class="pt-space-xs flex flex-wrap items-center gap-space-md">
+<a class="inline-flex items-center gap-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface px-space-md py-space-sm rounded-full font-label-md text-label-md transition-colors shadow-sm" href="mailto:mga@mgacreative.com">
+<span class="material-symbols-outlined text-primary text-[20px]">mail</span>
+<span class="font-semibold">mga@mgacreative.com</span>
+</a>
+<span class="text-on-surface-variant font-body-sm text-body-sm">En geç 24 saat içinde dönüş yapıyoruz.</span>
+</div>
+</div>
+<!-- Clean Direct Download Card -->
+<div class="lg:col-span-4 flex flex-col items-stretch bg-surface-container p-space-md rounded-2xl space-y-space-sm text-center">
+<div class="w-12 h-12 rounded-full bg-primary text-on-primary mx-auto flex items-center justify-center shadow">
+<span class="material-symbols-outlined text-[24px]">restaurant_menu</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Mutfakta Yerini Al</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              CookMatch tamamen ücretsizdir. Hemen indir, dolabındaki malzemeleri eşleştir.
+            </p>
+<a class="inline-flex items-center justify-center gap-space-xs bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md px-space-md py-space-sm rounded-full transition-all shadow-md" href="https://play.google.com/store/apps/details?id=com.cookmatch.app" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[20px]">shop</span>
+<span>Google Play'den İndir</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<script>
+  // Interactive Ingredient Demo Chip Toggles
+  const chipButtons = document.querySelectorAll('.ingredient-toggle');
+  const countBadge = document.getElementById('ingredient-match-count');
+
+  chipButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const isSelected = btn.classList.contains('bg-tertiary');
+      if (isSelected) {
+        btn.classList.remove('bg-tertiary', 'text-on-tertiary', 'shadow-sm');
+        btn.classList.add('bg-surface-container-high', 'text-on-surface');
+        btn.innerHTML = `<span>+</span> ${btn.dataset.ingredient.charAt(0).toUpperCase() + btn.dataset.ingredient.slice(1)}`;
+      } else {
+        btn.classList.remove('bg-surface-container-high', 'text-on-surface');
+        btn.classList.add('bg-tertiary', 'text-on-tertiary', 'shadow-sm');
+        btn.innerHTML = `<span class="material-symbols-outlined text-[16px]">check</span> ${btn.dataset.ingredient.charAt(0).toUpperCase() + btn.dataset.ingredient.slice(1)}`;
+      }
+
+      // Update match count display
+      const activeCount = document.querySelectorAll('.ingredient-toggle.bg-tertiary').length;
+      if (activeCount === 0) {
+        countBadge.innerText = 'Malzeme seçimi bekleniyor';
+      } else {
+        const simulatedTarif = activeCount * 17 + (activeCount === 3 ? 12 : 0);
+        countBadge.innerText = `${activeCount} Malzeme = ${simulatedTarif} Tarif`;
+      }
+    });
+  });
+</script></main></body></html>

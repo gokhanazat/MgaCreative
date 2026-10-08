@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+
+<html lang="tr"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>FamilyOS - Ev ve Aile Yönetimi</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-secondary-fixed-variant": "#394b3a", "surface": "#fcf9f3", "on-secondary-container": "#546755", "on-surface-variant": "#56423c", "outline-variant": "#ddc0b8", "on-error-container": "#93000a", "on-primary": "#ffffff", "on-tertiary-container": "#fffbff", "on-tertiary-fixed": "#2a1800", "surface-container": "#f0eee8", "primary-fixed": "#ffdbd0", "on-tertiary": "#ffffff", "inverse-on-surface": "#f3f0ea", "inverse-surface": "#31312d", "surface-container-highest": "#e5e2dc", "on-background": "#1c1c18", "tertiary": "#795523", "primary-fixed-dim": "#ffb59e", "surface-tint": "#a04020", "background": "#fcf9f3", "on-primary-container": "#fffbff", "error": "#ba1a1a", "secondary-fixed-dim": "#b7ccb6", "inverse-primary": "#ffb59e", "on-primary-fixed": "#3a0b00", "secondary-container": "#d0e5ce", "surface-variant": "#e5e2dc", "surface-container-high": "#ebe8e2", "tertiary-fixed-dim": "#efbe82", "primary": "#9c3e1e", "secondary": "#506351", "surface-dim": "#dcdad4", "on-surface": "#1c1c18", "on-tertiary-fixed-variant": "#614010", "surface-container-lowest": "#ffffff", "primary-container": "#bd5633", "tertiary-container": "#956d39", "secondary-fixed": "#d3e8d1", "on-primary-fixed-variant": "#802a0a", "on-secondary-fixed": "#0e1f11", "tertiary-fixed": "#ffddb6", "surface-bright": "#fcf9f3", "on-error": "#ffffff", "surface-container-low": "#f6f3ed", "outline": "#8a726b", "error-container": "#ffdad6", "on-secondary": "#ffffff" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-lg": "1.5rem", "margin": "3rem", "space-sm": "0.5rem", "space-xl": "2.5rem", "space-md": "1rem", "margin-mobile": "1.25rem", "space-xs": "0.25rem", "gutter": "1.5rem", "gutter-mobile": "1rem" }, "fontFamily": { "headline-lg": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "display": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Plus Jakarta Sans"], "display-mobile": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "title": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"] }, "fontSize": { "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}], "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}], "display": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.03em", "fontWeight": "700"}], "headline-lg-mobile": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "700"}], "display-mobile": ["38px", {"lineHeight": "46px", "letterSpacing": "-0.02em", "fontWeight": "700"}], "headline-sm": ["22px", {"lineHeight": "30px", "fontWeight": "600"}], "title": ["18px", {"lineHeight": "26px", "fontWeight": "600"}], "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600"}], "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}], "headline-md": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}], "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}], "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}] } } } }</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(74,53,40,0.04)]"><div class="h-20 max-w-[1240px] mx-auto px-gutter-mobile lg:px-margin flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg"><a class="flex items-center gap-space-xs" data-path="anasayfa" href="#"><div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-on-primary shadow-[0_4px_12px_rgba(74,53,40,0.06)]"><span class="material-symbols-outlined text-[24px]">roofing</span></div><div class="flex flex-col"><span class="font-title text-title text-on-surface leading-tight tracking-tight">FamilyOS</span><span class="font-label-sm text-label-sm text-on-surface-variant">Ev &amp; Aile Düzeni</span></div></a></div><nav class="hidden md:flex items-center gap-space-md" data-active-classes="bg-surface-container-high text-on-surface font-title rounded-lg"><a class="px-space-md py-space-xs rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="ozellikler" href="#">Özellikler</a><a class="px-space-md py-space-xs rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="kimler-icin" href="#">Kimler İçin</a><a class="px-space-md py-space-xs rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="sss" href="#">SSS</a><a class="px-space-md py-space-xs rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="iletisim" href="#">İletişim</a></nav><div class="flex items-center gap-space-sm"><a class="px-space-md py-space-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="giris-yap" href="#">Giriş Yap</a><a class="flex items-center gap-space-xs bg-primary text-on-primary px-space-md py-space-sm rounded-lg font-label-md text-label-md shadow-[0_4px_12px_rgba(74,53,40,0.06)] hover:bg-primary-container hover:text-on-primary-container transition-all active:scale-[0.98]" data-path="uygulamayi-indir" href="#"><span class="material-symbols-outlined text-[20px]">download</span><span>Google Play'den İndirin</span></a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface min-h-[calc(100vh-280px)]"><div class="flex flex-col w-full">
+<!-- HERO SECTION -->
+<section class="relative w-full overflow-hidden bg-surface py-space-xl lg:py-margin">
+<div class="max-w-[1240px] mx-auto px-gutter-mobile lg:px-margin">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
+<!-- Left Column: Copy & Actions -->
+<div class="lg:col-span-6 flex flex-col items-start gap-space-lg">
+<!-- Eyebrow Badge -->
+<div class="inline-flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-secondary-container/60 text-on-secondary-fixed-variant shadow-sm">
+<span class="material-symbols-outlined text-[18px] text-secondary">home_repair_service</span>
+<span class="font-label-md text-label-md tracking-wide">Evinizin Dijital İşletim Sistemi</span>
+</div>
+<!-- Headline -->
+<h1 class="font-display text-display lg:text-[54px] lg:leading-[62px] text-on-surface tracking-tight">
+            Evinizdeki Her Şey Yolunda, <span class="text-primary font-display">Aileniz Güvende.</span>
+</h1>
+<!-- Subhead -->
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+            FamilyOS ile karmaşık bakım programlarını unutma, biten deterjanın peşinden koşma veya garanti belgelerini arama günleri geride kaldı. Tüm ev yönetiminiz tek ve güvenli bir yerde.
+          </p>
+<!-- Primary CTA -->
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-space-md w-full sm:w-auto pt-space-xs">
+<a class="flex items-center justify-center gap-space-sm bg-primary text-on-primary px-space-xl py-space-md rounded-xl font-title text-title shadow-md hover:bg-primary-container hover:shadow-lg transition-all active:scale-[0.98]" href="https://play.google.com" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[24px]">shop</span>
+<span>Google Play'den İndirin</span>
+</a>
+</div>
+<!-- Quick Trust Badges -->
+<div class="pt-space-md flex flex-wrap items-center gap-y-space-sm gap-x-space-lg text-on-surface-variant">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface">4.9/5</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Kullanıcı Memnuniyeti</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">verified</span>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">Kolay Kurulum</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">shield</span>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">Gizlilik &amp; Güvenlik Odaklı</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Visual Composition with Status Badges -->
+<div class="lg:col-span-6 relative mt-space-lg lg:mt-0 flex justify-center">
+<!-- Ambient Glow Circle -->
+<div class="absolute -inset-4 bg-gradient-to-tr from-primary/10 via-secondary-container/30 to-transparent rounded-full blur-3xl pointer-events-none"></div>
+<!-- Main Hero Frame -->
+<div class="relative w-full max-w-[560px] rounded-2xl overflow-hidden shadow-xl bg-surface-container-lowest">
+<img alt="FamilyOS ile mutlu ve huzurlu aile" class="w-full h-[440px] lg:h-[490px] object-cover object-center" src="./assets/img_1.png"/>
+<!-- Floating Status Pill 1: Maintenance Alert (Top-Left) -->
+<div class="absolute top-4 left-4 sm:top-6 sm:left-6 bg-surface-container-lowest/95 backdrop-blur-md px-space-md py-space-sm rounded-xl shadow-lg flex items-center gap-space-sm transition-transform hover:-translate-y-0.5">
+<div class="w-8 h-8 rounded-lg bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">build</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">Kombi Bakımı: 3 gün kaldı</span>
+<span class="text-[11px] leading-tight text-on-surface-variant">ECA Yetkili Servis Randevulu</span>
+</div>
+</div>
+<!-- Floating Status Pill 2: Pantry Low Notice (Center-Right) -->
+<div class="absolute top-1/2 -translate-y-1/2 right-4 sm:right-6 bg-surface-container-lowest/95 backdrop-blur-md px-space-md py-space-sm rounded-xl shadow-lg flex items-center gap-space-sm transition-transform hover:-translate-y-0.5">
+<div class="w-8 h-8 rounded-lg bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">Zeytinyağı stoğu kritik</span>
+<span class="text-[11px] leading-tight text-on-surface-variant">Kalan: 1/3 şişe • Sepete eklendi</span>
+</div>
+</div>
+<!-- Floating Status Pill 3: Overview Bar (Bottom Horizontal) -->
+<div class="absolute bottom-4 inset-x-4 sm:bottom-6 sm:inset-x-6 bg-surface-container-lowest/95 backdrop-blur-md px-space-md py-space-sm rounded-xl shadow-lg flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">cottage</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface">Bizim Ev Modu</span>
+</div>
+<div class="flex items-center gap-space-sm font-label-sm text-label-sm text-on-surface-variant">
+<span class="px-space-xs py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed font-semibold">4 Birey</span>
+<span>24 Cihaz</span>
+<span class="text-secondary font-semibold">0 Aksayan Görev</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- KEY FEATURES SECTION -->
+<section class="w-full bg-surface-container-low py-space-xl lg:py-margin" id="ozellikler">
+<div class="max-w-[1240px] mx-auto px-gutter-mobile lg:px-margin flex flex-col gap-space-xl">
+<!-- Section Header -->
+<div class="flex flex-col items-center text-center max-w-2xl mx-auto gap-space-xs">
+<span class="font-label-md text-label-md uppercase tracking-wider text-primary font-bold">HUZURLU EV DÜZENİ</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Evinizin İhtiyaç Duyduğu Her Şey Tek Ekranda</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Karmaşayı sonlandıran pratik araçlarla aile yaşamınızı hafifletin.</p>
+</div>
+<!-- Features Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Card 1: Maintenance -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-lg flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow group">
+<div class="flex flex-col gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-primary-fixed flex items-center justify-center text-primary group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[26px]">home_repair_service</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<h3 class="font-title text-title text-on-surface">Zamanında Bakım Takibi, Sorunsuz Yaşam</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Kombi, klima, su arıtıcı ve beyaz eşyaların periyodik servis tarihlerini takip eder. Masraflı arızaları önceden engeller.
+              </p>
+</div>
+</div>
+<div class="mt-space-lg pt-space-md border-t-0 bg-surface-container-low rounded-xl p-space-sm flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">Klima Filtre Temizliği</span>
+<span class="px-space-xs py-0.5 rounded-full bg-primary-container text-on-primary-container text-[11px] font-semibold">Her 6 Ayda Bir</span>
+</div>
+</div>
+<!-- Card 2: Digital Inventory -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-lg flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow group">
+<div class="flex flex-col gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-secondary-fixed flex items-center justify-center text-secondary group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[26px]">inventory_2</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<h3 class="font-title text-title text-on-surface">Evinizin Dijital Envanteri</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Buzdolabından dikiş makinesine kadar model, seri no, fatura ve garanti belgeleri tek bir arşivde güvende.
+              </p>
+</div>
+</div>
+<div class="mt-space-lg pt-space-md bg-secondary-container/40 rounded-xl p-space-sm flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-secondary-container font-semibold">Kayıtlı Cihaz: 18 Adet</span>
+<span class="font-label-sm text-label-sm text-secondary font-bold">Garanti Koruması %100</span>
+</div>
+</div>
+<!-- Card 3: Smart Pantry -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-lg flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow group">
+<div class="flex flex-col gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-tertiary-fixed flex items-center justify-center text-tertiary group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[26px]">shopping_cart_checkout</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<h3 class="font-title text-title text-on-surface">Akıllı Stok ve Kiler Takibi</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Biten temizlik ve gıda malzemelerini izler, belirlediğiniz limit altına inince otomatik ortak alışveriş sepeti oluşturur.
+              </p>
+</div>
+</div>
+<div class="mt-space-lg pt-space-md bg-surface-container-low rounded-xl p-space-sm flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">Bulaşık Kapsülü: 6 Adet</span>
+<span class="font-label-sm text-label-sm text-tertiary font-bold">Otomatik Listeye Alındı</span>
+</div>
+</div>
+<!-- Card 4: Location & Room Mapping -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-lg flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow group">
+<div class="flex flex-col gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center text-on-secondary-container group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[26px]">location_on</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<h3 class="font-title text-title text-on-surface">Her Şey Yerinde</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Eşyaların hangi dolap, koli veya odada olduğunu kaydedin. Mevsimlik kıyafetleri ve yedek anahtarları saniyeler içinde bulun.
+              </p>
+</div>
+</div>
+<div class="mt-space-lg pt-space-md bg-surface-container-low rounded-xl p-space-sm flex items-center justify-between text-on-surface-variant">
+<span class="font-label-sm text-label-sm font-semibold">Örnek: "Pasaportlar"</span>
+<span class="font-label-sm text-label-sm text-primary font-semibold">Çalışma Odası • Kasa</span>
+</div>
+</div>
+<!-- Card 5: Family Chore Delegation (Spans 2 cols on lg) -->
+<div class="lg:col-span-2 bg-surface-container-lowest rounded-2xl p-space-lg flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow group">
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="w-12 h-12 rounded-xl bg-primary-fixed flex items-center justify-center text-primary group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[26px]">diversity_3</span>
+</div>
+<span class="font-label-sm text-label-sm bg-surface-container px-space-sm py-1 rounded-full text-on-surface-variant">Eşit Paylaşım</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<h3 class="font-title text-title text-on-surface">Ortak Yaşam Alanı ve Aile Organizasyonu</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Evdeki görev dağılımını şeffaflaştırarak zihinsel ev yükünü dengeler. Hatırlatıcılar tartışma yaratmadan nazikçe devreye girer.
+              </p>
+</div>
+</div>
+<div class="mt-space-lg pt-space-md flex flex-wrap items-center gap-space-sm">
+<div class="px-space-md py-space-xs rounded-full bg-primary-fixed text-on-primary-fixed-variant font-label-sm text-label-sm flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px]">face</span>
+<span>Anne: 4 Görev</span>
+</div>
+<div class="px-space-md py-space-xs rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px]">face_6</span>
+<span>Baba: 3 Görev</span>
+</div>
+<div class="px-space-md py-space-xs rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-sm text-label-sm flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px]">child_care</span>
+<span>Çocuklar: 2 Rutin</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SHOWCASE SECTION: DÜZENLİ BİR EV, SAKİN BİR ZİHİN -->
+<section class="w-full bg-surface py-space-xl lg:py-margin">
+<div class="max-w-[1240px] mx-auto px-gutter-mobile lg:px-margin">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
+<!-- Showcase Image -->
+<div class="lg:col-span-6 relative">
+<div class="relative rounded-2xl overflow-hidden shadow-lg bg-surface-container-high">
+<img alt="Düzenli ve ferah mutfak kiler düzeni" class="w-full h-[400px] lg:h-[480px] object-cover object-center" src="./assets/img_2.png"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+<div class="absolute bottom-6 left-6 right-6 text-on-primary flex items-center justify-between">
+<span class="font-title text-title drop-shadow">Akıllı Kiler &amp; Mutfak Düzeni</span>
+<span class="font-label-sm text-label-sm bg-surface-container-lowest/80 text-on-surface px-space-sm py-1 rounded-full backdrop-blur-sm">Sıfır Karışıklık</span>
+</div>
+</div>
+</div>
+<!-- Showcase Story & Metrics -->
+<div class="lg:col-span-6 flex flex-col gap-space-lg lg:pl-space-md">
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-md text-label-md uppercase tracking-wider text-primary font-bold">HUZURLU ALANLAR</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Düzenli Bir Ev, Sakin Bir Zihin</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Gözünüzün arkada kalmadığı bir yuva kurgusu. Kilerin son kullanma tarihlerinden kombinin kışlık bakımına, her küçük ayrıntı FamilyOS akıllı hatırlatıcıları ile kontrol altında.
+            </p>
+</div>
+<!-- Key Metrics -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-sm pt-space-xs">
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col gap-space-xs">
+<span class="font-headline-md text-headline-md text-primary font-bold">%35</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant leading-tight">Daha Az Gıda İsrafı</span>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col gap-space-xs">
+<span class="font-headline-md text-headline-md text-secondary font-bold">0</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant leading-tight">Unutulan Cihaz Bakımı</span>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col gap-space-xs">
+<span class="font-headline-md text-headline-md text-tertiary font-bold">3 Saat</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant leading-tight">Haftalık Tasarruf</span>
+</div>
+</div>
+<!-- Feature Bullets -->
+<div class="flex flex-col gap-space-sm pt-space-xs">
+<div class="flex items-start gap-space-sm">
+<div class="w-6 h-6 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed mt-0.5">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface"><span class="font-semibold">Gerçek Zamanlı Eşzamanlama:</span> Eşiniz marketteyken sepet anında güncellenir.</p>
+</div>
+<div class="flex items-start gap-space-sm">
+<div class="w-6 h-6 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed mt-0.5">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface"><span class="font-semibold">Fotoğraflı Garanti Arşivi:</span> Kaybolan fişler ve silinen termal kağıtlar tarih olur.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- TARGET AUDIENCE SECTION -->
+<section class="w-full bg-surface-container-low py-space-xl lg:py-margin" id="kimler-icin">
+<div class="max-w-[1240px] mx-auto px-gutter-mobile lg:px-margin flex flex-col gap-space-xl">
+<div class="flex flex-col items-center text-center max-w-2xl mx-auto gap-space-xs">
+<span class="font-label-md text-label-md uppercase tracking-wider text-secondary font-bold">KİMLER İÇİN TASARLANDI?</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Her Hanenin Dinamiğine Uyum Sağlar</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">İhtiyacınıza göre şekillenen esnek ev işletim altyapısı.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Target 1 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm flex flex-col gap-space-md hover:-translate-y-1 transition-all">
+<div class="w-12 h-12 rounded-xl bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[28px]">family_restroom</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Meşgul Aileler</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Çocukların okulu, rutin ev işleri ve servis randevularını organize ederek anne-baba arasındaki iletişimi sakinleştirir.
+            </p>
+</div>
+<div class="mt-auto pt-space-sm text-primary font-label-sm text-label-sm font-semibold flex items-center gap-1">
+<span>Daha az zihinsel stres</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</div>
+</div>
+<!-- Target 2 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm flex flex-col gap-space-md hover:-translate-y-1 transition-all">
+<div class="w-12 h-12 rounded-xl bg-secondary-fixed flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[28px]">auto_awesome</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Organizasyon Tutkunları</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Kilerdeki kavanozları etiketlemeyi, eşyaların yerini net bilmeyi ve minimalist huzuru korumayı sevenler için kusursuz dijital sistem.
+            </p>
+</div>
+<div class="mt-auto pt-space-sm text-secondary font-label-sm text-label-sm font-semibold flex items-center gap-1">
+<span>Mükemmel düzen</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</div>
+</div>
+<!-- Target 3 -->
+<div class="bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm flex flex-col gap-space-md hover:-translate-y-1 transition-all">
+<div class="w-12 h-12 rounded-xl bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[28px]">real_estate_agent</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Mülk &amp; Ev Sahipleri</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Cihazların ömrünü periyodik bakımlarla uzatmak, faturaları arşivlemek ve mülkün maddi değerini güvende tutmak isteyenler için.
+            </p>
+</div>
+<div class="mt-auto pt-space-sm text-tertiary font-label-sm text-label-sm font-semibold flex items-center gap-1">
+<span>Cihaz ve mülk koruması</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- FAQ SECTION -->
+<section class="w-full bg-surface py-space-xl lg:py-margin" id="sss">
+<div class="max-w-[840px] mx-auto px-gutter-mobile lg:px-margin flex flex-col gap-space-xl">
+<div class="flex flex-col items-center text-center gap-space-xs">
+<span class="font-label-md text-label-md uppercase tracking-wider text-primary font-bold">MERAK EDİLENLER</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Sıkça Sorulan Sorular</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">FamilyOS ile ilgili temel bilgileri derledik.</p>
+</div>
+<!-- Accordion Items -->
+<div class="flex flex-col gap-space-md" id="faq-accordion">
+<!-- FAQ 1 -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm cursor-pointer transition-all hover:shadow-md" onclick="toggleFaq(this)">
+<div class="flex items-center justify-between gap-space-md">
+<h3 class="font-title text-title text-on-surface font-semibold">Hangi tür eşya ve görevleri ekleyebilirim?</h3>
+<span class="material-symbols-outlined text-on-surface-variant transition-transform duration-200 faq-icon">expand_more</span>
+</div>
+<div class="faq-content hidden mt-space-md pt-space-md border-t-0 text-on-surface-variant font-body-md text-body-md">
+            FamilyOS son derece esnektir. Kombi, beyaz eşya, klima gibi teknik cihazlardan bahçe bakım rutinlerine, kiler stoklarından sigorta-garanti belgelerine kadar evinizle ilgili her unsuru ekleyebilirsiniz.
+          </div>
+</div>
+<!-- FAQ 2 -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm cursor-pointer transition-all hover:shadow-md" onclick="toggleFaq(this)">
+<div class="flex items-center justify-between gap-space-md">
+<h3 class="font-title text-title text-on-surface font-semibold">Bakım bildirimleri nasıl çalışır?</h3>
+<span class="material-symbols-outlined text-on-surface-variant transition-transform duration-200 faq-icon">expand_more</span>
+</div>
+<div class="faq-content hidden mt-space-md pt-space-md border-t-0 text-on-surface-variant font-body-md text-body-md">
+            Cihazınızın son bakım tarihini ve periyodunu (örneğin 6 ayda bir veya yılda bir) belirlersiniz. Tarih yaklaştığında FamilyOS sizi nazik bildirimlerle uyarır, yetkili servis notlarını ve garanti belgenizi önünüze getirir.
+          </div>
+</div>
+<!-- FAQ 3 -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm cursor-pointer transition-all hover:shadow-md" onclick="toggleFaq(this)">
+<div class="flex items-center justify-between gap-space-md">
+<h3 class="font-title text-title text-on-surface font-semibold">Birden fazla telefondan senkronize olur mu?</h3>
+<span class="material-symbols-outlined text-on-surface-variant transition-transform duration-200 faq-icon">expand_more</span>
+</div>
+<div class="faq-content hidden mt-space-md pt-space-md border-t-0 text-on-surface-variant font-body-md text-body-md">
+            Evet! Aile üyeleri aynı hane grubuna dahil olabilir. Bir fert alışveriş listesinden bir ürün sildiğinde veya kombi bakımını tamamladığında tüm aile bireylerinin ekranında anında güncellenir.
+          </div>
+</div>
+</div>
+</div>
+</section>
+<!-- BOTTOM CTA / DOWNLOAD BANNER & CONTACT -->
+<section class="w-full bg-surface-container-high py-space-xl lg:py-margin">
+<div class="max-w-[1240px] mx-auto px-gutter-mobile lg:px-margin">
+<!-- Main Download Card -->
+<div class="relative bg-gradient-to-r from-primary via-primary-container to-primary rounded-3xl p-space-xl lg:p-margin text-on-primary shadow-xl overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-space-xl">
+<!-- Ambient Shape inside Card -->
+<div class="absolute -right-16 -top-16 w-80 h-80 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
+<div class="flex flex-col gap-space-sm max-w-xl text-center lg:text-left z-10">
+<span class="font-label-md text-label-md uppercase tracking-wider text-primary-fixed opacity-90">HEMEN BAŞLAYIN</span>
+<h2 class="font-display text-display lg:text-[44px] lg:leading-[52px] font-bold text-on-primary">
+            FamilyOS ile evinizde huzurlu bir düzen başlatın.
+          </h2>
+<p class="font-body-lg text-body-lg text-primary-fixed">
+            Google Play üzerinden hemen indirin, evinizin tüm ritmini sakin bir düzene kavuşturun.
+          </p>
+</div>
+<div class="flex flex-col sm:flex-row items-center gap-space-md z-10">
+<a class="flex items-center gap-space-sm bg-surface-container-lowest text-primary px-space-xl py-space-md rounded-xl font-title text-title shadow-lg hover:bg-surface transition-all active:scale-[0.98]" href="https://play.google.com" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[26px]">shop</span>
+<span>Google Play'den İndirin</span>
+</a>
+</div>
+</div>
+<!-- Developer Info & Direct Contact Card -->
+<div class="mt-space-lg grid grid-cols-1 md:grid-cols-2 gap-gutter items-stretch">
+<div class="bg-surface-container-lowest rounded-2xl p-space-lg flex items-center gap-space-md shadow-sm">
+<div class="w-12 h-12 rounded-xl bg-secondary-fixed flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[24px]">alternate_email</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Doğrudan İletişim</span>
+<a class="font-title text-title text-on-surface hover:text-primary transition-colors" href="mailto:mga@mgacreative.com">mga@mgacreative.com</a>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-2xl p-space-lg flex items-center gap-space-md shadow-sm">
+<div class="w-12 h-12 rounded-xl bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[24px]">code</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Geliştirici &amp; Tasarım</span>
+<span class="font-title text-title text-on-surface">MGA Creative • Mustafa Gökhan Azat</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive Accordion Script -->
+<script>
+    function toggleFaq(element) {
+      const content = element.querySelector('.faq-content');
+      const icon = element.querySelector('.faq-icon');
+      const isHidden = content.classList.contains('hidden');
+      
+      // Close others
+      document.querySelectorAll('#faq-accordion .faq-content').forEach(c => c.classList.add('hidden'));
+      document.querySelectorAll('#faq-accordion .faq-icon').forEach(i => i.style.transform = 'rotate(0deg)');
+
+      if (isHidden) {
+        content.classList.remove('hidden');
+        icon.style.transform = 'rotate(180deg)';
+      }
+    }
+  </script>
+</div></main><footer class="w-full bg-surface-container-low shadow-[0_1px_8px_rgba(74,53,40,0.04)]"><div class="max-w-[1240px] mx-auto px-gutter-mobile lg:px-margin py-space-xl"><div class="grid grid-cols-1 md:grid-cols-12 gap-gutter"><div class="md:col-span-6 flex flex-col gap-space-sm"><div class="flex items-center gap-space-xs"><div class="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-on-primary"><span class="material-symbols-outlined text-[20px]">roofing</span></div><span class="font-title text-title text-on-surface">FamilyOS</span></div><p class="font-body-md text-body-md text-on-surface-variant max-w-md">Modern haneler, yoğun ebeveynler ve ortak yaşam alanları için dingin, dengeli ve huzurlu ev koordinasyon platformu.</p></div><div class="md:col-span-3 flex flex-col gap-space-xs"><span class="font-label-md text-label-md text-on-surface uppercase tracking-wider">Hızlı Erişim</span><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="ozellikler" href="#">Özellikler</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="kimler-icin" href="#">Kimler İçin</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="sss" href="#">Sıkça Sorulan Sorular</a></div><div class="md:col-span-3 flex flex-col gap-space-xs"><span class="font-label-md text-label-md text-on-surface uppercase tracking-wider">İletişim &amp; Geliştirici</span><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="mailto:mga@mgacreative.com">mga@mgacreative.com</a><span class="font-body-sm text-body-sm text-on-surface-variant">Geliştirici: MGA Creative</span></div></div><div class="mt-space-xl pt-space-lg flex flex-col sm:flex-row items-center justify-between gap-space-sm"><span class="font-label-sm text-label-sm text-on-surface-variant">© 2025 FamilyOS. Tüm hakları saklıdır.</span><span class="font-label-sm text-label-sm text-on-surface-variant">Tasarım &amp; Altyapı: MGA Creative</span></div></div></footer></body></html>

@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+
+<html lang="tr"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>Agroplan - Akıllı Tarım ve Çiftlik Planlama</title><link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"primary-container":"#3a5a40","on-secondary-fixed":"#2b1700","tertiary-fixed-dim":"#bfcd8f","secondary-fixed":"#ffdcbb","tertiary":"#364011","on-tertiary":"#ffffff","on-secondary-fixed-variant":"#673d00","on-error":"#ffffff","on-primary-container":"#acd0af","surface-container-high":"#fae5ce","on-surface-variant":"#424842","on-secondary-container":"#784a0d","on-tertiary-fixed-variant":"#404b1b","inverse-primary":"#abd0af","background":"#fff8f4","surface-container-lowest":"#ffffff","surface-container-low":"#fff1e4","surface-tint":"#45664b","secondary-fixed-dim":"#faba75","surface-variant":"#f4dfc9","on-tertiary-fixed":"#171e00","primary-fixed-dim":"#abd0af","outline":"#727971","on-secondary":"#ffffff","error-container":"#ffdad6","primary-fixed":"#c7ecca","tertiary-container":"#4c5826","error":"#ba1a1a","surface":"#fff8f4","inverse-on-surface":"#ffeedd","on-primary":"#ffffff","surface-container":"#ffebd5","secondary-container":"#fdbd77","tertiary-fixed":"#dbe9a9","on-surface":"#241a0c","on-primary-fixed":"#02210c","outline-variant":"#c2c8bf","on-primary-fixed-variant":"#2e4e35","surface-dim":"#ebd7c1","on-tertiary-container":"#c0ce90","on-background":"#241a0c","secondary":"#835418","primary":"#23422a","inverse-surface":"#3a2e1f","surface-container-highest":"#f4dfc9","surface-bright":"#fff8f4","on-error-container":"#93000a"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-lg":"1.5rem","space-xs":"0.25rem","margin":"2rem","gutter-mobile":"0.75rem","gutter":"1.25rem","margin-mobile":"1rem","space-md":"1rem","space-sm":"0.5rem","space-xl":"2.5rem"},"fontFamily":{"body-lg":["Plus Jakarta Sans"],"label-sm":["Plus Jakarta Sans"],"display-lg":["Epilogue"],"headline-lg":["Epilogue"],"headline-md":["Epilogue"],"headline-lg-mobile":["Epilogue"],"headline-sm":["Epilogue"],"body-sm":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"title-md":["Plus Jakarta Sans"],"display-lg-mobile":["Epilogue"],"label-md":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"]},"fontSize":{"body-lg":["16px",{"lineHeight":"26px","fontWeight":"400"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.03em","fontWeight":"500"}],"display-lg":["44px",{"lineHeight":"52px","letterSpacing":"-0.02em","fontWeight":"600"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.015em","fontWeight":"600"}],"headline-md":["24px",{"lineHeight":"32px","fontWeight":"600"}],"headline-lg-mobile":["26px",{"lineHeight":"34px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-sm":["20px",{"lineHeight":"28px","fontWeight":"500"}],"body-sm":["12px",{"lineHeight":"18px","fontWeight":"400"}],"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"600"}],"title-md":["18px",{"lineHeight":"26px","fontWeight":"600"}],"display-lg-mobile":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"600"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"22px","fontWeight":"400"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(94,80,63,0.06)]"><div class="h-20 w-full max-w-[1280px] mx-auto px-6 lg:px-12 flex items-center justify-between gap-6"><div class="flex items-center gap-3"><img alt="Agroplan Logo" class="h-8 w-auto object-contain" src="./assets/img_1.png"/><span class="font-headline-sm text-headline-sm text-primary font-bold tracking-tight">Agroplan</span></div><nav class="hidden md:flex items-center gap-8" data-active-classes="bg-surface-container text-primary font-semibold rounded-lg"><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors py-2 px-3" data-path="ozellikler" href="#">Özellikler</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors py-2 px-3" data-path="tarla-yonetimi" href="#">Tarla Yönetimi</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors py-2 px-3" data-path="ciftci-deneyimleri" href="#">Çiftçi Deneyimleri</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors py-2 px-3" data-path="iletisim" href="#">İletişim</a></nav><div class="flex items-center gap-4"><a class="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-container text-on-primary font-label-lg text-label-lg px-5 py-2.5 rounded-xl transition-all shadow-[0_4px_12px_rgba(35,66,42,0.18)] hover:shadow-[0_6px_16px_rgba(35,66,42,0.25)]" href="https://play.google.com/store/apps/details?id=com.gkhnazat.agroplan.mobile" rel="noopener noreferrer" target="_blank"><span>Giriş Yap</span><span class="material-symbols-outlined text-[18px]">open_in_new</span></a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface"><div class="flex flex-col w-full">
+<!-- HERO SECTION WITH SUN-DRENCHED AERIAL FIELD -->
+<section class="relative w-full overflow-hidden -mt-20 pt-28 pb-20 md:pb-32 bg-surface">
+<!-- Atmospheric Ambient Glows -->
+<div class="absolute -top-24 left-1/2 -translate-x-1/2 w-[900px] h-[550px] bg-secondary-container/20 rounded-full blur-3xl pointer-events-none -z-10"></div>
+<div class="absolute top-1/3 -right-40 w-96 h-96 bg-primary-fixed-dim/30 rounded-full blur-3xl pointer-events-none -z-10"></div>
+<div class="max-w-[1280px] mx-auto px-6 lg:px-12">
+<!-- Top Sub-Badge -->
+<div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-surface-container-high text-on-secondary-container mb-6 shadow-sm">
+<span class="material-symbols-outlined text-[18px] text-secondary">eco</span>
+<span class="font-label-md text-label-md tracking-wide">Yeni Nesil Çiftçi Asistanı • Android İçin Yayında</span>
+</div>
+<!-- Hero Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+<!-- Text Column -->
+<div class="lg:col-span-6 flex flex-col items-start space-y-6">
+<h1 class="font-display-lg text-display-lg text-primary tracking-tight font-bold">
+            Toprağın Bereketini Bilgiyle, Emeğinizi <span class="text-secondary underline decoration-secondary-container decoration-4 underline-offset-6">Agroplan</span> ile Büyütün.
+          </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl leading-relaxed">
+            Ekimden hasada, gübrelemeden sulama takvimine kadar tarlanızın tüm döngüsünü cebinizden kolayca yönetin. Çiftçimizin emeğine değer katmak için tasarlandı.
+          </p>
+<!-- Direct Download CTA Group -->
+<div class="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
+<a class="inline-flex items-center justify-center gap-3 bg-primary hover:bg-primary-container text-on-primary font-label-lg text-label-lg px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5" href="https://play.google.com/store/apps/details?id=com.gkhnazat.agroplan.mobile" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[24px]">android</span>
+<span class="flex flex-col text-left leading-tight">
+<span class="font-label-sm text-label-sm opacity-80">Hemen Sahip Olun</span>
+<span class="font-label-lg text-label-lg font-bold">Google Play'den İndir</span>
+</span>
+</a>
+<div class="inline-flex items-center gap-3 px-5 py-3.5 rounded-2xl bg-surface-container-low text-on-surface-variant">
+<span class="flex h-3 w-3 relative">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+</span>
+<span class="font-label-md text-label-md font-medium">Tamamen Ücretsiz &amp; Kolay Kurulum</span>
+</div>
+</div>
+<!-- Quick Metrics Bar -->
+<div class="pt-6 grid grid-cols-3 gap-6 w-full max-w-md pt-4">
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-primary font-bold">4.9 / 5</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Çiftçi Puanı</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-secondary font-bold">%35</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Su &amp; Gübre Tasarrufu</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-primary font-bold">12.000+</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Kayıtlı Parsel</span>
+</div>
+</div>
+</div>
+<!-- Hero Visual with Interactive Overlays -->
+<div class="lg:col-span-6 relative">
+<!-- Main Landscape Imagery Card -->
+<div class="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl bg-surface-container">
+<img alt="Agroplan tarla planlama altın saat gün batımı görüntüsü" class="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-700" src="./assets/img_2.png"/>
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/60 via-transparent to-transparent"></div>
+</div>
+<!-- Floating Micro-Widget 1: Irrigation Complete -->
+<div class="absolute -top-6 -left-6 md:top-6 md:-left-8 bg-surface/90 backdrop-blur-md p-4 rounded-2xl shadow-xl max-w-[270px] animate-pulse">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[22px]">water_drop</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-tertiary font-semibold tracking-wide">BUGÜN TAMAMLANDI</span>
+<span class="font-label-md text-label-md text-on-surface font-bold">2. Parsel Damlama Sulama</span>
+</div>
+</div>
+</div>
+<!-- Floating Micro-Widget 2: Agricultural Weather Advice -->
+<div class="absolute -bottom-8 right-2 md:bottom-6 md:-right-6 bg-surface/95 backdrop-blur-md p-4 md:p-5 rounded-2xl shadow-xl max-w-[320px]">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-xl bg-secondary-fixed flex items-center justify-center text-on-secondary-container shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[22px]">thunderstorm</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center justify-between gap-2">
+<span class="font-label-sm text-label-sm text-secondary font-bold">ZİRAİ HAVA UYARISI</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Yarın 14:00</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface font-medium mt-1">
+                  Kuvvetli yağış beklentisi var. Yaprak gübrelemesi ve ilaçlama planınızı erteleyiniz.
+                </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- FEATURES SECTION: COMPANION IN THE FIELD -->
+<section class="w-full py-24 bg-surface-container-low" id="ozellikler">
+<div class="max-w-[1280px] mx-auto px-6 lg:px-12">
+<!-- Section Header -->
+<div class="max-w-2xl mb-16">
+<span class="font-label-md text-label-md text-secondary uppercase tracking-widest font-bold">Her Aşamada Yanınızda</span>
+<h2 class="font-headline-lg text-headline-lg text-primary font-bold mt-2 tracking-tight">
+          Tarlanızda Size Yoldaş Olan Doğal Özellikler
+        </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-3">
+          Karmaşık grafikler yerine, bir bakışta ne yapacağınızı söyleyen samimi, anlaşılır araçlar geliştirdik.
+        </p>
+</div>
+<!-- Feature Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Feature 1: Parsel ve Ürün Takibi -->
+<div class="bg-surface-container-lowest p-8 rounded-3xl shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div>
+<div class="w-14 h-14 rounded-2xl bg-primary-fixed flex items-center justify-center text-primary mb-6">
+<span class="material-symbols-outlined text-[30px]">map</span>
+</div>
+<h3 class="font-title-md text-title-md text-primary font-bold mb-3">Parsel ve Ürün Takibi</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Hangi tarlaya ne zaman ekim yapıldığını, tohum cinsini ve gelişim gününü tek bakışta harita üzerinde görün.
+            </p>
+</div>
+<div class="mt-8 pt-4 flex items-center gap-2 text-primary font-label-md text-label-md font-semibold">
+<span>Sınırları çizin, takip edin</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</div>
+</div>
+<!-- Feature 2: Akıllı Sulama & Gübreleme -->
+<div class="bg-surface-container-lowest p-8 rounded-3xl shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div>
+<div class="w-14 h-14 rounded-2xl bg-tertiary-fixed flex items-center justify-center text-tertiary mb-6">
+<span class="material-symbols-outlined text-[30px]">grain</span>
+</div>
+<h3 class="font-title-md text-title-md text-primary font-bold mb-3">Akıllı Sulama &amp; Gübreleme</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Toprağın ihtiyacı kadar su ve besin verin. Hem masrafları minimuma indirin hem de mahsul verimini katlayın.
+            </p>
+</div>
+<div class="mt-8 pt-4 flex items-center gap-2 text-tertiary font-label-md text-label-md font-semibold">
+<span>Otomatik hatırlatmalar</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</div>
+</div>
+<!-- Feature 3: Maliyet & Hasat Gelir Hesabı -->
+<div class="bg-surface-container-lowest p-8 rounded-3xl shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div>
+<div class="w-14 h-14 rounded-2xl bg-secondary-fixed flex items-center justify-center text-on-secondary-container mb-6">
+<span class="material-symbols-outlined text-[30px]">calculate</span>
+</div>
+<h3 class="font-title-md text-title-md text-primary font-bold mb-3">Maliyet &amp; Hasat Hesabı</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Mazot, işçilik, ilaç ve tohum giderlerini anında kaydedin. Sezon sonu beklenmedik sürprizlerle karşılaşmayın.
+            </p>
+</div>
+<div class="mt-8 pt-4 flex items-center gap-2 text-secondary font-label-md text-label-md font-semibold">
+<span>Şeffaf kar hesabı</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</div>
+</div>
+<!-- Feature 4: Zirai Hava Tahmini -->
+<div class="bg-surface-container-lowest p-8 rounded-3xl shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div>
+<div class="w-14 h-14 rounded-2xl bg-primary-fixed-dim flex items-center justify-center text-primary mb-6">
+<span class="material-symbols-outlined text-[30px]">thermostat</span>
+</div>
+<h3 class="font-title-md text-title-md text-primary font-bold mb-3">Zirai Hava Tahmini</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Klasik tahminler yerine don, fırtına, çiğ düşmesi ve kritik rüzgar saatlerini önceden haber veren özel zirai radar.
+            </p>
+</div>
+<div class="mt-8 pt-4 flex items-center gap-2 text-primary font-label-md text-label-md font-semibold">
+<span>Sahaya özel bildirimler</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- VISUAL BENTO SHOWCASE: FIELD MANAGEMENT IN ACTION -->
+<section class="w-full py-24 bg-surface" id="tarla-yonetimi">
+<div class="max-w-[1280px] mx-auto px-6 lg:px-12">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<!-- Visual Storytelling Left Column -->
+<div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="space-y-4">
+<div class="rounded-3xl overflow-hidden aspect-[4/5] bg-surface-container shadow-md">
+<img class="w-full h-full object-cover" data-alt="Anatolian sunlit olive grove in Aegean hills, rich fertile soil between trees, natural morning mist, realistic agricultural photography in warm earthy tones" src="./assets/img_3.png"/>
+</div>
+<div class="bg-surface-container p-6 rounded-3xl">
+<div class="flex items-center gap-3 mb-2 text-secondary font-headline-sm font-bold">
+<span class="material-symbols-outlined">schedule</span>
+<span>Mevsimlik Döngü</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Tohum yatağı hazırlığından depolamaya kadar her periyot için adım adım tavsiyeler.
+              </p>
+</div>
+</div>
+<div class="space-y-4 sm:pt-10">
+<div class="bg-primary text-on-primary p-7 rounded-3xl shadow-lg">
+<span class="material-symbols-outlined text-[36px] text-tertiary-fixed mb-3">energy_savings_leaf</span>
+<h4 class="font-title-md text-title-md font-bold mb-2">Bereketli Topraklar</h4>
+<p class="font-body-sm text-body-sm opacity-90 leading-relaxed">
+                Her parselin geçmiş ürün verilerini saklayarak nöbetleşe ekim (münavebe) planınızı en doğru şekilde kurmanıza destek oluruz.
+              </p>
+</div>
+<div class="rounded-3xl overflow-hidden aspect-[4/5] bg-surface-container shadow-md">
+<img class="w-full h-full object-cover" data-alt="Modern Turkish farmer smiling while holding freshly harvested organic vegetables in a sun-drenched greenhouse, natural golden sunlight and authentic lifestyle" src="./assets/img_4.png"/>
+</div>
+</div>
+</div>
+<!-- Descriptive Copy Right Column -->
+<div class="lg:col-span-5 flex flex-col space-y-6">
+<div class="inline-flex items-center gap-2 text-secondary font-label-md text-label-md font-bold tracking-wider uppercase">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span>Doğru Karar, Yüksek Verim</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-primary font-bold tracking-tight">
+            Tarlanızdaki Her Bir Metrekareyi Bilinçle İşleyin
+          </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+            Geleneksel çiftçilik tecrübesiyle modern dijital kayıt defterini bir araya getirdik. Kağıt kalem kaybolur, cepteki Agroplan ise traktör başında, çapa yaparken veya kahvehanede sohbet ederken hep elinizin altında.
+          </p>
+<div class="space-y-4 pt-2">
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-primary shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">done</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface"><strong>İnternet Kesilse Bile:</strong> Çevrimdışı kayıt kabiliyeti ile çekmeyen dağ tarlalarında bile notlarınızı tutun.</p>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-primary shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">done</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface"><strong>Fotoğraflı Hastalık &amp; Zararlı Arşivi:</strong> Bitkide şüpheli bir sararma veya böcek gördüğünüzde anında fotoğraflayıp parselinize iliştirin.</p>
+</div>
+</div>
+<div class="pt-4">
+<a class="inline-flex items-center gap-2 bg-secondary text-surface font-label-lg text-label-lg px-6 py-3.5 rounded-xl hover:bg-secondary-container hover:text-on-secondary-container transition-all" href="https://play.google.com/store/apps/details?id=com.gkhnazat.agroplan.mobile" rel="noopener noreferrer" target="_blank">
+<span>Hemen Tarlanızı Ekleyin</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- TESTIMONIALS: REAL FARMER VOICES -->
+<section class="w-full py-24 bg-surface-container-low" id="ciftci-deneyimleri">
+<div class="max-w-[1280px] mx-auto px-6 lg:px-12">
+<!-- Section Intro -->
+<div class="text-center max-w-2xl mx-auto mb-16">
+<span class="font-label-md text-label-md text-secondary uppercase tracking-widest font-bold">Toprağa Gönül Verenler</span>
+<h2 class="font-headline-lg text-headline-lg text-primary font-bold mt-2 tracking-tight">
+          Toprağa Gönül Verenlerin Sözleri
+        </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-3">
+          Tarlanın gerçek emekçileri Agroplan ile nasıl kolaylık bulduklarını anlatıyor.
+        </p>
+</div>
+<!-- Testimonial Cards Mosaic -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Testimonial 1 -->
+<div class="bg-surface-container-lowest p-8 rounded-3xl shadow-sm flex flex-col justify-between relative">
+<span class="material-symbols-outlined text-secondary/30 text-[48px] absolute top-6 right-6 select-none">format_quote</span>
+<div>
+<div class="flex items-center gap-1 text-secondary mb-4">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed italic">
+              "Konya Ovası'nda 400 dönüm buğday ve arpa ekiyorum. Hangi kuyu ne kadar çalıştı, mazot nereye gitti kafamda tutmaktan kurtuldum. Agroplan sanki yanımda bir ziraat mühendisi varmış gibi hissettiriyor."
+            </p>
+</div>
+<div class="flex items-center gap-4 mt-8 pt-6 border-t border-surface-container">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container shrink-0">
+<img class="w-full h-full object-cover" data-alt="Portrait of an experienced middle-aged Turkish farmer with sun-weathered face and flat cap standing in wheat field in Konya, warm natural daylight" src="./assets/img_5.png"/>
+</div>
+<div>
+<p class="font-title-md text-title-md text-primary font-bold">Ahmet Bey</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Konya • Tahıl Üreticisi</p>
+</div>
+</div>
+</div>
+<!-- Testimonial 2 -->
+<div class="bg-surface-container-lowest p-8 rounded-3xl shadow-sm flex flex-col justify-between relative">
+<span class="material-symbols-outlined text-secondary/30 text-[48px] absolute top-6 right-6 select-none">format_quote</span>
+<div>
+<div class="flex items-center gap-1 text-secondary mb-4">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed italic">
+              "Bağcılıkta don riski en büyük kabusumuzdu. Geçen bahar Agroplan'ın gece yarısı don uyarısı sayesinde saman yakıp dumanlama yaptık ve tüm bağı kurtardık. Uygulama emeğimizin can simidi oldu."
+            </p>
+</div>
+<div class="flex items-center gap-4 mt-8 pt-6 border-t border-surface-container">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container shrink-0">
+<img class="w-full h-full object-cover" data-alt="Portrait of a cheerful female Turkish farmer working in lush vineyards in Manisa Aegean region, warm sunny day, documentary realistic style" src="./assets/img_6.png"/>
+</div>
+<div>
+<p class="font-title-md text-title-md text-primary font-bold">Fatma Hanım</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Manisa • Üzüm &amp; Zeytin Üreticisi</p>
+</div>
+</div>
+</div>
+<!-- Testimonial 3 -->
+<div class="bg-surface-container-lowest p-8 rounded-3xl shadow-sm flex flex-col justify-between relative">
+<span class="material-symbols-outlined text-secondary/30 text-[48px] absolute top-6 right-6 select-none">format_quote</span>
+<div>
+<div class="flex items-center gap-1 text-secondary mb-4">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed italic">
+              "Eskiden defter yaprakları kaybolur, hangi tarlaya hangi gübreyi ne zaman verdik karışırdı. Torunuma gösterdim bana indirdi, şimdi tek tuşla hasat gelirimi hesaplıyorum. Kullanması pek kolay!"
+            </p>
+</div>
+<div class="flex items-center gap-4 mt-8 pt-6 border-t border-surface-container">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container shrink-0">
+<img class="w-full h-full object-cover" data-alt="Portrait of an elderly wise Turkish farmer named Mehmet Dayi sitting in citrus orchard in Adana, genuine warm expression, olive and citrus orchard background" src="./assets/img_7.png"/>
+</div>
+<div>
+<p class="font-title-md text-title-md text-primary font-bold">Mehmet Dayı</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Adana • Narenciye &amp; Mısır</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- DOWNLOAD / QR GOOGLE PLAY ACTION BANNER -->
+<section class="w-full py-20 bg-surface">
+<div class="max-w-[1280px] mx-auto px-6 lg:px-12">
+<div class="bg-primary text-on-primary rounded-3xl p-8 lg:p-14 relative overflow-hidden shadow-2xl">
+<!-- Soft decorative background rings -->
+<div class="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-primary-container opacity-40 blur-2xl"></div>
+<div class="absolute top-0 right-1/3 w-64 h-64 rounded-full bg-tertiary-fixed-dim/10 blur-xl"></div>
+<div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10">
+<div class="max-w-xl text-center lg:text-left">
+<div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary-container text-on-primary-container font-label-sm text-label-sm mb-4">
+<span class="material-symbols-outlined text-[16px]">touch_app</span>
+<span>Hemen Başlayın</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg font-bold leading-tight">
+              Agroplan ile tarlanız her zaman kontrol altında.
+            </h2>
+<p class="font-body-lg text-body-lg text-primary-fixed-dim mt-4">
+              Uygulamayı telefonunuza indirin, parselinizi haritadan işaretleyin ve ilk ekim planınızı birkaç dakikada hazırlayın.
+            </p>
+</div>
+<!-- Direct CTA Block -->
+<div class="flex flex-col sm:flex-row items-center gap-6">
+<a class="inline-flex items-center gap-3 bg-secondary-container hover:bg-secondary-fixed text-on-secondary-container font-label-lg text-label-lg px-8 py-5 rounded-2xl shadow-xl hover:shadow-2xl transition-all transform hover:-translate-y-1" href="https://play.google.com/store/apps/details?id=com.gkhnazat.agroplan.mobile" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[28px]">shop</span>
+<span class="flex flex-col text-left">
+<span class="font-label-sm text-label-sm font-semibold opacity-90">Google Play Store</span>
+<span class="font-title-md text-title-md font-bold">Hemen Ücretsiz İndir</span>
+</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- WARM, INTIMATE CONTACT & COMMUNITY CLOSING -->
+<section class="w-full py-16 bg-surface-container" id="iletisim">
+<div class="max-w-[1280px] mx-auto px-6 lg:px-12 text-center">
+<div class="max-w-2xl mx-auto flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-surface flex items-center justify-center text-primary shadow-sm mb-4">
+<span class="material-symbols-outlined text-[24px]">coffee</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary font-bold mb-2">
+          Bir Bardak Çay Eşliğinde Tarım Sohbeti
+        </h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-lg mb-6">
+          Sorularınız, ürün önerileriniz veya arazinizdeki özel gereksinimler için bize her zaman yazabilirsiniz:
+        </p>
+<!-- Prominently Highlighted Email -->
+<a class="inline-flex items-center gap-2.5 px-6 py-3 rounded-2xl bg-surface hover:bg-surface-container-high text-primary font-title-md text-title-md font-bold shadow-sm hover:shadow transition-all group" href="mailto:mga@mgacreative.com">
+<span class="material-symbols-outlined text-secondary group-hover:scale-110 transition-transform">mail</span>
+<span>mga@mgacreative.com</span>
+</a>
+<!-- Friendly closing line -->
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-10">
+          © 2025 Agroplan • Toprağa ve emeğe sonsuz saygıyla • İletişim: 
+          <a class="text-primary hover:underline font-semibold" href="mailto:mga@mgacreative.com">mga@mgacreative.com</a>
+</p>
+</div>
+</div>
+</section>
+</div></main><footer class="w-full bg-surface-container-low py-12 px-6 lg:px-12 shadow-[0_1px_8px_rgba(94,80,63,0.04)]"><div class="w-full max-w-[1280px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left"><div class="flex flex-col gap-1"><p class="font-title-md text-title-md text-primary font-semibold">Agroplan</p><p class="font-body-sm text-body-sm text-on-surface-variant">Bereketli topraklar, akıllı kararlar ile geleceğe yeşeriyor.</p></div><div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-[20px]">mail</span><a class="font-label-lg text-label-lg text-primary hover:text-primary-container underline underline-offset-4 transition-colors" href="mailto:mga@mgacreative.com">mga@mgacreative.com</a></div></div></footer></body></html>

@@ -506,13 +506,22 @@ async function checkSession() {
         if (session && session.user) {
             showDashboard(session.user.email);
         } else {
-            showDashboard('Admin (Canlı Yönetim)');
+            showLogin();
         }
     } catch (e) {
         console.error('Session check error:', e);
-        showDashboard('Admin (Canlı Yönetim)');
+        showLogin();
     }
 }
+
+// Supabase Auth Değişikliklerini Dinle
+supabase.auth.onAuthStateChange((event, session) => {
+    if (session && session.user) {
+        showDashboard(session.user.email);
+    } else if (event === 'SIGNED_OUT') {
+        showLogin();
+    }
+});
 
 // --- LOGİN İŞLEMİ ---
 if (loginForm) {
