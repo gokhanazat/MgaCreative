@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HotelOS — Küçük Oteller İçin Otel Yönetim Sistemi | MGA Creative</title>
+<meta name="description" content="Butik oteller, pansiyonlar ve apart oteller için rezervasyon takvimi, check-in/check-out, housekeeping ve raporlar tek uygulamada. Ücretsiz demo ve ücretsiz deneme.">
+<meta property="og:title" content="HotelOS — Otel Yönetim Sistemi">
+<meta property="og:description" content="Rezervasyon, oda, housekeeping ve raporlar tek ekranda. Ücretsiz deneyin.">
+<meta property="og:image" content="assets/hotelos-logo.png">
+<link rel="icon" href="assets/hotelos-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#101e3a; --navy-2:#1c3460; --navy-3:#0b1529;
+    --gold:#c9a45c; --gold-l:#e7cb8c;
+    --cream:#f8f5ee; --ink:#1b2333; --muted:#5b6476; --line:#e4e1d8;
+    --radius:16px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--cream);line-height:1.6}
+  img{max-width:100%;display:block}
+  a{color:inherit}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+  h1,h2,h3{font-family:Lora,Georgia,serif;line-height:1.2;margin:0}
+
+  /* nav */
+  .nav{position:sticky;top:0;z-index:10;background:rgba(16,30,58,.94);backdrop-filter:blur(8px);border-bottom:1px solid rgba(201,164,92,.25)}
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff}
+  .brand img{width:38px;height:38px;border-radius:50%;background:#fff;border:2px solid var(--gold);object-fit:cover}
+  .brand span{font-family:Lora,serif;font-weight:700;font-size:20px}
+  .nav-cta{display:flex;gap:10px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 22px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none;border:1.5px solid transparent;transition:transform .15s ease, background .15s ease}
+  .btn:hover{transform:translateY(-1px)}
+  .btn-gold{background:var(--gold);color:var(--navy)}
+  .btn-gold:hover{background:var(--gold-l)}
+  .btn-ghost{border-color:rgba(255,255,255,.45);color:#fff}
+  .btn-ghost:hover{background:rgba(255,255,255,.08)}
+  .btn-sm{padding:8px 16px;font-size:14px}
+
+  /* hero */
+  .hero{position:relative;color:#fff;background:var(--navy);overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background:url(assets/lobby.jpg) right center/cover no-repeat;opacity:.35}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--navy) 35%,rgba(16,30,58,.55) 70%,rgba(16,30,58,.2))}
+  .hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding-top:72px;padding-bottom:80px}
+  .kicker{display:inline-flex;align-items:center;gap:10px;color:var(--gold-l);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+  .kicker::before{content:"";width:28px;height:2px;background:var(--gold)}
+  .hero h1{font-size:46px;margin:16px 0 18px}
+  .hero p.lead{font-size:18px;color:#d3dbea;max-width:520px;margin:0 0 28px}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:12px}
+  .hero-note{margin-top:18px;font-size:14px;color:#aeb9cf}
+  .showcase{border-radius:18px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.45);border:1px solid rgba(201,164,92,.4);background:#0b1529}
+  .showcase img{width:100%;aspect-ratio:3/2;object-fit:cover}
+
+  /* sections */
+  section{padding:84px 0}
+  .sec-head{max-width:640px;margin-bottom:44px}
+  .sec-head h2{font-size:34px;margin:12px 0 12px;color:var(--navy)}
+  .sec-head p{color:var(--muted);margin:0;font-size:17px}
+  .kicker.dark{color:#9a7a3c}
+
+  .who{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .who div{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+  .who strong{display:block;font-size:16px;margin-bottom:4px;color:var(--navy)}
+  .who span{font-size:14px;color:var(--muted)}
+
+  .features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .feat{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px}
+  .feat .ico{width:42px;height:42px;border-radius:12px;background:var(--navy);display:grid;place-items:center;margin-bottom:14px}
+  .feat .ico svg{width:22px;height:22px;stroke:var(--gold);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .feat h3{font-family:Inter,sans-serif;font-size:17px;font-weight:600;margin-bottom:6px;color:var(--navy)}
+  .feat p{margin:0;font-size:15px;color:var(--muted)}
+
+  .split{background:var(--navy);color:#fff}
+  .split .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .split img{border-radius:18px;box-shadow:0 24px 48px rgba(0,0,0,.4);aspect-ratio:6/5;object-fit:cover;width:100%}
+  .split h2{font-size:34px;margin:12px 0 16px}
+  .split p{color:#d3dbea;font-size:17px}
+  .checks{list-style:none;padding:0;margin:22px 0 0}
+  .checks li{position:relative;padding-left:32px;margin:12px 0;color:#e6ebf5}
+  .checks li::before{content:"";position:absolute;left:0;top:4px;width:20px;height:20px;border-radius:50%;background:var(--gold) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23101e3a' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E") center/12px no-repeat}
+
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;counter-reset:s}
+  .step{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px;position:relative}
+  .step::before{counter-increment:s;content:counter(s);font-family:Lora,serif;font-weight:700;font-size:15px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--gold);color:var(--navy);margin-bottom:14px}
+  .step h3{font-family:Inter,sans-serif;font-size:17px;font-weight:600;margin-bottom:6px;color:var(--navy)}
+  .step p{margin:0;font-size:15px;color:var(--muted)}
+
+  .cta{background:linear-gradient(135deg,var(--navy),var(--navy-2));color:#fff;text-align:center;border-radius:24px;padding:56px 24px;margin:0 20px}
+  .cta h2{font-size:34px;margin-bottom:12px}
+  .cta p{color:#d3dbea;font-size:17px;margin:0 auto 28px;max-width:560px}
+  .cta .hero-cta{justify-content:center}
+  .contact-line{margin-top:22px;font-size:15px;color:#c3cde0}
+  .contact-line a{color:var(--gold-l);text-decoration:none}
+
+  footer{padding:36px 0;text-align:center;color:var(--muted);font-size:14px}
+  footer a{color:var(--navy);text-decoration:none;font-weight:600}
+
+  @media (max-width:900px){
+    .hero .wrap,.split .wrap{grid-template-columns:1fr;gap:32px}
+    .hero h1{font-size:34px}
+    .who{grid-template-columns:repeat(2,1fr)}
+    .features,.steps{grid-template-columns:1fr}
+    section{padding:60px 0}
+    .nav-cta .btn-ghost{display:none}
+  }
+  @media (max-width:480px){
+    .who{grid-template-columns:1fr}
+    .sec-head h2,.split h2,.cta h2{font-size:28px}
+    .btn{width:100%}
+    .nav-cta .btn{width:auto}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#"><img src="assets/hotelos-logo.png" alt="HotelOS logosu"><span>HotelOS</span></a>
+    <div class="nav-cta">
+      <a class="btn btn-ghost btn-sm" href="https://play.google.com/store/apps/details?id=com.mgacreative.hotel" target="_blank" rel="noopener">Google Play</a>
+      <a class="btn btn-gold btn-sm" href="#demo">Ücretsiz demo</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="kicker">Otel Yönetim Sistemi</span>
+        <h1>Küçük oteller için sade ve uygun fiyatlı otel yönetimi</h1>
+        <p class="lead">Rezervasyon takvimi, check-in/check-out, misafir kayıtları, housekeeping ve raporlar tek uygulamada. Ekibinizin her üyesi kendi yetkisiyle aynı ekranı görür.</p>
+        <div class="hero-cta">
+          <a class="btn btn-gold" href="#demo">Ücretsiz demo isteyin</a>
+          <a class="btn btn-ghost" href="https://play.google.com/store/apps/details?id=com.mgacreative.hotel" target="_blank" rel="noopener">Google Play'den indirin</a>
+        </div>
+        <p class="hero-note">Ücretsiz deneme sürümüyle kendi otelinizde, gerçek rezervasyonlarla deneyin.</p>
+      </div>
+      <div class="showcase">
+        <img src="assets/hotelos-tanitim.gif" alt="HotelOS tanıtım animasyonu: oda durumu paneli ve özellikler" width="600" height="400">
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker dark">Kimler için</span>
+        <h2>Büyük zincirler için değil, sizin gibi işletmeler için</h2>
+        <p>Karmaşık ve pahalı otel yazılımlarına ihtiyaç duymayan, ama defter ve Excel'le de yetinmek istemeyen işletmeler için tasarlandı.</p>
+      </div>
+      <div class="who">
+        <div><strong>Butik oteller</strong><span>Az oda, yüksek misafir beklentisi</span></div>
+        <div><strong>Pansiyonlar</strong><span>Aile işletmeleri ve konaklar</span></div>
+        <div><strong>Apart oteller</strong><span>Daire ve suit bazlı konaklama</span></div>
+        <div><strong>Küçük-orta oteller</strong><span>Şehir ve tatil otelleri</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker dark">Özellikler</span>
+        <h2>Otelinizin günlük işleri tek ekranda</h2>
+      </div>
+      <div class="features">
+        <div class="feat"><div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg></div><h3>Rezervasyon takvimi</h3><p>Hangi odanın hangi gece dolu olduğunu tek bakışta görün, çakışan rezervasyonlardan kurtulun.</p></div>
+        <div class="feat"><div class="ico"><svg viewBox="0 0 24 24"><path d="M3 21V8l9-5 9 5v13"/><path d="M9 21v-7h6v7"/></svg></div><h3>Oda yönetimi</h3><p>Oda tiplerinizi, durumlarını ve kapasitelerini tanımlayın; dolu, boş ve temizlikteki odaları anlık izleyin.</p></div>
+        <div class="feat"><div class="ico"><svg viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="M10 17l5-5-5-5M15 12H3"/></svg></div><h3>Check-in / Check-out</h3><p>Misafir girişini ve çıkışını hızlıca yapın, misafiriniz resepsiyonda beklemesin.</p></div>
+        <div class="feat"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></div><h3>Misafir yönetimi</h3><p>Misafir bilgileri ve konaklama geçmişi düzenli ve tek yerde.</p></div>
+        <div class="feat"><div class="ico"><svg viewBox="0 0 24 24"><path d="M4 20h16M6 20V10l6-6 6 6v10"/><path d="M10 14h4"/></svg></div><h3>Housekeeping ve bakım</h3><p>Temizlik ve bakım işlerini atayın, hangi odanın hazır olduğunu ekibinizle birlikte takip edin.</p></div>
+        <div class="feat"><div class="ico"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div><h3>Muhasebe ve raporlar</h3><p>Gelirlerinizi ve doluluk durumunuzu raporlarla görün; çok kullanıcılı rollerle herkes kendi yetkisinde çalışsın.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="split">
+    <div class="wrap">
+      <img src="assets/reception.jpg" alt="Otel resepsiyonunda misafir karşılama">
+      <div>
+        <span class="kicker">Neden HotelOS</span>
+        <h2>Benzer sistemlere büyük ücretler ödemek zorunda değilsiniz</h2>
+        <p>Otel yazılımları çoğu zaman küçük işletmeler için gereğinden pahalı ve karmaşık. HotelOS'u bilinçli olarak uygun fiyatlı bir abonelik modeliyle sunuyoruz; amacımız tek seferlik satış değil, uzun süre birlikte çalışmak.</p>
+        <ul class="checks">
+          <li>Ücretsiz demo ve ücretsiz deneme sürümü</li>
+          <li>Telefondan da kullanılabilen sade arayüz</li>
+          <li>Ekip üyeleri için ayrı kullanıcı ve yetkiler</li>
+          <li>Kurulumda takıldığınız yerde bize doğrudan ulaşabilirsiniz</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker dark">Nasıl başlarım</span>
+        <h2>Üç adımda deneyin</h2>
+      </div>
+      <div class="steps">
+        <div class="step"><h3>Uygulamayı indirin</h3><p>HotelOS'u Google Play'den ücretsiz indirin ya da bizden demo isteyin.</p></div>
+        <div class="step"><h3>Odalarınızı tanımlayın</h3><p>Oda tiplerinizi ve ekibinizi ekleyin; takıldığınız yerde bizi arayın.</p></div>
+        <div class="step"><h3>Gerçek rezervasyonlarla kullanın</h3><p>Deneme süresince kendi otelinizde gerçek ortamda kullanın, sonra karar verin.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="demo" style="padding-top:0">
+    <div class="cta">
+      <h2>Ücretsiz demo için bize yazın</h2>
+      <p>Otelinizin adını ve oda sayınızı yazın; size uygun demoyu birlikte ayarlayalım.</p>
+      <div class="hero-cta">
+        <a class="btn btn-gold" href="https://wa.me/905442200600?text=Merhaba%2C%20HotelOS%20i%C3%A7in%20%C3%BCcretsiz%20demo%20istiyorum.%20Otel%20ad%C4%B1%3A%20%20%7C%20Oda%20say%C4%B1s%C4%B1%3A%20" target="_blank" rel="noopener">WhatsApp'tan yazın</a>
+        <a class="btn btn-ghost" href="tel:+908502427110">Hemen arayın</a>
+      </div>
+      <p class="contact-line">
+        <a href="tel:+908502427110">+90 850 242 71 10</a> &nbsp;|&nbsp;
+        <a href="tel:+905442200600">+90 544 220 06 00</a> &nbsp;|&nbsp;
+        <a href="mailto:mga@mgacreative.com?subject=HotelOS%20demo%20talebi">mga@mgacreative.com</a>
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">HotelOS bir <a href="https://www.mgacreative.com">MGA Creative</a> ürünüdür. İskenderun / Hatay</div>
+</footer>
+
+</body>
+</html>
