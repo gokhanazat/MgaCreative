@@ -289,15 +289,15 @@
     let isLatestOnly = false;
 
     function getAllBlogPosts() {
-        const saved = localStorage.getItem('mga_blog_posts');
-        if (saved !== null) {
-            try { 
-                return JSON.parse(saved); 
-            } catch(e) {
-                return [...DEFAULT_BLOG_POSTS];
-            }
-        }
-        return [...DEFAULT_BLOG_POSTS];
+        return window.__BLOG_POSTS || [...DEFAULT_BLOG_POSTS];
+    }
+
+    function startBlog() {
+        fetch('/data/blog-posts.json', { cache: 'no-store' })
+            .then(r => r.json())
+            .then(posts => { window.__BLOG_POSTS = posts; })
+            .catch(() => {})
+            .then(initBlog);
     }
 
     function updateCategoryCounts() {
@@ -509,9 +509,9 @@
     }
 
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initBlog);
+        document.addEventListener('DOMContentLoaded', startBlog);
     } else {
-        initBlog();
+        startBlog();
     }
 </script>
 </body>

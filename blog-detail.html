@@ -430,15 +430,15 @@ Yapay zeka ve akıllı paylaşım protokolleri, küçük işletmelerden küresel
     }
 
     function getAllBlogPosts() {
-        const saved = localStorage.getItem('mga_blog_posts');
-        if (saved !== null) {
-            try { 
-                return JSON.parse(saved); 
-            } catch(e) {
-                return [...DEFAULT_BLOG_POSTS];
-            }
-        }
-        return [...DEFAULT_BLOG_POSTS];
+        return window.__BLOG_POSTS || [...DEFAULT_BLOG_POSTS];
+    }
+
+    function startPost() {
+        fetch('/data/blog-posts.json', { cache: 'no-store' })
+            .then(r => r.json())
+            .then(posts => { window.__BLOG_POSTS = posts; })
+            .catch(() => {})
+            .then(initPost);
     }
 
     function buildTableOfContents() {
@@ -594,7 +594,7 @@ Yapay zeka ve akıllı paylaşım protokolleri, küçük işletmelerden küresel
         });
     }
 
-    document.addEventListener('DOMContentLoaded', initPost);
+    document.addEventListener('DOMContentLoaded', startPost);
 </script>
 </body>
 </html>
