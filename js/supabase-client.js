@@ -245,3 +245,74 @@ export async function deleteAppReview(reviewId) {
 }
 
 
+
+// -- BLOG YÖNETİMİ (blog_posts tablosu + 'blog' storage bucket) --
+
+const BLOG_TIMEOUT_MS = 8000;
+
+function withTimeout(promise, ms, label) {
+    const timeout = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error(`${label} zaman aşımına uğradı`)), ms)
+    );
+    return Promise.race([promise, timeout]);
+}
+
+/**
+ * Admin için tüm blog yazılarını (taslaklar dahil) çeker
+ */
+export async function fetchAdminBlogPosts() {
+    const query = supabase
+        .from('blog_posts')
+        .select('*')
+        .order('published_at', { ascending: false, nullsFirst: true })
+        .order('created_at', { ascending: false });
+    const { data, error } = await withTimeout(query, BLOG_TIMEOUT_MS, 'Blog listesi');
+    if (error) throw error;
+    return data || [];
+}
+
+/**
+ * Yeni blog yazısı ekler, eklenen kaydı döner
+ */
+export async function insertBlogPost(post) {
+    const query = supabase.from('blog_posts').insert([post]).select().single();
+    const { data, error } = await withTimeout(query, BLOG_TIMEOUT_MS, 'Kaydetme');
+    if (error) throw error;
+    return data;
+}
+
+/**
+ * Blog yazısını günceller
+ */
+export async function updateBlogPost(id, updates) {
+    const query = supabase.from('blog_posts').update(updates).eq('id', id).select().single();
+    const { data, error } = await withTimeout(query, BLOG_TIMEOUT_MS, 'Güncelleme');
+    if (error) throw error;
+    return data;
+}
+
+/**
+ * Blog yazısını siler
+ */
+export async function deleteBlogPost(id) {
+    const query = supabase.from('blog_posts').delete().eq('id', id);
+    const { error } = await withTimeout(query, BLOG_TIMEOUT_MS, 'Silme');
+    if (error) throw error;
+}
+
+/**
+ * Kapak görselini 'blog' bucket'ına yükler, herkese açık URL döner
+ */
+export async function uploadBlogImage(file) {
+    if (!file) return null;
+    const ext = (file.name.split('.').pop() || 'jpg').toLowerCase();
+    const path = `covers/${Date.now()}_${Math.random().toString(36).slice(2, 8)}.${ext}`;
+    const upload = supabase.storage.from('blog').upload(path, file, {
+        cacheControl: '31536000',
+        contentType: file.type || undefined
+    });
+    const { error } = await withTimeout(upload, 20000, 'Görsel yükleme');
+    if (error) throw error;
+    const { data } = supabase.storage.from('blog').getPublicUrl(path);
+    return data.publicUrl;
+}

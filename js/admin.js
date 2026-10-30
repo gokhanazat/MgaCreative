@@ -8,8 +8,13 @@ import {
     uploadPortfolioImage,
     fetchAppReviewsFromDB,
     updateReviewStatus,
-    deleteAppReview
-} from './supabase-client.js';
+    deleteAppReview,
+    fetchAdminBlogPosts,
+    insertBlogPost,
+    updateBlogPost,
+    deleteBlogPost,
+    uploadBlogImage
+} from './supabase-client.js?v=4.8.0';
 
 // DOM Elementleri - Login
 const loginForm = document.getElementById('loginForm');
@@ -1152,65 +1157,111 @@ tabButtons.forEach(btn => {
     });
 });
 
-// --- BLOG YÖNETİMİ ---
-const DEFAULT_ADMIN_BLOGS = [
-    {
-        slug: 'modern-mobil-uygulama-gelistirme-kotlin-jetpack-compose',
-        title: "2026'da Modern Mobil Uygulama Geliştirme: Kotlin & Jetpack Compose Neden Tercih Edilmeli?",
-        summary: "Android ekosisteminde bildirimli UI (Declarative UI) devrimi, yüksek performanslı mimariler ve Clean Architecture standartları.",
-        category: "Mobil Yazılım",
-        readTime: "5 dk okuma",
-        date: "18 Ağustos 2026",
-        author: "MGA Creative Mühendislik Ekibi",
-        image: "images/agroplan_detay.png",
-        content: "Modern mobil yazılım dünyasında kullanıcı deneyimi..."
-    },
-    {
-        slug: 'dijital-tarimda-verimlilik-ve-tarla-yonetimi',
-        title: "Dijital Tarımda Verimlilik: AgroPlan ile Tarla ve Finans Yönetimi Nasıl Yapılır?",
-        summary: "Geleneksel tarımsal üretim süreçlerinin dijitalleşmesi, gübreleme, sulama ve hasat maliyetlerinin akıllı takibi.",
-        category: "Tarım Teknolojileri",
-        readTime: "4 dk okuma",
-        date: "15 Ağustos 2026",
-        author: "Gökhan Azat",
-        image: "images/aproplan_detay.png",
-        content: "Tarım sektörü, artan girdi maliyetleri..."
-    },
-    {
-        slug: 'yapay-zeka-ve-nlp-ile-is-akisi-otomasyonu',
-        title: "Yapay Zeka ve NLP ile Günlük İş Akışınızı Otomatize Edin: Akıllı Ajanda ve vCard Sistemleri",
-        summary: "Doğal Dil İşleme (NLP) teknolojileriyle e-postalardan görev çıkarma ve temassız dijital kartvizit ekosistemi.",
-        category: "Yapay Zeka",
-        readTime: "6 dk okuma",
-        date: "10 Ağustos 2026",
-        author: "MGA Creative AI Lab",
-        image: "images/cardly_detay.jpeg",
-        content: "Günümüz iş dünyasında en büyük zaman kaybı..."
-    }
-];
-
+// --- BLOG YÖNETİMİ (Supabase: blog_posts) ---
 let cachedBlogs = [];
 
-function loadAdminBlogs() {
-    const saved = localStorage.getItem('mga_blog_posts');
-    if (saved !== null) {
-        try { 
-            cachedBlogs = JSON.parse(saved); 
-        } catch(e) {
-            cachedBlogs = [...DEFAULT_ADMIN_BLOGS];
-            localStorage.setItem('mga_blog_posts', JSON.stringify(cachedBlogs));
-        }
-    } else {
-        cachedBlogs = [...DEFAULT_ADMIN_BLOGS];
-        localStorage.setItem('mga_blog_posts', JSON.stringify(cachedBlogs));
-    }
+function escapeHtml(value) {
+    return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
 
+function calcReadTime(content) {
+    const words = (content || '').trim().split(/\s+/).filter(Boolean).length;
+    return `${Math.max(3, Math.ceil(words / 200))} dk okuma`;
+}
+
+function formatBlogDate(iso) {
+    if (!iso) return '';
+    return new Date(iso).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+function uniqueSlug(base, ignoreId = null) {
+    const root = base || `yazi-${Date.now()}`;
+    const taken = new Set(cachedBlogs.filter(b => b.id !== ignoreId).map(b => b.slug));
+    let slug = root;
+    let n = 2;
+    while (taken.has(slug)) slug = `${root}-${n++}`;
+    return slug;
+}
+
+function setBlogBusy(btn, busy, busyText) {
+    if (!btn) return;
+    if (busy) {
+        btn.dataset.originalHtml = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = `<span class="material-symbols-outlined animate-spin text-lg">sync</span><span>${busyText}</span>`;
+    } else {
+        btn.disabled = false;
+        if (btn.dataset.originalHtml) btn.innerHTML = btn.dataset.originalHtml;
+    }
+}
+
+function blogErrorMessage(err) {
+    const msg = (err && (err.message || err.error_description)) || String(err);
+    if (/blog_posts|relation .* does not exist|schema cache/i.test(msg)) {
+        return 'Blog tablosu Supabase\'de bulunamadı. supabase/blog_posts.sql dosyasını SQL Editor\'da çalıştırın.';
+    }
+    if (/row-level security|permission|not authorized|JWT/i.test(msg)) {
+        return 'Yetki hatası: Bu hesap blog admini değil veya oturum süresi doldu. Çıkış yapıp tekrar giriş yapın.';
+    }
+    if (/Bucket not found/i.test(msg)) {
+        return '"blog" görsel alanı bulunamadı. supabase/blog_posts.sql dosyasını çalıştırın.';
+    }
+    return msg;
+}
+
+function updateBlogCounters() {
+    const published = cachedBlogs.filter(b => b.status === 'published').length;
+    const drafts = cachedBlogs.length - published;
     const statTotalBlogs = document.getElementById('statTotalBlogs');
     const blogCountBadge = document.getElementById('blogCountBadge');
-    if (statTotalBlogs) statTotalBlogs.textContent = cachedBlogs.length;
-    if (blogCountBadge) blogCountBadge.textContent = `${cachedBlogs.length} Makale`;
+    if (statTotalBlogs) statTotalBlogs.textContent = published;
+    if (blogCountBadge) {
+        blogCountBadge.textContent = drafts
+            ? `${published} Yayında • ${drafts} Taslak`
+            : `${published} Makale`;
+    }
+}
 
-    renderAdminBlogList();
+function populateBlogCategories() {
+    const list = document.getElementById('blogCategoryList');
+    if (!list) return;
+    const defaults = ['Mobil Yazılım', 'Yapay Zeka', 'Tarım Teknolojileri', 'B2B Çözümler'];
+    const cats = [...new Set([...defaults, ...cachedBlogs.map(b => b.category).filter(Boolean)])]
+        .sort((a, b) => a.localeCompare(b, 'tr'));
+    list.innerHTML = cats.map(c => `<option value="${escapeHtml(c)}"></option>`).join('');
+}
+
+async function loadAdminBlogs() {
+    const blogList = document.getElementById('blogList');
+    if (blogList) {
+        blogList.innerHTML = `
+            <div class="text-center py-12 text-slate-400 bg-slate-50 rounded-2xl border border-slate-200 p-6 space-y-2">
+                <span class="material-symbols-outlined text-3xl animate-spin text-indigo-500">sync</span>
+                <p class="text-xs font-semibold">Makaleler yükleniyor...</p>
+            </div>`;
+    }
+    try {
+        cachedBlogs = await fetchAdminBlogPosts();
+        updateBlogCounters();
+        populateBlogCategories();
+        renderAdminBlogList();
+    } catch (err) {
+        console.warn('Blog yükleme hatası:', err);
+        if (blogList) {
+            blogList.innerHTML = `
+                <div class="text-center py-8 bg-red-50 rounded-2xl border border-red-200 p-6 space-y-3">
+                    <p class="text-xs font-semibold text-red-600">${escapeHtml(blogErrorMessage(err))}</p>
+                    <button type="button" id="retryBlogsBtn" class="px-3 py-1.5 bg-white border border-red-200 rounded-lg text-xs font-bold text-red-700">Tekrar Dene</button>
+                </div>`;
+            const retry = document.getElementById('retryBlogsBtn');
+            if (retry) retry.addEventListener('click', loadAdminBlogs);
+        }
+    }
 }
 
 function renderAdminBlogList() {
@@ -1218,98 +1269,149 @@ function renderAdminBlogList() {
     const searchBlog = document.getElementById('searchBlog');
     if (!blogList) return;
 
-    const query = searchBlog ? searchBlog.value.toLowerCase().trim() : '';
-    const filtered = cachedBlogs.filter(b => {
-        return b.title.toLowerCase().includes(query) || 
-               b.summary.toLowerCase().includes(query) || 
-               b.category.toLowerCase().includes(query);
-    });
+    const query = searchBlog ? searchBlog.value.toLocaleLowerCase('tr').trim() : '';
+    const filtered = cachedBlogs.filter(b =>
+        [b.title, b.summary, b.category].some(v => (v || '').toLocaleLowerCase('tr').includes(query))
+    );
 
     if (filtered.length === 0) {
         blogList.innerHTML = `
             <div class="text-center py-12 text-slate-400 bg-slate-50 rounded-2xl border border-slate-200 p-6 space-y-3">
                 <span class="material-symbols-outlined text-4xl text-slate-300">article</span>
-                <p class="text-sm font-medium">Arama kriterine uygun makale bulunamadı.</p>
-            </div>
-        `;
+                <p class="text-sm font-medium">${cachedBlogs.length ? 'Arama kriterine uygun makale bulunamadı.' : 'Henüz makale yok. Soldaki formdan ilk makaleni ekle.'}</p>
+            </div>`;
         return;
     }
 
-    blogList.innerHTML = filtered.map(b => `
-        <div class="glass-card p-4 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border border-slate-200 hover:border-indigo-300 transition-all">
+    blogList.innerHTML = filtered.map(b => {
+        const isPub = b.status === 'published';
+        const statusBadge = isPub
+            ? '<span class="px-2 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-md text-[10px] font-bold uppercase">Yayında</span>'
+            : '<span class="px-2 py-0.5 bg-amber-50 text-amber-700 border border-amber-200 rounded-md text-[10px] font-bold uppercase">Taslak</span>';
+        const dateText = isPub ? formatBlogDate(b.published_at) : `Son düzenleme: ${formatBlogDate(b.updated_at)}`;
+        return `
+        <div class="glass-card p-4 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border border-slate-200 hover:border-indigo-300 transition-all ${isPub ? '' : 'bg-amber-50/30'}">
             <div class="flex items-center gap-4 flex-1 min-w-0">
-                <img src="${b.image || 'images/agroplan_detay.png'}" alt="${b.title}" class="w-14 h-14 rounded-xl object-cover border border-slate-200 flex-shrink-0 bg-slate-100">
+                <img src="${escapeHtml(b.image || 'images/agroplan_detay.png')}" alt="" class="w-14 h-14 rounded-xl object-cover border border-slate-200 flex-shrink-0 bg-slate-100">
                 <div class="space-y-1 min-w-0">
-                    <div class="flex items-center gap-2">
-                        <span class="px-2 py-0.5 bg-indigo-50 text-indigo-700 border border-indigo-100 rounded-md text-[10px] font-bold uppercase">${b.category}</span>
-                        <h4 class="text-slate-900 font-bold text-sm truncate">${b.title}</h4>
+                    <div class="flex items-center gap-2 flex-wrap">
+                        ${statusBadge}
+                        <span class="px-2 py-0.5 bg-indigo-50 text-indigo-700 border border-indigo-100 rounded-md text-[10px] font-bold uppercase">${escapeHtml(b.category)}</span>
                     </div>
-                    <p class="text-xs text-slate-500 line-clamp-2">${b.summary}</p>
+                    <h4 class="text-slate-900 font-bold text-sm truncate">${escapeHtml(b.title)}</h4>
+                    <p class="text-xs text-slate-500 line-clamp-2">${escapeHtml(b.summary)}</p>
                     <div class="text-[11px] text-slate-400 font-medium pt-0.5 flex items-center gap-3">
-                        <span>${b.date || 'Bugün'} • ${b.author || 'MGA Ekibi'}</span>
-                        ${b.link ? `<span class="text-indigo-600 font-semibold flex items-center gap-0.5"><span class="material-symbols-outlined text-[12px]">link</span>Linkli</span>` : ''}
+                        <span>${escapeHtml(dateText)} • ${escapeHtml(b.author || 'MGA Ekibi')}</span>
+                        ${b.link ? '<span class="text-indigo-600 font-semibold flex items-center gap-0.5"><span class="material-symbols-outlined text-[12px]">link</span>Linkli</span>' : ''}
                     </div>
                 </div>
             </div>
-            
-            <div class="flex items-center gap-2 w-full sm:w-auto justify-end border-t sm:border-t-0 border-slate-100 pt-2 sm:pt-0">
-                <a href="/blog-detail?slug=${b.slug}" target="_blank" class="px-3 py-1.5 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-lg transition-all flex items-center gap-1 text-xs font-bold">
-                    <span class="material-symbols-outlined text-base text-sky-600">visibility</span>
-                    <span>Görüntüle</span>
-                </a>
-                <button type="button" class="edit-blog-btn px-3 py-1.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 rounded-lg transition-all flex items-center gap-1 text-xs font-bold" data-slug="${b.slug}">
-                    <span class="material-symbols-outlined text-base">edit</span>
-                    <span>Düzenle</span>
+            <div class="flex items-center gap-2 w-full sm:w-auto justify-end flex-wrap border-t sm:border-t-0 border-slate-100 pt-2 sm:pt-0">
+                ${isPub ? `
+                <a href="/blog-detail?slug=${encodeURIComponent(b.slug)}" target="_blank" class="px-3 py-1.5 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-lg transition-all flex items-center gap-1 text-xs font-bold">
+                    <span class="material-symbols-outlined text-base text-sky-600">visibility</span><span>Görüntüle</span>
+                </a>` : ''}
+                <button type="button" class="toggle-blog-btn px-3 py-1.5 ${isPub ? 'bg-white hover:bg-amber-50 text-amber-700 border-amber-200' : 'bg-emerald-600 hover:bg-emerald-700 text-white border-emerald-600'} border rounded-lg transition-all flex items-center gap-1 text-xs font-bold" data-id="${b.id}">
+                    <span class="material-symbols-outlined text-base">${isPub ? 'unpublished' : 'publish'}</span><span>${isPub ? 'Taslağa Al' : 'Yayınla'}</span>
                 </button>
-                <button type="button" class="delete-blog-btn px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 rounded-lg transition-all flex items-center gap-1 text-xs font-bold" data-slug="${b.slug}">
-                    <span class="material-symbols-outlined text-base">delete</span>
-                    <span>Sil</span>
+                <button type="button" class="edit-blog-btn px-3 py-1.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 rounded-lg transition-all flex items-center gap-1 text-xs font-bold" data-id="${b.id}">
+                    <span class="material-symbols-outlined text-base">edit</span><span>Düzenle</span>
+                </button>
+                <button type="button" class="delete-blog-btn px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 rounded-lg transition-all flex items-center gap-1 text-xs font-bold" data-id="${b.id}">
+                    <span class="material-symbols-outlined text-base">delete</span><span>Sil</span>
                 </button>
             </div>
-        </div>
-    `).join('');
+        </div>`;
+    }).join('');
 
-    // Düzenleme butonlarını dinle
-    document.querySelectorAll('.edit-blog-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const slug = e.currentTarget.getAttribute('data-slug');
-            openEditBlogModal(slug);
+    blogList.querySelectorAll('.edit-blog-btn').forEach(btn => {
+        btn.addEventListener('click', e => openEditBlogModal(e.currentTarget.dataset.id));
+    });
+
+    blogList.querySelectorAll('.toggle-blog-btn').forEach(btn => {
+        btn.addEventListener('click', async e => {
+            const button = e.currentTarget;
+            const post = cachedBlogs.find(b => b.id === button.dataset.id);
+            if (!post) return;
+            const nextStatus = post.status === 'published' ? 'draft' : 'published';
+            setBlogBusy(button, true, nextStatus === 'published' ? 'Yayınlanıyor' : 'Alınıyor');
+            try {
+                await updateBlogPost(post.id, { status: nextStatus });
+                await loadAdminBlogs();
+            } catch (err) {
+                setBlogBusy(button, false);
+                alert('İşlem başarısız: ' + blogErrorMessage(err));
+            }
         });
     });
 
-    // Silme butonlarını dinle
-    document.querySelectorAll('.delete-blog-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const slug = e.currentTarget.getAttribute('data-slug');
-            const target = cachedBlogs.find(b => b.slug === slug);
-            if (confirm(`"${target ? target.title : 'Bu makaleyi'}" silmek istediğinize emin misiniz?`)) {
-                cachedBlogs = cachedBlogs.filter(b => b.slug !== slug);
-                localStorage.setItem('mga_blog_posts', JSON.stringify(cachedBlogs));
-                loadAdminBlogs();
+    blogList.querySelectorAll('.delete-blog-btn').forEach(btn => {
+        btn.addEventListener('click', async e => {
+            const button = e.currentTarget;
+            const post = cachedBlogs.find(b => b.id === button.dataset.id);
+            if (!post) return;
+            if (!confirm(`"${post.title}" kalıcı olarak silinsin mi?\n\nSadece yayından kaldırmak istiyorsan "Taslağa Al"ı kullan.`)) return;
+            setBlogBusy(button, true, 'Siliniyor');
+            try {
+                await deleteBlogPost(post.id);
+                await loadAdminBlogs();
+            } catch (err) {
+                setBlogBusy(button, false);
+                alert('Silme başarısız: ' + blogErrorMessage(err));
             }
         });
     });
 }
 
-// --- BLOG DÜZENLEME MODAL FONKSİYONLARI ---
+// Form alanlarından ortak yazı nesnesini toplar (prefix: 'b_' veya 'edit_b_')
+async function collectBlogForm(prefix) {
+    const val = id => (document.getElementById(prefix + id)?.value || '').trim();
+    const fileInput = document.getElementById(prefix + 'image_file');
+    const file = fileInput && fileInput.files && fileInput.files[0];
+
+    let image = val('image');
+    if (file) image = await uploadBlogImage(file);
+
+    const content = val('content');
+    return {
+        title: val('title'),
+        summary: val('summary'),
+        category: val('category') || 'Mobil Yazılım',
+        author: val('author') || 'MGA Creative Ekibi',
+        image,
+        link: val('link'),
+        content,
+        read_time: calcReadTime(content),
+        status: val('status') === 'published' ? 'published' : 'draft'
+    };
+}
+
+// --- BLOG DÜZENLEME MODALI ---
 const editBlogModal = document.getElementById('editBlogModal');
 const closeEditBlogModalBtn = document.getElementById('closeEditBlogModalBtn');
 const cancelEditBlogBtn = document.getElementById('cancelEditBlogBtn');
 const editBlogForm = document.getElementById('editBlogForm');
 
-function openEditBlogModal(slug) {
-    const post = cachedBlogs.find(b => b.slug === slug);
+function openEditBlogModal(id) {
+    const post = cachedBlogs.find(b => b.id === id);
     if (!post || !editBlogModal) return;
 
-    document.getElementById('edit_b_slug').value = post.slug;
-    document.getElementById('edit_b_title').value = post.title || '';
-    document.getElementById('edit_b_summary').value = post.summary || '';
-    document.getElementById('edit_b_category').value = post.category || 'Mobil Yazılım';
-    document.getElementById('edit_b_author').value = post.author || 'MGA Creative Ekibi';
-    document.getElementById('edit_b_image').value = post.image || '';
-    const editLinkInput = document.getElementById('edit_b_link');
-    if (editLinkInput) editLinkInput.value = post.link || '';
-    document.getElementById('edit_b_content').value = post.content || '';
+    const set = (field, value) => {
+        const el = document.getElementById('edit_b_' + field);
+        if (el) el.value = value ?? '';
+    };
+    set('id', post.id);
+    set('slug', post.slug);
+    set('title', post.title);
+    set('summary', post.summary);
+    set('category', post.category);
+    set('author', post.author || 'MGA Creative Ekibi');
+    set('image', post.image);
+    set('link', post.link);
+    set('content', post.content);
+    set('status', post.status);
+    const fileInput = document.getElementById('edit_b_image_file');
+    if (fileInput) fileInput.value = '';
 
     editBlogModal.classList.remove('hidden');
 }
@@ -1322,39 +1424,22 @@ if (closeEditBlogModalBtn) closeEditBlogModalBtn.addEventListener('click', close
 if (cancelEditBlogBtn) cancelEditBlogBtn.addEventListener('click', closeEditBlogModal);
 
 if (editBlogForm) {
-    editBlogForm.addEventListener('submit', (e) => {
+    editBlogForm.addEventListener('submit', async e => {
         e.preventDefault();
-        
-        const origSlug = document.getElementById('edit_b_slug').value;
-        const targetIndex = cachedBlogs.findIndex(b => b.slug === origSlug);
-        if (targetIndex === -1) return;
-
-        const title = document.getElementById('edit_b_title').value.trim();
-        const summary = document.getElementById('edit_b_summary').value.trim();
-        const category = document.getElementById('edit_b_category').value;
-        const author = document.getElementById('edit_b_author').value.trim() || 'MGA Creative Ekibi';
-        const image = document.getElementById('edit_b_image').value.trim() || 'images/agroplan_detay.png';
-        const editLinkInput = document.getElementById('edit_b_link');
-        const link = editLinkInput ? editLinkInput.value.trim() : '';
-        const content = document.getElementById('edit_b_content').value.trim();
-
-        const updatedPost = {
-            ...cachedBlogs[targetIndex],
-            title: title,
-            summary: summary,
-            category: category,
-            author: author,
-            image: image,
-            link: link,
-            content: content,
-            readTime: `${Math.max(3, Math.ceil(content.split(' ').length / 150))} dk okuma`
-        };
-
-        cachedBlogs[targetIndex] = updatedPost;
-        localStorage.setItem('mga_blog_posts', JSON.stringify(cachedBlogs));
-
-        closeEditBlogModal();
-        loadAdminBlogs();
+        const id = document.getElementById('edit_b_id').value;
+        const saveBtn = document.getElementById('saveEditBlogBtn');
+        setBlogBusy(saveBtn, true, 'Kaydediliyor');
+        try {
+            const updates = await collectBlogForm('edit_b_');
+            if (!updates.image) throw new Error('Kapak görseli için URL girin veya dosya seçin.');
+            await updateBlogPost(id, updates);
+            setBlogBusy(saveBtn, false);
+            closeEditBlogModal();
+            await loadAdminBlogs();
+        } catch (err) {
+            setBlogBusy(saveBtn, false);
+            alert('Kaydetme başarısız: ' + blogErrorMessage(err));
+        }
     });
 }
 
@@ -1394,38 +1479,39 @@ if (searchBlogInput) {
 // Yeni Blog Makalesi Ekleme Formu
 const addBlogForm = document.getElementById('addBlogForm');
 const addBlogBtn = document.getElementById('addBlogBtn');
+const blogStatusSelect = document.getElementById('b_status');
+
+function syncAddBlogBtnLabel() {
+    if (!addBlogBtn || addBlogBtn.disabled) return;
+    const publish = blogStatusSelect && blogStatusSelect.value === 'published';
+    addBlogBtn.innerHTML = publish
+        ? '<span class="material-symbols-outlined text-lg">publish</span><span>Makaleyi Yayınla</span>'
+        : '<span class="material-symbols-outlined text-lg">save</span><span>Taslak Olarak Kaydet</span>';
+}
+if (blogStatusSelect) blogStatusSelect.addEventListener('change', syncAddBlogBtnLabel);
+
 if (addBlogForm) {
-    addBlogForm.addEventListener('submit', (e) => {
+    addBlogForm.addEventListener('submit', async e => {
         e.preventDefault();
-        
-        const title = document.getElementById('b_title').value.trim();
-        const summary = document.getElementById('b_summary').value.trim();
-        const category = document.getElementById('b_category').value;
-        const author = document.getElementById('b_author').value.trim() || 'MGA Creative Ekibi';
-        const image = document.getElementById('b_image').value.trim() || 'images/agroplan_detay.png';
-        const linkInput = document.getElementById('b_link');
-        const link = linkInput ? linkInput.value.trim() : '';
-        const content = document.getElementById('b_content').value.trim();
-        const slug = slugify(title);
-
-        const newPost = {
-            slug: slug,
-            title: title,
-            summary: summary,
-            category: category,
-            author: author,
-            image: image,
-            link: link,
-            content: content,
-            readTime: `${Math.max(3, Math.ceil(content.split(' ').length / 150))} dk okuma`,
-            date: new Date().toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' })
-        };
-
-        cachedBlogs.unshift(newPost);
-        localStorage.setItem('mga_blog_posts', JSON.stringify(cachedBlogs));
-
-        addBlogForm.reset();
-        loadAdminBlogs();
+        setBlogBusy(addBlogBtn, true, 'Kaydediliyor');
+        try {
+            const post = await collectBlogForm('b_');
+            if (!post.image) throw new Error('Kapak görseli için URL girin veya dosya seçin.');
+            post.slug = uniqueSlug(slugify(post.title));
+            await insertBlogPost(post);
+            addBlogForm.reset();
+            setBlogBusy(addBlogBtn, false);
+            syncAddBlogBtnLabel();
+            await loadAdminBlogs();
+            if (post.status === 'published') {
+                if (confirm('Makale yayında. Sitede görmek ister misin?')) {
+                    window.open(`/blog-detail?slug=${encodeURIComponent(post.slug)}`, '_blank');
+                }
+            }
+        } catch (err) {
+            setBlogBusy(addBlogBtn, false);
+            alert('Kaydetme başarısız: ' + blogErrorMessage(err));
+        }
     });
 }
 

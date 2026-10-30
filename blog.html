@@ -155,30 +155,7 @@
                             </span>
                             <span id="cat-count-all" class="text-xs px-2 py-0.5 rounded-full bg-slate-200 text-slate-700 font-mono font-bold">0</span>
                         </button>
-                        <button class="category-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all border border-transparent hover:bg-slate-100 text-slate-700" data-cat="Mobil Yazılım">
-                            <span class="flex items-center gap-2.5">
-                                <span class="material-symbols-outlined text-lg">smartphone</span> Mobil Yazılım
-                            </span>
-                            <span id="cat-count-mobil" class="text-xs px-2 py-0.5 rounded-full bg-slate-200 text-slate-700 font-mono font-medium">0</span>
-                        </button>
-                        <button class="category-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all border border-transparent hover:bg-slate-100 text-slate-700" data-cat="Yapay Zeka">
-                            <span class="flex items-center gap-2.5">
-                                <span class="material-symbols-outlined text-lg">psychology</span> Yapay Zeka
-                            </span>
-                            <span id="cat-count-ai" class="text-xs px-2 py-0.5 rounded-full bg-slate-200 text-slate-700 font-mono font-medium">0</span>
-                        </button>
-                        <button class="category-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all border border-transparent hover:bg-slate-100 text-slate-700" data-cat="Tarım Teknolojileri">
-                            <span class="flex items-center gap-2.5">
-                                <span class="material-symbols-outlined text-lg">agriculture</span> Tarım Teknolojileri
-                            </span>
-                            <span id="cat-count-tarim" class="text-xs px-2 py-0.5 rounded-full bg-slate-200 text-slate-700 font-mono font-medium">0</span>
-                        </button>
-                        <button class="category-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all border border-transparent hover:bg-slate-100 text-slate-700" data-cat="B2B Çözümler">
-                            <span class="flex items-center gap-2.5">
-                                <span class="material-symbols-outlined text-lg">business_center</span> B2B Çözümler
-                            </span>
-                            <span id="cat-count-b2b" class="text-xs px-2 py-0.5 rounded-full bg-slate-200 text-slate-700 font-mono font-medium">0</span>
-                        </button>
+                        <div id="dynamic-category-list" class="space-y-1.5"></div>
                     </div>
                 </div>
 
@@ -249,83 +226,66 @@
     </div>
 </footer>
 
+<script src="/js/blog-data.js?v=1"></script>
 <script>
-    const DEFAULT_BLOG_POSTS = [
-        {
-            slug: 'modern-mobil-uygulama-gelistirme-kotlin-jetpack-compose',
-            title: "2026'da Modern Mobil Uygulama Geliştirme: Kotlin & Jetpack Compose Neden Tercih Edilmeli?",
-            summary: "Android ekosisteminde bildirimli UI (Declarative UI) devrimi, yüksek performanslı mimariler ve Clean Architecture standartlarının uygulama başarısındaki kritik rolü.",
-            category: "Mobil Yazılım",
-            readTime: "5 dk okuma",
-            date: "18 Ağustos 2026",
-            author: "MGA Creative Mühendislik Ekibi",
-            image: "images/agroplan_detay.png"
-        },
-        {
-            slug: 'dijital-tarimda-verimlilik-ve-tarla-yonetimi',
-            title: "Dijital Tarımda Verimlilik: AgroPlan ile Tarla ve Finans Yönetimi Nasıl Yapılır?",
-            summary: "Geleneksel tarımsal üretim süreçlerinin dijitalleşmesi, gübreleme, sulama ve hasat maliyetlerinin akıllı telefonlardan takibinin getirdiği kâr artışı.",
-            category: "Tarım Teknolojileri",
-            readTime: "4 dk okuma",
-            date: "15 Ağustos 2026",
-            author: "Gökhan Azat",
-            image: "images/aproplan_detay.png"
-        },
-        {
-            slug: 'yapay-zeka-ve-nlp-ile-is-akisi-otomasyonu',
-            title: "Yapay Zeka ve NLP ile Günlük İş Akışınızı Otomatize Edin: Akıllı Ajanda ve vCard Sistemleri",
-            summary: "Doğal Dil İşleme (NLP) teknolojileriyle e-postalardan ve mesajlardan otomatik görev çıkarma ve yeni nesil temassız dijital kartvizit ekosistemi.",
-            category: "Yapay Zeka",
-            readTime: "6 dk okuma",
-            date: "10 Ağustos 2026",
-            author: "MGA Creative AI Lab",
-            image: "images/cardly_detay.jpeg"
-        }
-    ];
-
     let allBlogPosts = [];
     let activeCategory = 'all';
     let searchQuery = '';
     let isLatestOnly = false;
 
     function getAllBlogPosts() {
-        return window.__BLOG_POSTS || [...DEFAULT_BLOG_POSTS];
+        return window.__BLOG_POSTS || [];
     }
 
     function startBlog() {
-        fetch('/data/blog-index.json', { cache: 'no-store' })
-            .then(r => r.json())
+        window.MGABlog.fetchIndex()
             .then(posts => { window.__BLOG_POSTS = posts; })
-            .catch(() => {})
+            .catch(err => { console.warn('Blog yüklenemedi:', err); window.__BLOG_POSTS = []; })
             .then(initBlog);
     }
 
-    function updateCategoryCounts() {
-        let countAll = allBlogPosts.length;
-        let countMobil = 0;
-        let countAI = 0;
-        let countTarim = 0;
-        let countB2B = 0;
+    const CATEGORY_ICONS = {
+        'Mobil Yazılım': 'smartphone',
+        'Mobil Uygulama Geliştirme': 'smartphone',
+        'Yapay Zeka': 'psychology',
+        'Tarım Teknolojileri': 'agriculture',
+        'B2B Çözümler': 'business_center',
+        'Ev & Yaşam': 'home',
+        'Dijital Belge': 'description',
+        'Dijital Kartvizit': 'contact_page',
+        'Araç Bakımı': 'directions_car',
+        'Otomotiv': 'directions_car',
+        'Yemek ve Tarif': 'restaurant',
+        'Kişisel Gelişim': 'self_improvement'
+    };
 
+    function escapeHtml(value) {
+        return String(value == null ? '' : value)
+            .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
+    function updateCategoryCounts() {
+        const counts = {};
         allBlogPosts.forEach(item => {
-            const cat = item.category || '';
-            if (cat === 'Mobil Yazılım') countMobil++;
-            else if (cat === 'Yapay Zeka') countAI++;
-            else if (cat === 'Tarım Teknolojileri') countTarim++;
-            else if (cat === 'B2B Çözümler') countB2B++;
+            const cat = item.category || 'Diğer';
+            counts[cat] = (counts[cat] || 0) + 1;
         });
 
         const elAll = document.getElementById('cat-count-all');
-        const elMobil = document.getElementById('cat-count-mobil');
-        const elAI = document.getElementById('cat-count-ai');
-        const elTarim = document.getElementById('cat-count-tarim');
-        const elB2B = document.getElementById('cat-count-b2b');
+        if (elAll) elAll.textContent = allBlogPosts.length;
 
-        if (elAll) elAll.textContent = countAll;
-        if (elMobil) elMobil.textContent = countMobil;
-        if (elAI) elAI.textContent = countAI;
-        if (elTarim) elTarim.textContent = countTarim;
-        if (elB2B) elB2B.textContent = countB2B;
+        const container = document.getElementById('dynamic-category-list');
+        if (!container) return;
+        container.innerHTML = Object.keys(counts)
+            .sort((a, b) => counts[b] - counts[a] || a.localeCompare(b, 'tr'))
+            .map(cat => `
+                        <button class="category-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all border border-transparent hover:bg-slate-100 text-slate-700" data-cat="${escapeHtml(cat)}">
+                            <span class="flex items-center gap-2.5 text-left">
+                                <span class="material-symbols-outlined text-lg">${CATEGORY_ICONS[cat] || 'label'}</span> ${escapeHtml(cat)}
+                            </span>
+                            <span class="text-xs px-2 py-0.5 rounded-full bg-slate-200 text-slate-700 font-mono font-medium">${counts[cat]}</span>
+                        </button>`).join('');
     }
 
     function applyFiltersAndRender() {

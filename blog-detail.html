@@ -318,76 +318,8 @@
 }
 </script>
 
+<script src="/js/blog-data.js?v=1"></script>
 <script>
-    const DEFAULT_BLOG_POSTS = [
-        {
-            slug: 'modern-mobil-uygulama-gelistirme-kotlin-jetpack-compose',
-            title: "2026'da Modern Mobil Uygulama Geliştirme: Kotlin & Jetpack Compose Neden Tercih Edilmeli?",
-            summary: "Android ekosisteminde bildirimli UI (Declarative UI) devrimi, yüksek performanslı mimariler ve Clean Architecture standartlarının uygulama başarısındaki kritik rolü.",
-            category: "Mobil Yazılım",
-            readTime: "5 dk okuma",
-            date: "18 Ağustos 2026",
-            author: "MGA Creative Mühendislik Ekibi",
-            image: "images/agroplan_detay.png",
-            content: `Modern mobil yazılım dünyasında kullanıcı deneyimi, hız ve kararlılık her zamankinden daha belirleyicidir. Google'ın Android için geliştirdiği modern UI araç seti **Jetpack Compose**, klasik XML tabanlı arayüz geliştirme yaklaşımını tamamen geride bıraktı.
-
-### Declarative UI (Bildirimli Arayüz) Gücü
-Geleneksel arayüz geliştirmede görünüm durumunu (state) elle senkronize etmek zorundayken, Jetpack Compose ile durum değiştikçe arayüz otomatik olarak yeniden çizilir (recomposition). Bu mimari:
-- **%40 daha az kod:** XML dosyaları ve boilerplate bağlama kodları ortadan kalkar.
-- **Hızlı geliştirme döngüsü:** Canlı önizleme ve modüler bileşen yapısı sayesinde tasarım anında test edilir.
-- **Daha az çökme (Crash-Free):** Kotlin'in Type Safety ve Null Safety özellikleri sayesinde çalışma zamanı hataları minimize edilir.
-
-### Clean Architecture & StateFlow ile Kararlılık
-MGA Creative olarak geliştirdiğimiz tüm Android projelerinde (Hotel OS, AgroPlan, Cardly) **Clean Architecture** prensiplerini uyguluyoruz. Veri katmanı (Data), iş mantığı (Domain) ve arayüz katmanı (Presentation) birbirinden bağımsız inşa edilerek uzun vadeli bakım kolaylığı sağlanır.
-
-### Sonuç ve 2026 Vizyonu
-2026 yılında kurumsal ölçekte bir mobil uygulama geliştirmeyi hedefliyorsanız, Kotlin & Jetpack Compose ikilisi hem performans hem de geliştirme hızı açısından altın standarttır.`
-        },
-        {
-            slug: 'dijital-tarimda-verimlilik-ve-tarla-yonetimi',
-            title: "Dijital Tarımda Verimlilik: AgroPlan ile Tarla ve Finans Yönetimi Nasıl Yapılır?",
-            summary: "Geleneksel tarımsal üretim süreçlerinin dijitalleşmesi, gübreleme, sulama ve hasat maliyetlerinin akıllı telefonlardan takibinin getirdiği kâr artışı.",
-            category: "Tarım Teknolojileri",
-            readTime: "4 dk okuma",
-            date: "15 Ağustos 2026",
-            author: "Gökhan Azat",
-            image: "images/aproplan_detay.png",
-            content: `Tarım sektörü, artan girdi maliyetleri (mazot, tohum, gübre, ilaçlama) ve iklim koşulları nedeniyle her dönümün hesaplanmasını zorunlu kılmaktadır. Geleneksel defter tutma yöntemleri, sezon sonunda çiftçinin gerçek kâr/zarar durumunu görmesini engellemektedir.
-
-### AgroPlan ile Neler Değişiyor?
-1. **Arazi ve Parsel Dijitalleştirmesi:** Sahip olunan veya kiralanan tüm tarlalar dönüm ve ürün türüne göre haritalandırılır.
-2. **Periyodik Bakım & Sulama Hatırlatıcıları:** İlaçlama ve sulama periyotları zamanında yapılarak ürün kaybı önlenir.
-3. **Maliyet ve Kâr Analizi:** Sezon boyunca yapılan tüm harcamalar kaydedilir, hasat satışı yapıldığında net kâr grafiği anında elde edilir.
-4. **Çevrimdışı (Offline) Çalışma:** Tarlada internet çekmese dahi kayıtlar yerel veritabanında güvenle tutulur, internet bağlantısı sağlandığında buluta senkronize edilir.
-
-### Geleceğin Tarım Yönetimi
-Dijital tarım araçları artık lüks değil; maliyetlerini kontrol altında tutmak ve kazancını artırmak isteyen her üretici için vazgeçilmez bir ihtiyaçtır.`
-        },
-        {
-            slug: 'yapay-zeka-ve-nlp-ile-is-akisi-otomasyonu',
-            title: "Yapay Zeka ve NLP ile Günlük İş Akışınızı Otomatize Edin: Akıllı Ajanda ve vCard Sistemleri",
-            summary: "Doğal Dil İşleme (NLP) teknolojileriyle e-postalardan ve mesajlardan otomatik görev çıkarma ve yeni nesil temassız dijital kartvizit ekosistemi.",
-            category: "Yapay Zeka",
-            readTime: "6 dk okuma",
-            date: "10 Ağustos 2026",
-            author: "MGA Creative AI Lab",
-            image: "images/cardly_detay.jpeg",
-            content: `Günümüz iş dünyasında en büyük zaman kaybı, dağınık iletişim kanallarından (e-posta, WhatsApp, toplantı notları) çıkan görevleri elle takvime işlemektir.
-
-### NLP ile Akıllı Ajanda Çıkarımı (MailMind Yaklaşımı)
-Doğal Dil İşleme (Natural Language Processing) algoritmaları, gelen e-postalardaki tarih, saat ve görev ifadelerini otomatik olarak ayrıştırarak tek dokunuşla ajandanıza ekler.
-
-### Ağ Oluşturmada Dijital Dönüşüm: Cardly
-Kağıt kartvizitlerin %88'i ilk hafta içinde çöpe gitmektedir. **Cardly** vCard sistemiyle:
-- **NFC ve Dinamik QR:** Telefonu dokundurarak veya QR okutarak rehbere anında kayıt.
-- **Dinamik Güncelleme:** Telefon numarası veya unvan değiştiğinde tüm paylaşılan kartvizitler anında güncellenir.
-- **Çevre Dostu & Prestijli:** Sıfır kağıt israfı ile modern kurumsal imaj.
-
-### Sonuç: Akıllı Otomasyon
-Yapay zeka ve akıllı paylaşım protokolleri, küçük işletmelerden küresel şirketlere kadar iş yapış biçimlerini temelden dönüştürmektedir.`
-        }
-    ];
-
     let headingCounter = 0;
 
     function slugify(text) {
@@ -430,23 +362,33 @@ Yapay zeka ve akıllı paylaşım protokolleri, küçük işletmelerden küresel
     }
 
     function getAllBlogPosts() {
-        return window.__BLOG_POSTS || [...DEFAULT_BLOG_POSTS];
+        return window.__BLOG_POSTS || [];
     }
 
     function startPost() {
         const slug = new URLSearchParams(window.location.search).get('slug') || '';
-        fetch('/data/blog-index.json', { cache: 'no-store' })
-            .then(r => r.json())
-            .then(posts => { window.__BLOG_POSTS = posts; })
-            .catch(() => {})
-            .then(() => {
-                if (!slug || !/^[a-z0-9-]+$/.test(slug)) return null;
-                return fetch('/data/posts/' + slug + '.json', { cache: 'no-store' })
-                    .then(r => (r.ok ? r.json() : null))
-                    .then(full => { window.__CURRENT_POST = full; })
-                    .catch(() => {});
-            })
-            .then(initPost);
+        Promise.all([
+            window.MGABlog.fetchPost(slug).catch(err => { console.warn('Makale yüklenemedi:', err); return null; }),
+            window.MGABlog.fetchIndex().catch(() => [])
+        ]).then(([post, index]) => {
+            window.__CURRENT_POST = post;
+            window.__BLOG_POSTS = index;
+            initPost();
+        });
+    }
+
+    function showPostNotFound() {
+        document.getElementById('pageTitle').textContent = 'Makale bulunamadı | MGA Creative Blog';
+        document.getElementById('postTitle').textContent = 'Makale bulunamadı';
+        document.getElementById('postSummary').textContent = 'Aradığınız makale kaldırılmış veya henüz yayınlanmamış olabilir.';
+        ['postCategory', 'postReadTime', 'postDate', 'postAuthor'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.textContent = '';
+        });
+        const img = document.getElementById('postImage');
+        if (img) img.style.display = 'none';
+        document.getElementById('postContent').innerHTML =
+            '<p>Tüm makalelere <a href="/blog">blog sayfasından</a> ulaşabilirsiniz.</p>';
     }
 
     function buildTableOfContents() {
@@ -500,7 +442,11 @@ Yapay zeka ve akıllı paylaşım protokolleri, küçük işletmelerden küresel
         const slug = urlParams.get('slug');
 
         const allPosts = getAllBlogPosts();
-        const post = window.__CURRENT_POST || allPosts.find(p => p.slug === slug) || allPosts[0];
+        const post = window.__CURRENT_POST;
+        if (!post) {
+            showPostNotFound();
+            return;
+        }
 
         // Metadata & Content
         document.getElementById('pageTitle').textContent = `${post.title} | MGA Creative Blog`;
@@ -558,8 +504,8 @@ Yapay zeka ve akıllı paylaşım protokolleri, küçük işletmelerden küresel
                     "name": "MGA Creative",
                     "url": "https://www.mgacreative.com"
                 },
-                "datePublished": "2026-08-18",
-                "image": "https://www.mgacreative.com/" + post.image
+                "datePublished": post.publishedAt || undefined,
+                "image": /^https?:\/\//.test(post.image) ? post.image : "https://www.mgacreative.com/" + String(post.image || '').replace(/^\//, '')
             };
             schemaEl.textContent = JSON.stringify(schemaData);
         }
