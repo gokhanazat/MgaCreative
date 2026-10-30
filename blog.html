@@ -293,7 +293,7 @@
     }
 
     function startBlog() {
-        fetch('/data/blog-posts.json', { cache: 'no-store' })
+        fetch('/data/blog-index.json', { cache: 'no-store' })
             .then(r => r.json())
             .then(posts => { window.__BLOG_POSTS = posts; })
             .catch(() => {})

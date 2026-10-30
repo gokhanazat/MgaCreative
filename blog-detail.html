@@ -434,10 +434,18 @@ Yapay zeka ve akıllı paylaşım protokolleri, küçük işletmelerden küresel
     }
 
     function startPost() {
-        fetch('/data/blog-posts.json', { cache: 'no-store' })
+        const slug = new URLSearchParams(window.location.search).get('slug') || '';
+        fetch('/data/blog-index.json', { cache: 'no-store' })
             .then(r => r.json())
             .then(posts => { window.__BLOG_POSTS = posts; })
             .catch(() => {})
+            .then(() => {
+                if (!slug || !/^[a-z0-9-]+$/.test(slug)) return null;
+                return fetch('/data/posts/' + slug + '.json', { cache: 'no-store' })
+                    .then(r => (r.ok ? r.json() : null))
+                    .then(full => { window.__CURRENT_POST = full; })
+                    .catch(() => {});
+            })
             .then(initPost);
     }
 
@@ -492,7 +500,7 @@ Yapay zeka ve akıllı paylaşım protokolleri, küçük işletmelerden küresel
         const slug = urlParams.get('slug');
 
         const allPosts = getAllBlogPosts();
-        const post = allPosts.find(p => p.slug === slug) || allPosts[0];
+        const post = window.__CURRENT_POST || allPosts.find(p => p.slug === slug) || allPosts[0];
 
         // Metadata & Content
         document.getElementById('pageTitle').textContent = `${post.title} | MGA Creative Blog`;
@@ -506,7 +514,7 @@ Yapay zeka ve akıllı paylaşım protokolleri, küçük işletmelerden küresel
         document.getElementById('postImage').src = post.image;
         document.getElementById('postImage').alt = post.title;
 
-        let contentHtml = parseMarkdown(post.content);
+        let contentHtml = parseMarkdown(post.content || '');
         
         // Eğer makaleye özel bir bağlantı/proje linki atanmışsa altına şık bir kart ekle
         if (post.link) {
