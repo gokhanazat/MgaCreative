@@ -342,10 +342,14 @@
                         <div class="lg:col-span-7 flex flex-col h-full">
                             <div class="flex items-center justify-between gap-2 mb-4">
                                 <div class="flex items-center gap-2">
-                                    <h3 class="text-base font-bold text-slate-900">Yayınlanmış Makaleler</h3>
+                                    <h3 class="text-base font-bold text-slate-900">Makaleler</h3>
                                     <span id="blogCountBadge" class="text-xs text-slate-600 bg-slate-100 px-2.5 py-1 rounded-full border border-slate-200 font-semibold">…</span>
+                                    <button type="button" id="checkInboxBtn" class="px-2.5 py-1 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-full text-xs font-semibold flex items-center gap-1 transition-all" title="Agent'ların hazırladığı yeni taslakları kontrol et">
+                                        <span class="material-symbols-outlined text-sm">inbox</span><span>Agent Taslakları</span>
+                                    </button>
                                 </div>
                             </div>
+                            <div id="blogInboxNotice" class="hidden"></div>
                             <div id="blogList" class="space-y-3 overflow-y-auto max-h-[620px] pr-2 custom-scrollbar flex-1">
                                 <!-- Dynamic Blog Items -->
                             </div>
@@ -615,7 +619,7 @@
     </div>
 
     <!-- Script yükleme -->
-    <script type="module" src="js/admin.js?v=4.8.0"></script>
+    <script type="module" src="js/admin.js?v=4.9.0"></script>
 
 </body>
 </html>

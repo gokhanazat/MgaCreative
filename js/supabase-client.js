@@ -316,3 +316,22 @@ export async function uploadBlogImage(file) {
     const { data } = supabase.storage.from('blog').getPublicUrl(path);
     return data.publicUrl;
 }
+
+/**
+ * Daha önce içe alınmış agent taslak dosyalarının yolları (blog_imports)
+ */
+export async function fetchBlogImportPaths() {
+    const query = supabase.from('blog_imports').select('path');
+    const { data, error } = await withTimeout(query, BLOG_TIMEOUT_MS, 'İçe aktarım kaydı');
+    if (error) throw error;
+    return new Set((data || []).map(r => r.path));
+}
+
+/**
+ * Bir agent taslak dosyasını içe alındı olarak işaretler
+ */
+export async function recordBlogImport(path, slug) {
+    const query = supabase.from('blog_imports').upsert([{ path, slug }], { onConflict: 'path' });
+    const { error } = await withTimeout(query, BLOG_TIMEOUT_MS, 'İçe aktarım kaydı');
+    if (error) throw error;
+}

@@ -13,8 +13,10 @@ import {
     insertBlogPost,
     updateBlogPost,
     deleteBlogPost,
-    uploadBlogImage
-} from './supabase-client.js?v=4.8.0';
+    uploadBlogImage,
+    fetchBlogImportPaths,
+    recordBlogImport
+} from './supabase-client.js?v=4.9.0';
 
 // DOM Elementleri - Login
 const loginForm = document.getElementById('loginForm');
@@ -1236,7 +1238,118 @@ function populateBlogCategories() {
     list.innerHTML = cats.map(c => `<option value="${escapeHtml(c)}"></option>`).join('');
 }
 
-async function loadAdminBlogs() {
+// --- AGENT TASLAKLARINI İÇE AL (GitHub: blog-inbox dalı, inbox/ klasörü) ---
+const BLOG_INBOX_API = 'https://api.github.com/repos/gokhanazat/MgaCreative/contents/inbox?ref=blog-inbox';
+let inboxImportRunning = false;
+
+function setInboxNotice(html, tone = 'info') {
+    const box = document.getElementById('blogInboxNotice');
+    if (!box) return;
+    if (!html) {
+        box.classList.add('hidden');
+        box.innerHTML = '';
+        return;
+    }
+    const tones = {
+        info: 'bg-sky-50 border-sky-200 text-sky-800',
+        success: 'bg-emerald-50 border-emerald-200 text-emerald-800',
+        warn: 'bg-amber-50 border-amber-200 text-amber-800'
+    };
+    box.className = `mb-3 text-xs font-semibold rounded-xl border px-3 py-2 ${tones[tone] || tones.info}`;
+    box.innerHTML = html;
+}
+
+async function importInboxDrafts() {
+    if (inboxImportRunning) return 0;
+    inboxImportRunning = true;
+    try {
+        const res = await fetch(BLOG_INBOX_API, { cache: 'no-store', headers: { Accept: 'application/vnd.github+json' } });
+        if (res.status === 404) return 0; // dal veya klasör henüz yok
+        if (!res.ok) throw new Error(`GitHub yanıtı: ${res.status}`);
+        const files = await res.json();
+        if (!Array.isArray(files)) return 0;
+
+        const jsonFiles = files.filter(f => f.type === 'file' && f.name.endsWith('.json'));
+        if (!jsonFiles.length) {
+            setInboxNotice('');
+            return 0;
+        }
+        const imported = await fetchBlogImportPaths();
+        const byName = new Map(files.map(f => [f.name, f]));
+        const pending = jsonFiles.filter(f => !imported.has(f.path));
+        if (!pending.length) {
+            setInboxNotice('');
+            return 0;
+        }
+
+        setInboxNotice(`<span class="material-symbols-outlined text-sm align-middle animate-spin">sync</span> ${pending.length} yeni agent taslağı içe alınıyor...`);
+
+        const existing = await fetchAdminBlogPosts();
+        cachedBlogs = existing;
+        let count = 0;
+
+        for (const file of pending) {
+            try {
+                const draft = await (await fetch(file.download_url, { cache: 'no-store' })).json();
+                if (!draft || !draft.title || !draft.content) {
+                    console.warn('Geçersiz taslak, atlandı:', file.path);
+                    await recordBlogImport(file.path, null);
+                    continue;
+                }
+
+                // Kapak: aynı adlı .svg/.png/.jpg dosyası varsa Supabase'e yükle
+                let image = (draft.image || '').trim();
+                const base = file.name.replace(/\.json$/, '');
+                const cover = ['svg', 'png', 'jpg', 'jpeg', 'webp'].map(ext => byName.get(`${base}.${ext}`)).find(Boolean);
+                if (cover) {
+                    const blob = await (await fetch(cover.download_url, { cache: 'no-store' })).blob();
+                    const ext = cover.name.split('.').pop().toLowerCase();
+                    const type = ext === 'svg' ? 'image/svg+xml' : (blob.type || `image/${ext}`);
+                    image = await uploadBlogImage(new File([blob], cover.name, { type }));
+                }
+                if (!image || image.startsWith('inbox/')) image = 'images/agroplan_detay.png';
+
+                const content = String(draft.content);
+                const post = {
+                    slug: uniqueSlug(slugify(draft.slug || draft.title)),
+                    title: String(draft.title).trim(),
+                    summary: String(draft.summary || '').trim(),
+                    category: String(draft.category || 'Mobil Yazılım').trim(),
+                    author: String(draft.author || 'MGA Creative Ekibi').trim(),
+                    image,
+                    link: String(draft.link || '').trim(),
+                    content,
+                    read_time: calcReadTime(content),
+                    status: 'draft'
+                };
+                const saved = await insertBlogPost(post);
+                cachedBlogs.unshift(saved);
+                await recordBlogImport(file.path, saved.slug);
+                count++;
+            } catch (err) {
+                console.warn('Taslak içe alınamadı:', file.path, err);
+            }
+        }
+
+        if (count) {
+            setInboxNotice(`<span class="material-symbols-outlined text-sm align-middle">inbox</span> Agent'lardan ${count} yeni taslak geldi. Okuyup "Yayınla"ya basabilirsin.`, 'success');
+        } else {
+            setInboxNotice('');
+        }
+        return count;
+    } catch (err) {
+        console.warn('Agent taslakları kontrol edilemedi:', err);
+        const msg = /blog_imports/.test(err && err.message || '')
+            ? 'Agent taslaklarını almak için supabase/blog_imports.sql dosyası çalıştırılmalı.'
+            : 'Agent taslakları şu an kontrol edilemedi, liste yine de güncel.';
+        setInboxNotice(msg, 'warn');
+        return 0;
+    } finally {
+        inboxImportRunning = false;
+    }
+}
+
+async function loadAdminBlogs(options = {}) {
     const blogList = document.getElementById('blogList');
     if (blogList) {
         blogList.innerHTML = `
@@ -1246,6 +1359,7 @@ async function loadAdminBlogs() {
             </div>`;
     }
     try {
+        if (options.checkInbox) await importInboxDrafts();
         cachedBlogs = await fetchAdminBlogPosts();
         updateBlogCounters();
         populateBlogCategories();
@@ -1468,6 +1582,18 @@ if (insertLinkBtn) {
 const editInsertLinkBtn = document.getElementById('editInsertLinkBtn');
 if (editInsertLinkBtn) {
     editInsertLinkBtn.addEventListener('click', () => helperInsertLink('edit_b_content'));
+}
+
+// Agent taslaklarını elle kontrol et
+const checkInboxBtn = document.getElementById('checkInboxBtn');
+if (checkInboxBtn) {
+    checkInboxBtn.addEventListener('click', async () => {
+        setBlogBusy(checkInboxBtn, true, 'Kontrol ediliyor');
+        await loadAdminBlogs({ checkInbox: true });
+        setBlogBusy(checkInboxBtn, false);
+        const box = document.getElementById('blogInboxNotice');
+        if (box && box.classList.contains('hidden')) setInboxNotice('Yeni agent taslağı yok.', 'info');
+    });
 }
 
 // Blog Arama Dinleyicisi
@@ -1753,7 +1879,7 @@ if (refreshReviewsBtn) {
 async function loadDashboardData() {
     // 1. Projeleri, Blogları ve Yorumları yerel/veritabanı verileriyle anında doldur
     renderPortfolioList(false);
-    loadAdminBlogs();
+    loadAdminBlogs({ checkInbox: true });
     loadAdminReviews();
 
     // 2. Arka planda site başlıklarını doldur
