@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+<rect width="1200" height="630" fill="#fbf4ec"/>
+<circle cx="140" cy="120" r="70" fill="none" stroke="#c9a227" stroke-width="6"/>
+<circle cx="1060" cy="520" r="80" fill="none" stroke="#c9a227" stroke-width="6"/>
+<circle cx="1080" cy="110" r="36" fill="#e8c9c1"/>
+<circle cx="120" cy="520" r="44" fill="#e8c9c1"/>
+<g fill="#d9b8ae"><circle cx="250" cy="560" r="10"/><circle cx="290" cy="560" r="10"/><circle cx="910" cy="70" r="10"/><circle cx="950" cy="70" r="10"/></g>
+<rect x="200" y="200" width="800" height="230" rx="24" fill="#6b2d3c"/>
+<text x="600" y="300" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="58" font-weight="700" fill="#ffffff">Son Hafta Krizi:</text>
+<text x="600" y="375" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="52" font-weight="700" fill="#f3d27a">LCV ve Oturma Planı</text>
+</svg>
